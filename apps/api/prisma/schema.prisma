@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum DishSource {
+  manual
+  ai
+  vision
+}
+
+enum DishStatus {
+  pending_approval
+  approved
+  rejected
+}
+
+model User {
+  id        String        @id @default(cuid())
+  email     String?       @unique
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  dishes    Dish[]
+  history   DishHistory[]
+}
+
+model Dish {
+  id          String               @id @default(cuid())
+  name        String
+  description String?
+  source      DishSource           @default(manual)
+  status      DishStatus           @default(approved)
+  createdById String?
+  createdBy   User?                @relation(fields: [createdById], references: [id])
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  ingredients DishIngredient[]
+  steps       DishStep[]
+  addGroups   DishAddOptionGroup[]
+  history     DishHistory[]
+  images      DishImage[]
+}
+
+model DishIngredient {
+  id        String   @id @default(cuid())
+  dishId    String
+  dish      Dish     @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  name      String
+  amount    String?
+  unit      String?
+  optional  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model DishStep {
+  id        String   @id @default(cuid())
+  dishId    String
+  dish      Dish     @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  position  Int
+  text      String
+  createdAt DateTime @default(now())
+
+  @@unique([dishId, position])
+}
+
+model DishAddOptionGroup {
+  id        String          @id @default(cuid())
+  dishId    String
+  dish      Dish            @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  groupKey  String
+  label     String?
+  options   DishAddOption[]
+  createdAt DateTime        @default(now())
+
+  @@unique([dishId, groupKey])
+}
+
+model DishAddOption {
+  id        String             @id @default(cuid())
+  groupId   String
+  group     DishAddOptionGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  value     String
+  createdAt DateTime           @default(now())
+}
+
+model DishHistory {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dishId    String
+  dish      Dish     @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  clickIdx  Int
+  shownAt   DateTime @default(now())
+
+  @@index([userId, shownAt])
+}
+
+model AiGeneration {
+  id            String   @id @default(cuid())
+  userId        String?
+  operation     String
+  model         String
+  provider      String
+  prompt        String?
+  rawResponse   String?
+  parsedPayload Json?
+  confidence    Float?
+  status        String
+  errorMessage  String?
+  createdAt     DateTime @default(now())
+}
+
+model DishImage {
+  id             String   @id @default(cuid())
+  dishId         String?
+  dish           Dish?    @relation(fields: [dishId], references: [id], onDelete: SetNull)
+  imageUrl       String
+  visionPayload  Json?
+  confidence     Float?
+  recognizedName String?
+  createdAt      DateTime @default(now())
+}

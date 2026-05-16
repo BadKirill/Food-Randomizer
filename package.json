@@ -2,12 +2,19 @@
   "name": "food-randomizer",
   "private": true,
   "version": "0.1.0",
+  "engines": {
+    "node": ">=20.19.4"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "typecheck": "echo \"Add per-package typecheck scripts\"",
-    "lint": "echo \"Add per-package lint scripts\""
+    "dev:mobile": "npm run start --workspace apps/mobile",
+    "dev:api": "npm run start:dev --workspace apps/api",
+    "build:api": "npm run build --workspace apps/api",
+    "test:api": "npm run test --workspace apps/api",
+    "typecheck": "npm run build:api",
+    "lint": "npm run lint --workspace apps/api"
   }
 }
