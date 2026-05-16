@@ -1,0 +1,13 @@
+{
+  "name": "food-randomizer",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "typecheck": "echo \"Add per-package typecheck scripts\"",
+    "lint": "echo \"Add per-package lint scripts\""
+  }
+}
