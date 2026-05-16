@@ -12,8 +12,14 @@
   "scripts": {
     "dev:mobile": "npm run start --workspace apps/mobile",
     "dev:api": "npm run start:dev --workspace apps/api",
+    "dev:db": "docker compose up -d postgres",
+    "dev:db:down": "docker compose down",
     "build:api": "npm run build --workspace apps/api",
     "test:api": "npm run test --workspace apps/api",
+    "migrate:dev": "npm run prisma:migrate --workspace apps/api",
+    "migrate:deploy": "npm run prisma:migrate:deploy --workspace apps/api",
+    "prisma:generate": "npm run prisma:generate --workspace apps/api",
+    "deploy:api": "bash ./scripts/deploy-api.sh",
     "typecheck": "npm run build:api",
     "lint": "npm run lint --workspace apps/api"
   }
