@@ -7,27 +7,67 @@ AI-ready cross-platform architecture for a Food Randomizer app (iOS + Android) w
 - AI ingredient/step inference
 - AI image-based dish recognition
 
-## Proposed Stack
+## Stack
 - Mobile: React Native + Expo + TypeScript
-- API: Node.js + NestJS (or Fastify) + TypeScript
+- API: Node.js + NestJS + TypeScript
 - DB: PostgreSQL + Prisma
-- Queue (later): BullMQ
-- Storage: S3-compatible object storage
+- Containerization: Docker + Compose
 - Shared contracts: TypeScript + Zod
 
 ## Repo Layout
-- `apps/mobile`: React Native app (UI + local session state)
-- `apps/api`: Backend API (business logic, AI integration, DB access)
-- `packages/contracts`: Shared DTOs/schemas used by mobile + API
-- `docs`: Architecture notes and initial API spec
+- `apps/mobile`: React Native app (frontend)
+- `apps/api`: NestJS API (backend)
+- `packages/contracts`: Shared DTOs/schemas
+- `docs`: architecture and deployment docs
+- `scripts`: deployment/bootstrap scripts
 
-## First Build Order
-1. Implement manual dishes CRUD + randomizer in API.
-2. Connect mobile to `/random/next` and render full dish output.
-3. Add AI text generation endpoint and approval flow.
-4. Add image recognition endpoint and confidence-based UX.
+This layout is intentionally split-ready. We keep one repo now, but `apps/mobile` and `apps/api` can be moved into separate repos later with minimal changes.
 
-See:
-- `docs/architecture.md`
-- `docs/api-spec.md`
-- `packages/contracts/src/index.ts`
+## Environment Strategy
+### Mobile
+- `apps/mobile/.env.dev`
+- `apps/mobile/.env.prod`
+
+Key variable:
+- `EXPO_PUBLIC_API_BASE_URL`
+
+### API
+- `apps/api/.env.dev`
+- `apps/api/.env.prod`
+
+Key variables:
+- `PORT`
+- `DATABASE_URL`
+- `CORS_ORIGINS` (comma-separated)
+
+## Local Development
+1. Start DB
+```bash
+npm run dev:db
+```
+
+2. Start API
+```bash
+npm run dev:api
+```
+
+3. Start mobile
+```bash
+npm run dev:mobile
+```
+
+## Production Deploy (Oracle-ready)
+- Build/deploy API container:
+```bash
+npm run deploy:api
+```
+
+- Full Oracle setup guide:
+`docs/deployment-oracle.md`
+
+## Verification
+- Health endpoint: `GET /health`
+- API tests:
+```bash
+npm run test:api
+```
