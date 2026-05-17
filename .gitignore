@@ -37,3 +37,6 @@ apps/mobile/web-build/
 
 # Temporary
 /tmp/
+
+# Local private keys
+*.key
