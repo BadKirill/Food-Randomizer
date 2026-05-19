@@ -6,5 +6,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   slug: 'food-randomizer',
   extra: {
     apiBaseUrl: process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://localhost:3000',
+    dishesWriteToken: process.env.EXPO_PUBLIC_DISHES_WRITE_TOKEN ?? '',
   },
 });

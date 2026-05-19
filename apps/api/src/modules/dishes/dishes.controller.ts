@@ -4,12 +4,15 @@ import {
   Controller,
   Delete,
   Get,
+  Headers,
   HttpCode,
+  InternalServerErrorException,
   NotFoundException,
   Param,
   Patch,
   Post,
   Query,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { DishesRepository } from './dishes.repository';
 
@@ -41,7 +44,8 @@ export class DishesController {
   constructor(private readonly dishesRepository: DishesRepository) {}
 
   @Post()
-  async create(@Body() body: unknown) {
+  async create(@Body() body: unknown, @Headers('authorization') authorization?: string) {
+    this.assertWriteToken(authorization);
     const parsed = CreateDishRequestSchema.parse(body);
     const dish = await this.dishesRepository.createDish(parsed);
     return this.mapDishDetail(dish);
@@ -64,7 +68,12 @@ export class DishesController {
   }
 
   @Patch(':dishId')
-  async update(@Param('dishId') dishId: string, @Body() body: unknown) {
+  async update(
+    @Param('dishId') dishId: string,
+    @Body() body: unknown,
+    @Headers('authorization') authorization?: string,
+  ) {
+    this.assertWriteToken(authorization);
     const parsed = UpdateDishRequestSchema.parse(body);
     const dish = await this.dishesRepository.updateDish(dishId, {
       ...parsed,
@@ -78,7 +87,11 @@ export class DishesController {
 
   @Delete(':dishId')
   @HttpCode(200)
-  async archive(@Param('dishId') dishId: string) {
+  async archive(
+    @Param('dishId') dishId: string,
+    @Headers('authorization') authorization?: string,
+  ) {
+    this.assertWriteToken(authorization);
     const archived = await this.dishesRepository.archiveDish(dishId);
     if (!archived) {
       throw new NotFoundException('Dish not found');
@@ -109,5 +122,22 @@ export class DishesController {
         options: g.options.map((o) => o.value),
       })),
     };
+  }
+
+  private assertWriteToken(authorizationHeader?: string) {
+    const configuredToken = process.env.DISHES_WRITE_TOKEN;
+    if (!configuredToken) {
+      throw new InternalServerErrorException(
+        'DISHES_WRITE_TOKEN is not configured',
+      );
+    }
+
+    const tokenFromHeader = authorizationHeader?.startsWith('Bearer ')
+      ? authorizationHeader.slice('Bearer '.length).trim()
+      : undefined;
+
+    if (!tokenFromHeader || tokenFromHeader !== configuredToken) {
+      throw new UnauthorizedException('Invalid write token');
+    }
   }
 }
