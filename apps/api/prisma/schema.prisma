@@ -19,6 +19,12 @@ enum DishStatus {
   rejected
 }
 
+enum DishType {
+  usual
+  vegetarian
+  vegan
+}
+
 model User {
   id        String        @id @default(cuid())
   email     String?       @unique
@@ -33,9 +39,12 @@ model Dish {
   name        String
   description String?
   source      DishSource           @default(manual)
+  dishType    DishType             @default(usual)
   status      DishStatus           @default(approved)
+  createdBy   String?
   createdById String?
-  createdBy   User?                @relation(fields: [createdById], references: [id])
+  creator     User?                @relation(fields: [createdById], references: [id])
+  archivedAt  DateTime?
   createdAt   DateTime             @default(now())
   updatedAt   DateTime             @updatedAt
   ingredients DishIngredient[]

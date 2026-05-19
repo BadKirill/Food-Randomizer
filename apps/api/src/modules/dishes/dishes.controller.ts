@@ -5,6 +5,8 @@ import { DishesRepository } from './dishes.repository';
 const CreateDishRequestSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
+  dishType: z.enum(['usual', 'vegetarian', 'vegan']).optional(),
+  createdBy: z.string().min(1).optional(),
   ingredients: z.array(z.string().min(1)).min(1),
   steps: z.array(z.string().min(1)).min(1),
   addOnOptions: z.array(z.string().min(1)).default([]),
@@ -41,6 +43,9 @@ export class DishesController {
       id: dish.id,
       name: dish.name,
       description: dish.description,
+      dishType: dish.dishType,
+      createdBy: dish.createdBy,
+      archivedAt: dish.archivedAt,
       ingredients: dish.ingredients.map((i) => ({
         name: i.name,
         amount: i.amount,

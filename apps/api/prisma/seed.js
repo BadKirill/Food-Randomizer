@@ -56,7 +56,9 @@ async function main() {
         name: item.name,
         description: item.preparation,
         source: 'manual',
+        dishType: 'vegan',
         status: 'approved',
+        createdBy: 'seed',
       },
     });
 

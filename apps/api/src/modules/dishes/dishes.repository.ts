@@ -11,7 +11,10 @@ export class DishesRepository {
 
   async findApprovedWithRelations() {
     return this.prisma.dish.findMany({
-      where: { status: 'approved' },
+      where: {
+        status: 'approved',
+        archivedAt: null,
+      },
       include: {
         ingredients: true,
         steps: {
@@ -28,7 +31,10 @@ export class DishesRepository {
 
   async listApprovedBasic() {
     return this.prisma.dish.findMany({
-      where: { status: 'approved' },
+      where: {
+        status: 'approved',
+        archivedAt: null,
+      },
       orderBy: { createdAt: 'desc' },
       select: {
         id: true,
@@ -44,6 +50,7 @@ export class DishesRepository {
       where: {
         id: dishId,
         status: 'approved',
+        archivedAt: null,
       },
       include: {
         ingredients: true,
@@ -65,6 +72,8 @@ export class DishesRepository {
     ingredients: string[];
     steps: string[];
     addOnOptions: string[];
+    dishType?: 'usual' | 'vegetarian' | 'vegan';
+    createdBy?: string;
   }) {
     return this.prisma.$transaction(async (tx) => {
       const dish = await tx.dish.create({
@@ -72,7 +81,9 @@ export class DishesRepository {
           name: input.name,
           description: input.description,
           source: 'manual',
+          dishType: input.dishType ?? 'usual',
           status: 'approved',
+          createdBy: input.createdBy ?? 'community',
         },
       });
 
