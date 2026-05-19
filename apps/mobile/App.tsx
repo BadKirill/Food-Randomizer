@@ -10,7 +10,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { API_BASE_URL } from './src/config/api';
+import { API_BASE_URL, DISHES_WRITE_TOKEN } from './src/config/api';
 
 type DishIngredient = { name: string; amount?: string; unit?: string };
 type DishAddOnGroup = { groupKey: string; options: string[]; selected?: string };
@@ -181,7 +181,10 @@ export default function App() {
     try {
       const response = await fetch(`${API_BASE_URL}/dishes`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+        },
         body: JSON.stringify(payload),
       });
 
@@ -247,7 +250,10 @@ export default function App() {
     try {
       const response = await fetch(`${API_BASE_URL}/dishes/${editingDishId}`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+        },
         body: JSON.stringify(payload),
       });
 
@@ -278,6 +284,9 @@ export default function App() {
     try {
       const response = await fetch(`${API_BASE_URL}/dishes/${selectedDish.id}`, {
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+        },
       });
       if (!response.ok) {
         throw new Error(`API error: ${response.status}`);
