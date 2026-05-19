@@ -19,6 +19,7 @@ type DishDetail = {
   id: string;
   name: string;
   description?: string;
+  dishType?: 'usual' | 'vegetarian' | 'vegan';
   ingredients: DishIngredient[];
   steps: string[];
   addOnGroups: DishAddOnGroup[];
@@ -36,12 +37,14 @@ type DishListItem = {
   id: string;
   name: string;
   description?: string;
+  dishType?: 'usual' | 'vegetarian' | 'vegan';
   createdAt: string;
 };
 
 type CreateDishPayload = {
   name: string;
   description?: string;
+  dishType?: 'usual' | 'vegetarian' | 'vegan';
   ingredients: string[];
   steps: string[];
   addOnOptions: string[];
@@ -61,6 +64,8 @@ export default function App() {
   const [dishIngredients, setDishIngredients] = useState('');
   const [dishSteps, setDishSteps] = useState('');
   const [dishAddOns, setDishAddOns] = useState('');
+  const [dishType, setDishType] = useState<'usual' | 'vegetarian' | 'vegan'>('vegan');
+  const [editingDishId, setEditingDishId] = useState<string | null>(null);
 
   const [listLoading, setListLoading] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
@@ -153,6 +158,7 @@ export default function App() {
       ingredients: parseLines(dishIngredients),
       steps: parseLines(dishSteps),
       addOnOptions: parseLines(dishAddOns),
+      dishType,
     };
 
     try {
@@ -168,6 +174,8 @@ export default function App() {
 
       setManageMessage('Dish created');
       clearDishForm();
+      setEditingDishId(null);
+      setSelectedDish(null);
       await fetchDishes();
     } catch (e) {
       setManageError(e instanceof Error ? e.message : 'Failed to create dish');
@@ -182,6 +190,7 @@ export default function App() {
     setDishIngredients('');
     setDishSteps('');
     setDishAddOns('');
+    setDishType('vegan');
   }
 
   function loadDishIntoFormForEdit(dish: DishDetail) {
@@ -190,7 +199,83 @@ export default function App() {
     setDishIngredients(dish.ingredients.map((i) => i.name).join('\n'));
     setDishSteps(dish.steps.join('\n'));
     setDishAddOns(dish.addOnGroups.flatMap((g) => g.options).join('\n'));
-    setManageMessage('Dish loaded into form. Edit fields and save as a new version.');
+    setDishType(dish.dishType ?? 'vegan');
+    setEditingDishId(dish.id);
+    setManageMessage('Edit mode enabled. Save changes to update this dish.');
+  }
+
+  async function updateDish() {
+    if (!editingDishId) {
+      setManageError('No dish selected for update');
+      return;
+    }
+    if (!canSaveDish) {
+      setManageError('Name, ingredients and steps are required');
+      return;
+    }
+
+    setSaveLoading(true);
+    setManageError(null);
+    setManageMessage(null);
+
+    const payload: CreateDishPayload = {
+      name: dishName.trim(),
+      description: dishDescription.trim() || undefined,
+      ingredients: parseLines(dishIngredients),
+      steps: parseLines(dishSteps),
+      addOnOptions: parseLines(dishAddOns),
+      dishType,
+    };
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/dishes/${editingDishId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      setManageMessage('Dish updated');
+      await fetchDishes();
+      await fetchDishById(editingDishId);
+    } catch (e) {
+      setManageError(e instanceof Error ? e.message : 'Failed to update dish');
+    } finally {
+      setSaveLoading(false);
+    }
+  }
+
+  async function archiveSelectedDish() {
+    if (!selectedDish) {
+      setManageError('No dish selected to archive');
+      return;
+    }
+
+    setSaveLoading(true);
+    setManageError(null);
+    setManageMessage(null);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/dishes/${selectedDish.id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      setManageMessage('Dish archived');
+      setSelectedDish(null);
+      setEditingDishId(null);
+      clearDishForm();
+      await fetchDishes();
+    } catch (e) {
+      setManageError(e instanceof Error ? e.message : 'Failed to archive dish');
+    } finally {
+      setSaveLoading(false);
+    }
   }
 
   return (
@@ -231,7 +316,7 @@ export default function App() {
           </View>
         ) : (
           <View>
-            <Text style={styles.sectionTitle}>Add Dish</Text>
+            <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
 
             <TextInput
               value={dishName}
@@ -266,16 +351,29 @@ export default function App() {
               style={[styles.input, styles.inputMulti]}
               multiline
             />
+            <View style={styles.inlineActions}>
+              <Pressable onPress={() => setDishType('usual')} style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Usual</Text>
+              </Pressable>
+              <Pressable onPress={() => setDishType('vegetarian')} style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+              </Pressable>
+              <Pressable onPress={() => setDishType('vegan')} style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Vegan</Text>
+              </Pressable>
+            </View>
 
             <Pressable
-              onPress={createDish}
+              onPress={editingDishId ? updateDish : createDish}
               disabled={!canSaveDish || saveLoading}
               style={[
                 styles.button,
                 (!canSaveDish || saveLoading) ? styles.buttonDisabled : null,
               ]}
             >
-              <Text style={styles.buttonText}>{saveLoading ? 'Saving...' : 'Save Dish'}</Text>
+              <Text style={styles.buttonText}>
+                {saveLoading ? 'Saving...' : editingDishId ? 'Save Changes' : 'Save Dish'}
+              </Text>
             </Pressable>
 
             <View style={styles.inlineActions}>
@@ -283,10 +381,13 @@ export default function App() {
                 <Text style={styles.secondaryButtonText}>Refresh List</Text>
               </Pressable>
               <Pressable
-                onPress={clearDishForm}
+                onPress={() => {
+                  setEditingDishId(null);
+                  clearDishForm();
+                }}
                 style={[styles.secondaryButton, styles.secondaryButtonMuted]}
               >
-                <Text style={styles.secondaryButtonText}>Clear Form</Text>
+                <Text style={styles.secondaryButtonText}>Clear / Exit Edit</Text>
               </Pressable>
             </View>
 
@@ -304,6 +405,7 @@ export default function App() {
                 onPress={() => fetchDishById(dish.id)}
               >
                 <Text style={styles.listCardTitle}>{dish.name}</Text>
+                <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
                 {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
               </Pressable>
             ))}
@@ -315,7 +417,13 @@ export default function App() {
                   onPress={() => loadDishIntoFormForEdit(selectedDish)}
                   style={styles.secondaryButton}
                 >
-                  <Text style={styles.secondaryButtonText}>Load Into Form (Edit Draft)</Text>
+                  <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
+                </Pressable>
+                <Pressable
+                  onPress={archiveSelectedDish}
+                  style={[styles.secondaryButton, styles.secondaryDanger]}
+                >
+                  <Text style={styles.secondaryButtonText}>Archive Dish</Text>
                 </Pressable>
                 <DishCard dish={selectedDish} />
               </View>
@@ -339,6 +447,7 @@ function DishCard({ dish }: { dish: DishDetail }) {
   return (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>{dish.name}</Text>
+      <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
       {dish.description ? <Text style={styles.description}>{dish.description}</Text> : null}
 
       <Text style={styles.sectionTitle}>Ingredients</Text>
@@ -423,6 +532,13 @@ const styles = StyleSheet.create({
   },
   secondaryButtonMuted: {
     opacity: 0.9,
+  },
+  secondaryActive: {
+    backgroundColor: '#cfe8db',
+  },
+  secondaryDanger: {
+    backgroundColor: '#fed7d7',
+    marginTop: 8,
   },
   secondaryButtonText: {
     color: '#111827',
