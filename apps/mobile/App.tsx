@@ -81,6 +81,7 @@ export default function App() {
   const canSaveDish = useMemo(() => {
     return dishName.trim().length > 0 && parseLines(dishIngredients).length > 0 && parseLines(dishSteps).length > 0;
   }, [dishName, dishIngredients, dishSteps]);
+  const hasWriteToken = DISHES_WRITE_TOKEN.trim().length > 0;
 
   async function fetchRandomDish() {
     setRandomLoading(true);
@@ -179,6 +180,9 @@ export default function App() {
     };
 
     try {
+      if (!hasWriteToken) {
+        throw new Error('Write token is not configured in mobile env');
+      }
       const response = await fetch(`${API_BASE_URL}/dishes`, {
         method: 'POST',
         headers: {
@@ -248,6 +252,9 @@ export default function App() {
     };
 
     try {
+      if (!hasWriteToken) {
+        throw new Error('Write token is not configured in mobile env');
+      }
       const response = await fetch(`${API_BASE_URL}/dishes/${editingDishId}`, {
         method: 'PATCH',
         headers: {
@@ -282,6 +289,9 @@ export default function App() {
     setManageMessage(null);
 
     try {
+      if (!hasWriteToken) {
+        throw new Error('Write token is not configured in mobile env');
+      }
       const response = await fetch(`${API_BASE_URL}/dishes/${selectedDish.id}`, {
         method: 'DELETE',
         headers: {
@@ -358,6 +368,11 @@ export default function App() {
         ) : (
           <View>
             <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
+            {!hasWriteToken ? (
+              <Text style={styles.error}>
+                Write token is missing. Set EXPO_PUBLIC_DISHES_WRITE_TOKEN to enable create/edit/archive.
+              </Text>
+            ) : null}
 
             <TextInput
               value={dishName}
@@ -406,10 +421,11 @@ export default function App() {
 
             <Pressable
               onPress={editingDishId ? updateDish : createDish}
-              disabled={!canSaveDish || saveLoading}
+              disabled={!canSaveDish || saveLoading || !hasWriteToken}
               style={[
                 styles.button,
                 (!canSaveDish || saveLoading) ? styles.buttonDisabled : null,
+                !hasWriteToken ? styles.buttonDisabled : null,
               ]}
             >
               <Text style={styles.buttonText}>
@@ -476,6 +492,7 @@ export default function App() {
                 </Pressable>
                 <Pressable
                   onPress={archiveSelectedDish}
+                  disabled={!hasWriteToken || saveLoading}
                   style={[styles.secondaryButton, styles.secondaryDanger]}
                 >
                   <Text style={styles.secondaryButtonText}>Archive Dish</Text>
