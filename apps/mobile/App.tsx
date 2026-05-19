@@ -39,6 +39,7 @@ type DishListItem = {
   description?: string;
   dishType?: 'usual' | 'vegetarian' | 'vegan';
   createdAt: string;
+  archivedAt?: string | null;
 };
 
 type CreateDishPayload = {
@@ -77,6 +78,7 @@ export default function App() {
   const [selectedDish, setSelectedDish] = useState<DishDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [dishListFilter, setDishListFilter] = useState<'all' | 'usual' | 'vegetarian' | 'vegan'>('all');
+  const [dishArchivedFilter, setDishArchivedFilter] = useState<'active' | 'archived'>('active');
 
   const canSaveDish = useMemo(() => {
     return dishName.trim().length > 0 && parseLines(dishIngredients).length > 0 && parseLines(dishSteps).length > 0;
@@ -116,13 +118,20 @@ export default function App() {
     }
   }
 
-  async function fetchDishes(filter: 'all' | 'usual' | 'vegetarian' | 'vegan' = dishListFilter) {
+  async function fetchDishes(
+    filter: 'all' | 'usual' | 'vegetarian' | 'vegan' = dishListFilter,
+    archived: 'active' | 'archived' = dishArchivedFilter,
+  ) {
     setListLoading(true);
     setManageError(null);
 
     try {
-      const query = filter === 'all' ? '' : `?dishType=${filter}`;
-      const response = await fetch(`${API_BASE_URL}/dishes${query}`);
+      const params = new URLSearchParams();
+      params.set('archived', archived);
+      if (filter !== 'all') {
+        params.set('dishType', filter);
+      }
+      const response = await fetch(`${API_BASE_URL}/dishes?${params.toString()}`);
       if (!response.ok) {
         throw new Error(`API error: ${response.status}`);
       }
@@ -138,7 +147,13 @@ export default function App() {
 
   async function applyDishFilter(filter: 'all' | 'usual' | 'vegetarian' | 'vegan') {
     setDishListFilter(filter);
-    await fetchDishes(filter);
+    await fetchDishes(filter, dishArchivedFilter);
+  }
+
+  async function applyArchivedFilter(filter: 'active' | 'archived') {
+    setDishArchivedFilter(filter);
+    setSelectedDish(null);
+    await fetchDishes(dishListFilter, filter);
   }
 
   async function fetchDishById(dishId: string) {
@@ -314,6 +329,34 @@ export default function App() {
     }
   }
 
+  async function unarchiveDishById(dishId: string) {
+    setSaveLoading(true);
+    setManageError(null);
+    setManageMessage(null);
+
+    try {
+      if (!hasWriteToken) {
+        throw new Error('Write token is not configured in mobile env');
+      }
+      const response = await fetch(`${API_BASE_URL}/dishes/${dishId}/unarchive`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      setManageMessage('Dish unarchived');
+      await fetchDishes(dishListFilter, dishArchivedFilter);
+    } catch (e) {
+      setManageError(e instanceof Error ? e.message : 'Failed to unarchive dish');
+    } finally {
+      setSaveLoading(false);
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -454,6 +497,14 @@ export default function App() {
 
             <Text style={styles.sectionTitle}>Dishes</Text>
             <View style={styles.inlineActions}>
+              <Pressable onPress={() => applyArchivedFilter('active')} style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Active</Text>
+              </Pressable>
+              <Pressable onPress={() => applyArchivedFilter('archived')} style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Archived</Text>
+              </Pressable>
+            </View>
+            <View style={styles.inlineActions}>
               <Pressable onPress={() => applyDishFilter('all')} style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}>
                 <Text style={styles.secondaryButtonText}>All</Text>
               </Pressable>
@@ -470,15 +521,28 @@ export default function App() {
             {dishes.length === 0 ? <Text style={styles.empty}>No dishes loaded yet.</Text> : null}
 
             {dishes.map((dish) => (
-              <Pressable
-                key={dish.id}
-                style={styles.listCard}
-                onPress={() => fetchDishById(dish.id)}
-              >
-                <Text style={styles.listCardTitle}>{dish.name}</Text>
-                <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
-                {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
-              </Pressable>
+              <View key={dish.id} style={styles.listCard}>
+                <Pressable
+                  onPress={() => {
+                    if (dishArchivedFilter === 'active') {
+                      fetchDishById(dish.id);
+                    }
+                  }}
+                >
+                  <Text style={styles.listCardTitle}>{dish.name}</Text>
+                  <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
+                  {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
+                </Pressable>
+                {dishArchivedFilter === 'archived' ? (
+                  <Pressable
+                    onPress={() => unarchiveDishById(dish.id)}
+                    disabled={!hasWriteToken || saveLoading}
+                    style={[styles.secondaryButton, styles.secondaryActive]}
+                  >
+                    <Text style={styles.secondaryButtonText}>Unarchive</Text>
+                  </Pressable>
+                ) : null}
+              </View>
             ))}
 
             {selectedDish ? (

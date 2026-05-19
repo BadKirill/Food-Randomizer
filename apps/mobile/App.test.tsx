@@ -143,4 +143,49 @@ describe('Mobile MVP flows', () => {
       expect(deleteCall).toBeTruthy();
     });
   });
+
+  it('loads archived dishes and unarchives from list', async () => {
+    (global.fetch as jest.Mock)
+      .mockResolvedValueOnce(
+        createJsonResponse([
+          {
+            id: 'dish-2',
+            name: 'Archived Dish',
+            description: 'old',
+            dishType: 'vegan',
+            createdAt: new Date().toISOString(),
+            archivedAt: new Date().toISOString(),
+          },
+        ]),
+      )
+      .mockResolvedValueOnce(createJsonResponse({ id: 'dish-2', archivedAt: null }))
+      .mockResolvedValueOnce(
+        createJsonResponse([
+          {
+            id: 'dish-2',
+            name: 'Archived Dish',
+            description: 'old',
+            dishType: 'vegan',
+            createdAt: new Date().toISOString(),
+            archivedAt: new Date().toISOString(),
+          },
+        ]),
+      );
+
+    render(<App />);
+    fireEvent.press(screen.getByText('Manage Dishes'));
+    fireEvent.press(screen.getByText('Archived'));
+
+    expect(await screen.findByText('Archived Dish')).toBeTruthy();
+    fireEvent.press(screen.getByText('Unarchive'));
+
+    await waitFor(() => {
+      const postCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
+        const url = call[0] as string;
+        const options = call[1] as { method?: string } | undefined;
+        return url.includes('/dishes/dish-2/unarchive') && options?.method === 'POST';
+      });
+      expect(postCall).toBeTruthy();
+    });
+  });
 });
