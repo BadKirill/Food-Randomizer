@@ -20,6 +20,7 @@ describe('API endpoints (e2e)', () => {
     createDish: jest.fn(),
     updateDish: jest.fn(),
     archiveDish: jest.fn(),
+    unarchiveDish: jest.fn(),
     findApprovedWithRelations: jest.fn(),
   };
 
@@ -56,7 +57,8 @@ describe('API endpoints (e2e)', () => {
   beforeAll(async () => {
     process.env.DISHES_WRITE_TOKEN = 'test-write-token';
 
-    dishesRepositoryMock.listApprovedBasic.mockImplementation((dishType?: string) => {
+    dishesRepositoryMock.listApprovedBasic.mockImplementation(
+      (dishType?: string, archived: 'active' | 'archived' | 'all' = 'active') => {
       const all = [
         {
           id: 'dish-usual',
@@ -74,8 +76,10 @@ describe('API endpoints (e2e)', () => {
         },
       ];
 
-      if (!dishType) return all;
-      return all.filter((d) => d.dishType === dishType);
+      let result = all;
+      if (dishType) result = result.filter((d) => d.dishType === dishType);
+      if (archived === 'archived') return [];
+      return result;
     });
 
     dishesRepositoryMock.findApprovedById.mockImplementation((id: string) => {
@@ -88,6 +92,10 @@ describe('API endpoints (e2e)', () => {
     dishesRepositoryMock.archiveDish.mockResolvedValue({
       id: 'dish-1',
       archivedAt: new Date().toISOString(),
+    });
+    dishesRepositoryMock.unarchiveDish.mockResolvedValue({
+      id: 'dish-1',
+      archivedAt: null,
     });
 
     historyRepositoryMock.ensureUser.mockResolvedValue(undefined);
@@ -161,7 +169,12 @@ describe('API endpoints (e2e)', () => {
     expect(Array.isArray(response.body)).toBe(true);
     expect(response.body).toHaveLength(1);
     expect(response.body[0].dishType).toBe('vegan');
-    expect(dishesRepositoryMock.listApprovedBasic).toHaveBeenCalledWith('vegan');
+    expect(dishesRepositoryMock.listApprovedBasic).toHaveBeenCalledWith('vegan', 'active');
+  });
+
+  it('GET /dishes supports archived filter', async () => {
+    await request(app.getHttpServer()).get('/dishes?archived=all').expect(200);
+    expect(dishesRepositoryMock.listApprovedBasic).toHaveBeenCalledWith(undefined, 'all');
   });
 
   it('POST /dishes rejects missing write token', async () => {
@@ -220,6 +233,17 @@ describe('API endpoints (e2e)', () => {
 
     expect(response.body.id).toBe('dish-1');
     expect(dishesRepositoryMock.archiveDish).toHaveBeenCalledWith('dish-1');
+  });
+
+  it('POST /dishes/:id/unarchive unarchives dish with valid token', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/dishes/dish-1/unarchive')
+      .set('Authorization', 'Bearer test-write-token')
+      .expect(200);
+
+    expect(response.body.id).toBe('dish-1');
+    expect(response.body.archivedAt).toBeNull();
+    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-1');
   });
 
   it('POST /random/next returns only filtered dish type', async () => {
