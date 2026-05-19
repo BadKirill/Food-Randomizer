@@ -2,6 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RequestLoggerMiddleware } from './common/request-logger.middleware';
+import { WriteTokenGuard } from './common/write-token.guard';
 import { HealthController } from './modules/health/health.controller';
 import { RandomizerController } from './modules/randomizer/randomizer.controller';
 import { RandomizerService } from './modules/randomizer/randomizer.service';
@@ -24,6 +25,7 @@ import { PrismaService } from './prisma/prisma.service';
     DishesRepository,
     HistoryRepository,
     RandomizerService,
+    WriteTokenGuard,
   ],
 })
 export class AppModule implements NestModule {
