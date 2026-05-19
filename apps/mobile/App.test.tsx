@@ -1,6 +1,11 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import App from './App';
 
+jest.mock('./src/config/api', () => ({
+  API_BASE_URL: 'http://localhost:3000',
+  DISHES_WRITE_TOKEN: 'test-mobile-write-token',
+}));
+
 function createJsonResponse(body: unknown, status = 200) {
   return {
     ok: status >= 200 && status < 300,
