@@ -40,6 +40,7 @@ export class DishesRepository {
         id: true,
         name: true,
         description: true,
+        dishType: true,
         createdAt: true,
       },
     });
@@ -131,6 +132,103 @@ export class DishesRepository {
           addGroups: { include: { options: true } },
         },
       });
+    });
+  }
+
+  async updateDish(
+    dishId: string,
+    input: {
+      name?: string;
+      description?: string | null;
+      dishType?: 'usual' | 'vegetarian' | 'vegan';
+      ingredients?: string[];
+      steps?: string[];
+      addOnOptions?: string[];
+    },
+  ) {
+    const existing = await this.findApprovedById(dishId);
+    if (!existing) {
+      return null;
+    }
+
+    return this.prisma.$transaction(async (tx) => {
+      await tx.dish.update({
+        where: { id: dishId },
+        data: {
+          name: input.name,
+          description: input.description,
+          dishType: input.dishType,
+        },
+      });
+
+      if (input.ingredients) {
+        await tx.dishIngredient.deleteMany({ where: { dishId } });
+        if (input.ingredients.length > 0) {
+          await tx.dishIngredient.createMany({
+            data: input.ingredients.map((name) => ({ dishId, name })),
+          });
+        }
+      }
+
+      if (input.steps) {
+        await tx.dishStep.deleteMany({ where: { dishId } });
+        if (input.steps.length > 0) {
+          await tx.dishStep.createMany({
+            data: input.steps.map((text, i) => ({
+              dishId,
+              position: i + 1,
+              text,
+            })),
+          });
+        }
+      }
+
+      if (input.addOnOptions) {
+        await tx.dishAddOption.deleteMany({
+          where: { group: { dishId } },
+        });
+        await tx.dishAddOptionGroup.deleteMany({ where: { dishId } });
+        if (input.addOnOptions.length > 0) {
+          const group = await tx.dishAddOptionGroup.create({
+            data: {
+              dishId,
+              groupKey: 'can_add',
+              label: 'Can add',
+            },
+          });
+          await tx.dishAddOption.createMany({
+            data: input.addOnOptions.map((value) => ({
+              groupId: group.id,
+              value,
+            })),
+          });
+        }
+      }
+
+      return tx.dish.findUniqueOrThrow({
+        where: { id: dishId },
+        include: {
+          ingredients: true,
+          steps: { orderBy: { position: 'asc' } },
+          addGroups: { include: { options: true } },
+        },
+      });
+    });
+  }
+
+  async archiveDish(dishId: string) {
+    const existing = await this.findApprovedById(dishId);
+    if (!existing) {
+      return null;
+    }
+
+    return this.prisma.dish.update({
+      where: { id: dishId },
+      data: { archivedAt: new Date() },
+      select: {
+        id: true,
+        archivedAt: true,
+      },
     });
   }
 }

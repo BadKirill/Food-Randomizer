@@ -1,5 +1,15 @@
 import { z } from 'zod';
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  NotFoundException,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { DishesRepository } from './dishes.repository';
 
 const CreateDishRequestSchema = z.object({
@@ -10,6 +20,15 @@ const CreateDishRequestSchema = z.object({
   ingredients: z.array(z.string().min(1)).min(1),
   steps: z.array(z.string().min(1)).min(1),
   addOnOptions: z.array(z.string().min(1)).default([]),
+});
+
+const UpdateDishRequestSchema = z.object({
+  name: z.string().min(1).optional(),
+  description: z.string().optional(),
+  dishType: z.enum(['usual', 'vegetarian', 'vegan']).optional(),
+  ingredients: z.array(z.string().min(1)).optional(),
+  steps: z.array(z.string().min(1)).optional(),
+  addOnOptions: z.array(z.string().min(1)).optional(),
 });
 
 @Controller('dishes')
@@ -36,6 +55,32 @@ export class DishesController {
     }
 
     return this.mapDishDetail(dish);
+  }
+
+  @Patch(':dishId')
+  async update(@Param('dishId') dishId: string, @Body() body: unknown) {
+    const parsed = UpdateDishRequestSchema.parse(body);
+    const dish = await this.dishesRepository.updateDish(dishId, {
+      ...parsed,
+      description: parsed.description ?? null,
+    });
+    if (!dish) {
+      throw new NotFoundException('Dish not found');
+    }
+    return this.mapDishDetail(dish);
+  }
+
+  @Delete(':dishId')
+  @HttpCode(200)
+  async archive(@Param('dishId') dishId: string) {
+    const archived = await this.dishesRepository.archiveDish(dishId);
+    if (!archived) {
+      throw new NotFoundException('Dish not found');
+    }
+    return {
+      id: archived.id,
+      archivedAt: archived.archivedAt,
+    };
   }
 
   private mapDishDetail(dish: Awaited<ReturnType<DishesRepository['createDish']>>) {
