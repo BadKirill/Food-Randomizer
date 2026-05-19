@@ -9,11 +9,12 @@ export type DishWithRelations = Awaited<
 export class DishesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findApprovedWithRelations() {
+  async findApprovedWithRelations(dishType?: 'usual' | 'vegetarian' | 'vegan') {
     return this.prisma.dish.findMany({
       where: {
         status: 'approved',
         archivedAt: null,
+        dishType: dishType ?? undefined,
       },
       include: {
         ingredients: true,
@@ -29,11 +30,12 @@ export class DishesRepository {
     });
   }
 
-  async listApprovedBasic() {
+  async listApprovedBasic(dishType?: 'usual' | 'vegetarian' | 'vegan') {
     return this.prisma.dish.findMany({
       where: {
         status: 'approved',
         archivedAt: null,
+        dishType: dishType ?? undefined,
       },
       orderBy: { createdAt: 'desc' },
       select: {

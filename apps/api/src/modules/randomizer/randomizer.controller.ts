@@ -13,6 +13,7 @@ export class RandomizerController {
     return this.randomizerService.getNextForUser({
       userId: parsed.userId,
       cooldownClicks: parsed.cooldownClicks,
+      dishType: parsed.dishType,
     });
   }
 }

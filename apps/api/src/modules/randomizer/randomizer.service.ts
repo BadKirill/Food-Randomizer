@@ -24,10 +24,13 @@ export class RandomizerService {
   async getNextForUser(params: {
     userId: string;
     cooldownClicks: number;
+    dishType?: 'usual' | 'vegetarian' | 'vegan';
   }): Promise<RandomNextResponse> {
     await this.historyRepository.ensureUser(params.userId);
 
-    const dishesFromDb = await this.dishesRepository.findApprovedWithRelations();
+    const dishesFromDb = await this.dishesRepository.findApprovedWithRelations(
+      params.dishType,
+    );
     const mappedDishes = dishesFromDb.map((dish) => this.mapDish(dish));
 
     const historyRows = await this.historyRepository.getRecentSelections(
@@ -119,6 +122,7 @@ export class RandomizerService {
       id: dish.id,
       name: dish.name,
       description: dish.description ?? undefined,
+      dishType: dish.dishType,
       source: dish.source,
       status: dish.status,
       ingredients: dish.ingredients.map((ing) => ({
