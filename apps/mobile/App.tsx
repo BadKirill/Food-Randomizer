@@ -75,6 +75,7 @@ export default function App() {
 
   const [selectedDish, setSelectedDish] = useState<DishDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  const [dishListFilter, setDishListFilter] = useState<'all' | 'usual' | 'vegetarian' | 'vegan'>('all');
 
   const canSaveDish = useMemo(() => {
     return dishName.trim().length > 0 && parseLines(dishIngredients).length > 0 && parseLines(dishSteps).length > 0;
@@ -104,12 +105,13 @@ export default function App() {
     }
   }
 
-  async function fetchDishes() {
+  async function fetchDishes(filter: 'all' | 'usual' | 'vegetarian' | 'vegan' = dishListFilter) {
     setListLoading(true);
     setManageError(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/dishes`);
+      const query = filter === 'all' ? '' : `?dishType=${filter}`;
+      const response = await fetch(`${API_BASE_URL}/dishes${query}`);
       if (!response.ok) {
         throw new Error(`API error: ${response.status}`);
       }
@@ -121,6 +123,11 @@ export default function App() {
     } finally {
       setListLoading(false);
     }
+  }
+
+  async function applyDishFilter(filter: 'all' | 'usual' | 'vegetarian' | 'vegan') {
+    setDishListFilter(filter);
+    await fetchDishes(filter);
   }
 
   async function fetchDishById(dishId: string) {
@@ -377,7 +384,7 @@ export default function App() {
             </Pressable>
 
             <View style={styles.inlineActions}>
-              <Pressable onPress={fetchDishes} style={styles.secondaryButton}>
+              <Pressable onPress={() => fetchDishes()} style={styles.secondaryButton}>
                 <Text style={styles.secondaryButtonText}>Refresh List</Text>
               </Pressable>
               <Pressable
@@ -396,6 +403,20 @@ export default function App() {
             {manageMessage ? <Text style={styles.success}>{manageMessage}</Text> : null}
 
             <Text style={styles.sectionTitle}>Dishes</Text>
+            <View style={styles.inlineActions}>
+              <Pressable onPress={() => applyDishFilter('all')} style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>All</Text>
+              </Pressable>
+              <Pressable onPress={() => applyDishFilter('usual')} style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Usual</Text>
+              </Pressable>
+              <Pressable onPress={() => applyDishFilter('vegetarian')} style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+              </Pressable>
+              <Pressable onPress={() => applyDishFilter('vegan')} style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Vegan</Text>
+              </Pressable>
+            </View>
             {dishes.length === 0 ? <Text style={styles.empty}>No dishes loaded yet.</Text> : null}
 
             {dishes.map((dish) => (

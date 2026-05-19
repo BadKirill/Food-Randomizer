@@ -29,11 +29,12 @@ export class DishesRepository {
     });
   }
 
-  async listApprovedBasic() {
+  async listApprovedBasic(dishType?: 'usual' | 'vegetarian' | 'vegan') {
     return this.prisma.dish.findMany({
       where: {
         status: 'approved',
         archivedAt: null,
+        dishType: dishType ?? undefined,
       },
       orderBy: { createdAt: 'desc' },
       select: {

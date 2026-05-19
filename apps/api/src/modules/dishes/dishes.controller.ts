@@ -9,6 +9,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { DishesRepository } from './dishes.repository';
 
@@ -31,6 +32,10 @@ const UpdateDishRequestSchema = z.object({
   addOnOptions: z.array(z.string().min(1)).optional(),
 });
 
+const ListDishesQuerySchema = z.object({
+  dishType: z.enum(['usual', 'vegetarian', 'vegan']).optional(),
+});
+
 @Controller('dishes')
 export class DishesController {
   constructor(private readonly dishesRepository: DishesRepository) {}
@@ -43,8 +48,9 @@ export class DishesController {
   }
 
   @Get()
-  async list() {
-    return this.dishesRepository.listApprovedBasic();
+  async list(@Query() query: unknown) {
+    const parsed = ListDishesQuerySchema.parse(query);
+    return this.dishesRepository.listApprovedBasic(parsed.dishType);
   }
 
   @Get(':dishId')
