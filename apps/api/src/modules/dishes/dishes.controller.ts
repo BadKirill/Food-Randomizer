@@ -36,6 +36,7 @@ const UpdateDishRequestSchema = z.object({
 
 const ListDishesQuerySchema = z.object({
   dishType: z.enum(['usual', 'vegetarian', 'vegan']).optional(),
+  archived: z.enum(['active', 'archived', 'all']).default('active'),
 });
 
 @Controller('dishes')
@@ -53,7 +54,7 @@ export class DishesController {
   @Get()
   async list(@Query() query: unknown) {
     const parsed = ListDishesQuerySchema.parse(query);
-    return this.dishesRepository.listApprovedBasic(parsed.dishType);
+    return this.dishesRepository.listApprovedBasic(parsed.dishType, parsed.archived);
   }
 
   @Get(':dishId')
@@ -94,6 +95,20 @@ export class DishesController {
     return {
       id: archived.id,
       archivedAt: archived.archivedAt,
+    };
+  }
+
+  @Post(':dishId/unarchive')
+  @HttpCode(200)
+  @UseGuards(WriteTokenGuard)
+  async unarchive(@Param('dishId') dishId: string) {
+    const unarchived = await this.dishesRepository.unarchiveDish(dishId);
+    if (!unarchived) {
+      throw new NotFoundException('Dish not found');
+    }
+    return {
+      id: unarchived.id,
+      archivedAt: unarchived.archivedAt,
     };
   }
 

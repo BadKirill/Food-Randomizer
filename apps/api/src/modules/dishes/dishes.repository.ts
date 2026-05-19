@@ -30,11 +30,17 @@ export class DishesRepository {
     });
   }
 
-  async listApprovedBasic(dishType?: 'usual' | 'vegetarian' | 'vegan') {
+  async listApprovedBasic(
+    dishType?: 'usual' | 'vegetarian' | 'vegan',
+    archived: 'active' | 'archived' | 'all' = 'active',
+  ) {
+    const archivedFilter =
+      archived === 'active' ? null : archived === 'archived' ? { not: null } : undefined;
+
     return this.prisma.dish.findMany({
       where: {
         status: 'approved',
-        archivedAt: null,
+        archivedAt: archivedFilter,
         dishType: dishType ?? undefined,
       },
       orderBy: { createdAt: 'desc' },
@@ -227,6 +233,28 @@ export class DishesRepository {
     return this.prisma.dish.update({
       where: { id: dishId },
       data: { archivedAt: new Date() },
+      select: {
+        id: true,
+        archivedAt: true,
+      },
+    });
+  }
+
+  async unarchiveDish(dishId: string) {
+    const dish = await this.prisma.dish.findFirst({
+      where: {
+        id: dishId,
+        status: 'approved',
+      },
+      select: { id: true, archivedAt: true },
+    });
+    if (!dish || !dish.archivedAt) {
+      return null;
+    }
+
+    return this.prisma.dish.update({
+      where: { id: dishId },
+      data: { archivedAt: null },
       select: {
         id: true,
         archivedAt: true,
