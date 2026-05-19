@@ -16,6 +16,7 @@ export const DishSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
   description: z.string().optional(),
+  dishType: z.enum(['usual', 'vegetarian', 'vegan']).default('usual'),
   ingredients: z.array(IngredientSchema).min(1),
   steps: z.array(z.string().min(1)).min(1),
   addOnGroups: z.array(AddOnGroupSchema).default([]),
@@ -26,6 +27,7 @@ export const DishSchema = z.object({
 export const RandomNextRequestSchema = z.object({
   userId: z.string().min(1),
   cooldownClicks: z.number().int().min(1).max(10).default(4),
+  dishType: z.enum(['usual', 'vegetarian', 'vegan']).optional(),
 });
 
 export const ResolvedAddOnGroupSchema = AddOnGroupSchema.extend({

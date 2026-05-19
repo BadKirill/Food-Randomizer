@@ -58,6 +58,7 @@ export default function App() {
   const [randomData, setRandomData] = useState<RandomNextResponse | null>(null);
   const [randomLoading, setRandomLoading] = useState(false);
   const [randomError, setRandomError] = useState<string | null>(null);
+  const [randomDishTypeFilter, setRandomDishTypeFilter] = useState<'all' | 'usual' | 'vegetarian' | 'vegan'>('all');
 
   const [dishName, setDishName] = useState('');
   const [dishDescription, setDishDescription] = useState('');
@@ -86,10 +87,19 @@ export default function App() {
     setRandomError(null);
 
     try {
+      const payloadBody =
+        randomDishTypeFilter === 'all'
+          ? { userId: 'mobile-demo-user', cooldownClicks: 4 }
+          : {
+              userId: 'mobile-demo-user',
+              cooldownClicks: 4,
+              dishType: randomDishTypeFilter,
+            };
+
       const response = await fetch(`${API_BASE_URL}/random/next`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: 'mobile-demo-user', cooldownClicks: 4 }),
+        body: JSON.stringify(payloadBody),
       });
 
       if (!response.ok) {
@@ -308,6 +318,21 @@ export default function App() {
 
         {mode === 'random' ? (
           <View>
+            <Text style={styles.sectionTitle}>Random Filter</Text>
+            <View style={styles.inlineActions}>
+              <Pressable onPress={() => setRandomDishTypeFilter('all')} style={[styles.secondaryButton, randomDishTypeFilter === 'all' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>All</Text>
+              </Pressable>
+              <Pressable onPress={() => setRandomDishTypeFilter('usual')} style={[styles.secondaryButton, randomDishTypeFilter === 'usual' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Usual</Text>
+              </Pressable>
+              <Pressable onPress={() => setRandomDishTypeFilter('vegetarian')} style={[styles.secondaryButton, randomDishTypeFilter === 'vegetarian' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+              </Pressable>
+              <Pressable onPress={() => setRandomDishTypeFilter('vegan')} style={[styles.secondaryButton, randomDishTypeFilter === 'vegan' ? styles.secondaryActive : null]}>
+                <Text style={styles.secondaryButtonText}>Vegan</Text>
+              </Pressable>
+            </View>
             <Pressable
               onPress={fetchRandomDish}
               disabled={randomLoading}
