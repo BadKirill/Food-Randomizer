@@ -7,6 +7,7 @@ COPY apps/api ./apps/api
 COPY packages/contracts ./packages/contracts
 
 RUN npm ci
+RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
 RUN npm run build --workspace apps/api
 RUN npm prune --omit=dev
 

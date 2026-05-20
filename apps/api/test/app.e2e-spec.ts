@@ -4,7 +4,9 @@ import request from 'supertest';
 import { App } from 'supertest/types';
 import { AppController } from '../src/app.controller';
 import { AppService } from '../src/app.service';
-import { WriteTokenGuard } from '../src/common/write-token.guard';
+import { AuthGuard } from '../src/common/auth.guard';
+import { UnauthorizedException } from '@nestjs/common';
+import { AuthService } from '../src/modules/auth/auth.service';
 import { DishesController } from '../src/modules/dishes/dishes.controller';
 import { DishesRepository } from '../src/modules/dishes/dishes.repository';
 import { HistoryRepository } from '../src/modules/history/history.repository';
@@ -52,10 +54,20 @@ describe('API endpoints (e2e)', () => {
     getHello: jest.fn(() => 'Hello World!'),
   };
 
-  const originalWriteToken = process.env.DISHES_WRITE_TOKEN;
+  const authServiceMock = {
+    getSessionFromBearerHeader: jest.fn(),
+  };
 
   beforeAll(async () => {
-    process.env.DISHES_WRITE_TOKEN = 'test-write-token';
+    authServiceMock.getSessionFromBearerHeader.mockImplementation((header?: string) => {
+      if (header !== 'Bearer test-session-token') {
+        throw new UnauthorizedException('Invalid or expired session');
+      }
+      return {
+        id: 'session-1',
+        user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+      };
+    });
 
     dishesRepositoryMock.listApprovedBasic.mockImplementation(
       (dishType?: string, archived: 'active' | 'archived' | 'all' = 'active') => {
@@ -136,9 +148,10 @@ describe('API endpoints (e2e)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       controllers: [AppController, DishesController, RandomizerController],
       providers: [
-        WriteTokenGuard,
+        AuthGuard,
         RandomizerService,
         { provide: AppService, useValue: appServiceMock },
+        { provide: AuthService, useValue: authServiceMock },
         { provide: DishesRepository, useValue: dishesRepositoryMock },
         { provide: HistoryRepository, useValue: historyRepositoryMock },
       ],
@@ -149,8 +162,9 @@ describe('API endpoints (e2e)', () => {
   });
 
   afterAll(async () => {
-    process.env.DISHES_WRITE_TOKEN = originalWriteToken;
-    await app.close();
+    if (app) {
+      await app.close();
+    }
   });
 
   beforeEach(() => {
@@ -177,7 +191,7 @@ describe('API endpoints (e2e)', () => {
     expect(dishesRepositoryMock.listApprovedBasic).toHaveBeenCalledWith(undefined, 'all');
   });
 
-  it('POST /dishes rejects missing write token', async () => {
+  it('POST /dishes rejects missing auth token', async () => {
     await request(app.getHttpServer())
       .post('/dishes')
       .send({
@@ -189,10 +203,10 @@ describe('API endpoints (e2e)', () => {
       .expect(401);
   });
 
-  it('POST /dishes creates dish with valid write token', async () => {
+  it('POST /dishes creates dish with valid auth token', async () => {
     const response = await request(app.getHttpServer())
       .post('/dishes')
-      .set('Authorization', 'Bearer test-write-token')
+      .set('Authorization', 'Bearer test-session-token')
       .send({
         name: 'Dish',
         dishType: 'vegan',
@@ -209,7 +223,7 @@ describe('API endpoints (e2e)', () => {
   it('PATCH /dishes/:id updates dish with valid token', async () => {
     await request(app.getHttpServer())
       .patch('/dishes/dish-1')
-      .set('Authorization', 'Bearer test-write-token')
+      .set('Authorization', 'Bearer test-session-token')
       .send({
         name: 'Updated',
         dishType: 'vegetarian',
@@ -218,6 +232,7 @@ describe('API endpoints (e2e)', () => {
 
     expect(dishesRepositoryMock.updateDish).toHaveBeenCalledWith(
       'dish-1',
+      'user-1',
       expect.objectContaining({
         name: 'Updated',
         dishType: 'vegetarian',
@@ -228,22 +243,22 @@ describe('API endpoints (e2e)', () => {
   it('DELETE /dishes/:id archives dish with valid token', async () => {
     const response = await request(app.getHttpServer())
       .delete('/dishes/dish-1')
-      .set('Authorization', 'Bearer test-write-token')
+      .set('Authorization', 'Bearer test-session-token')
       .expect(200);
 
     expect(response.body.id).toBe('dish-1');
-    expect(dishesRepositoryMock.archiveDish).toHaveBeenCalledWith('dish-1');
+    expect(dishesRepositoryMock.archiveDish).toHaveBeenCalledWith('dish-1', 'user-1');
   });
 
   it('POST /dishes/:id/unarchive unarchives dish with valid token', async () => {
     const response = await request(app.getHttpServer())
       .post('/dishes/dish-1/unarchive')
-      .set('Authorization', 'Bearer test-write-token')
+      .set('Authorization', 'Bearer test-session-token')
       .expect(200);
 
     expect(response.body.id).toBe('dish-1');
     expect(response.body.archivedAt).toBeNull();
-    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-1');
+    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-1', 'user-1');
   });
 
   it('POST /random/next returns only filtered dish type', async () => {

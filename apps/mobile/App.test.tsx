@@ -3,7 +3,7 @@ import App from './App';
 
 jest.mock('./src/config/api', () => ({
   API_BASE_URL: 'http://localhost:3000',
-  DISHES_WRITE_TOKEN: 'test-mobile-write-token',
+  DEFAULT_LOGIN_EMAIL: 'tester@foodrandomizer.app',
 }));
 
 function createJsonResponse(body: unknown, status = 200) {
@@ -100,6 +100,13 @@ describe('Mobile MVP flows', () => {
   it('archives selected dish with DELETE request', async () => {
     (global.fetch as jest.Mock)
       .mockResolvedValueOnce(
+        createJsonResponse({
+          token: 'test-session-token',
+          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+        }),
+      )
+      .mockResolvedValueOnce(
         createJsonResponse([
           {
             id: 'dish-1',
@@ -127,6 +134,9 @@ describe('Mobile MVP flows', () => {
     render(<App />);
 
     fireEvent.press(screen.getByText('Manage Dishes'));
+    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
+    fireEvent.press(screen.getByText('Login'));
+    await screen.findByText('User: tester@foodrandomizer.app');
     fireEvent.press(screen.getByText('Refresh List'));
     expect(await screen.findByText('Dish One')).toBeTruthy();
 
@@ -146,6 +156,13 @@ describe('Mobile MVP flows', () => {
 
   it('loads archived dishes and unarchives from list', async () => {
     (global.fetch as jest.Mock)
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          token: 'test-session-token',
+          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+        }),
+      )
       .mockResolvedValueOnce(
         createJsonResponse([
           {
@@ -174,6 +191,9 @@ describe('Mobile MVP flows', () => {
 
     render(<App />);
     fireEvent.press(screen.getByText('Manage Dishes'));
+    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
+    fireEvent.press(screen.getByText('Login'));
+    await screen.findByText('User: tester@foodrandomizer.app');
     fireEvent.press(screen.getByText('Archived'));
 
     expect(await screen.findByText('Archived Dish')).toBeTruthy();
