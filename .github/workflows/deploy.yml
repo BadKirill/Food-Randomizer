@@ -24,8 +24,10 @@ jobs:
           username: ${{ secrets.OCI_API_USER }}
           key: ${{ secrets.OCI_API_SSH_KEY }}
           port: ${{ secrets.OCI_API_SSH_PORT || '22' }}
+          timeout: 120s
           script_stop: true
           command_timeout: 60m
+          debug: true
           script: |
             set -euo pipefail
 
