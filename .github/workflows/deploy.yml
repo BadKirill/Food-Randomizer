@@ -34,9 +34,9 @@ jobs:
             cd ~/Food-Randomizer
 
             # Force server repo to remote main and avoid local merge conflicts.
-            git fetch origin main
+            git fetch "https://x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}@github.com/BadKirill/Food-Randomizer.git" main
             git checkout main
-            git reset --hard origin/main
+            git reset --hard FETCH_HEAD
 
             # Materialize production env from GitHub secret so deploy is deterministic.
             cat > apps/api/.env.prod <<'EOF'
