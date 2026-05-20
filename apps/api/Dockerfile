@@ -8,6 +8,7 @@ COPY packages/contracts ./packages/contracts
 
 RUN npm ci
 RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
+RUN npm run build --workspace packages/contracts
 RUN npm run build --workspace apps/api
 RUN npm prune --omit=dev
 
@@ -20,6 +21,7 @@ COPY --from=builder /app/tsconfig.base.json ./
 COPY --from=builder /app/apps/api/package*.json ./apps/api/
 COPY --from=builder /app/packages/contracts/package*.json ./packages/contracts/
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/packages/contracts ./packages/contracts
 
 COPY --from=builder /app/apps/api/dist ./apps/api/dist
 COPY --from=builder /app/apps/api/prisma ./apps/api/prisma
