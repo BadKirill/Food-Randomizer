@@ -28,10 +28,25 @@ enum DishType {
 model User {
   id        String        @id @default(cuid())
   email     String?       @unique
+  passwordHash String?
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   dishes    Dish[]
   history   DishHistory[]
+  sessions  UserSession[]
+}
+
+model UserSession {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, expiresAt])
 }
 
 model Dish {

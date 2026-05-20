@@ -10,7 +10,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { API_BASE_URL, DISHES_WRITE_TOKEN } from './src/config/api';
+import { API_BASE_URL, DEFAULT_LOGIN_EMAIL } from './src/config/api';
 
 type DishIngredient = { name: string; amount?: string; unit?: string };
 type DishAddOnGroup = { groupKey: string; options: string[]; selected?: string };
@@ -52,9 +52,18 @@ type CreateDishPayload = {
 };
 
 type ScreenMode = 'random' | 'manage';
+type LoginResponse = {
+  token: string;
+  user: { id: string; email: string | null };
+  expiresAt: string;
+};
 
 export default function App() {
   const [mode, setMode] = useState<ScreenMode>('random');
+  const [loginEmail, setLoginEmail] = useState(DEFAULT_LOGIN_EMAIL);
+  const [loginPassword, setLoginPassword] = useState('');
+  const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null);
 
   const [randomData, setRandomData] = useState<RandomNextResponse | null>(null);
   const [randomLoading, setRandomLoading] = useState(false);
@@ -83,7 +92,7 @@ export default function App() {
   const canSaveDish = useMemo(() => {
     return dishName.trim().length > 0 && parseLines(dishIngredients).length > 0 && parseLines(dishSteps).length > 0;
   }, [dishName, dishIngredients, dishSteps]);
-  const hasWriteToken = DISHES_WRITE_TOKEN.trim().length > 0;
+  const isAuthenticated = Boolean(sessionToken);
 
   async function fetchRandomDish() {
     setRandomLoading(true);
@@ -195,14 +204,14 @@ export default function App() {
     };
 
     try {
-      if (!hasWriteToken) {
-        throw new Error('Write token is not configured in mobile env');
+      if (!sessionToken) {
+        throw new Error('Login is required');
       }
       const response = await fetch(`${API_BASE_URL}/dishes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+          Authorization: `Bearer ${sessionToken}`,
         },
         body: JSON.stringify(payload),
       });
@@ -267,14 +276,14 @@ export default function App() {
     };
 
     try {
-      if (!hasWriteToken) {
-        throw new Error('Write token is not configured in mobile env');
+      if (!sessionToken) {
+        throw new Error('Login is required');
       }
       const response = await fetch(`${API_BASE_URL}/dishes/${editingDishId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+          Authorization: `Bearer ${sessionToken}`,
         },
         body: JSON.stringify(payload),
       });
@@ -304,13 +313,13 @@ export default function App() {
     setManageMessage(null);
 
     try {
-      if (!hasWriteToken) {
-        throw new Error('Write token is not configured in mobile env');
+      if (!sessionToken) {
+        throw new Error('Login is required');
       }
       const response = await fetch(`${API_BASE_URL}/dishes/${selectedDish.id}`, {
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+          Authorization: `Bearer ${sessionToken}`,
         },
       });
       if (!response.ok) {
@@ -335,13 +344,13 @@ export default function App() {
     setManageMessage(null);
 
     try {
-      if (!hasWriteToken) {
-        throw new Error('Write token is not configured in mobile env');
+      if (!sessionToken) {
+        throw new Error('Login is required');
       }
       const response = await fetch(`${API_BASE_URL}/dishes/${dishId}/unarchive`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${DISHES_WRITE_TOKEN}`,
+          Authorization: `Bearer ${sessionToken}`,
         },
       });
       if (!response.ok) {
@@ -352,6 +361,54 @@ export default function App() {
       await fetchDishes(dishListFilter, dishArchivedFilter);
     } catch (e) {
       setManageError(e instanceof Error ? e.message : 'Failed to unarchive dish');
+    } finally {
+      setSaveLoading(false);
+    }
+  }
+
+  async function login() {
+    setSaveLoading(true);
+    setManageError(null);
+    setManageMessage(null);
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: loginEmail.trim(), password: loginPassword }),
+      });
+      if (!response.ok) {
+        throw new Error(`Login failed: ${response.status}`);
+      }
+      const payload = (await response.json()) as LoginResponse;
+      setSessionToken(payload.token);
+      setCurrentUserEmail(payload.user.email);
+      setManageMessage(`Logged in as ${payload.user.email ?? payload.user.id}`);
+    } catch (e) {
+      setManageError(e instanceof Error ? e.message : 'Login failed');
+    } finally {
+      setSaveLoading(false);
+    }
+  }
+
+  async function register() {
+    setSaveLoading(true);
+    setManageError(null);
+    setManageMessage(null);
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: loginEmail.trim(), password: loginPassword }),
+      });
+      if (!response.ok) {
+        throw new Error(`Register failed: ${response.status}`);
+      }
+      const payload = (await response.json()) as LoginResponse;
+      setSessionToken(payload.token);
+      setCurrentUserEmail(payload.user.email);
+      setManageMessage(`Registered and logged in as ${payload.user.email ?? payload.user.id}`);
+    } catch (e) {
+      setManageError(e instanceof Error ? e.message : 'Register failed');
     } finally {
       setSaveLoading(false);
     }
@@ -411,11 +468,30 @@ export default function App() {
         ) : (
           <View>
             <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
-            {!hasWriteToken ? (
-              <Text style={styles.error}>
-                Write token is missing. Set EXPO_PUBLIC_DISHES_WRITE_TOKEN to enable create/edit/archive.
-              </Text>
-            ) : null}
+            <TextInput
+              value={loginEmail}
+              onChangeText={setLoginEmail}
+              placeholder="Your email (for login)"
+              style={styles.input}
+              autoCapitalize="none"
+            />
+            <TextInput
+              value={loginPassword}
+              onChangeText={setLoginPassword}
+              placeholder="Password (min 8 chars)"
+              style={styles.input}
+              secureTextEntry
+            />
+            <View style={styles.inlineActions}>
+              <Pressable onPress={login} disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8} style={styles.secondaryButton}>
+                <Text style={styles.secondaryButtonText}>Login</Text>
+              </Pressable>
+              <Pressable onPress={register} disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8} style={styles.secondaryButton}>
+                <Text style={styles.secondaryButtonText}>Register</Text>
+              </Pressable>
+              {currentUserEmail ? <Text style={styles.listCardText}>User: {currentUserEmail}</Text> : null}
+            </View>
+            {!isAuthenticated ? <Text style={styles.error}>Login first to create/edit/archive dishes.</Text> : null}
 
             <TextInput
               value={dishName}
@@ -464,11 +540,11 @@ export default function App() {
 
             <Pressable
               onPress={editingDishId ? updateDish : createDish}
-              disabled={!canSaveDish || saveLoading || !hasWriteToken}
+              disabled={!canSaveDish || saveLoading || !isAuthenticated}
               style={[
                 styles.button,
                 (!canSaveDish || saveLoading) ? styles.buttonDisabled : null,
-                !hasWriteToken ? styles.buttonDisabled : null,
+                !isAuthenticated ? styles.buttonDisabled : null,
               ]}
             >
               <Text style={styles.buttonText}>
@@ -536,7 +612,7 @@ export default function App() {
                 {dishArchivedFilter === 'archived' ? (
                   <Pressable
                     onPress={() => unarchiveDishById(dish.id)}
-                    disabled={!hasWriteToken || saveLoading}
+                    disabled={!isAuthenticated || saveLoading}
                     style={[styles.secondaryButton, styles.secondaryActive]}
                   >
                     <Text style={styles.secondaryButtonText}>Unarchive</Text>
@@ -556,7 +632,7 @@ export default function App() {
                 </Pressable>
                 <Pressable
                   onPress={archiveSelectedDish}
-                  disabled={!hasWriteToken || saveLoading}
+                  disabled={!isAuthenticated || saveLoading}
                   style={[styles.secondaryButton, styles.secondaryDanger]}
                 >
                   <Text style={styles.secondaryButtonText}>Archive Dish</Text>

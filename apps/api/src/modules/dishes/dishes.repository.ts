@@ -83,6 +83,7 @@ export class DishesRepository {
     addOnOptions: string[];
     dishType?: 'usual' | 'vegetarian' | 'vegan';
     createdBy?: string;
+    createdById: string;
   }) {
     return this.prisma.$transaction(async (tx) => {
       const dish = await tx.dish.create({
@@ -93,6 +94,7 @@ export class DishesRepository {
           dishType: input.dishType ?? 'usual',
           status: 'approved',
           createdBy: input.createdBy ?? 'community',
+          createdById: input.createdById,
         },
       });
 
@@ -145,6 +147,7 @@ export class DishesRepository {
 
   async updateDish(
     dishId: string,
+    userId: string,
     input: {
       name?: string;
       description?: string | null;
@@ -156,6 +159,9 @@ export class DishesRepository {
   ) {
     const existing = await this.findApprovedById(dishId);
     if (!existing) {
+      return null;
+    }
+    if (existing.createdById !== userId) {
       return null;
     }
 
@@ -224,9 +230,12 @@ export class DishesRepository {
     });
   }
 
-  async archiveDish(dishId: string) {
+  async archiveDish(dishId: string, userId: string) {
     const existing = await this.findApprovedById(dishId);
     if (!existing) {
+      return null;
+    }
+    if (existing.createdById !== userId) {
       return null;
     }
 
@@ -240,11 +249,12 @@ export class DishesRepository {
     });
   }
 
-  async unarchiveDish(dishId: string) {
+  async unarchiveDish(dishId: string, userId: string) {
     const dish = await this.prisma.dish.findFirst({
       where: {
         id: dishId,
         status: 'approved',
+        createdById: userId,
       },
       select: { id: true, archivedAt: true },
     });

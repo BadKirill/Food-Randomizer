@@ -11,21 +11,10 @@ function parseCorsOrigins(value?: string): string[] {
 }
 
 function assertRequiredEnv() {
-  const requiredVars = ['DATABASE_URL'];
+  const requiredVars = ['DATABASE_URL', 'SESSION_SECRET'];
   const missing = requiredVars.filter((key) => !process.env[key]);
   if (missing.length > 0) {
     throw new Error(`Missing required env vars: ${missing.join(', ')}`);
-  }
-
-  const writeToken = process.env.DISHES_WRITE_TOKEN?.trim();
-  if (!writeToken) {
-    throw new Error('DISHES_WRITE_TOKEN must be set');
-  }
-  if (
-    writeToken === 'REPLACE_WITH_STRONG_SECRET_TOKEN' ||
-    writeToken === 'dev-write-token-change-me'
-  ) {
-    throw new Error('DISHES_WRITE_TOKEN is using an insecure placeholder value');
   }
 }
 

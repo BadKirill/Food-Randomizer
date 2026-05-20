@@ -3,13 +3,14 @@ import Constants from 'expo-constants';
 const expoExtra =
   (Constants.expoConfig?.extra as {
     apiBaseUrl?: string;
-    dishesWriteToken?: string;
+    defaultLoginEmail?: string;
   } | undefined) ?? {};
 
 const fromEnv = process.env.EXPO_PUBLIC_API_BASE_URL;
 const fromExtra = expoExtra.apiBaseUrl;
-const writeTokenFromEnv = process.env.EXPO_PUBLIC_DISHES_WRITE_TOKEN;
-const writeTokenFromExtra = expoExtra.dishesWriteToken;
+const defaultLoginEmailFromEnv = process.env.EXPO_PUBLIC_DEFAULT_LOGIN_EMAIL;
+const defaultLoginEmailFromExtra = expoExtra.defaultLoginEmail;
 
 export const API_BASE_URL = fromEnv ?? fromExtra ?? 'http://localhost:3000';
-export const DISHES_WRITE_TOKEN = writeTokenFromEnv ?? writeTokenFromExtra ?? '';
+export const DEFAULT_LOGIN_EMAIL =
+  defaultLoginEmailFromEnv ?? defaultLoginEmailFromExtra ?? '';

@@ -3,7 +3,7 @@ import App from './App';
 
 jest.mock('./src/config/api', () => ({
   API_BASE_URL: 'http://localhost:3000',
-  DISHES_WRITE_TOKEN: 'test-mobile-write-token',
+  DEFAULT_LOGIN_EMAIL: 'tester@foodrandomizer.app',
 }));
 
 function createJsonResponse(body: unknown, status = 200) {

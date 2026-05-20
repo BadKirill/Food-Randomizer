@@ -12,14 +12,14 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { WriteTokenGuard } from '../../common/write-token.guard';
+import { AuthGuard } from '../../common/auth.guard';
+import { CurrentUser, type AuthUser } from '../../common/current-user.decorator';
 import { DishesRepository } from './dishes.repository';
 
 const CreateDishRequestSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
   dishType: z.enum(['usual', 'vegetarian', 'vegan']).optional(),
-  createdBy: z.string().min(1).optional(),
   ingredients: z.array(z.string().min(1)).min(1),
   steps: z.array(z.string().min(1)).min(1),
   addOnOptions: z.array(z.string().min(1)).default([]),
@@ -44,10 +44,14 @@ export class DishesController {
   constructor(private readonly dishesRepository: DishesRepository) {}
 
   @Post()
-  @UseGuards(WriteTokenGuard)
-  async create(@Body() body: unknown) {
+  @UseGuards(AuthGuard)
+  async create(@CurrentUser() user: AuthUser, @Body() body: unknown) {
     const parsed = CreateDishRequestSchema.parse(body);
-    const dish = await this.dishesRepository.createDish(parsed);
+    const dish = await this.dishesRepository.createDish({
+      ...parsed,
+      createdById: user.id,
+      createdBy: user.email ?? user.id,
+    });
     return this.mapDishDetail(dish);
   }
 
@@ -68,13 +72,14 @@ export class DishesController {
   }
 
   @Patch(':dishId')
-  @UseGuards(WriteTokenGuard)
+  @UseGuards(AuthGuard)
   async update(
+    @CurrentUser() user: AuthUser,
     @Param('dishId') dishId: string,
     @Body() body: unknown,
   ) {
     const parsed = UpdateDishRequestSchema.parse(body);
-    const dish = await this.dishesRepository.updateDish(dishId, {
+    const dish = await this.dishesRepository.updateDish(dishId, user.id, {
       ...parsed,
       description: parsed.description ?? null,
     });
@@ -86,9 +91,9 @@ export class DishesController {
 
   @Delete(':dishId')
   @HttpCode(200)
-  @UseGuards(WriteTokenGuard)
-  async archive(@Param('dishId') dishId: string) {
-    const archived = await this.dishesRepository.archiveDish(dishId);
+  @UseGuards(AuthGuard)
+  async archive(@CurrentUser() user: AuthUser, @Param('dishId') dishId: string) {
+    const archived = await this.dishesRepository.archiveDish(dishId, user.id);
     if (!archived) {
       throw new NotFoundException('Dish not found');
     }
@@ -100,9 +105,9 @@ export class DishesController {
 
   @Post(':dishId/unarchive')
   @HttpCode(200)
-  @UseGuards(WriteTokenGuard)
-  async unarchive(@Param('dishId') dishId: string) {
-    const unarchived = await this.dishesRepository.unarchiveDish(dishId);
+  @UseGuards(AuthGuard)
+  async unarchive(@CurrentUser() user: AuthUser, @Param('dishId') dishId: string) {
+    const unarchived = await this.dishesRepository.unarchiveDish(dishId, user.id);
     if (!unarchived) {
       throw new NotFoundException('Dish not found');
     }
