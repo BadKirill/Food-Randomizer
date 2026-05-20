@@ -72,6 +72,34 @@ If it fails, allow inbound TCP `3000` in OCI security rules for your source IP.
   - `class-validator`
   - `class-transformer`
 
+## 8) Automatic deployment from GitHub to Oracle VM
+This repo includes `/.github/workflows/deploy.yml`:
+- trigger: successful `CI` on `main` (or manual run)
+- action: SSH into API VM, reset to `origin/main`, write `apps/api/.env.prod` from secret, run deployment script
+
+### Required GitHub Actions secrets
+Set these in: `GitHub -> Settings -> Secrets and variables -> Actions`
+
+- `OCI_API_HOST` (example: `92.5.190.116`)
+- `OCI_API_USER` (example: `ubuntu`)
+- `OCI_API_SSH_KEY` (private SSH key content, multiline)
+- `OCI_API_SSH_PORT` (optional, usually `22`)
+- `API_ENV_PROD` (full multiline content of `apps/api/.env.prod`)
+
+Example `API_ENV_PROD` value:
+```env
+NODE_ENV=production
+PORT=3000
+DATABASE_URL=postgresql://pgadmin:Qw45%23531RemR4m%21@10.0.2.43:5432/food_randomizer?schema=public
+CORS_ORIGINS=http://92.5.190.116:8081
+SESSION_SECRET=<your-long-random-secret>
+```
+
+### Notes
+- Production `apps/api/.env.prod` is intentionally injected from GitHub Secrets during deploy.
+- `scripts/deploy-api.sh` runs `docker compose ... up -d --build api` and health check (`/health`).
+- Because deploy uses `git reset --hard origin/main`, local ad-hoc server edits are discarded on every deploy.
+
 ## Split-ready structure
 This monorepo can be split later with minimal work:
 - Frontend repo candidate: `apps/mobile`

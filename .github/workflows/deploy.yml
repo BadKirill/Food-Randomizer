@@ -1,0 +1,46 @@
+name: Deploy API (Oracle)
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-api-main
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to randomizer-api-01
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.OCI_API_HOST }}
+          username: ${{ secrets.OCI_API_USER }}
+          key: ${{ secrets.OCI_API_SSH_KEY }}
+          port: ${{ secrets.OCI_API_SSH_PORT || '22' }}
+          script_stop: true
+          command_timeout: 60m
+          script: |
+            set -euo pipefail
+
+            cd ~/Food-Randomizer
+
+            # Force server repo to remote main and avoid local merge conflicts.
+            git fetch origin main
+            git checkout main
+            git reset --hard origin/main
+
+            # Materialize production env from GitHub secret so deploy is deterministic.
+            cat > apps/api/.env.prod <<'EOF'
+            ${{ secrets.API_ENV_PROD }}
+            EOF
+
+            chmod 600 apps/api/.env.prod
+
+            bash scripts/deploy-api.sh
