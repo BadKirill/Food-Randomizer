@@ -3,13 +3,13 @@ import { useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { API_BASE_URL, DEFAULT_LOGIN_EMAIL } from './src/config/api';
 
 type DishIngredient = { name: string; amount?: string; unit?: string };
