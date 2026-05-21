@@ -416,27 +416,32 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.bgOrbTop} />
+      <View style={styles.bgOrbRight} />
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.title}>Food Randomizer</Text>
-        <Text style={styles.subtitle}>API: {API_BASE_URL}</Text>
+        <View style={styles.heroCard}>
+          <Text style={styles.heroTag}>Meal Planner</Text>
+          <Text style={styles.title}>Food Randomizer</Text>
+          <Text style={styles.subtitle}>API: {API_BASE_URL}</Text>
+        </View>
 
         <View style={styles.tabRow}>
           <Pressable
             onPress={() => setMode('random')}
             style={[styles.tab, mode === 'random' ? styles.tabActive : null]}
           >
-            <Text style={styles.tabLabel}>Random</Text>
+            <Text style={[styles.tabLabel, mode === 'random' ? styles.tabLabelActive : null]}>Random</Text>
           </Pressable>
           <Pressable
             onPress={() => setMode('manage')}
             style={[styles.tab, mode === 'manage' ? styles.tabActive : null]}
           >
-            <Text style={styles.tabLabel}>Manage Dishes</Text>
+            <Text style={[styles.tabLabel, mode === 'manage' ? styles.tabLabelActive : null]}>Manage Dishes</Text>
           </Pressable>
         </View>
 
         {mode === 'random' ? (
-          <View>
+          <View style={styles.sectionCard}>
             <Text style={styles.sectionTitle}>Random Filter</Text>
             <View style={styles.inlineActions}>
               <Pressable onPress={() => setRandomDishTypeFilter('all')} style={[styles.secondaryButton, randomDishTypeFilter === 'all' ? styles.secondaryActive : null]}>
@@ -466,7 +471,7 @@ export default function App() {
             {randomData ? <DishCard dish={randomData.dish} /> : null}
           </View>
         ) : (
-          <View>
+          <View style={styles.sectionCard}>
             <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
             <TextInput
               value={loginEmail}
@@ -622,7 +627,7 @@ export default function App() {
             ))}
 
             {selectedDish ? (
-              <View>
+              <View style={styles.selectedDishBlock}>
                 <Text style={styles.sectionTitle}>Selected Dish</Text>
                 <Pressable
                   onPress={() => loadDishIntoFormForEdit(selectedDish)}
@@ -643,7 +648,7 @@ export default function App() {
           </View>
         )}
       </ScrollView>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 }
@@ -689,144 +694,227 @@ function DishCard({ dish }: { dish: DishDetail }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f6f7f8',
+    backgroundColor: '#f0f5f2',
+  },
+  bgOrbTop: {
+    position: 'absolute',
+    top: -60,
+    left: -40,
+    width: 220,
+    height: 220,
+    borderRadius: 999,
+    backgroundColor: '#d6efe2',
+  },
+  bgOrbRight: {
+    position: 'absolute',
+    top: 120,
+    right: -80,
+    width: 220,
+    height: 220,
+    borderRadius: 999,
+    backgroundColor: '#e6f4ec',
   },
   content: {
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 18,
+    gap: 14,
   },
-  title: {
-    fontSize: 24,
+  heroCard: {
+    backgroundColor: '#123f2a',
+    borderRadius: 18,
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    shadowColor: '#0a2217',
+    shadowOpacity: 0.22,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 4,
+  },
+  heroTag: {
+    alignSelf: 'flex-start',
+    color: '#123f2a',
+    backgroundColor: '#d6efe2',
+    borderRadius: 999,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     fontWeight: '700',
+    fontSize: 12,
     marginBottom: 8,
   },
+  title: {
+    fontSize: 28,
+    fontWeight: '800',
+    marginBottom: 6,
+    color: '#f3fbf7',
+  },
   subtitle: {
-    marginBottom: 16,
-    color: '#555',
+    color: '#d4e8de',
+    fontSize: 13,
   },
   tabRow: {
     flexDirection: 'row',
-    marginBottom: 16,
+    marginBottom: 6,
     gap: 10,
   },
   tab: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 10,
-    backgroundColor: '#e5e7eb',
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 12,
+    backgroundColor: '#dbe4df',
+    borderWidth: 1,
+    borderColor: '#c8d4ce',
+    alignItems: 'center',
   },
   tabActive: {
-    backgroundColor: '#cfe8db',
+    backgroundColor: '#123f2a',
+    borderColor: '#123f2a',
   },
   tabLabel: {
-    fontWeight: '600',
-    color: '#1f2937',
+    fontWeight: '700',
+    color: '#234536',
+  },
+  tabLabelActive: {
+    color: '#eef9f2',
+  },
+  sectionCard: {
+    backgroundColor: '#fbfffc',
+    borderRadius: 16,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: '#d8e6dd',
+    shadowColor: '#17382a',
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
   },
   button: {
-    backgroundColor: '#1d6f42',
+    backgroundColor: '#1c7547',
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 10,
+    paddingVertical: 13,
+    borderRadius: 12,
     alignSelf: 'flex-start',
   },
   buttonDisabled: {
-    opacity: 0.7,
+    opacity: 0.52,
   },
   buttonText: {
     color: '#fff',
     fontWeight: '700',
   },
   secondaryButton: {
-    backgroundColor: '#e5e7eb',
+    backgroundColor: '#edf4ef',
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#d2dfd7',
   },
   secondaryButtonMuted: {
     opacity: 0.9,
   },
   secondaryActive: {
-    backgroundColor: '#cfe8db',
+    backgroundColor: '#d6efe2',
+    borderColor: '#9bcbb2',
   },
   secondaryDanger: {
-    backgroundColor: '#fed7d7',
+    backgroundColor: '#ffe5e5',
+    borderColor: '#f2bbbb',
     marginTop: 8,
   },
   secondaryButtonText: {
-    color: '#111827',
+    color: '#204434',
     fontWeight: '600',
   },
   inlineActions: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 10,
     marginTop: 10,
-    marginBottom: 8,
+    marginBottom: 6,
   },
   loader: {
     marginTop: 14,
   },
   error: {
     marginTop: 12,
-    color: '#b42318',
+    color: '#b5372b',
+    fontWeight: '600',
   },
   success: {
     marginTop: 12,
-    color: '#166534',
+    color: '#1f7a4a',
+    fontWeight: '600',
   },
   input: {
-    backgroundColor: '#fff',
-    borderColor: '#d1d5db',
+    backgroundColor: '#fdfefe',
+    borderColor: '#c7d8cf',
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 12,
     paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingVertical: 11,
     marginBottom: 10,
+    color: '#113224',
   },
   inputMulti: {
     minHeight: 90,
     textAlignVertical: 'top',
   },
   empty: {
-    color: '#6b7280',
+    color: '#5e6f66',
+    marginTop: 4,
   },
   listCard: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
+    backgroundColor: '#f8fcf9',
+    borderRadius: 12,
     padding: 12,
     marginTop: 8,
+    borderWidth: 1,
+    borderColor: '#d8e6dd',
   },
   listCardTitle: {
-    fontWeight: '700',
+    fontWeight: '800',
     fontSize: 16,
-    color: '#111827',
+    color: '#133726',
   },
   listCardText: {
     marginTop: 4,
-    color: '#4b5563',
+    color: '#4f6659',
+  },
+  selectedDishBlock: {
+    marginTop: 10,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: '#dbe7df',
   },
   card: {
     marginTop: 18,
-    backgroundColor: '#fff',
-    borderRadius: 12,
+    backgroundColor: '#f7fbf8',
+    borderRadius: 14,
     padding: 16,
+    borderWidth: 1,
+    borderColor: '#d7e7dd',
   },
   cardTitle: {
-    fontSize: 20,
-    fontWeight: '700',
+    fontSize: 21,
+    fontWeight: '800',
     marginBottom: 8,
+    color: '#133827',
   },
   description: {
-    color: '#4b5563',
+    color: '#4b6357',
     marginBottom: 12,
   },
   sectionTitle: {
     marginTop: 12,
     marginBottom: 6,
-    fontWeight: '700',
+    fontWeight: '800',
     fontSize: 16,
+    color: '#193a2b',
   },
   listItem: {
-    color: '#1f2937',
+    color: '#244336',
     marginBottom: 4,
   },
 });
