@@ -30,6 +30,9 @@ jobs:
         run: npm run build --workspace apps/api
 
       - name: API e2e tests
+        env:
+          SESSION_SECRET: ci-test-session-secret
+          DISHES_WRITE_TOKEN: ci-test-write-token
         run: npm run test:e2e --workspace apps/api
 
   mobile:
