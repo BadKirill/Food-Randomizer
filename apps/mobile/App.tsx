@@ -115,13 +115,14 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `API error: ${response.status}`);
       }
 
       const payload = (await response.json()) as RandomNextResponse;
       setRandomData(payload);
     } catch (e) {
-      setRandomError(e instanceof Error ? e.message : 'Failed to fetch dish from backend');
+      setRandomError(formatClientError(e, 'Failed to fetch dish from backend'));
     } finally {
       setRandomLoading(false);
     }
@@ -142,13 +143,14 @@ export default function App() {
       }
       const response = await fetch(`${API_BASE_URL}/dishes?${params.toString()}`);
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `API error: ${response.status}`);
       }
 
       const payload = (await response.json()) as DishListItem[];
       setDishes(payload);
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Failed to load dishes');
+      setManageError(formatClientError(e, 'Failed to load dishes'));
     } finally {
       setListLoading(false);
     }
@@ -172,13 +174,14 @@ export default function App() {
     try {
       const response = await fetch(`${API_BASE_URL}/dishes/${dishId}`);
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `API error: ${response.status}`);
       }
 
       const payload = (await response.json()) as DishDetail;
       setSelectedDish(payload);
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Failed to load dish details');
+      setManageError(formatClientError(e, 'Failed to load dish details'));
     } finally {
       setDetailLoading(false);
     }
@@ -217,7 +220,8 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `API error: ${response.status}`);
       }
 
       setManageMessage('Dish created');
@@ -226,7 +230,7 @@ export default function App() {
       setSelectedDish(null);
       await fetchDishes();
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Failed to create dish');
+      setManageError(formatClientError(e, 'Failed to create dish'));
     } finally {
       setSaveLoading(false);
     }
@@ -289,14 +293,15 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `API error: ${response.status}`);
       }
 
       setManageMessage('Dish updated');
       await fetchDishes();
       await fetchDishById(editingDishId);
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Failed to update dish');
+      setManageError(formatClientError(e, 'Failed to update dish'));
     } finally {
       setSaveLoading(false);
     }
@@ -323,7 +328,8 @@ export default function App() {
         },
       });
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `API error: ${response.status}`);
       }
 
       setManageMessage('Dish archived');
@@ -332,7 +338,7 @@ export default function App() {
       clearDishForm();
       await fetchDishes();
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Failed to archive dish');
+      setManageError(formatClientError(e, 'Failed to archive dish'));
     } finally {
       setSaveLoading(false);
     }
@@ -354,13 +360,14 @@ export default function App() {
         },
       });
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `API error: ${response.status}`);
       }
 
       setManageMessage('Dish unarchived');
       await fetchDishes(dishListFilter, dishArchivedFilter);
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Failed to unarchive dish');
+      setManageError(formatClientError(e, 'Failed to unarchive dish'));
     } finally {
       setSaveLoading(false);
     }
@@ -377,14 +384,15 @@ export default function App() {
         body: JSON.stringify({ email: loginEmail.trim(), password: loginPassword }),
       });
       if (!response.ok) {
-        throw new Error(`Login failed: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `Login failed: ${response.status}`);
       }
       const payload = (await response.json()) as LoginResponse;
       setSessionToken(payload.token);
       setCurrentUserEmail(payload.user.email);
       setManageMessage(`Logged in as ${payload.user.email ?? payload.user.id}`);
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Login failed');
+      setManageError(formatClientError(e, 'Login failed'));
     } finally {
       setSaveLoading(false);
     }
@@ -401,14 +409,15 @@ export default function App() {
         body: JSON.stringify({ email: loginEmail.trim(), password: loginPassword }),
       });
       if (!response.ok) {
-        throw new Error(`Register failed: ${response.status}`);
+        const apiMessage = await parseApiError(response);
+        throw new Error(apiMessage ?? `Register failed: ${response.status}`);
       }
       const payload = (await response.json()) as LoginResponse;
       setSessionToken(payload.token);
       setCurrentUserEmail(payload.user.email);
       setManageMessage(`Registered and logged in as ${payload.user.email ?? payload.user.id}`);
     } catch (e) {
-      setManageError(e instanceof Error ? e.message : 'Register failed');
+      setManageError(formatClientError(e, 'Register failed'));
     } finally {
       setSaveLoading(false);
     }
@@ -477,6 +486,7 @@ export default function App() {
               value={loginEmail}
               onChangeText={setLoginEmail}
               placeholder="Your email (for login)"
+              placeholderTextColor="#7d8d86"
               style={styles.input}
               autoCapitalize="none"
             />
@@ -484,6 +494,7 @@ export default function App() {
               value={loginPassword}
               onChangeText={setLoginPassword}
               placeholder="Password (min 8 chars)"
+              placeholderTextColor="#7d8d86"
               style={styles.input}
               secureTextEntry
             />
@@ -498,36 +509,46 @@ export default function App() {
             </View>
             {!isAuthenticated ? <Text style={styles.error}>Login first to create/edit/archive dishes.</Text> : null}
 
+            <Text style={styles.fieldLabel}>Dish Name</Text>
             <TextInput
               value={dishName}
               onChangeText={setDishName}
               placeholder="Dish name"
+              placeholderTextColor="#7d8d86"
               style={styles.input}
             />
+            <Text style={styles.fieldLabel}>Description</Text>
             <TextInput
               value={dishDescription}
               onChangeText={setDishDescription}
               placeholder="Description (optional)"
+              placeholderTextColor="#7d8d86"
               style={styles.input}
             />
+            <Text style={styles.fieldLabel}>Ingredients</Text>
             <TextInput
               value={dishIngredients}
               onChangeText={setDishIngredients}
               placeholder="Ingredients (one per line)"
+              placeholderTextColor="#7d8d86"
               style={[styles.input, styles.inputMulti]}
               multiline
             />
+            <Text style={styles.fieldLabel}>Steps</Text>
             <TextInput
               value={dishSteps}
               onChangeText={setDishSteps}
               placeholder="Steps (one per line)"
+              placeholderTextColor="#7d8d86"
               style={[styles.input, styles.inputMulti]}
               multiline
             />
+            <Text style={styles.fieldLabel}>Can Add</Text>
             <TextInput
               value={dishAddOns}
               onChangeText={setDishAddOns}
               placeholder="Can add (one per line)"
+              placeholderTextColor="#7d8d86"
               style={[styles.input, styles.inputMulti]}
               multiline
             />
@@ -571,6 +592,7 @@ export default function App() {
                 <Text style={styles.secondaryButtonText}>Clear / Exit Edit</Text>
               </Pressable>
             </View>
+            <Text style={styles.hintText}>After login, tap Refresh List to load dishes.</Text>
 
             {listLoading || detailLoading ? <ActivityIndicator style={styles.loader} /> : null}
             {manageError ? <Text style={styles.error}>{manageError}</Text> : null}
@@ -658,6 +680,28 @@ function parseLines(input: string) {
     .split('\n')
     .map((value) => value.trim())
     .filter((value) => value.length > 0);
+}
+
+async function parseApiError(response: Response): Promise<string | null> {
+  try {
+    const contentType = response.headers.get('content-type') ?? '';
+    if (!contentType.includes('application/json')) return null;
+    const payload = (await response.json()) as { message?: string | string[] };
+    if (Array.isArray(payload.message)) return payload.message.join(', ');
+    return payload.message ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function formatClientError(error: unknown, fallback: string): string {
+  if (error instanceof Error) {
+    if (error.message === 'Network request failed') {
+      return 'Cannot reach API. Check API URL, server status, and Android HTTP settings.';
+    }
+    return error.message;
+  }
+  return fallback;
 }
 
 function DishCard({ dish }: { dish: DishDetail }) {
@@ -856,6 +900,18 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
     marginBottom: 10,
     color: '#113224',
+  },
+  fieldLabel: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#23493a',
+    marginBottom: -4,
+  },
+  hintText: {
+    fontSize: 13,
+    color: '#5b6f65',
+    marginTop: 2,
+    marginBottom: 6,
   },
   inputMulti: {
     minHeight: 90,
