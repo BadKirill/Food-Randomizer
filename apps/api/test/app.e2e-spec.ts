@@ -274,4 +274,18 @@ describe('API endpoints (e2e)', () => {
     expect(response.body.dish.dishType).toBe('vegan');
     expect(dishesRepositoryMock.findApprovedWithRelations).toHaveBeenCalledWith('vegan');
   });
+
+  it('POST /random/next returns 404 when there are no dishes', async () => {
+    dishesRepositoryMock.findApprovedWithRelations.mockReturnValueOnce([]);
+
+    const response = await request(app.getHttpServer())
+      .post('/random/next')
+      .send({
+        userId: 'u-empty',
+        cooldownClicks: 4,
+      })
+      .expect(404);
+
+    expect(response.body.message).toBe('No dishes available');
+  });
 });

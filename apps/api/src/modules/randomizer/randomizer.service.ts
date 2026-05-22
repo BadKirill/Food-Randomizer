@@ -1,5 +1,5 @@
 import type { RandomNextResponse } from '@food/contracts';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DishesRepository, type DishWithRelations } from '../dishes/dishes.repository';
 import { HistoryRepository } from '../history/history.repository';
 
@@ -73,7 +73,7 @@ export class RandomizerService {
     let cooldown = params.cooldownClicks;
 
     if (dishes.length === 0) {
-      throw new Error('No dishes available');
+      throw new NotFoundException('No dishes available');
     }
 
     const lastDishId = history[0]?.dishId;
