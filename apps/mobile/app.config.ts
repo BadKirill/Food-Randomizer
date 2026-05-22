@@ -2,7 +2,7 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   const apiBaseUrl =
-    process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://api.your-domain.com';
+    process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://api.randomeal.app';
   const allowCleartextHttp =
     process.env.EXPO_PUBLIC_ALLOW_CLEARTEXT_HTTP === 'true';
 
