@@ -30,6 +30,7 @@ This layout is intentionally split-ready. We keep one repo now, but `apps/mobile
 
 Key variable:
 - `EXPO_PUBLIC_API_BASE_URL`
+- `EXPO_PUBLIC_ALLOW_CLEARTEXT_HTTP`
 
 ### API
 - `apps/api/.env.dev`
@@ -64,6 +65,9 @@ npm run deploy:api
 
 - Full Oracle setup guide:
 `docs/deployment-oracle.md`
+
+- HTTPS reverse-proxy setup (Nginx + Let's Encrypt):
+`docs/https-nginx-letsencrypt.md`
 
 ## Verification
 - Health endpoint: `GET /health`

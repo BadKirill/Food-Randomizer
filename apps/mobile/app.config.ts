@@ -1,12 +1,17 @@
 import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
+  const apiBaseUrl =
+    process.env.EXPO_PUBLIC_API_BASE_URL ?? 'https://api.your-domain.com';
+  const allowCleartextHttp =
+    process.env.EXPO_PUBLIC_ALLOW_CLEARTEXT_HTTP === 'true';
+
   const resolved: ExpoConfig = {
     ...config,
     name: 'Food Randomizer',
     slug: 'food-randomizer',
     extra: {
-      apiBaseUrl: process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://92.5.190.116:3000',
+      apiBaseUrl,
       defaultLoginEmail: process.env.EXPO_PUBLIC_DEFAULT_LOGIN_EMAIL ?? '',
     },
   };
@@ -14,7 +19,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   resolved.android = {
     ...(resolved.android ?? {}),
     // Not present in Expo's Android TS type, but supported by config plugins/prebuild.
-    usesCleartextTraffic: true,
+    usesCleartextTraffic: allowCleartextHttp,
   } as ExpoConfig['android'];
 
   return resolved;
