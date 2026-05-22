@@ -11,7 +11,7 @@ const fromExtra = expoExtra.apiBaseUrl;
 const defaultLoginEmailFromEnv = process.env.EXPO_PUBLIC_DEFAULT_LOGIN_EMAIL;
 const defaultLoginEmailFromExtra = expoExtra.defaultLoginEmail;
 
-// Default to deployed API so physical devices work even if Expo env isn't loaded.
-export const API_BASE_URL = fromEnv ?? fromExtra ?? 'http://92.5.190.116:3000';
+// Default to HTTPS API endpoint for production-safe mobile connectivity.
+export const API_BASE_URL = fromEnv ?? fromExtra ?? 'https://api.your-domain.com';
 export const DEFAULT_LOGIN_EMAIL =
   defaultLoginEmailFromEnv ?? defaultLoginEmailFromExtra ?? '';
