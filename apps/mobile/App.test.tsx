@@ -41,8 +41,9 @@ describe('Mobile MVP flows', () => {
 
     render(<App />);
 
+    fireEvent.press(screen.getByText('All'));
     fireEvent.press(screen.getByText('Vegan'));
-    fireEvent.press(screen.getByText('Pick Random Dish'));
+    fireEvent.press(screen.getAllByText('Random')[1]);
 
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
 
@@ -55,12 +56,20 @@ describe('Mobile MVP flows', () => {
     render(<App />);
 
     fireEvent.press(screen.getByText('Manage Dishes'));
-    fireEvent.press(screen.getByText('Save Dish'));
+    expect(screen.getByText('Manage Is Locked')).toBeTruthy();
+    expect(screen.queryByText('Save Dish')).toBeNull();
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
   it('loads selected dish into edit mode and shows Save Changes', async () => {
     (global.fetch as jest.Mock)
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          token: 'test-session-token',
+          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+        }),
+      )
       .mockResolvedValueOnce(
         createJsonResponse([
           {
@@ -86,10 +95,12 @@ describe('Mobile MVP flows', () => {
 
     render(<App />);
     fireEvent.press(screen.getByText('Manage Dishes'));
-    fireEvent.press(screen.getByText('Refresh List'));
+    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
+    fireEvent.press(screen.getByTestId('auth-login-button'));
+    await screen.findByText('Logged in: tester@foodrandomizer.app');
 
-    expect(await screen.findByText('Dish One')).toBeTruthy();
-    fireEvent.press(screen.getByText('Dish One'));
+    await waitFor(() => expect(screen.getByText('Dish One')).toBeTruthy());
+    fireEvent.press(screen.getByTestId('dish-row-dish-1'));
 
     expect(await screen.findByText('Edit This Dish')).toBeTruthy();
     fireEvent.press(screen.getByText('Edit This Dish'));
@@ -135,15 +146,13 @@ describe('Mobile MVP flows', () => {
 
     fireEvent.press(screen.getByText('Manage Dishes'));
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
-    fireEvent.press(screen.getByText('Login'));
-    await screen.findByText('User: tester@foodrandomizer.app');
-    fireEvent.press(screen.getByText('Refresh List'));
-    expect(await screen.findByText('Dish One')).toBeTruthy();
-
-    fireEvent.press(screen.getByText('Dish One'));
+    fireEvent.press(screen.getByTestId('auth-login-button'));
+    await screen.findByText('Logged in: tester@foodrandomizer.app');
+    await waitFor(() => expect(screen.getByText('Dish One')).toBeTruthy());
+    fireEvent.press(screen.getByTestId('dish-row-dish-1'));
     expect(await screen.findByText('Archive Dish')).toBeTruthy();
 
-    fireEvent.press(screen.getByText('Archive Dish'));
+    fireEvent.press(screen.getByTestId('dish-archive-button'));
 
     await waitFor(() => {
       const deleteCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
@@ -163,6 +172,7 @@ describe('Mobile MVP flows', () => {
           expiresAt: new Date(Date.now() + 3600_000).toISOString(),
         }),
       )
+      .mockResolvedValueOnce(createJsonResponse([]))
       .mockResolvedValueOnce(
         createJsonResponse([
           {
@@ -176,28 +186,17 @@ describe('Mobile MVP flows', () => {
         ]),
       )
       .mockResolvedValueOnce(createJsonResponse({ id: 'dish-2', archivedAt: null }))
-      .mockResolvedValueOnce(
-        createJsonResponse([
-          {
-            id: 'dish-2',
-            name: 'Archived Dish',
-            description: 'old',
-            dishType: 'vegan',
-            createdAt: new Date().toISOString(),
-            archivedAt: new Date().toISOString(),
-          },
-        ]),
-      );
+      .mockResolvedValueOnce(createJsonResponse([]));
 
     render(<App />);
     fireEvent.press(screen.getByText('Manage Dishes'));
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
-    fireEvent.press(screen.getByText('Login'));
-    await screen.findByText('User: tester@foodrandomizer.app');
+    fireEvent.press(screen.getByTestId('auth-login-button'));
+    await screen.findByText('Logged in: tester@foodrandomizer.app');
     fireEvent.press(screen.getByText('Archived'));
 
-    expect(await screen.findByText('Archived Dish')).toBeTruthy();
-    fireEvent.press(screen.getByText('Unarchive'));
+    await waitFor(() => expect(screen.getByText('Archived Dish')).toBeTruthy());
+    fireEvent.press(screen.getByTestId('dish-unarchive-dish-2'));
 
     await waitFor(() => {
       const postCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
