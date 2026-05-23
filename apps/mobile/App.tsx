@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  Animated,
+  Modal,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -69,6 +71,8 @@ export default function App() {
   const [randomLoading, setRandomLoading] = useState(false);
   const [randomError, setRandomError] = useState<string | null>(null);
   const [randomDishTypeFilter, setRandomDishTypeFilter] = useState<'all' | 'usual' | 'vegetarian' | 'vegan'>('all');
+  const [filterSheetOpen, setFilterSheetOpen] = useState(false);
+  const [dishModalOpen, setDishModalOpen] = useState(false);
 
   const [dishName, setDishName] = useState('');
   const [dishDescription, setDishDescription] = useState('');
@@ -89,14 +93,31 @@ export default function App() {
   const [dishListFilter, setDishListFilter] = useState<'all' | 'usual' | 'vegetarian' | 'vegan'>('all');
   const [dishArchivedFilter, setDishArchivedFilter] = useState<'active' | 'archived'>('active');
 
+  const randomButtonScale = useRef(new Animated.Value(1)).current;
+  const randomButtonOpacity = useRef(new Animated.Value(1)).current;
+
   const canSaveDish = useMemo(() => {
     return dishName.trim().length > 0 && parseLines(dishIngredients).length > 0 && parseLines(dishSteps).length > 0;
   }, [dishName, dishIngredients, dishSteps]);
+
   const isAuthenticated = Boolean(sessionToken);
 
   async function fetchRandomDish() {
     setRandomLoading(true);
     setRandomError(null);
+
+    Animated.parallel([
+      Animated.timing(randomButtonScale, {
+        toValue: 0.86,
+        duration: 220,
+        useNativeDriver: true,
+      }),
+      Animated.timing(randomButtonOpacity, {
+        toValue: 0.2,
+        duration: 220,
+        useNativeDriver: true,
+      }),
+    ]).start();
 
     try {
       const payloadBody =
@@ -121,10 +142,24 @@ export default function App() {
 
       const payload = (await response.json()) as RandomNextResponse;
       setRandomData(payload);
+      setDishModalOpen(true);
     } catch (e) {
       setRandomError(formatClientError(e, 'Failed to fetch dish from backend'));
     } finally {
       setRandomLoading(false);
+      Animated.parallel([
+        Animated.spring(randomButtonScale, {
+          toValue: 1,
+          speed: 12,
+          bounciness: 8,
+          useNativeDriver: true,
+        }),
+        Animated.timing(randomButtonOpacity, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true,
+        }),
+      ]).start();
     }
   }
 
@@ -391,6 +426,7 @@ export default function App() {
       setSessionToken(payload.token);
       setCurrentUserEmail(payload.user.email);
       setManageMessage(`Logged in as ${payload.user.email ?? payload.user.id}`);
+      await fetchDishes();
     } catch (e) {
       setManageError(formatClientError(e, 'Login failed'));
     } finally {
@@ -416,6 +452,7 @@ export default function App() {
       setSessionToken(payload.token);
       setCurrentUserEmail(payload.user.email);
       setManageMessage(`Registered and logged in as ${payload.user.email ?? payload.user.id}`);
+      await fetchDishes();
     } catch (e) {
       setManageError(formatClientError(e, 'Register failed'));
     } finally {
@@ -423,254 +460,297 @@ export default function App() {
     }
   }
 
+  const selectedFilterLabel =
+    randomDishTypeFilter === 'all'
+      ? 'All'
+      : randomDishTypeFilter === 'usual'
+        ? 'Usual'
+        : randomDishTypeFilter === 'vegetarian'
+          ? 'Vegetarian'
+          : 'Vegan';
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.bgOrbTop} />
-      <View style={styles.bgOrbRight} />
+      <View style={styles.glowOne} />
+      <View style={styles.glowTwo} />
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.heroCard}>
-          <Text style={styles.heroTag}>Meal Planner</Text>
+          <Text style={styles.heroTag}>Night Mode</Text>
           <Text style={styles.title}>Food Randomizer</Text>
           <Text style={styles.subtitle}>API: {API_BASE_URL}</Text>
         </View>
 
         <View style={styles.tabRow}>
-          <Pressable
-            onPress={() => setMode('random')}
-            style={[styles.tab, mode === 'random' ? styles.tabActive : null]}
-          >
+          <Pressable onPress={() => setMode('random')} style={[styles.tab, mode === 'random' ? styles.tabActive : null]}>
             <Text style={[styles.tabLabel, mode === 'random' ? styles.tabLabelActive : null]}>Random</Text>
           </Pressable>
-          <Pressable
-            onPress={() => setMode('manage')}
-            style={[styles.tab, mode === 'manage' ? styles.tabActive : null]}
-          >
+          <Pressable onPress={() => setMode('manage')} style={[styles.tab, mode === 'manage' ? styles.tabActive : null]}>
             <Text style={[styles.tabLabel, mode === 'manage' ? styles.tabLabelActive : null]}>Manage Dishes</Text>
           </Pressable>
         </View>
 
         {mode === 'random' ? (
-          <View style={styles.sectionCard}>
-            <Text style={styles.sectionTitle}>Random Filter</Text>
-            <View style={styles.inlineActions}>
-              <Pressable onPress={() => setRandomDishTypeFilter('all')} style={[styles.secondaryButton, randomDishTypeFilter === 'all' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>All</Text>
-              </Pressable>
-              <Pressable onPress={() => setRandomDishTypeFilter('usual')} style={[styles.secondaryButton, randomDishTypeFilter === 'usual' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Usual</Text>
-              </Pressable>
-              <Pressable onPress={() => setRandomDishTypeFilter('vegetarian')} style={[styles.secondaryButton, randomDishTypeFilter === 'vegetarian' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Vegetarian</Text>
-              </Pressable>
-              <Pressable onPress={() => setRandomDishTypeFilter('vegan')} style={[styles.secondaryButton, randomDishTypeFilter === 'vegan' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Vegan</Text>
-              </Pressable>
-            </View>
-            <Pressable
-              onPress={fetchRandomDish}
-              disabled={randomLoading}
-              style={[styles.button, randomLoading ? styles.buttonDisabled : null]}
-            >
-              <Text style={styles.buttonText}>{randomLoading ? 'Picking...' : 'Pick Random Dish'}</Text>
+          <View style={styles.randomStage}>
+            <Pressable onPress={() => setFilterSheetOpen(true)} style={styles.filterFab}>
+              <Text style={styles.filterFabIcon}>≡</Text>
+              <Text style={styles.filterFabText}>{selectedFilterLabel}</Text>
             </Pressable>
 
-            {randomLoading ? <ActivityIndicator style={styles.loader} /> : null}
-            {randomError ? <Text style={styles.error}>{randomError}</Text> : null}
-
-            {randomData ? <DishCard dish={randomData.dish} /> : null}
+            <View style={styles.randomCenterWrap}>
+              <Animated.View style={{ opacity: randomButtonOpacity, transform: [{ scale: randomButtonScale }] }}>
+                <Pressable
+                  onPress={fetchRandomDish}
+                  disabled={randomLoading}
+                  style={[styles.randomBigButton, randomLoading ? styles.buttonDisabled : null]}
+                >
+                  <Text style={styles.randomBigButtonText}>{randomLoading ? 'Picking...' : 'Random'}</Text>
+                </Pressable>
+              </Animated.View>
+              {randomLoading ? <ActivityIndicator style={styles.loader} color="#52ff9f" /> : null}
+              {randomError ? <Text style={styles.error}>{randomError}</Text> : null}
+            </View>
           </View>
         ) : (
           <View style={styles.sectionCard}>
-            <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
-            <TextInput
-              value={loginEmail}
-              onChangeText={setLoginEmail}
-              placeholder="Your email (for login)"
-              placeholderTextColor="#7d8d86"
-              style={styles.input}
-              autoCapitalize="none"
-            />
-            <TextInput
-              value={loginPassword}
-              onChangeText={setLoginPassword}
-              placeholder="Password (min 8 chars)"
-              placeholderTextColor="#7d8d86"
-              style={styles.input}
-              secureTextEntry
-            />
-            <View style={styles.inlineActions}>
-              <Pressable onPress={login} disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8} style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>Login</Text>
-              </Pressable>
-              <Pressable onPress={register} disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8} style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>Register</Text>
-              </Pressable>
-              {currentUserEmail ? <Text style={styles.listCardText}>User: {currentUserEmail}</Text> : null}
-            </View>
-            {!isAuthenticated ? <Text style={styles.error}>Login first to create/edit/archive dishes.</Text> : null}
-
-            <Text style={styles.fieldLabel}>Dish Name</Text>
-            <TextInput
-              value={dishName}
-              onChangeText={setDishName}
-              placeholder="Dish name"
-              placeholderTextColor="#7d8d86"
-              style={styles.input}
-            />
-            <Text style={styles.fieldLabel}>Description</Text>
-            <TextInput
-              value={dishDescription}
-              onChangeText={setDishDescription}
-              placeholder="Description (optional)"
-              placeholderTextColor="#7d8d86"
-              style={styles.input}
-            />
-            <Text style={styles.fieldLabel}>Ingredients</Text>
-            <TextInput
-              value={dishIngredients}
-              onChangeText={setDishIngredients}
-              placeholder="Ingredients (one per line)"
-              placeholderTextColor="#7d8d86"
-              style={[styles.input, styles.inputMulti]}
-              multiline
-            />
-            <Text style={styles.fieldLabel}>Steps</Text>
-            <TextInput
-              value={dishSteps}
-              onChangeText={setDishSteps}
-              placeholder="Steps (one per line)"
-              placeholderTextColor="#7d8d86"
-              style={[styles.input, styles.inputMulti]}
-              multiline
-            />
-            <Text style={styles.fieldLabel}>Can Add</Text>
-            <TextInput
-              value={dishAddOns}
-              onChangeText={setDishAddOns}
-              placeholder="Can add (one per line)"
-              placeholderTextColor="#7d8d86"
-              style={[styles.input, styles.inputMulti]}
-              multiline
-            />
-            <View style={styles.inlineActions}>
-              <Pressable onPress={() => setDishType('usual')} style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Usual</Text>
-              </Pressable>
-              <Pressable onPress={() => setDishType('vegetarian')} style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Vegetarian</Text>
-              </Pressable>
-              <Pressable onPress={() => setDishType('vegan')} style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Vegan</Text>
-              </Pressable>
-            </View>
-
-            <Pressable
-              onPress={editingDishId ? updateDish : createDish}
-              disabled={!canSaveDish || saveLoading || !isAuthenticated}
-              style={[
-                styles.button,
-                (!canSaveDish || saveLoading) ? styles.buttonDisabled : null,
-                !isAuthenticated ? styles.buttonDisabled : null,
-              ]}
-            >
-              <Text style={styles.buttonText}>
-                {saveLoading ? 'Saving...' : editingDishId ? 'Save Changes' : 'Save Dish'}
-              </Text>
-            </Pressable>
-
-            <View style={styles.inlineActions}>
-              <Pressable onPress={() => fetchDishes()} style={styles.secondaryButton}>
-                <Text style={styles.secondaryButtonText}>Refresh List</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => {
-                  setEditingDishId(null);
-                  clearDishForm();
-                }}
-                style={[styles.secondaryButton, styles.secondaryButtonMuted]}
-              >
-                <Text style={styles.secondaryButtonText}>Clear / Exit Edit</Text>
-              </Pressable>
-            </View>
-            <Text style={styles.hintText}>After login, tap Refresh List to load dishes.</Text>
-
-            {listLoading || detailLoading ? <ActivityIndicator style={styles.loader} /> : null}
-            {manageError ? <Text style={styles.error}>{manageError}</Text> : null}
-            {manageMessage ? <Text style={styles.success}>{manageMessage}</Text> : null}
-
-            <Text style={styles.sectionTitle}>Dishes</Text>
-            <View style={styles.inlineActions}>
-              <Pressable onPress={() => applyArchivedFilter('active')} style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Active</Text>
-              </Pressable>
-              <Pressable onPress={() => applyArchivedFilter('archived')} style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Archived</Text>
-              </Pressable>
-            </View>
-            <View style={styles.inlineActions}>
-              <Pressable onPress={() => applyDishFilter('all')} style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>All</Text>
-              </Pressable>
-              <Pressable onPress={() => applyDishFilter('usual')} style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Usual</Text>
-              </Pressable>
-              <Pressable onPress={() => applyDishFilter('vegetarian')} style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Vegetarian</Text>
-              </Pressable>
-              <Pressable onPress={() => applyDishFilter('vegan')} style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}>
-                <Text style={styles.secondaryButtonText}>Vegan</Text>
-              </Pressable>
-            </View>
-            {dishes.length === 0 ? <Text style={styles.empty}>No dishes loaded yet.</Text> : null}
-
-            {dishes.map((dish) => (
-              <View key={dish.id} style={styles.listCard}>
-                <Pressable
-                  onPress={() => {
-                    if (dishArchivedFilter === 'active') {
-                      fetchDishById(dish.id);
-                    }
-                  }}
-                >
-                  <Text style={styles.listCardTitle}>{dish.name}</Text>
-                  <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
-                  {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
-                </Pressable>
-                {dishArchivedFilter === 'archived' ? (
+            {!isAuthenticated ? (
+              <>
+                <Text style={styles.sectionTitle}>Manage Is Locked</Text>
+                <Text style={styles.hintText}>Login or register to open dish management.</Text>
+                <TextInput
+                  value={loginEmail}
+                  onChangeText={setLoginEmail}
+                  placeholder="Your email"
+                  placeholderTextColor="#63736d"
+                  style={styles.input}
+                  autoCapitalize="none"
+                />
+                <TextInput
+                  value={loginPassword}
+                  onChangeText={setLoginPassword}
+                  placeholder="Password (min 8 chars)"
+                  placeholderTextColor="#63736d"
+                  style={styles.input}
+                  secureTextEntry
+                />
+                <View style={styles.inlineActions}>
                   <Pressable
-                    onPress={() => unarchiveDishById(dish.id)}
-                    disabled={!isAuthenticated || saveLoading}
-                    style={[styles.secondaryButton, styles.secondaryActive]}
+                    testID="auth-login-button"
+                    onPress={login}
+                    disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8}
+                    style={styles.secondaryButton}
                   >
-                    <Text style={styles.secondaryButtonText}>Unarchive</Text>
+                    <Text style={styles.secondaryButtonText}>Login</Text>
                   </Pressable>
-                ) : null}
-              </View>
-            ))}
+                  <Pressable
+                    testID="auth-register-button"
+                    onPress={register}
+                    disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8}
+                    style={styles.secondaryButton}
+                  >
+                    <Text style={styles.secondaryButtonText}>Register</Text>
+                  </Pressable>
+                </View>
+                {manageError ? <Text style={styles.error}>{manageError}</Text> : null}
+                {manageMessage ? <Text style={styles.success}>{manageMessage}</Text> : null}
+              </>
+            ) : (
+              <>
+                <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
+                {currentUserEmail ? <Text style={styles.hintText}>Logged in: {currentUserEmail}</Text> : null}
 
-            {selectedDish ? (
-              <View style={styles.selectedDishBlock}>
-                <Text style={styles.sectionTitle}>Selected Dish</Text>
+                <Text style={styles.fieldLabel}>Dish Name</Text>
+                <TextInput
+                  value={dishName}
+                  onChangeText={setDishName}
+                  placeholder="Dish name"
+                  placeholderTextColor="#63736d"
+                  style={styles.input}
+                />
+                <Text style={styles.fieldLabel}>Description</Text>
+                <TextInput
+                  value={dishDescription}
+                  onChangeText={setDishDescription}
+                  placeholder="Description (optional)"
+                  placeholderTextColor="#63736d"
+                  style={styles.input}
+                />
+                <Text style={styles.fieldLabel}>Ingredients</Text>
+                <TextInput
+                  value={dishIngredients}
+                  onChangeText={setDishIngredients}
+                  placeholder="Ingredients (one per line)"
+                  placeholderTextColor="#63736d"
+                  style={[styles.input, styles.inputMulti]}
+                  multiline
+                />
+                <Text style={styles.fieldLabel}>Steps</Text>
+                <TextInput
+                  value={dishSteps}
+                  onChangeText={setDishSteps}
+                  placeholder="Steps (one per line)"
+                  placeholderTextColor="#63736d"
+                  style={[styles.input, styles.inputMulti]}
+                  multiline
+                />
+                <Text style={styles.fieldLabel}>Can Add</Text>
+                <TextInput
+                  value={dishAddOns}
+                  onChangeText={setDishAddOns}
+                  placeholder="Can add (one per line)"
+                  placeholderTextColor="#63736d"
+                  style={[styles.input, styles.inputMulti]}
+                  multiline
+                />
+                <View style={styles.inlineActions}>
+                  <Pressable onPress={() => setDishType('usual')} style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Usual</Text>
+                  </Pressable>
+                  <Pressable onPress={() => setDishType('vegetarian')} style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+                  </Pressable>
+                  <Pressable onPress={() => setDishType('vegan')} style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Vegan</Text>
+                  </Pressable>
+                </View>
+
                 <Pressable
-                  onPress={() => loadDishIntoFormForEdit(selectedDish)}
-                  style={styles.secondaryButton}
+                  onPress={editingDishId ? updateDish : createDish}
+                  disabled={!canSaveDish || saveLoading}
+                  style={[styles.button, !canSaveDish || saveLoading ? styles.buttonDisabled : null]}
                 >
-                  <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
+                  <Text style={styles.buttonText}>{saveLoading ? 'Saving...' : editingDishId ? 'Save Changes' : 'Save Dish'}</Text>
                 </Pressable>
-                <Pressable
-                  onPress={archiveSelectedDish}
-                  disabled={!isAuthenticated || saveLoading}
-                  style={[styles.secondaryButton, styles.secondaryDanger]}
-                >
-                  <Text style={styles.secondaryButtonText}>Archive Dish</Text>
-                </Pressable>
-                <DishCard dish={selectedDish} />
-              </View>
-            ) : null}
+
+                <View style={styles.inlineActions}>
+                  <Pressable testID="manage-refresh-button" onPress={() => fetchDishes()} style={styles.secondaryButton}>
+                    <Text style={styles.secondaryButtonText}>Refresh List</Text>
+                  </Pressable>
+                  <Pressable
+                    onPress={() => {
+                      setEditingDishId(null);
+                      clearDishForm();
+                    }}
+                    style={[styles.secondaryButton, styles.secondaryButtonMuted]}
+                  >
+                    <Text style={styles.secondaryButtonText}>Clear / Exit Edit</Text>
+                  </Pressable>
+                </View>
+
+                {listLoading || detailLoading ? <ActivityIndicator style={styles.loader} color="#52ff9f" /> : null}
+                {manageError ? <Text style={styles.error}>{manageError}</Text> : null}
+                {manageMessage ? <Text style={styles.success}>{manageMessage}</Text> : null}
+
+                <Text style={styles.sectionTitle}>Dishes</Text>
+                <View style={styles.inlineActions}>
+                  <Pressable onPress={() => applyArchivedFilter('active')} style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Active</Text>
+                  </Pressable>
+                  <Pressable onPress={() => applyArchivedFilter('archived')} style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Archived</Text>
+                  </Pressable>
+                </View>
+                <View style={styles.inlineActions}>
+                  <Pressable onPress={() => applyDishFilter('all')} style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>All</Text>
+                  </Pressable>
+                  <Pressable onPress={() => applyDishFilter('usual')} style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Usual</Text>
+                  </Pressable>
+                  <Pressable onPress={() => applyDishFilter('vegetarian')} style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+                  </Pressable>
+                  <Pressable onPress={() => applyDishFilter('vegan')} style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}>
+                    <Text style={styles.secondaryButtonText}>Vegan</Text>
+                  </Pressable>
+                </View>
+                {dishes.length === 0 ? <Text style={styles.empty}>No dishes loaded yet.</Text> : null}
+
+                {dishes.map((dish) => (
+                  <View key={dish.id} style={styles.listCard}>
+                    <Pressable
+                      testID={`dish-row-${dish.id}`}
+                      onPress={() => {
+                        if (dishArchivedFilter === 'active') {
+                          fetchDishById(dish.id);
+                        }
+                      }}
+                    >
+                      <Text style={styles.listCardTitle}>{dish.name}</Text>
+                      <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
+                      {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
+                    </Pressable>
+                    {dishArchivedFilter === 'archived' ? (
+                      <Pressable
+                        testID={`dish-unarchive-${dish.id}`}
+                        onPress={() => unarchiveDishById(dish.id)}
+                        disabled={saveLoading}
+                        style={[styles.secondaryButton, styles.secondaryActive]}
+                      >
+                        <Text style={styles.secondaryButtonText}>Unarchive</Text>
+                      </Pressable>
+                    ) : null}
+                  </View>
+                ))}
+
+                {selectedDish ? (
+                  <View style={styles.selectedDishBlock}>
+                    <Text style={styles.sectionTitle}>Selected Dish</Text>
+                    <Pressable onPress={() => loadDishIntoFormForEdit(selectedDish)} style={styles.secondaryButton}>
+                      <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
+                    </Pressable>
+                    <Pressable
+                      testID="dish-archive-button"
+                      onPress={archiveSelectedDish}
+                      disabled={saveLoading}
+                      style={[styles.secondaryButton, styles.secondaryDanger]}
+                    >
+                      <Text style={styles.secondaryButtonText}>Archive Dish</Text>
+                    </Pressable>
+                    <DishDetailsBlock dish={selectedDish} />
+                  </View>
+                ) : null}
+              </>
+            )}
           </View>
         )}
       </ScrollView>
-      <StatusBar style="dark" />
+
+      <Modal visible={filterSheetOpen} animationType="fade" transparent onRequestClose={() => setFilterSheetOpen(false)}>
+        <View style={styles.sheetBackdrop}>
+          <View style={styles.sheetCard}>
+            <Text style={styles.sheetTitle}>Choose Dish Type</Text>
+            {(['all', 'usual', 'vegetarian', 'vegan'] as const).map((kind) => (
+              <Pressable
+                key={kind}
+                style={[styles.sheetButton, randomDishTypeFilter === kind ? styles.sheetButtonActive : null]}
+                onPress={() => {
+                  setRandomDishTypeFilter(kind);
+                  setFilterSheetOpen(false);
+                }}
+              >
+                <Text style={styles.sheetButtonText}>{kind === 'all' ? 'All' : kind === 'usual' ? 'Usual' : kind === 'vegetarian' ? 'Vegetarian' : 'Vegan'}</Text>
+              </Pressable>
+            ))}
+            <Pressable onPress={() => setFilterSheetOpen(false)} style={styles.sheetCloseButton}>
+              <Text style={styles.sheetCloseText}>Close</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal visible={dishModalOpen} animationType="slide" onRequestClose={() => setDishModalOpen(false)}>
+        <SafeAreaView style={styles.modalContainer}>
+          <View style={styles.modalHeaderRow}>
+            <Text style={styles.modalHeaderTitle}>Your Dish</Text>
+            <Pressable onPress={() => setDishModalOpen(false)} style={styles.modalCloseButton}>
+              <Text style={styles.modalCloseText}>Close</Text>
+            </Pressable>
+          </View>
+          {randomData ? <DishModalScreen dish={randomData.dish} /> : null}
+        </SafeAreaView>
+      </Modal>
+
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 }
@@ -704,7 +784,7 @@ function formatClientError(error: unknown, fallback: string): string {
   return fallback;
 }
 
-function DishCard({ dish }: { dish: DishDetail }) {
+function DishDetailsBlock({ dish }: { dish: DishDetail }) {
   return (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>{dish.name}</Text>
@@ -735,140 +815,227 @@ function DishCard({ dish }: { dish: DishDetail }) {
   );
 }
 
+function DishModalScreen({ dish }: { dish: DishDetail }) {
+  return (
+    <ScrollView contentContainerStyle={styles.modalContent}>
+      <Text style={styles.modalDishTitle}>{dish.name}</Text>
+      <View style={styles.modalInfoBlock}>
+        <Text style={styles.modalType}>Type: {dish.dishType ?? 'usual'}</Text>
+        {dish.description ? <Text style={styles.description}>{dish.description}</Text> : null}
+
+        <Text style={styles.sectionTitle}>Ingredients</Text>
+        {dish.ingredients.map((ingredient, index) => (
+          <Text key={`${ingredient.name}-${index}`} style={styles.listItem}>
+            - {ingredient.name}
+          </Text>
+        ))}
+
+        <Text style={styles.sectionTitle}>How to cook</Text>
+        {dish.steps.map((step, index) => (
+          <Text key={`${step}-${index}`} style={styles.listItem}>
+            {index + 1}. {step}
+          </Text>
+        ))}
+
+        <Text style={styles.sectionTitle}>Can add</Text>
+        {dish.addOnGroups.flatMap((group) => group.options).map((option, index) => (
+          <Text key={`${option}-${index}`} style={styles.listItem}>
+            - {option}
+          </Text>
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f5f2',
+    backgroundColor: '#040b08',
   },
-  bgOrbTop: {
+  glowOne: {
     position: 'absolute',
-    top: -60,
-    left: -40,
+    width: 260,
+    height: 260,
+    borderRadius: 999,
+    backgroundColor: '#0f2e1f',
+    top: -70,
+    left: -80,
+  },
+  glowTwo: {
+    position: 'absolute',
     width: 220,
     height: 220,
     borderRadius: 999,
-    backgroundColor: '#d6efe2',
-  },
-  bgOrbRight: {
-    position: 'absolute',
-    top: 120,
-    right: -80,
-    width: 220,
-    height: 220,
-    borderRadius: 999,
-    backgroundColor: '#e6f4ec',
+    backgroundColor: '#072217',
+    bottom: 80,
+    right: -70,
   },
   content: {
-    paddingHorizontal: 20,
-    paddingVertical: 18,
+    paddingHorizontal: 18,
+    paddingVertical: 16,
     gap: 14,
   },
   heroCard: {
-    backgroundColor: '#123f2a',
-    borderRadius: 18,
+    backgroundColor: '#08140f',
+    borderRadius: 22,
     paddingHorizontal: 18,
     paddingVertical: 16,
-    shadowColor: '#0a2217',
-    shadowOpacity: 0.22,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 4,
+    borderWidth: 1,
+    borderColor: '#1b4f36',
+    shadowColor: '#52ff9f',
+    shadowOpacity: 0.28,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 0 },
+    elevation: 6,
   },
   heroTag: {
     alignSelf: 'flex-start',
-    color: '#123f2a',
-    backgroundColor: '#d6efe2',
+    color: '#03130b',
+    backgroundColor: '#52ff9f',
     borderRadius: 999,
     paddingHorizontal: 10,
     paddingVertical: 4,
     fontWeight: '700',
-    fontSize: 12,
+    fontSize: 11,
     marginBottom: 8,
   },
   title: {
-    fontSize: 28,
+    fontSize: 34,
     fontWeight: '800',
     marginBottom: 6,
-    color: '#f3fbf7',
+    color: '#effff6',
   },
   subtitle: {
-    color: '#d4e8de',
+    color: '#9ad7b7',
     fontSize: 13,
   },
   tabRow: {
     flexDirection: 'row',
-    marginBottom: 6,
     gap: 10,
   },
   tab: {
     flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderRadius: 12,
-    backgroundColor: '#dbe4df',
-    borderWidth: 1,
-    borderColor: '#c8d4ce',
+    borderRadius: 14,
+    paddingVertical: 12,
     alignItems: 'center',
+    backgroundColor: '#0f1915',
+    borderWidth: 1,
+    borderColor: '#1b3b2a',
   },
   tabActive: {
-    backgroundColor: '#123f2a',
-    borderColor: '#123f2a',
+    backgroundColor: '#0d2d1f',
+    borderColor: '#52ff9f',
   },
   tabLabel: {
     fontWeight: '700',
-    color: '#234536',
+    color: '#98b8a8',
   },
   tabLabelActive: {
-    color: '#eef9f2',
+    color: '#d7ffe9',
+  },
+  randomStage: {
+    minHeight: 420,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#1a3b2a',
+    backgroundColor: '#09120f',
+    padding: 14,
+  },
+  filterFab: {
+    alignSelf: 'flex-start',
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    backgroundColor: '#0f2d20',
+    borderWidth: 1,
+    borderColor: '#2f7a55',
+    flexDirection: 'row',
+    gap: 8,
+    alignItems: 'center',
+  },
+  filterFabIcon: {
+    color: '#52ff9f',
+    fontSize: 16,
+    fontWeight: '900',
+  },
+  filterFabText: {
+    color: '#d7ffe8',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  randomCenterWrap: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 12,
+  },
+  randomBigButton: {
+    width: 190,
+    height: 190,
+    borderRadius: 999,
+    backgroundColor: '#0e3a28',
+    borderWidth: 2,
+    borderColor: '#52ff9f',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#52ff9f',
+    shadowOpacity: 0.34,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 0 },
+    elevation: 8,
+  },
+  randomBigButtonText: {
+    color: '#d8ffeb',
+    fontSize: 28,
+    fontWeight: '900',
+    letterSpacing: 1,
   },
   sectionCard: {
-    backgroundColor: '#fbfffc',
-    borderRadius: 16,
+    backgroundColor: '#0a1310',
+    borderRadius: 18,
     padding: 14,
     borderWidth: 1,
-    borderColor: '#d8e6dd',
-    shadowColor: '#17382a',
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 2,
+    borderColor: '#1d3f2e',
   },
   button: {
-    backgroundColor: '#1c7547',
+    backgroundColor: '#0d6f43',
     paddingHorizontal: 16,
     paddingVertical: 13,
     borderRadius: 12,
     alignSelf: 'flex-start',
+    borderWidth: 1,
+    borderColor: '#52ff9f',
   },
   buttonDisabled: {
     opacity: 0.52,
   },
   buttonText: {
-    color: '#fff',
+    color: '#e8fff3',
     fontWeight: '700',
   },
   secondaryButton: {
-    backgroundColor: '#edf4ef',
+    backgroundColor: '#0f1b16',
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#d2dfd7',
+    borderColor: '#2a4b3a',
   },
   secondaryButtonMuted: {
     opacity: 0.9,
   },
   secondaryActive: {
-    backgroundColor: '#d6efe2',
-    borderColor: '#9bcbb2',
+    backgroundColor: '#163a29',
+    borderColor: '#52ff9f',
   },
   secondaryDanger: {
-    backgroundColor: '#ffe5e5',
-    borderColor: '#f2bbbb',
+    backgroundColor: '#2d1414',
+    borderColor: '#7a3030',
     marginTop: 8,
   },
   secondaryButtonText: {
-    color: '#204434',
+    color: '#ccf7df',
     fontWeight: '600',
   },
   inlineActions: {
@@ -879,98 +1046,194 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   loader: {
-    marginTop: 14,
+    marginTop: 8,
   },
   error: {
-    marginTop: 12,
-    color: '#b5372b',
-    fontWeight: '600',
+    marginTop: 10,
+    color: '#ff8b8b',
+    fontWeight: '700',
+    textAlign: 'center',
   },
   success: {
-    marginTop: 12,
-    color: '#1f7a4a',
-    fontWeight: '600',
+    marginTop: 10,
+    color: '#52ff9f',
+    fontWeight: '700',
   },
   input: {
-    backgroundColor: '#fdfefe',
-    borderColor: '#c7d8cf',
+    backgroundColor: '#06100d',
+    borderColor: '#29523f',
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 11,
     marginBottom: 10,
-    color: '#113224',
+    color: '#e8fff2',
   },
   fieldLabel: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#23493a',
+    color: '#8af0be',
     marginBottom: -4,
   },
   hintText: {
     fontSize: 13,
-    color: '#5b6f65',
-    marginTop: 2,
-    marginBottom: 6,
+    color: '#86a598',
+    marginBottom: 8,
   },
   inputMulti: {
     minHeight: 90,
     textAlignVertical: 'top',
   },
   empty: {
-    color: '#5e6f66',
+    color: '#8da79a',
     marginTop: 4,
   },
   listCard: {
-    backgroundColor: '#f8fcf9',
+    backgroundColor: '#0b1713',
     borderRadius: 12,
     padding: 12,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: '#d8e6dd',
+    borderColor: '#244734',
   },
   listCardTitle: {
     fontWeight: '800',
     fontSize: 16,
-    color: '#133726',
+    color: '#d8ffeb',
   },
   listCardText: {
     marginTop: 4,
-    color: '#4f6659',
+    color: '#9bc7b1',
   },
   selectedDishBlock: {
     marginTop: 10,
     paddingTop: 8,
     borderTopWidth: 1,
-    borderTopColor: '#dbe7df',
+    borderTopColor: '#234535',
   },
   card: {
     marginTop: 18,
-    backgroundColor: '#f7fbf8',
+    backgroundColor: '#08120f',
     borderRadius: 14,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#d7e7dd',
+    borderColor: '#244634',
   },
   cardTitle: {
     fontSize: 21,
     fontWeight: '800',
     marginBottom: 8,
-    color: '#133827',
+    color: '#e3ffee',
   },
   description: {
-    color: '#4b6357',
+    color: '#95bca8',
     marginBottom: 12,
   },
   sectionTitle: {
     marginTop: 12,
     marginBottom: 6,
     fontWeight: '800',
-    fontSize: 16,
-    color: '#193a2b',
+    fontSize: 18,
+    color: '#9effcb',
   },
   listItem: {
-    color: '#244336',
+    color: '#c7f4de',
     marginBottom: 4,
+  },
+  sheetBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(2, 8, 5, 0.78)',
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+  },
+  sheetCard: {
+    backgroundColor: '#08140f',
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: '#2f6f4d',
+    padding: 16,
+    gap: 8,
+  },
+  sheetTitle: {
+    color: '#d9ffeb',
+    fontWeight: '800',
+    fontSize: 18,
+    marginBottom: 4,
+  },
+  sheetButton: {
+    borderRadius: 10,
+    paddingVertical: 11,
+    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: '#2c4f3d',
+    backgroundColor: '#101f19',
+  },
+  sheetButtonActive: {
+    borderColor: '#52ff9f',
+    backgroundColor: '#153a29',
+  },
+  sheetButtonText: {
+    color: '#d8fce9',
+    fontWeight: '700',
+  },
+  sheetCloseButton: {
+    marginTop: 4,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  sheetCloseText: {
+    color: '#8ec9ac',
+    fontWeight: '700',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: '#030a07',
+  },
+  modalHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#1e4331',
+  },
+  modalHeaderTitle: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#d8ffea',
+  },
+  modalCloseButton: {
+    borderWidth: 1,
+    borderColor: '#52ff9f',
+    borderRadius: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 12,
+    backgroundColor: '#103726',
+  },
+  modalCloseText: {
+    color: '#dbffec',
+    fontWeight: '700',
+  },
+  modalContent: {
+    padding: 16,
+    gap: 12,
+  },
+  modalDishTitle: {
+    color: '#ecfff5',
+    fontSize: 30,
+    fontWeight: '900',
+  },
+  modalInfoBlock: {
+    backgroundColor: '#08130f',
+    borderWidth: 1,
+    borderColor: '#1f4733',
+    borderRadius: 16,
+    padding: 14,
+  },
+  modalType: {
+    color: '#9deec4',
+    fontWeight: '700',
+    marginBottom: 6,
   },
 });
