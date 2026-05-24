@@ -50,8 +50,8 @@ jobs:
       - name: Build API
         run: npm run build --workspace apps/api
 
-      - name: API unit tests
-        run: npm run test --workspace apps/api
+      - name: API unit tests + coverage gate
+        run: npm run test:cov --workspace apps/api
 
       - name: API mocked e2e tests
         run: npm run test:e2e --workspace apps/api
