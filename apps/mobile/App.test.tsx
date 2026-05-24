@@ -43,7 +43,8 @@ describe('Mobile MVP flows', () => {
 
     fireEvent.press(screen.getByText('All'));
     fireEvent.press(screen.getByText('Vegan'));
-    fireEvent.press(screen.getAllByText('Random')[1]);
+    fireEvent(screen.getByTestId('random-action-button'), 'pressIn');
+    fireEvent(screen.getByTestId('random-action-button'), 'pressOut');
 
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
 
@@ -55,7 +56,7 @@ describe('Mobile MVP flows', () => {
   it('does not send create request when required fields are empty', async () => {
     render(<App />);
 
-    fireEvent.press(screen.getByText('Manage Dishes'));
+    fireEvent.press(screen.getByText('Manage'));
     expect(screen.getByText('Login or register to open dish management.')).toBeTruthy();
     expect(screen.queryByText('Clear All')).toBeNull();
     expect(global.fetch).not.toHaveBeenCalled();
@@ -94,7 +95,7 @@ describe('Mobile MVP flows', () => {
       );
 
     render(<App />);
-    fireEvent.press(screen.getByText('Manage Dishes'));
+    fireEvent.press(screen.getByText('Manage'));
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
     fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');
@@ -145,7 +146,7 @@ describe('Mobile MVP flows', () => {
 
     render(<App />);
 
-    fireEvent.press(screen.getByText('Manage Dishes'));
+    fireEvent.press(screen.getByText('Manage'));
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
     fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');
@@ -191,7 +192,7 @@ describe('Mobile MVP flows', () => {
       .mockResolvedValueOnce(createJsonResponse([]));
 
     render(<App />);
-    fireEvent.press(screen.getByText('Manage Dishes'));
+    fireEvent.press(screen.getByText('Manage'));
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
     fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');

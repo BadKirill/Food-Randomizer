@@ -110,22 +110,36 @@ export default function App() {
 
   const isAuthenticated = Boolean(sessionToken);
 
-  async function fetchRandomDish() {
-    setRandomLoading(true);
-    setRandomError(null);
-
+  function animateRandomPressed(pressed: boolean) {
     Animated.parallel([
       Animated.timing(randomButtonScale, {
-        toValue: 0.86,
-        duration: 220,
+        toValue: pressed ? 0.9 : 1,
+        duration: 110,
         useNativeDriver: true,
       }),
       Animated.timing(randomButtonOpacity, {
-        toValue: 0.2,
-        duration: 220,
+        toValue: pressed ? 0.72 : 1,
+        duration: 110,
         useNativeDriver: true,
       }),
     ]).start();
+  }
+
+  function handleRandomPressIn() {
+    if (randomLoading) return;
+    clearTransientFeedback();
+    animateRandomPressed(true);
+  }
+
+  async function handleRandomPressOut() {
+    if (randomLoading) return;
+    await fetchRandomDish();
+    animateRandomPressed(false);
+  }
+
+  async function fetchRandomDish() {
+    setRandomLoading(true);
+    setRandomError(null);
 
     try {
       const payloadBody =
@@ -155,19 +169,6 @@ export default function App() {
       setRandomError(formatClientError(e, 'Failed to fetch dish from backend'));
     } finally {
       setRandomLoading(false);
-      Animated.parallel([
-        Animated.spring(randomButtonScale, {
-          toValue: 1,
-          speed: 12,
-          bounciness: 8,
-          useNativeDriver: true,
-        }),
-        Animated.timing(randomButtonOpacity, {
-          toValue: 1,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-      ]).start();
     }
   }
 
@@ -523,30 +524,19 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View style={styles.glowOne} />
       <View style={styles.glowTwo} />
-      <KeyboardAvoidingView style={styles.keyboardWrap} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <KeyboardAvoidingView
+        style={styles.keyboardWrap}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 18 : 0}
+      >
       <ScrollView
         contentContainerStyle={styles.content}
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
       >
-        <View style={styles.heroCard}>
-          <Text style={styles.heroTag}>Night Mode</Text>
-          <Text style={styles.title}>Food Randomizer</Text>
-          <Text style={styles.subtitle}>API: {API_BASE_URL}</Text>
-        </View>
-
-        <View style={styles.tabRow}>
-          <Pressable onPress={() => setMode('random')} style={[styles.tab, mode === 'random' ? styles.tabActive : null]}>
-            <Text style={[styles.tabLabel, mode === 'random' ? styles.tabLabelActive : null]}>Random</Text>
-          </Pressable>
-          <Pressable onPress={() => setMode('manage')} style={[styles.tab, mode === 'manage' ? styles.tabActive : null]}>
-            <Text style={[styles.tabLabel, mode === 'manage' ? styles.tabLabelActive : null]}>Manage Dishes</Text>
-          </Pressable>
-        </View>
-
         {mode === 'random' ? (
           <View style={styles.randomStage}>
-            <Pressable onPress={() => setFilterSheetOpen(true)} style={styles.filterFab}>
+            <Pressable onPress={() => setFilterSheetOpen(true)} style={({ pressed }) => [styles.filterFab, pressed ? styles.buttonPressed : null]}>
               <Text style={styles.filterFabIcon}>≡</Text>
               <Text style={styles.filterFabText}>{selectedFilterLabel}</Text>
             </Pressable>
@@ -554,9 +544,15 @@ export default function App() {
             <View style={styles.randomCenterWrap}>
               <Animated.View style={{ opacity: randomButtonOpacity, transform: [{ scale: randomButtonScale }] }}>
                 <Pressable
-                  onPress={fetchRandomDish}
+                  testID="random-action-button"
+                  onPressIn={handleRandomPressIn}
+                  onPressOut={handleRandomPressOut}
                   disabled={randomLoading}
-                  style={[styles.randomBigButton, randomLoading ? styles.buttonDisabled : null]}
+                  style={({ pressed }) => [
+                    styles.randomBigButton,
+                    pressed ? styles.buttonPressed : null,
+                    randomLoading ? styles.buttonDisabled : null,
+                  ]}
                 >
                   <Text style={styles.randomBigButtonText}>{randomLoading ? 'Picking...' : 'Random'}</Text>
                 </Pressable>
@@ -589,7 +585,7 @@ export default function App() {
                     autoCapitalize="none"
                   />
                   {loginEmail.length > 0 ? (
-                    <Pressable onPress={() => setLoginEmail('')} style={styles.inputClearBtn}>
+                    <Pressable onPress={() => setLoginEmail('')} style={({ pressed }) => [styles.inputClearBtn, pressed ? styles.buttonPressed : null]}>
                       <Text style={styles.inputClearBtnText}>×</Text>
                     </Pressable>
                   ) : null}
@@ -609,7 +605,7 @@ export default function App() {
                     secureTextEntry
                   />
                   {loginPassword.length > 0 ? (
-                    <Pressable onPress={() => setLoginPassword('')} style={styles.inputClearBtn}>
+                    <Pressable onPress={() => setLoginPassword('')} style={({ pressed }) => [styles.inputClearBtn, pressed ? styles.buttonPressed : null]}>
                       <Text style={styles.inputClearBtnText}>×</Text>
                     </Pressable>
                   ) : null}
@@ -620,7 +616,7 @@ export default function App() {
                     testID="auth-login-button"
                     onPress={login}
                     disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8}
-                    style={styles.secondaryButton}
+                    style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={styles.secondaryButtonText}>Login</Text>
                   </Pressable>
@@ -628,7 +624,7 @@ export default function App() {
                     testID="auth-register-button"
                     onPress={register}
                     disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8}
-                    style={styles.secondaryButton}
+                    style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={styles.secondaryButtonText}>Register</Text>
                   </Pressable>
@@ -644,7 +640,7 @@ export default function App() {
                       clearTransientFeedback();
                       setManageTab('form');
                     }}
-                    style={[styles.tab, manageTab === 'form' ? styles.tabActive : null]}
+                    style={({ pressed }) => [styles.tab, manageTab === 'form' ? styles.tabActive : null, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={[styles.tabLabel, manageTab === 'form' ? styles.tabLabelActive : null]}>{editingDishId ? 'Edit Form' : 'Add Form'}</Text>
                   </Pressable>
@@ -653,7 +649,7 @@ export default function App() {
                       clearTransientFeedback();
                       setManageTab('list');
                     }}
-                    style={[styles.tab, manageTab === 'list' ? styles.tabActive : null]}
+                    style={({ pressed }) => [styles.tab, manageTab === 'list' ? styles.tabActive : null, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={[styles.tabLabel, manageTab === 'list' ? styles.tabLabelActive : null]}>Dishes List</Text>
                   </Pressable>
@@ -669,7 +665,7 @@ export default function App() {
                           setEditingDishId(null);
                           clearDishForm();
                         }}
-                        style={[styles.secondaryButton, styles.secondaryButtonMuted]}
+                        style={({ pressed }) => [styles.secondaryButton, styles.secondaryButtonMuted, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>Clear All</Text>
                       </Pressable>
@@ -683,7 +679,7 @@ export default function App() {
                             clearTransientFeedback();
                             setDishType('usual');
                           }}
-                          style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}
+                          style={({ pressed }) => [styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                         >
                           <Text style={styles.secondaryButtonText}>Usual</Text>
                         </Pressable>
@@ -692,7 +688,7 @@ export default function App() {
                             clearTransientFeedback();
                             setDishType('vegetarian');
                           }}
-                          style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}
+                          style={({ pressed }) => [styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                         >
                           <Text style={styles.secondaryButtonText}>Vegetarian</Text>
                         </Pressable>
@@ -701,7 +697,7 @@ export default function App() {
                             clearTransientFeedback();
                             setDishType('vegan');
                           }}
-                          style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}
+                          style={({ pressed }) => [styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                         >
                           <Text style={styles.secondaryButtonText}>Vegan</Text>
                         </Pressable>
@@ -721,7 +717,7 @@ export default function App() {
                         style={styles.inputControl}
                       />
                       {dishName.length > 0 ? (
-                        <Pressable onPress={() => setDishName('')} style={styles.inputClearBtn}>
+                        <Pressable onPress={() => setDishName('')} style={({ pressed }) => [styles.inputClearBtn, pressed ? styles.buttonPressed : null]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
@@ -740,7 +736,7 @@ export default function App() {
                         style={styles.inputControl}
                       />
                       {dishDescription.length > 0 ? (
-                        <Pressable onPress={() => setDishDescription('')} style={styles.inputClearBtn}>
+                        <Pressable onPress={() => setDishDescription('')} style={({ pressed }) => [styles.inputClearBtn, pressed ? styles.buttonPressed : null]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
@@ -760,7 +756,7 @@ export default function App() {
                         multiline
                       />
                       {dishIngredients.length > 0 ? (
-                        <Pressable onPress={() => setDishIngredients('')} style={[styles.inputClearBtn, styles.inputClearBtnMulti]}>
+                        <Pressable onPress={() => setDishIngredients('')} style={({ pressed }) => [styles.inputClearBtn, styles.inputClearBtnMulti, pressed ? styles.buttonPressed : null]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
@@ -780,7 +776,7 @@ export default function App() {
                         multiline
                       />
                       {dishSteps.length > 0 ? (
-                        <Pressable onPress={() => setDishSteps('')} style={[styles.inputClearBtn, styles.inputClearBtnMulti]}>
+                        <Pressable onPress={() => setDishSteps('')} style={({ pressed }) => [styles.inputClearBtn, styles.inputClearBtnMulti, pressed ? styles.buttonPressed : null]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
@@ -800,7 +796,7 @@ export default function App() {
                         multiline
                       />
                       {dishAddOns.length > 0 ? (
-                        <Pressable onPress={() => setDishAddOns('')} style={[styles.inputClearBtn, styles.inputClearBtnMulti]}>
+                        <Pressable onPress={() => setDishAddOns('')} style={({ pressed }) => [styles.inputClearBtn, styles.inputClearBtnMulti, pressed ? styles.buttonPressed : null]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
@@ -809,7 +805,7 @@ export default function App() {
                     <Pressable
                       onPress={editingDishId ? updateDish : createDish}
                       disabled={!canSaveDish || saveLoading}
-                      style={[styles.button, !canSaveDish || saveLoading ? styles.buttonDisabled : null]}
+                      style={({ pressed }) => [styles.button, pressed ? styles.buttonPressed : null, !canSaveDish || saveLoading ? styles.buttonDisabled : null]}
                     >
                       <Text style={styles.buttonText}>{saveLoading ? 'Saving...' : editingDishId ? 'Save Changes' : 'Save Dish'}</Text>
                     </Pressable>
@@ -824,7 +820,7 @@ export default function App() {
                           clearTransientFeedback();
                           fetchDishes();
                         }}
-                        style={styles.secondaryButton}
+                        style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>Refresh List</Text>
                       </Pressable>
@@ -836,7 +832,7 @@ export default function App() {
                           clearTransientFeedback();
                           applyArchivedFilter('active');
                         }}
-                        style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}
+                        style={({ pressed }) => [styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>Active</Text>
                       </Pressable>
@@ -845,7 +841,7 @@ export default function App() {
                           clearTransientFeedback();
                           applyArchivedFilter('archived');
                         }}
-                        style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}
+                        style={({ pressed }) => [styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>Archived</Text>
                       </Pressable>
@@ -857,7 +853,7 @@ export default function App() {
                           clearTransientFeedback();
                           applyDishFilter('all');
                         }}
-                        style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}
+                        style={({ pressed }) => [styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>All</Text>
                       </Pressable>
@@ -866,7 +862,7 @@ export default function App() {
                           clearTransientFeedback();
                           applyDishFilter('usual');
                         }}
-                        style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}
+                        style={({ pressed }) => [styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>Usual</Text>
                       </Pressable>
@@ -875,7 +871,7 @@ export default function App() {
                           clearTransientFeedback();
                           applyDishFilter('vegetarian');
                         }}
-                        style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}
+                        style={({ pressed }) => [styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>Vegetarian</Text>
                       </Pressable>
@@ -884,7 +880,7 @@ export default function App() {
                           clearTransientFeedback();
                           applyDishFilter('vegan');
                         }}
-                        style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}
+                        style={({ pressed }) => [styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null, pressed ? styles.buttonPressed : null]}
                       >
                         <Text style={styles.secondaryButtonText}>Vegan</Text>
                       </Pressable>
@@ -901,6 +897,7 @@ export default function App() {
                               fetchDishById(dish.id, true);
                             }
                           }}
+                          style={({ pressed }) => [pressed ? styles.buttonPressed : null]}
                         >
                           <Text style={styles.listCardTitle}>{dish.name}</Text>
                           <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
@@ -911,7 +908,7 @@ export default function App() {
                             testID={`dish-unarchive-${dish.id}`}
                             onPress={() => unarchiveDishById(dish.id)}
                             disabled={saveLoading}
-                            style={[styles.secondaryButton, styles.secondaryActive]}
+                            style={({ pressed }) => [styles.secondaryButton, styles.secondaryActive, pressed ? styles.buttonPressed : null]}
                           >
                             <Text style={styles.secondaryButtonText}>Unarchive</Text>
                           </Pressable>
@@ -931,6 +928,28 @@ export default function App() {
         )}
       </ScrollView>
       </KeyboardAvoidingView>
+      <View style={styles.bottomTabRow}>
+        <Pressable
+          onPress={() => {
+            clearTransientFeedback();
+            setMode('random');
+          }}
+          style={({ pressed }) => [styles.bottomTab, mode === 'random' ? styles.bottomTabActive : null, pressed ? styles.buttonPressed : null]}
+        >
+          <Text style={styles.bottomTabIcon}>◉</Text>
+          <Text style={[styles.bottomTabLabel, mode === 'random' ? styles.bottomTabLabelActive : null]}>Random</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            clearTransientFeedback();
+            setMode('manage');
+          }}
+          style={({ pressed }) => [styles.bottomTab, mode === 'manage' ? styles.bottomTabActive : null, pressed ? styles.buttonPressed : null]}
+        >
+          <Text style={styles.bottomTabIcon}>☰</Text>
+          <Text style={[styles.bottomTabLabel, mode === 'manage' ? styles.bottomTabLabelActive : null]}>Manage</Text>
+        </Pressable>
+      </View>
 
       <Modal visible={filterSheetOpen} animationType="fade" transparent onRequestClose={() => setFilterSheetOpen(false)}>
         <View style={styles.sheetBackdrop}>
@@ -939,7 +958,7 @@ export default function App() {
             {(['all', 'usual', 'vegetarian', 'vegan'] as const).map((kind) => (
               <Pressable
                 key={kind}
-                style={[styles.sheetButton, randomDishTypeFilter === kind ? styles.sheetButtonActive : null]}
+                style={({ pressed }) => [styles.sheetButton, randomDishTypeFilter === kind ? styles.sheetButtonActive : null, pressed ? styles.buttonPressed : null]}
                 onPress={() => {
                   setRandomDishTypeFilter(kind);
                   setFilterSheetOpen(false);
@@ -948,7 +967,7 @@ export default function App() {
                 <Text style={styles.sheetButtonText}>{kind === 'all' ? 'All' : kind === 'usual' ? 'Usual' : kind === 'vegetarian' ? 'Vegetarian' : 'Vegan'}</Text>
               </Pressable>
             ))}
-            <Pressable onPress={() => setFilterSheetOpen(false)} style={styles.sheetCloseButton}>
+            <Pressable onPress={() => setFilterSheetOpen(false)} style={({ pressed }) => [styles.sheetCloseButton, pressed ? styles.buttonPressed : null]}>
               <Text style={styles.sheetCloseText}>Close</Text>
             </Pressable>
           </View>
@@ -959,7 +978,7 @@ export default function App() {
         <SafeAreaView style={styles.modalContainer}>
           <View style={styles.modalHeaderRow}>
             <Text style={styles.modalHeaderTitle}>Your Dish</Text>
-            <Pressable onPress={() => setDishModalOpen(false)} style={styles.modalCloseButton}>
+            <Pressable onPress={() => setDishModalOpen(false)} style={({ pressed }) => [styles.modalCloseButton, pressed ? styles.buttonPressed : null]}>
               <Text style={styles.modalCloseText}>Close</Text>
             </Pressable>
           </View>
@@ -976,7 +995,7 @@ export default function App() {
             <View style={styles.selectedSheetHandle} />
             <View style={styles.selectedSheetHeader}>
               <Text style={styles.modalHeaderTitle}>Selected Dish</Text>
-              <Pressable onPress={() => setSelectedDishModalOpen(false)} style={styles.modalCloseButton}>
+              <Pressable onPress={() => setSelectedDishModalOpen(false)} style={({ pressed }) => [styles.modalCloseButton, pressed ? styles.buttonPressed : null]}>
                 <Text style={styles.modalCloseText}>Close</Text>
               </Pressable>
             </View>
@@ -992,7 +1011,7 @@ export default function App() {
                       setSelectedDishModalOpen(false);
                       loadDishIntoFormForEdit(selectedDish);
                     }}
-                    style={styles.secondaryButton}
+                  style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
                   </Pressable>
@@ -1003,7 +1022,7 @@ export default function App() {
                       setSelectedDishModalOpen(false);
                     }}
                     disabled={saveLoading}
-                    style={[styles.secondaryButton, styles.secondaryDanger]}
+                    style={({ pressed }) => [styles.secondaryButton, styles.secondaryDanger, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={styles.secondaryButtonText}>Archive Dish</Text>
                   </Pressable>
@@ -1138,58 +1157,24 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 18,
-    paddingVertical: 20,
-    paddingBottom: 120,
-    gap: 18,
-  },
-  heroCard: {
-    backgroundColor: '#08140f',
-    borderRadius: 22,
-    paddingHorizontal: 18,
-    paddingVertical: 16,
-    borderWidth: 1,
-    borderColor: '#1b4f36',
-    shadowColor: '#52ff9f',
-    shadowOpacity: 0.28,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 0 },
-    elevation: 6,
-  },
-  heroTag: {
-    alignSelf: 'flex-start',
-    color: '#03130b',
-    backgroundColor: '#52ff9f',
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    fontWeight: '700',
-    fontSize: 11,
-    marginBottom: 8,
-  },
-  title: {
-    fontSize: 34,
-    fontWeight: '800',
-    marginBottom: 6,
-    color: '#effff6',
-  },
-  subtitle: {
-    color: '#9ad7b7',
-    fontSize: 13,
+    paddingTop: 12,
+    paddingBottom: 150,
+    gap: 22,
   },
   tabRow: {
     flexDirection: 'row',
-    gap: 12,
+    gap: 14,
   },
   manageSubTabRow: {
     flexDirection: 'row',
-    gap: 12,
-    marginTop: 10,
-    marginBottom: 10,
+    gap: 14,
+    marginTop: 12,
+    marginBottom: 14,
   },
   tab: {
     flex: 1,
     borderRadius: 14,
-    paddingVertical: 12,
+    paddingVertical: 14,
     alignItems: 'center',
     backgroundColor: '#0f1915',
     borderWidth: 1,
@@ -1207,12 +1192,12 @@ const styles = StyleSheet.create({
     color: '#d7ffe9',
   },
   randomStage: {
-    minHeight: 420,
+    minHeight: 520,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#1a3b2a',
     backgroundColor: '#09120f',
-    padding: 14,
+    padding: 16,
   },
   filterFab: {
     alignSelf: 'flex-start',
@@ -1240,11 +1225,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 12,
+    gap: 18,
   },
   randomBigButton: {
-    width: 190,
-    height: 190,
+    width: 220,
+    height: 220,
     borderRadius: 999,
     backgroundColor: '#0e3a28',
     borderWidth: 2,
@@ -1259,14 +1244,14 @@ const styles = StyleSheet.create({
   },
   randomBigButtonText: {
     color: '#d8ffeb',
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: '900',
     letterSpacing: 1,
   },
   sectionCard: {
     backgroundColor: '#0a1310',
     borderRadius: 18,
-    padding: 16,
+    padding: 18,
     borderWidth: 1,
     borderColor: '#1d3f2e',
   },
@@ -1294,11 +1279,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 12,
+    marginBottom: 18,
     gap: 10,
   },
   typeChooserTop: {
-    marginBottom: 10,
+    marginBottom: 16,
   },
   typeChooserTitle: {
     color: '#8af0be',
@@ -1311,7 +1296,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: 10,
-    marginBottom: 10,
+    marginBottom: 14,
   },
   listHeaderTitle: {
     fontWeight: '800',
@@ -1327,7 +1312,11 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     borderWidth: 1,
     borderColor: '#52ff9f',
-    marginTop: 6,
+    marginTop: 14,
+  },
+  buttonPressed: {
+    opacity: 0.78,
+    transform: [{ scale: 0.98 }],
   },
   buttonDisabled: {
     opacity: 0.52,
@@ -1339,7 +1328,7 @@ const styles = StyleSheet.create({
   secondaryButton: {
     backgroundColor: '#0f1b16',
     paddingHorizontal: 14,
-    paddingVertical: 11,
+    paddingVertical: 12,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#2a4b3a',
@@ -1362,9 +1351,9 @@ const styles = StyleSheet.create({
   inlineActions: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
-    marginTop: 12,
-    marginBottom: 10,
+    gap: 14,
+    marginTop: 14,
+    marginBottom: 14,
   },
   loader: {
     marginTop: 8,
@@ -1383,8 +1372,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     color: '#8af0be',
-    marginTop: 14,
-    marginBottom: 10,
+    marginTop: 16,
+    marginBottom: 12,
   },
   hintText: {
     fontSize: 13,
@@ -1400,11 +1389,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#06100d',
     paddingLeft: 12,
     paddingRight: 8,
-    minHeight: 54,
+    minHeight: 58,
+    position: 'relative',
   },
   inputRowMulti: {
     alignItems: 'flex-start',
-    minHeight: 120,
+    minHeight: 132,
   },
   inputControl: {
     flex: 1,
@@ -1412,27 +1402,30 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
   },
   inputControlMulti: {
-    minHeight: 110,
+    minHeight: 122,
     textAlignVertical: 'top',
   },
   inputClearBtn: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: 'rgba(149, 163, 156, 0.45)',
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(214, 231, 221, 0.22)',
+    borderWidth: 1,
+    borderColor: 'rgba(214, 231, 221, 0.24)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 6,
+    marginLeft: 8,
+    marginTop: 10,
   },
   inputClearBtnMulti: {
     alignSelf: 'flex-start',
-    marginTop: 10,
+    marginTop: 12,
   },
   inputClearBtnText: {
     color: '#ecf7f1',
     fontWeight: '900',
-    lineHeight: 20,
-    fontSize: 16,
+    lineHeight: 24,
+    fontSize: 20,
   },
   empty: {
     color: '#8da79a',
@@ -1457,6 +1450,47 @@ const styles = StyleSheet.create({
   },
   keyboardWrap: {
     flex: 1,
+  },
+  bottomTabRow: {
+    position: 'absolute',
+    left: 14,
+    right: 14,
+    bottom: 10,
+    flexDirection: 'row',
+    gap: 14,
+    backgroundColor: 'rgba(6, 16, 12, 0.94)',
+    borderWidth: 1,
+    borderColor: '#204434',
+    borderRadius: 18,
+    padding: 10,
+  },
+  bottomTab: {
+    flex: 1,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#1e3f2f',
+    paddingVertical: 10,
+    backgroundColor: '#0a1712',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+  },
+  bottomTabActive: {
+    borderColor: '#52ff9f',
+    backgroundColor: '#103526',
+  },
+  bottomTabIcon: {
+    color: '#9bd8b8',
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  bottomTabLabel: {
+    color: '#9bd8b8',
+    fontWeight: '700',
+    fontSize: 12,
+  },
+  bottomTabLabelActive: {
+    color: '#deffed',
   },
   sheetOverlay: {
     flex: 1,
