@@ -3,7 +3,10 @@ import { useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Animated,
+  KeyboardAvoidingView,
   Modal,
+  PanResponder,
+  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -92,12 +95,14 @@ export default function App() {
   const [dishes, setDishes] = useState<DishListItem[]>([]);
 
   const [selectedDish, setSelectedDish] = useState<DishDetail | null>(null);
+  const [selectedDishModalOpen, setSelectedDishModalOpen] = useState(false);
   const [detailLoading, setDetailLoading] = useState(false);
   const [dishListFilter, setDishListFilter] = useState<'all' | 'usual' | 'vegetarian' | 'vegan'>('all');
   const [dishArchivedFilter, setDishArchivedFilter] = useState<'active' | 'archived'>('active');
 
   const randomButtonScale = useRef(new Animated.Value(1)).current;
   const randomButtonOpacity = useRef(new Animated.Value(1)).current;
+  const selectedDishSheetY = useRef(new Animated.Value(0)).current;
 
   const canSaveDish = useMemo(() => {
     return dishName.trim().length > 0 && parseLines(dishIngredients).length > 0 && parseLines(dishSteps).length > 0;
@@ -205,7 +210,12 @@ export default function App() {
     await fetchDishes(dishListFilter, filter);
   }
 
-  async function fetchDishById(dishId: string) {
+  function clearTransientFeedback() {
+    if (manageMessage) setManageMessage(null);
+    if (manageError) setManageError(null);
+  }
+
+  async function fetchDishById(dishId: string, openModal = true) {
     setDetailLoading(true);
     setManageError(null);
 
@@ -218,6 +228,9 @@ export default function App() {
 
       const payload = (await response.json()) as DishDetail;
       setSelectedDish(payload);
+      if (openModal) {
+        setSelectedDishModalOpen(true);
+      }
     } catch (e) {
       setManageError(formatClientError(e, 'Failed to load dish details'));
     } finally {
@@ -468,24 +481,6 @@ export default function App() {
     }
   }
 
-  function clearField(value: string, setter: (v: string) => void) {
-    return (
-      <View style={styles.inputRow}>
-        <TextInput
-          value={value}
-          onChangeText={setter}
-          placeholderTextColor="#63736d"
-          style={styles.inputControl}
-        />
-        {value.length > 0 ? (
-          <Pressable onPress={() => setter('')} style={styles.inputClearBtn}>
-            <Text style={styles.inputClearBtnText}>×</Text>
-          </Pressable>
-        ) : null}
-      </View>
-    );
-  }
-
   const selectedFilterLabel =
     randomDishTypeFilter === 'all'
       ? 'All'
@@ -495,11 +490,45 @@ export default function App() {
           ? 'Vegetarian'
           : 'Vegan';
 
+  const selectedDishPanResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gestureState) =>
+        Math.abs(gestureState.dy) > Math.abs(gestureState.dx) && gestureState.dy > 6,
+      onPanResponderMove: (_, gestureState) => {
+        if (gestureState.dy > 0) {
+          selectedDishSheetY.setValue(gestureState.dy);
+        }
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dy > 120 || gestureState.vy > 0.8) {
+          Animated.timing(selectedDishSheetY, {
+            toValue: 480,
+            duration: 180,
+            useNativeDriver: true,
+          }).start(() => {
+            selectedDishSheetY.setValue(0);
+            setSelectedDishModalOpen(false);
+          });
+          return;
+        }
+        Animated.spring(selectedDishSheetY, {
+          toValue: 0,
+          useNativeDriver: true,
+        }).start();
+      },
+    }),
+  ).current;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.glowOne} />
       <View style={styles.glowTwo} />
-      <ScrollView contentContainerStyle={styles.content}>
+      <KeyboardAvoidingView style={styles.keyboardWrap} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
+      >
         <View style={styles.heroCard}>
           <Text style={styles.heroTag}>Night Mode</Text>
           <Text style={styles.title}>Food Randomizer</Text>
@@ -550,7 +579,10 @@ export default function App() {
                 <View style={styles.inputRow}>
                   <TextInput
                     value={loginEmail}
-                    onChangeText={setLoginEmail}
+                    onChangeText={(v) => {
+                      clearTransientFeedback();
+                      setLoginEmail(v);
+                    }}
                     placeholder="Your email"
                     placeholderTextColor="#63736d"
                     style={styles.inputControl}
@@ -567,7 +599,10 @@ export default function App() {
                 <View style={styles.inputRow}>
                   <TextInput
                     value={loginPassword}
-                    onChangeText={setLoginPassword}
+                    onChangeText={(v) => {
+                      clearTransientFeedback();
+                      setLoginPassword(v);
+                    }}
                     placeholder="Password (min 8 chars)"
                     placeholderTextColor="#63736d"
                     style={styles.inputControl}
@@ -604,10 +639,22 @@ export default function App() {
             ) : (
               <>
                 <View style={styles.manageSubTabRow}>
-                  <Pressable onPress={() => setManageTab('form')} style={[styles.tab, manageTab === 'form' ? styles.tabActive : null]}>
+                  <Pressable
+                    onPress={() => {
+                      clearTransientFeedback();
+                      setManageTab('form');
+                    }}
+                    style={[styles.tab, manageTab === 'form' ? styles.tabActive : null]}
+                  >
                     <Text style={[styles.tabLabel, manageTab === 'form' ? styles.tabLabelActive : null]}>{editingDishId ? 'Edit Form' : 'Add Form'}</Text>
                   </Pressable>
-                  <Pressable onPress={() => setManageTab('list')} style={[styles.tab, manageTab === 'list' ? styles.tabActive : null]}>
+                  <Pressable
+                    onPress={() => {
+                      clearTransientFeedback();
+                      setManageTab('list');
+                    }}
+                    style={[styles.tab, manageTab === 'list' ? styles.tabActive : null]}
+                  >
                     <Text style={[styles.tabLabel, manageTab === 'list' ? styles.tabLabelActive : null]}>Dishes List</Text>
                   </Pressable>
                 </View>
@@ -618,6 +665,7 @@ export default function App() {
                       <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
                       <Pressable
                         onPress={() => {
+                          clearTransientFeedback();
                           setEditingDishId(null);
                           clearDishForm();
                         }}
@@ -627,11 +675,47 @@ export default function App() {
                       </Pressable>
                     </View>
 
+                    <View style={styles.typeChooserTop}>
+                      <Text style={styles.typeChooserTitle}>Dish Type</Text>
+                      <View style={styles.inlineActions}>
+                        <Pressable
+                          onPress={() => {
+                            clearTransientFeedback();
+                            setDishType('usual');
+                          }}
+                          style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}
+                        >
+                          <Text style={styles.secondaryButtonText}>Usual</Text>
+                        </Pressable>
+                        <Pressable
+                          onPress={() => {
+                            clearTransientFeedback();
+                            setDishType('vegetarian');
+                          }}
+                          style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}
+                        >
+                          <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+                        </Pressable>
+                        <Pressable
+                          onPress={() => {
+                            clearTransientFeedback();
+                            setDishType('vegan');
+                          }}
+                          style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}
+                        >
+                          <Text style={styles.secondaryButtonText}>Vegan</Text>
+                        </Pressable>
+                      </View>
+                    </View>
+
                     <Text style={styles.fieldLabel}>Dish Name</Text>
                     <View style={styles.inputRow}>
                       <TextInput
                         value={dishName}
-                        onChangeText={setDishName}
+                        onChangeText={(v) => {
+                          clearTransientFeedback();
+                          setDishName(v);
+                        }}
                         placeholder="Dish name"
                         placeholderTextColor="#63736d"
                         style={styles.inputControl}
@@ -647,7 +731,10 @@ export default function App() {
                     <View style={styles.inputRow}>
                       <TextInput
                         value={dishDescription}
-                        onChangeText={setDishDescription}
+                        onChangeText={(v) => {
+                          clearTransientFeedback();
+                          setDishDescription(v);
+                        }}
                         placeholder="Description (optional)"
                         placeholderTextColor="#63736d"
                         style={styles.inputControl}
@@ -663,14 +750,17 @@ export default function App() {
                     <View style={[styles.inputRow, styles.inputRowMulti]}>
                       <TextInput
                         value={dishIngredients}
-                        onChangeText={setDishIngredients}
+                        onChangeText={(v) => {
+                          clearTransientFeedback();
+                          setDishIngredients(v);
+                        }}
                         placeholder="Ingredients (one per line)"
                         placeholderTextColor="#63736d"
                         style={[styles.inputControl, styles.inputControlMulti]}
                         multiline
                       />
                       {dishIngredients.length > 0 ? (
-                        <Pressable onPress={() => setDishIngredients('')} style={styles.inputClearBtn}>
+                        <Pressable onPress={() => setDishIngredients('')} style={[styles.inputClearBtn, styles.inputClearBtnMulti]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
@@ -680,14 +770,17 @@ export default function App() {
                     <View style={[styles.inputRow, styles.inputRowMulti]}>
                       <TextInput
                         value={dishSteps}
-                        onChangeText={setDishSteps}
+                        onChangeText={(v) => {
+                          clearTransientFeedback();
+                          setDishSteps(v);
+                        }}
                         placeholder="Steps (one per line)"
                         placeholderTextColor="#63736d"
                         style={[styles.inputControl, styles.inputControlMulti]}
                         multiline
                       />
                       {dishSteps.length > 0 ? (
-                        <Pressable onPress={() => setDishSteps('')} style={styles.inputClearBtn}>
+                        <Pressable onPress={() => setDishSteps('')} style={[styles.inputClearBtn, styles.inputClearBtnMulti]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
@@ -697,29 +790,20 @@ export default function App() {
                     <View style={[styles.inputRow, styles.inputRowMulti]}>
                       <TextInput
                         value={dishAddOns}
-                        onChangeText={setDishAddOns}
+                        onChangeText={(v) => {
+                          clearTransientFeedback();
+                          setDishAddOns(v);
+                        }}
                         placeholder="Can add (one per line)"
                         placeholderTextColor="#63736d"
                         style={[styles.inputControl, styles.inputControlMulti]}
                         multiline
                       />
                       {dishAddOns.length > 0 ? (
-                        <Pressable onPress={() => setDishAddOns('')} style={styles.inputClearBtn}>
+                        <Pressable onPress={() => setDishAddOns('')} style={[styles.inputClearBtn, styles.inputClearBtnMulti]}>
                           <Text style={styles.inputClearBtnText}>×</Text>
                         </Pressable>
                       ) : null}
-                    </View>
-
-                    <View style={styles.inlineActions}>
-                      <Pressable onPress={() => setDishType('usual')} style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}>
-                        <Text style={styles.secondaryButtonText}>Usual</Text>
-                      </Pressable>
-                      <Pressable onPress={() => setDishType('vegetarian')} style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}>
-                        <Text style={styles.secondaryButtonText}>Vegetarian</Text>
-                      </Pressable>
-                      <Pressable onPress={() => setDishType('vegan')} style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}>
-                        <Text style={styles.secondaryButtonText}>Vegan</Text>
-                      </Pressable>
                     </View>
 
                     <Pressable
@@ -733,32 +817,75 @@ export default function App() {
                 ) : (
                   <>
                     <View style={styles.listTopRow}>
-                      <Text style={styles.sectionTitle}>Dishes</Text>
-                      <Pressable testID="manage-refresh-button" onPress={() => fetchDishes()} style={styles.secondaryButton}>
+                      <Text style={styles.listHeaderTitle}>Dishes</Text>
+                      <Pressable
+                        testID="manage-refresh-button"
+                        onPress={() => {
+                          clearTransientFeedback();
+                          fetchDishes();
+                        }}
+                        style={styles.secondaryButton}
+                      >
                         <Text style={styles.secondaryButtonText}>Refresh List</Text>
                       </Pressable>
                     </View>
 
                     <View style={styles.inlineActions}>
-                      <Pressable onPress={() => applyArchivedFilter('active')} style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}>
+                      <Pressable
+                        onPress={() => {
+                          clearTransientFeedback();
+                          applyArchivedFilter('active');
+                        }}
+                        style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}
+                      >
                         <Text style={styles.secondaryButtonText}>Active</Text>
                       </Pressable>
-                      <Pressable onPress={() => applyArchivedFilter('archived')} style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}>
+                      <Pressable
+                        onPress={() => {
+                          clearTransientFeedback();
+                          applyArchivedFilter('archived');
+                        }}
+                        style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}
+                      >
                         <Text style={styles.secondaryButtonText}>Archived</Text>
                       </Pressable>
                     </View>
 
                     <View style={styles.inlineActions}>
-                      <Pressable onPress={() => applyDishFilter('all')} style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}>
+                      <Pressable
+                        onPress={() => {
+                          clearTransientFeedback();
+                          applyDishFilter('all');
+                        }}
+                        style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}
+                      >
                         <Text style={styles.secondaryButtonText}>All</Text>
                       </Pressable>
-                      <Pressable onPress={() => applyDishFilter('usual')} style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}>
+                      <Pressable
+                        onPress={() => {
+                          clearTransientFeedback();
+                          applyDishFilter('usual');
+                        }}
+                        style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}
+                      >
                         <Text style={styles.secondaryButtonText}>Usual</Text>
                       </Pressable>
-                      <Pressable onPress={() => applyDishFilter('vegetarian')} style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}>
+                      <Pressable
+                        onPress={() => {
+                          clearTransientFeedback();
+                          applyDishFilter('vegetarian');
+                        }}
+                        style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}
+                      >
                         <Text style={styles.secondaryButtonText}>Vegetarian</Text>
                       </Pressable>
-                      <Pressable onPress={() => applyDishFilter('vegan')} style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}>
+                      <Pressable
+                        onPress={() => {
+                          clearTransientFeedback();
+                          applyDishFilter('vegan');
+                        }}
+                        style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}
+                      >
                         <Text style={styles.secondaryButtonText}>Vegan</Text>
                       </Pressable>
                     </View>
@@ -771,7 +898,7 @@ export default function App() {
                           testID={`dish-row-${dish.id}`}
                           onPress={() => {
                             if (dishArchivedFilter === 'active') {
-                              fetchDishById(dish.id);
+                              fetchDishById(dish.id, true);
                             }
                           }}
                         >
@@ -792,25 +919,6 @@ export default function App() {
                       </View>
                     ))}
 
-                    {selectedDish ? (
-                      <View style={styles.selectedDishBlock}>
-                        <Text style={styles.sectionTitle}>Selected Dish</Text>
-                        <View style={styles.inlineActions}>
-                          <Pressable onPress={() => loadDishIntoFormForEdit(selectedDish)} style={styles.secondaryButton}>
-                            <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
-                          </Pressable>
-                          <Pressable
-                            testID="dish-archive-button"
-                            onPress={archiveSelectedDish}
-                            disabled={saveLoading}
-                            style={[styles.secondaryButton, styles.secondaryDanger]}
-                          >
-                            <Text style={styles.secondaryButtonText}>Archive Dish</Text>
-                          </Pressable>
-                        </View>
-                        <DishDetailsBlock dish={selectedDish} />
-                      </View>
-                    ) : null}
                   </>
                 )}
 
@@ -822,6 +930,7 @@ export default function App() {
           </View>
         )}
       </ScrollView>
+      </KeyboardAvoidingView>
 
       <Modal visible={filterSheetOpen} animationType="fade" transparent onRequestClose={() => setFilterSheetOpen(false)}>
         <View style={styles.sheetBackdrop}>
@@ -856,6 +965,54 @@ export default function App() {
           </View>
           {randomData ? <DishModalScreen dish={randomData.dish} /> : null}
         </SafeAreaView>
+      </Modal>
+
+      <Modal visible={selectedDishModalOpen} animationType="slide" transparent onRequestClose={() => setSelectedDishModalOpen(false)}>
+        <View style={styles.sheetOverlay}>
+          <Animated.View
+            style={[styles.selectedDishSheet, { transform: [{ translateY: selectedDishSheetY }] }]}
+            {...selectedDishPanResponder.panHandlers}
+          >
+            <View style={styles.selectedSheetHandle} />
+            <View style={styles.selectedSheetHeader}>
+              <Text style={styles.modalHeaderTitle}>Selected Dish</Text>
+              <Pressable onPress={() => setSelectedDishModalOpen(false)} style={styles.modalCloseButton}>
+                <Text style={styles.modalCloseText}>Close</Text>
+              </Pressable>
+            </View>
+            {selectedDish ? (
+              <ScrollView
+                contentContainerStyle={styles.selectedSheetBody}
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode="on-drag"
+              >
+                <View style={styles.inlineActions}>
+                  <Pressable
+                    onPress={() => {
+                      setSelectedDishModalOpen(false);
+                      loadDishIntoFormForEdit(selectedDish);
+                    }}
+                    style={styles.secondaryButton}
+                  >
+                    <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
+                  </Pressable>
+                  <Pressable
+                    testID="dish-archive-button"
+                    onPress={async () => {
+                      await archiveSelectedDish();
+                      setSelectedDishModalOpen(false);
+                    }}
+                    disabled={saveLoading}
+                    style={[styles.secondaryButton, styles.secondaryDanger]}
+                  >
+                    <Text style={styles.secondaryButtonText}>Archive Dish</Text>
+                  </Pressable>
+                </View>
+                <DishDetailsBlock dish={selectedDish} />
+              </ScrollView>
+            ) : null}
+          </Animated.View>
+        </View>
       </Modal>
 
       <StatusBar style="light" />
@@ -981,8 +1138,9 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 18,
-    paddingVertical: 16,
-    gap: 14,
+    paddingVertical: 20,
+    paddingBottom: 120,
+    gap: 18,
   },
   heroCard: {
     backgroundColor: '#08140f',
@@ -1020,13 +1178,13 @@ const styles = StyleSheet.create({
   },
   tabRow: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 12,
   },
   manageSubTabRow: {
     flexDirection: 'row',
-    gap: 10,
-    marginTop: 6,
-    marginBottom: 6,
+    gap: 12,
+    marginTop: 10,
+    marginBottom: 10,
   },
   tab: {
     flex: 1,
@@ -1108,7 +1266,7 @@ const styles = StyleSheet.create({
   sectionCard: {
     backgroundColor: '#0a1310',
     borderRadius: 18,
-    padding: 14,
+    padding: 16,
     borderWidth: 1,
     borderColor: '#1d3f2e',
   },
@@ -1117,9 +1275,9 @@ const styles = StyleSheet.create({
     borderColor: '#1f4a35',
     borderRadius: 12,
     paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingVertical: 12,
     backgroundColor: '#091812',
-    marginBottom: 8,
+    marginBottom: 12,
   },
   manageHeaderTitle: {
     color: '#c4ffd8',
@@ -1136,14 +1294,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 6,
+    marginBottom: 12,
     gap: 10,
+  },
+  typeChooserTop: {
+    marginBottom: 10,
+  },
+  typeChooserTitle: {
+    color: '#8af0be',
+    fontWeight: '800',
+    fontSize: 14,
+    marginBottom: 8,
   },
   listTopRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: 10,
+    marginBottom: 10,
+  },
+  listHeaderTitle: {
+    fontWeight: '800',
+    fontSize: 18,
+    color: '#9effcb',
+    lineHeight: 22,
   },
   button: {
     backgroundColor: '#0d6f43',
@@ -1164,8 +1338,8 @@ const styles = StyleSheet.create({
   },
   secondaryButton: {
     backgroundColor: '#0f1b16',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 11,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#2a4b3a',
@@ -1188,9 +1362,9 @@ const styles = StyleSheet.create({
   inlineActions: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 10,
-    marginTop: 10,
-    marginBottom: 6,
+    gap: 12,
+    marginTop: 12,
+    marginBottom: 10,
   },
   loader: {
     marginTop: 8,
@@ -1209,8 +1383,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     color: '#8af0be',
-    marginTop: 10,
-    marginBottom: 8,
+    marginTop: 14,
+    marginBottom: 10,
   },
   hintText: {
     fontSize: 13,
@@ -1226,6 +1400,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#06100d',
     paddingLeft: 12,
     paddingRight: 8,
+    minHeight: 54,
   },
   inputRowMulti: {
     alignItems: 'flex-start',
@@ -1241,14 +1416,17 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   inputClearBtn: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: '#5f6d67',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'rgba(149, 163, 156, 0.45)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
     marginLeft: 6,
+  },
+  inputClearBtnMulti: {
+    alignSelf: 'flex-start',
+    marginTop: 10,
   },
   inputClearBtnText: {
     color: '#ecf7f1',
@@ -1264,7 +1442,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0b1713',
     borderRadius: 12,
     padding: 12,
-    marginTop: 8,
+    marginTop: 10,
     borderWidth: 1,
     borderColor: '#244734',
   },
@@ -1277,11 +1455,41 @@ const styles = StyleSheet.create({
     marginTop: 4,
     color: '#9bc7b1',
   },
-  selectedDishBlock: {
-    marginTop: 10,
+  keyboardWrap: {
+    flex: 1,
+  },
+  sheetOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(2, 8, 5, 0.74)',
+    justifyContent: 'flex-end',
+  },
+  selectedDishSheet: {
+    maxHeight: '88%',
+    backgroundColor: '#07110d',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderWidth: 1,
+    borderColor: '#1f4936',
+    paddingHorizontal: 14,
     paddingTop: 8,
-    borderTopWidth: 1,
-    borderTopColor: '#234535',
+    paddingBottom: 16,
+  },
+  selectedSheetHandle: {
+    alignSelf: 'center',
+    width: 42,
+    height: 5,
+    borderRadius: 999,
+    backgroundColor: '#406455',
+    marginBottom: 10,
+  },
+  selectedSheetHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  selectedSheetBody: {
+    paddingBottom: 30,
   },
   card: {
     marginTop: 18,
