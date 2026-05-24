@@ -56,8 +56,8 @@ describe('Mobile MVP flows', () => {
     render(<App />);
 
     fireEvent.press(screen.getByText('Manage Dishes'));
-    expect(screen.getByText('Manage Is Locked')).toBeTruthy();
-    expect(screen.queryByText('Save Dish')).toBeNull();
+    expect(screen.getByText('Login or register to open dish management.')).toBeTruthy();
+    expect(screen.queryByText('Clear All')).toBeNull();
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
@@ -98,6 +98,7 @@ describe('Mobile MVP flows', () => {
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
     fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');
+    fireEvent.press(screen.getByText('Dishes List'));
 
     await waitFor(() => expect(screen.getByText('Dish One')).toBeTruthy());
     fireEvent.press(screen.getByTestId('dish-row-dish-1'));
@@ -148,6 +149,7 @@ describe('Mobile MVP flows', () => {
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
     fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');
+    fireEvent.press(screen.getByText('Dishes List'));
     await waitFor(() => expect(screen.getByText('Dish One')).toBeTruthy());
     fireEvent.press(screen.getByTestId('dish-row-dish-1'));
     expect(await screen.findByText('Archive Dish')).toBeTruthy();
@@ -193,6 +195,7 @@ describe('Mobile MVP flows', () => {
     fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
     fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');
+    fireEvent.press(screen.getByText('Dishes List'));
     fireEvent.press(screen.getByText('Archived'));
 
     await waitFor(() => expect(screen.getByText('Archived Dish')).toBeTruthy());

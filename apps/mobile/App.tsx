@@ -54,6 +54,7 @@ type CreateDishPayload = {
 };
 
 type ScreenMode = 'random' | 'manage';
+type ManageTab = 'form' | 'list';
 type LoginResponse = {
   token: string;
   user: { id: string; email: string | null };
@@ -62,6 +63,8 @@ type LoginResponse = {
 
 export default function App() {
   const [mode, setMode] = useState<ScreenMode>('random');
+  const [manageTab, setManageTab] = useState<ManageTab>('form');
+
   const [loginEmail, setLoginEmail] = useState(DEFAULT_LOGIN_EMAIL);
   const [loginPassword, setLoginPassword] = useState('');
   const [sessionToken, setSessionToken] = useState<string | null>(null);
@@ -264,6 +267,7 @@ export default function App() {
       setEditingDishId(null);
       setSelectedDish(null);
       await fetchDishes();
+      setManageTab('list');
     } catch (e) {
       setManageError(formatClientError(e, 'Failed to create dish'));
     } finally {
@@ -289,6 +293,7 @@ export default function App() {
     setDishType(dish.dishType ?? 'vegan');
     setEditingDishId(dish.id);
     setManageMessage('Edit mode enabled. Save changes to update this dish.');
+    setManageTab('form');
   }
 
   async function updateDish() {
@@ -335,6 +340,7 @@ export default function App() {
       setManageMessage('Dish updated');
       await fetchDishes();
       await fetchDishById(editingDishId);
+      setManageTab('list');
     } catch (e) {
       setManageError(formatClientError(e, 'Failed to update dish'));
     } finally {
@@ -369,8 +375,10 @@ export default function App() {
 
       setManageMessage('Dish archived');
       setSelectedDish(null);
-      setEditingDishId(null);
-      clearDishForm();
+      if (editingDishId === selectedDish.id) {
+        setEditingDishId(null);
+        clearDishForm();
+      }
       await fetchDishes();
     } catch (e) {
       setManageError(formatClientError(e, 'Failed to archive dish'));
@@ -425,7 +433,7 @@ export default function App() {
       const payload = (await response.json()) as LoginResponse;
       setSessionToken(payload.token);
       setCurrentUserEmail(payload.user.email);
-      setManageMessage(`Logged in as ${payload.user.email ?? payload.user.id}`);
+      setManageMessage('Login successful');
       await fetchDishes();
     } catch (e) {
       setManageError(formatClientError(e, 'Login failed'));
@@ -451,13 +459,31 @@ export default function App() {
       const payload = (await response.json()) as LoginResponse;
       setSessionToken(payload.token);
       setCurrentUserEmail(payload.user.email);
-      setManageMessage(`Registered and logged in as ${payload.user.email ?? payload.user.id}`);
+      setManageMessage('Registration successful');
       await fetchDishes();
     } catch (e) {
       setManageError(formatClientError(e, 'Register failed'));
     } finally {
       setSaveLoading(false);
     }
+  }
+
+  function clearField(value: string, setter: (v: string) => void) {
+    return (
+      <View style={styles.inputRow}>
+        <TextInput
+          value={value}
+          onChangeText={setter}
+          placeholderTextColor="#63736d"
+          style={styles.inputControl}
+        />
+        {value.length > 0 ? (
+          <Pressable onPress={() => setter('')} style={styles.inputClearBtn}>
+            <Text style={styles.inputClearBtnText}>×</Text>
+          </Pressable>
+        ) : null}
+      </View>
+    );
   }
 
   const selectedFilterLabel =
@@ -512,26 +538,48 @@ export default function App() {
           </View>
         ) : (
           <View style={styles.sectionCard}>
+            <View style={styles.manageHeaderBar}>
+              <Text style={styles.manageHeaderTitle}>Manage Dishes</Text>
+              <Text style={styles.manageHeaderUser}>{currentUserEmail ? `Logged in: ${currentUserEmail}` : 'Not logged in'}</Text>
+            </View>
+
             {!isAuthenticated ? (
               <>
-                <Text style={styles.sectionTitle}>Manage Is Locked</Text>
                 <Text style={styles.hintText}>Login or register to open dish management.</Text>
-                <TextInput
-                  value={loginEmail}
-                  onChangeText={setLoginEmail}
-                  placeholder="Your email"
-                  placeholderTextColor="#63736d"
-                  style={styles.input}
-                  autoCapitalize="none"
-                />
-                <TextInput
-                  value={loginPassword}
-                  onChangeText={setLoginPassword}
-                  placeholder="Password (min 8 chars)"
-                  placeholderTextColor="#63736d"
-                  style={styles.input}
-                  secureTextEntry
-                />
+                <Text style={styles.fieldLabel}>Email</Text>
+                <View style={styles.inputRow}>
+                  <TextInput
+                    value={loginEmail}
+                    onChangeText={setLoginEmail}
+                    placeholder="Your email"
+                    placeholderTextColor="#63736d"
+                    style={styles.inputControl}
+                    autoCapitalize="none"
+                  />
+                  {loginEmail.length > 0 ? (
+                    <Pressable onPress={() => setLoginEmail('')} style={styles.inputClearBtn}>
+                      <Text style={styles.inputClearBtnText}>×</Text>
+                    </Pressable>
+                  ) : null}
+                </View>
+
+                <Text style={styles.fieldLabel}>Password</Text>
+                <View style={styles.inputRow}>
+                  <TextInput
+                    value={loginPassword}
+                    onChangeText={setLoginPassword}
+                    placeholder="Password (min 8 chars)"
+                    placeholderTextColor="#63736d"
+                    style={styles.inputControl}
+                    secureTextEntry
+                  />
+                  {loginPassword.length > 0 ? (
+                    <Pressable onPress={() => setLoginPassword('')} style={styles.inputClearBtn}>
+                      <Text style={styles.inputClearBtnText}>×</Text>
+                    </Pressable>
+                  ) : null}
+                </View>
+
                 <View style={styles.inlineActions}>
                   <Pressable
                     testID="auth-login-button"
@@ -555,160 +603,220 @@ export default function App() {
               </>
             ) : (
               <>
-                <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
-                {currentUserEmail ? <Text style={styles.hintText}>Logged in: {currentUserEmail}</Text> : null}
-
-                <Text style={styles.fieldLabel}>Dish Name</Text>
-                <TextInput
-                  value={dishName}
-                  onChangeText={setDishName}
-                  placeholder="Dish name"
-                  placeholderTextColor="#63736d"
-                  style={styles.input}
-                />
-                <Text style={styles.fieldLabel}>Description</Text>
-                <TextInput
-                  value={dishDescription}
-                  onChangeText={setDishDescription}
-                  placeholder="Description (optional)"
-                  placeholderTextColor="#63736d"
-                  style={styles.input}
-                />
-                <Text style={styles.fieldLabel}>Ingredients</Text>
-                <TextInput
-                  value={dishIngredients}
-                  onChangeText={setDishIngredients}
-                  placeholder="Ingredients (one per line)"
-                  placeholderTextColor="#63736d"
-                  style={[styles.input, styles.inputMulti]}
-                  multiline
-                />
-                <Text style={styles.fieldLabel}>Steps</Text>
-                <TextInput
-                  value={dishSteps}
-                  onChangeText={setDishSteps}
-                  placeholder="Steps (one per line)"
-                  placeholderTextColor="#63736d"
-                  style={[styles.input, styles.inputMulti]}
-                  multiline
-                />
-                <Text style={styles.fieldLabel}>Can Add</Text>
-                <TextInput
-                  value={dishAddOns}
-                  onChangeText={setDishAddOns}
-                  placeholder="Can add (one per line)"
-                  placeholderTextColor="#63736d"
-                  style={[styles.input, styles.inputMulti]}
-                  multiline
-                />
-                <View style={styles.inlineActions}>
-                  <Pressable onPress={() => setDishType('usual')} style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Usual</Text>
+                <View style={styles.manageSubTabRow}>
+                  <Pressable onPress={() => setManageTab('form')} style={[styles.tab, manageTab === 'form' ? styles.tabActive : null]}>
+                    <Text style={[styles.tabLabel, manageTab === 'form' ? styles.tabLabelActive : null]}>{editingDishId ? 'Edit Form' : 'Add Form'}</Text>
                   </Pressable>
-                  <Pressable onPress={() => setDishType('vegetarian')} style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Vegetarian</Text>
-                  </Pressable>
-                  <Pressable onPress={() => setDishType('vegan')} style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Vegan</Text>
+                  <Pressable onPress={() => setManageTab('list')} style={[styles.tab, manageTab === 'list' ? styles.tabActive : null]}>
+                    <Text style={[styles.tabLabel, manageTab === 'list' ? styles.tabLabelActive : null]}>Dishes List</Text>
                   </Pressable>
                 </View>
 
-                <Pressable
-                  onPress={editingDishId ? updateDish : createDish}
-                  disabled={!canSaveDish || saveLoading}
-                  style={[styles.button, !canSaveDish || saveLoading ? styles.buttonDisabled : null]}
-                >
-                  <Text style={styles.buttonText}>{saveLoading ? 'Saving...' : editingDishId ? 'Save Changes' : 'Save Dish'}</Text>
-                </Pressable>
+                {manageTab === 'form' ? (
+                  <>
+                    <View style={styles.formTopBar}>
+                      <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
+                      <Pressable
+                        onPress={() => {
+                          setEditingDishId(null);
+                          clearDishForm();
+                        }}
+                        style={[styles.secondaryButton, styles.secondaryButtonMuted]}
+                      >
+                        <Text style={styles.secondaryButtonText}>Clear All</Text>
+                      </Pressable>
+                    </View>
 
-                <View style={styles.inlineActions}>
-                  <Pressable testID="manage-refresh-button" onPress={() => fetchDishes()} style={styles.secondaryButton}>
-                    <Text style={styles.secondaryButtonText}>Refresh List</Text>
-                  </Pressable>
-                  <Pressable
-                    onPress={() => {
-                      setEditingDishId(null);
-                      clearDishForm();
-                    }}
-                    style={[styles.secondaryButton, styles.secondaryButtonMuted]}
-                  >
-                    <Text style={styles.secondaryButtonText}>Clear / Exit Edit</Text>
-                  </Pressable>
-                </View>
+                    <Text style={styles.fieldLabel}>Dish Name</Text>
+                    <View style={styles.inputRow}>
+                      <TextInput
+                        value={dishName}
+                        onChangeText={setDishName}
+                        placeholder="Dish name"
+                        placeholderTextColor="#63736d"
+                        style={styles.inputControl}
+                      />
+                      {dishName.length > 0 ? (
+                        <Pressable onPress={() => setDishName('')} style={styles.inputClearBtn}>
+                          <Text style={styles.inputClearBtnText}>×</Text>
+                        </Pressable>
+                      ) : null}
+                    </View>
+
+                    <Text style={styles.fieldLabel}>Description</Text>
+                    <View style={styles.inputRow}>
+                      <TextInput
+                        value={dishDescription}
+                        onChangeText={setDishDescription}
+                        placeholder="Description (optional)"
+                        placeholderTextColor="#63736d"
+                        style={styles.inputControl}
+                      />
+                      {dishDescription.length > 0 ? (
+                        <Pressable onPress={() => setDishDescription('')} style={styles.inputClearBtn}>
+                          <Text style={styles.inputClearBtnText}>×</Text>
+                        </Pressable>
+                      ) : null}
+                    </View>
+
+                    <Text style={styles.fieldLabel}>Ingredients</Text>
+                    <View style={[styles.inputRow, styles.inputRowMulti]}>
+                      <TextInput
+                        value={dishIngredients}
+                        onChangeText={setDishIngredients}
+                        placeholder="Ingredients (one per line)"
+                        placeholderTextColor="#63736d"
+                        style={[styles.inputControl, styles.inputControlMulti]}
+                        multiline
+                      />
+                      {dishIngredients.length > 0 ? (
+                        <Pressable onPress={() => setDishIngredients('')} style={styles.inputClearBtn}>
+                          <Text style={styles.inputClearBtnText}>×</Text>
+                        </Pressable>
+                      ) : null}
+                    </View>
+
+                    <Text style={styles.fieldLabel}>Steps</Text>
+                    <View style={[styles.inputRow, styles.inputRowMulti]}>
+                      <TextInput
+                        value={dishSteps}
+                        onChangeText={setDishSteps}
+                        placeholder="Steps (one per line)"
+                        placeholderTextColor="#63736d"
+                        style={[styles.inputControl, styles.inputControlMulti]}
+                        multiline
+                      />
+                      {dishSteps.length > 0 ? (
+                        <Pressable onPress={() => setDishSteps('')} style={styles.inputClearBtn}>
+                          <Text style={styles.inputClearBtnText}>×</Text>
+                        </Pressable>
+                      ) : null}
+                    </View>
+
+                    <Text style={styles.fieldLabel}>Can Add</Text>
+                    <View style={[styles.inputRow, styles.inputRowMulti]}>
+                      <TextInput
+                        value={dishAddOns}
+                        onChangeText={setDishAddOns}
+                        placeholder="Can add (one per line)"
+                        placeholderTextColor="#63736d"
+                        style={[styles.inputControl, styles.inputControlMulti]}
+                        multiline
+                      />
+                      {dishAddOns.length > 0 ? (
+                        <Pressable onPress={() => setDishAddOns('')} style={styles.inputClearBtn}>
+                          <Text style={styles.inputClearBtnText}>×</Text>
+                        </Pressable>
+                      ) : null}
+                    </View>
+
+                    <View style={styles.inlineActions}>
+                      <Pressable onPress={() => setDishType('usual')} style={[styles.secondaryButton, dishType === 'usual' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Usual</Text>
+                      </Pressable>
+                      <Pressable onPress={() => setDishType('vegetarian')} style={[styles.secondaryButton, dishType === 'vegetarian' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+                      </Pressable>
+                      <Pressable onPress={() => setDishType('vegan')} style={[styles.secondaryButton, dishType === 'vegan' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Vegan</Text>
+                      </Pressable>
+                    </View>
+
+                    <Pressable
+                      onPress={editingDishId ? updateDish : createDish}
+                      disabled={!canSaveDish || saveLoading}
+                      style={[styles.button, !canSaveDish || saveLoading ? styles.buttonDisabled : null]}
+                    >
+                      <Text style={styles.buttonText}>{saveLoading ? 'Saving...' : editingDishId ? 'Save Changes' : 'Save Dish'}</Text>
+                    </Pressable>
+                  </>
+                ) : (
+                  <>
+                    <View style={styles.listTopRow}>
+                      <Text style={styles.sectionTitle}>Dishes</Text>
+                      <Pressable testID="manage-refresh-button" onPress={() => fetchDishes()} style={styles.secondaryButton}>
+                        <Text style={styles.secondaryButtonText}>Refresh List</Text>
+                      </Pressable>
+                    </View>
+
+                    <View style={styles.inlineActions}>
+                      <Pressable onPress={() => applyArchivedFilter('active')} style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Active</Text>
+                      </Pressable>
+                      <Pressable onPress={() => applyArchivedFilter('archived')} style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Archived</Text>
+                      </Pressable>
+                    </View>
+
+                    <View style={styles.inlineActions}>
+                      <Pressable onPress={() => applyDishFilter('all')} style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>All</Text>
+                      </Pressable>
+                      <Pressable onPress={() => applyDishFilter('usual')} style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Usual</Text>
+                      </Pressable>
+                      <Pressable onPress={() => applyDishFilter('vegetarian')} style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Vegetarian</Text>
+                      </Pressable>
+                      <Pressable onPress={() => applyDishFilter('vegan')} style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}>
+                        <Text style={styles.secondaryButtonText}>Vegan</Text>
+                      </Pressable>
+                    </View>
+
+                    {dishes.length === 0 ? <Text style={styles.empty}>No dishes loaded yet.</Text> : null}
+
+                    {dishes.map((dish) => (
+                      <View key={dish.id} style={styles.listCard}>
+                        <Pressable
+                          testID={`dish-row-${dish.id}`}
+                          onPress={() => {
+                            if (dishArchivedFilter === 'active') {
+                              fetchDishById(dish.id);
+                            }
+                          }}
+                        >
+                          <Text style={styles.listCardTitle}>{dish.name}</Text>
+                          <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
+                          {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
+                        </Pressable>
+                        {dishArchivedFilter === 'archived' ? (
+                          <Pressable
+                            testID={`dish-unarchive-${dish.id}`}
+                            onPress={() => unarchiveDishById(dish.id)}
+                            disabled={saveLoading}
+                            style={[styles.secondaryButton, styles.secondaryActive]}
+                          >
+                            <Text style={styles.secondaryButtonText}>Unarchive</Text>
+                          </Pressable>
+                        ) : null}
+                      </View>
+                    ))}
+
+                    {selectedDish ? (
+                      <View style={styles.selectedDishBlock}>
+                        <Text style={styles.sectionTitle}>Selected Dish</Text>
+                        <View style={styles.inlineActions}>
+                          <Pressable onPress={() => loadDishIntoFormForEdit(selectedDish)} style={styles.secondaryButton}>
+                            <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
+                          </Pressable>
+                          <Pressable
+                            testID="dish-archive-button"
+                            onPress={archiveSelectedDish}
+                            disabled={saveLoading}
+                            style={[styles.secondaryButton, styles.secondaryDanger]}
+                          >
+                            <Text style={styles.secondaryButtonText}>Archive Dish</Text>
+                          </Pressable>
+                        </View>
+                        <DishDetailsBlock dish={selectedDish} />
+                      </View>
+                    ) : null}
+                  </>
+                )}
 
                 {listLoading || detailLoading ? <ActivityIndicator style={styles.loader} color="#52ff9f" /> : null}
                 {manageError ? <Text style={styles.error}>{manageError}</Text> : null}
                 {manageMessage ? <Text style={styles.success}>{manageMessage}</Text> : null}
-
-                <Text style={styles.sectionTitle}>Dishes</Text>
-                <View style={styles.inlineActions}>
-                  <Pressable onPress={() => applyArchivedFilter('active')} style={[styles.secondaryButton, dishArchivedFilter === 'active' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Active</Text>
-                  </Pressable>
-                  <Pressable onPress={() => applyArchivedFilter('archived')} style={[styles.secondaryButton, dishArchivedFilter === 'archived' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Archived</Text>
-                  </Pressable>
-                </View>
-                <View style={styles.inlineActions}>
-                  <Pressable onPress={() => applyDishFilter('all')} style={[styles.secondaryButton, dishListFilter === 'all' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>All</Text>
-                  </Pressable>
-                  <Pressable onPress={() => applyDishFilter('usual')} style={[styles.secondaryButton, dishListFilter === 'usual' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Usual</Text>
-                  </Pressable>
-                  <Pressable onPress={() => applyDishFilter('vegetarian')} style={[styles.secondaryButton, dishListFilter === 'vegetarian' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Vegetarian</Text>
-                  </Pressable>
-                  <Pressable onPress={() => applyDishFilter('vegan')} style={[styles.secondaryButton, dishListFilter === 'vegan' ? styles.secondaryActive : null]}>
-                    <Text style={styles.secondaryButtonText}>Vegan</Text>
-                  </Pressable>
-                </View>
-                {dishes.length === 0 ? <Text style={styles.empty}>No dishes loaded yet.</Text> : null}
-
-                {dishes.map((dish) => (
-                  <View key={dish.id} style={styles.listCard}>
-                    <Pressable
-                      testID={`dish-row-${dish.id}`}
-                      onPress={() => {
-                        if (dishArchivedFilter === 'active') {
-                          fetchDishById(dish.id);
-                        }
-                      }}
-                    >
-                      <Text style={styles.listCardTitle}>{dish.name}</Text>
-                      <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
-                      {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
-                    </Pressable>
-                    {dishArchivedFilter === 'archived' ? (
-                      <Pressable
-                        testID={`dish-unarchive-${dish.id}`}
-                        onPress={() => unarchiveDishById(dish.id)}
-                        disabled={saveLoading}
-                        style={[styles.secondaryButton, styles.secondaryActive]}
-                      >
-                        <Text style={styles.secondaryButtonText}>Unarchive</Text>
-                      </Pressable>
-                    ) : null}
-                  </View>
-                ))}
-
-                {selectedDish ? (
-                  <View style={styles.selectedDishBlock}>
-                    <Text style={styles.sectionTitle}>Selected Dish</Text>
-                    <Pressable onPress={() => loadDishIntoFormForEdit(selectedDish)} style={styles.secondaryButton}>
-                      <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
-                    </Pressable>
-                    <Pressable
-                      testID="dish-archive-button"
-                      onPress={archiveSelectedDish}
-                      disabled={saveLoading}
-                      style={[styles.secondaryButton, styles.secondaryDanger]}
-                    >
-                      <Text style={styles.secondaryButtonText}>Archive Dish</Text>
-                    </Pressable>
-                    <DishDetailsBlock dish={selectedDish} />
-                  </View>
-                ) : null}
               </>
             )}
           </View>
@@ -914,6 +1022,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
   },
+  manageSubTabRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 6,
+    marginBottom: 6,
+  },
   tab: {
     flex: 1,
     borderRadius: 14,
@@ -998,6 +1112,39 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#1d3f2e',
   },
+  manageHeaderBar: {
+    borderWidth: 1,
+    borderColor: '#1f4a35',
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    backgroundColor: '#091812',
+    marginBottom: 8,
+  },
+  manageHeaderTitle: {
+    color: '#c4ffd8',
+    fontWeight: '800',
+    fontSize: 18,
+    marginBottom: 4,
+  },
+  manageHeaderUser: {
+    color: '#8bb7a1',
+    fontWeight: '600',
+    fontSize: 13,
+  },
+  formTopBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+    gap: 10,
+  },
+  listTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 10,
+  },
   button: {
     backgroundColor: '#0d6f43',
     paddingHorizontal: 16,
@@ -1006,6 +1153,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     borderWidth: 1,
     borderColor: '#52ff9f',
+    marginTop: 6,
   },
   buttonDisabled: {
     opacity: 0.52,
@@ -1032,7 +1180,6 @@ const styles = StyleSheet.create({
   secondaryDanger: {
     backgroundColor: '#2d1414',
     borderColor: '#7a3030',
-    marginTop: 8,
   },
   secondaryButtonText: {
     color: '#ccf7df',
@@ -1052,41 +1199,66 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#ff8b8b',
     fontWeight: '700',
-    textAlign: 'center',
   },
   success: {
     marginTop: 10,
     color: '#52ff9f',
     fontWeight: '700',
   },
-  input: {
-    backgroundColor: '#06100d',
-    borderColor: '#29523f',
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 11,
-    marginBottom: 10,
-    color: '#e8fff2',
-  },
   fieldLabel: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '700',
     color: '#8af0be',
-    marginBottom: -4,
+    marginTop: 10,
+    marginBottom: 8,
   },
   hintText: {
     fontSize: 13,
     color: '#86a598',
     marginBottom: 8,
   },
-  inputMulti: {
-    minHeight: 90,
+  inputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#29523f',
+    borderWidth: 1,
+    borderRadius: 12,
+    backgroundColor: '#06100d',
+    paddingLeft: 12,
+    paddingRight: 8,
+  },
+  inputRowMulti: {
+    alignItems: 'flex-start',
+    minHeight: 120,
+  },
+  inputControl: {
+    flex: 1,
+    color: '#e8fff2',
+    paddingVertical: 11,
+  },
+  inputControlMulti: {
+    minHeight: 110,
     textAlignVertical: 'top',
+  },
+  inputClearBtn: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: '#5f6d67',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+    marginLeft: 6,
+  },
+  inputClearBtnText: {
+    color: '#ecf7f1',
+    fontWeight: '900',
+    lineHeight: 20,
+    fontSize: 16,
   },
   empty: {
     color: '#8da79a',
-    marginTop: 4,
+    marginTop: 6,
   },
   listCard: {
     backgroundColor: '#0b1713',
@@ -1130,7 +1302,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   sectionTitle: {
-    marginTop: 12,
+    marginTop: 6,
     marginBottom: 6,
     fontWeight: '800',
     fontSize: 18,
