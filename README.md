@@ -75,3 +75,40 @@ npm run deploy:api
 ```bash
 npm run test:api
 ```
+
+## Test Matrix
+- Unit tests (API + mobile):
+```bash
+npm run test:unit
+```
+
+- Integration tests (API <-> DB with real Postgres):
+```bash
+npm run test:integration
+```
+
+- Critical-path e2e (API endpoint flow):
+```bash
+npm run test:e2e:critical
+```
+
+- Mobile->API/API->mobile contract checks:
+```bash
+TEST_API_BASE_URL=http://localhost:3000 \
+npm run test:contract:mobile-api
+```
+
+- Full headless suite:
+```bash
+npm run test:headless
+```
+
+- Full suite in background (logs to `/tmp/food-randomizer-tests.log`):
+```bash
+npm run test:background
+```
+
+- Headful mobile mode for emulator-visible test sessions:
+```bash
+npm run test:headful:mobile
+```

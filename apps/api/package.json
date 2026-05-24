@@ -19,6 +19,7 @@
     "test:cov": "jest --coverage --watchman=false",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json --watchman=false",
+    "test:e2e:real": "jest --config ./test/jest-real-e2e.json --watchman=false --runInBand",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",

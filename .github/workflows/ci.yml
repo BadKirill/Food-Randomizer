@@ -10,6 +10,24 @@ jobs:
   api:
     name: API Build and Tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: food_user
+          POSTGRES_PASSWORD: food_pass
+          POSTGRES_DB: food_randomizer
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U food_user -d food_randomizer"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://food_user:food_pass@localhost:5432/food_randomizer?schema=public
+      SESSION_SECRET: ci-test-session-secret
+      DISHES_WRITE_TOKEN: ci-test-write-token
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,14 +44,17 @@ jobs:
       - name: Generate Prisma Client
         run: npm run prisma:generate --workspace apps/api
 
+      - name: Apply Prisma migrations
+        run: npm run prisma:migrate:deploy --workspace apps/api
+
       - name: Build API
         run: npm run build --workspace apps/api
 
-      - name: API e2e tests
-        env:
-          SESSION_SECRET: ci-test-session-secret
-          DISHES_WRITE_TOKEN: ci-test-write-token
+      - name: API mocked e2e tests
         run: npm run test:e2e --workspace apps/api
+
+      - name: API real e2e tests (API <-> DB)
+        run: npm run test:e2e:real --workspace apps/api
 
   mobile:
     name: Mobile Tests and Typecheck
