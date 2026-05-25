@@ -10,6 +10,24 @@ jobs:
   api:
     name: API Build and Tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: food_user
+          POSTGRES_PASSWORD: food_pass
+          POSTGRES_DB: food_randomizer
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U food_user -d food_randomizer"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://food_user:food_pass@localhost:5432/food_randomizer?schema=public
+      SESSION_SECRET: ci-test-session-secret
+      DISHES_WRITE_TOKEN: ci-test-write-token
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,14 +44,20 @@ jobs:
       - name: Generate Prisma Client
         run: npm run prisma:generate --workspace apps/api
 
+      - name: Apply Prisma migrations
+        run: npm run prisma:migrate:deploy --workspace apps/api
+
       - name: Build API
         run: npm run build --workspace apps/api
 
-      - name: API e2e tests
-        env:
-          SESSION_SECRET: ci-test-session-secret
-          DISHES_WRITE_TOKEN: ci-test-write-token
+      - name: API unit tests + coverage gate
+        run: npm run test:cov --workspace apps/api
+
+      - name: API mocked e2e tests
         run: npm run test:e2e --workspace apps/api
+
+      - name: API real e2e tests (API <-> DB)
+        run: npm run test:e2e:real --workspace apps/api
 
   mobile:
     name: Mobile Tests and Typecheck
@@ -56,3 +80,66 @@ jobs:
 
       - name: Mobile typecheck
         run: npx tsc --noEmit -p apps/mobile/tsconfig.json
+
+  app_api_contract:
+    name: App <-> API Contract
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: food_user
+          POSTGRES_PASSWORD: food_pass
+          POSTGRES_DB: food_randomizer
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U food_user -d food_randomizer"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://food_user:food_pass@localhost:5432/food_randomizer?schema=public
+      SESSION_SECRET: ci-test-session-secret
+      DISHES_WRITE_TOKEN: ci-test-write-token
+      TEST_API_BASE_URL: http://localhost:3000
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.4'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npm run prisma:generate --workspace apps/api
+
+      - name: Apply Prisma migrations
+        run: npm run prisma:migrate:deploy --workspace apps/api
+
+      - name: Build API
+        run: npm run build --workspace apps/api
+
+      - name: Start API in background
+        run: |
+          npm run start:prod --workspace apps/api > /tmp/api.log 2>&1 &
+          for i in {1..60}; do
+            if curl -fsS http://localhost:3000/health >/dev/null; then
+              echo "API is up"
+              break
+            fi
+            sleep 2
+          done
+          curl -fsS http://localhost:3000/health >/dev/null
+
+      - name: Run app <-> API contract tests
+        run: npm run test:contract:mobile-api
+
+      - name: API logs (on failure)
+        if: failure()
+        run: cat /tmp/api.log
