@@ -50,8 +50,8 @@ jobs:
       - name: Build API
         run: npm run build --workspace apps/api
 
-      - name: API unit tests
-        run: npm run test --workspace apps/api
+      - name: API unit tests + coverage gate
+        run: npm run test:cov --workspace apps/api
 
       - name: API mocked e2e tests
         run: npm run test:e2e --workspace apps/api
@@ -122,9 +122,12 @@ jobs:
       - name: Apply Prisma migrations
         run: npm run prisma:migrate:deploy --workspace apps/api
 
+      - name: Build API
+        run: npm run build --workspace apps/api
+
       - name: Start API in background
         run: |
-          npm run start:dev --workspace apps/api > /tmp/api.log 2>&1 &
+          npm run start:prod --workspace apps/api > /tmp/api.log 2>&1 &
           for i in {1..60}; do
             if curl -fsS http://localhost:3000/health >/dev/null; then
               echo "API is up"
