@@ -611,12 +611,12 @@ export default function App() {
                   ) : null}
                 </View>
 
-                <View style={styles.inlineActions}>
+                <View style={styles.authActionsRow}>
                   <Pressable
                     testID="auth-login-button"
                     onPress={login}
                     disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8}
-                    style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}
+                    style={({ pressed }) => [styles.secondaryButton, styles.authActionButton, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={styles.secondaryButtonText}>Login</Text>
                   </Pressable>
@@ -624,7 +624,7 @@ export default function App() {
                     testID="auth-register-button"
                     onPress={register}
                     disabled={saveLoading || loginEmail.trim().length === 0 || loginPassword.length < 8}
-                    style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}
+                    style={({ pressed }) => [styles.secondaryButton, styles.authActionButton, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={styles.secondaryButtonText}>Register</Text>
                   </Pressable>
@@ -1192,44 +1192,44 @@ const styles = StyleSheet.create({
     color: '#d7ffe9',
   },
   randomStage: {
-    minHeight: 520,
+    minHeight: 620,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#1a3b2a',
     backgroundColor: '#09120f',
-    padding: 16,
+    padding: 22,
   },
   filterFab: {
     alignSelf: 'flex-start',
-    borderRadius: 14,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    borderRadius: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     backgroundColor: '#0f2d20',
     borderWidth: 1,
     borderColor: '#2f7a55',
     flexDirection: 'row',
-    gap: 8,
+    gap: 10,
     alignItems: 'center',
   },
   filterFabIcon: {
     color: '#52ff9f',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '900',
   },
   filterFabText: {
     color: '#d7ffe8',
     fontWeight: '700',
-    fontSize: 13,
+    fontSize: 16,
   },
   randomCenterWrap: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 18,
+    gap: 22,
   },
   randomBigButton: {
-    width: 220,
-    height: 220,
+    width: 260,
+    height: 260,
     borderRadius: 999,
     backgroundColor: '#0e3a28',
     borderWidth: 2,
@@ -1244,7 +1244,7 @@ const styles = StyleSheet.create({
   },
   randomBigButtonText: {
     color: '#d8ffeb',
-    fontSize: 32,
+    fontSize: 38,
     fontWeight: '900',
     letterSpacing: 1,
   },
@@ -1348,6 +1348,17 @@ const styles = StyleSheet.create({
     color: '#ccf7df',
     fontWeight: '600',
   },
+  authActionsRow: {
+    flexDirection: 'row',
+    gap: 14,
+    marginTop: 14,
+    marginBottom: 14,
+  },
+  authActionButton: {
+    flex: 1,
+    minWidth: 0,
+    alignItems: 'center',
+  },
   inlineActions: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -1415,7 +1426,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8,
-    marginTop: 10,
+    alignSelf: 'center',
   },
   inputClearBtnMulti: {
     alignSelf: 'flex-start',
