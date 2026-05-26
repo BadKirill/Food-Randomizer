@@ -29,6 +29,13 @@
     "seed:api": "npm run prisma:seed --workspace apps/api",
     "deploy:api": "bash ./scripts/deploy-api.sh",
     "typecheck": "npm run build:api",
-    "lint": "npm run lint --workspace apps/api"
+    "lint": "npm run lint --workspace apps/api",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "expo": "~54.0.34",
+    "react": "19.1.0",
+    "react-native": "0.81.5"
   }
 }
