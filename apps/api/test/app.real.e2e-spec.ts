@@ -112,9 +112,11 @@ describeIfDatabase('API real e2e (api -> db -> api)', () => {
       })
       .expect(201);
 
-    await request(app.getHttpServer())
+    const denied = await request(app.getHttpServer())
       .delete(`/dishes/${createRes.body.id}`)
       .set('Authorization', `Bearer ${attacker.body.token}`)
-      .expect(404);
+      .expect(403);
+
+    expect(denied.body?.message).toBe('Only the creator can edit or archive this dish');
   });
 });
