@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Animated,
@@ -79,6 +79,7 @@ export default function App() {
   const [randomDishTypeFilter, setRandomDishTypeFilter] = useState<'all' | 'usual' | 'vegetarian' | 'vegan'>('all');
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
   const [dishModalOpen, setDishModalOpen] = useState(false);
+  const [randomLoaderFrame, setRandomLoaderFrame] = useState(0);
 
   const [dishName, setDishName] = useState('');
   const [dishDescription, setDishDescription] = useState('');
@@ -109,6 +110,17 @@ export default function App() {
   }, [dishName, dishIngredients, dishSteps]);
 
   const isAuthenticated = Boolean(sessionToken);
+
+  useEffect(() => {
+    if (!randomLoading) {
+      setRandomLoaderFrame(0);
+      return;
+    }
+    const timer = setInterval(() => {
+      setRandomLoaderFrame((prev) => (prev + 1) % 3);
+    }, 220);
+    return () => clearInterval(timer);
+  }, [randomLoading]);
 
   function animateRandomPressed(pressed: boolean) {
     Animated.parallel([
@@ -296,6 +308,22 @@ export default function App() {
     setDishSteps('');
     setDishAddOns('');
     setDishType('vegan');
+  }
+
+  function exitEditMode() {
+    setEditingDishId(null);
+    clearDishForm();
+    setManageMessage('Edit canceled');
+  }
+
+  function logout() {
+    setSessionToken(null);
+    setCurrentUserEmail(null);
+    setEditingDishId(null);
+    setSelectedDish(null);
+    setSelectedDishModalOpen(false);
+    clearDishForm();
+    setManageMessage('Logged out');
   }
 
   function loadDishIntoFormForEdit(dish: DishDetail) {
@@ -534,12 +562,30 @@ export default function App() {
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
       >
+        <View style={styles.topModeRow}>
+          <Pressable
+            onPress={() => {
+              clearTransientFeedback();
+              setMode('random');
+            }}
+            style={({ pressed }) => [styles.topModeTab, mode === 'random' ? styles.topModeTabActive : null, pressed ? styles.buttonPressed : null]}
+          >
+            <Text style={[styles.topModeIcon, mode === 'random' ? styles.topModeIconActive : null]}>◉</Text>
+            <Text style={[styles.topModeLabel, mode === 'random' ? styles.topModeLabelActive : null]}>Random</Text>
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              clearTransientFeedback();
+              setMode('manage');
+            }}
+            style={({ pressed }) => [styles.topModeTab, mode === 'manage' ? styles.topModeTabActive : null, pressed ? styles.buttonPressed : null]}
+          >
+            <Text style={[styles.topModeIcon, mode === 'manage' ? styles.topModeIconActive : null]}>☰</Text>
+            <Text style={[styles.topModeLabel, mode === 'manage' ? styles.topModeLabelActive : null]}>Manage</Text>
+          </Pressable>
+        </View>
         {mode === 'random' ? (
           <View style={styles.randomStage}>
-            <View style={styles.randomHero}>
-              <Text style={styles.randomHeroEmoji}>🥗🍲🥑</Text>
-              <Text style={styles.randomHeroText}>Cozy food picker</Text>
-            </View>
             <Pressable onPress={() => setFilterSheetOpen(true)} style={({ pressed }) => [styles.filterFab, pressed ? styles.buttonPressed : null]}>
               <Text style={styles.filterFabIcon}>≡</Text>
               <Text style={styles.filterFabText}>{selectedFilterLabel}</Text>
@@ -561,7 +607,11 @@ export default function App() {
                   <Text style={styles.randomBigButtonText}>{randomLoading ? 'Picking...' : 'Random'}</Text>
                 </Pressable>
               </Animated.View>
-              {randomLoading ? <ActivityIndicator style={styles.loader} color="#223b5d" /> : null}
+              {randomLoading ? (
+                <View style={styles.randomFoodLoaderWrap}>
+                  <Text style={styles.randomFoodLoaderEmoji}>{randomLoaderFrame === 0 ? '🍜' : randomLoaderFrame === 1 ? '🍕' : '🥗'}</Text>
+                </View>
+              ) : null}
               {randomError ? <Text style={styles.error}>{randomError}</Text> : null}
             </View>
           </View>
@@ -657,22 +707,44 @@ export default function App() {
                   >
                     <Text style={[styles.tabLabel, manageTab === 'list' ? styles.tabLabelActive : null]}>Dishes List</Text>
                   </Pressable>
+                  <Pressable
+                    onPress={() => {
+                      clearTransientFeedback();
+                      logout();
+                    }}
+                    style={({ pressed }) => [styles.tab, styles.logoutTab, pressed ? styles.buttonPressed : null]}
+                  >
+                    <Text style={styles.tabLabel}>Logout</Text>
+                  </Pressable>
                 </View>
 
                 {manageTab === 'form' ? (
                   <>
                     <View style={styles.formTopBar}>
                       <Text style={styles.sectionTitle}>{editingDishId ? 'Edit Dish' : 'Add Dish'}</Text>
-                      <Pressable
-                        onPress={() => {
-                          clearTransientFeedback();
-                          setEditingDishId(null);
-                          clearDishForm();
-                        }}
-                        style={({ pressed }) => [styles.secondaryButton, styles.secondaryButtonMuted, pressed ? styles.buttonPressed : null]}
-                      >
-                        <Text style={styles.secondaryButtonText}>Clear All</Text>
-                      </Pressable>
+                      <View style={styles.formTopActions}>
+                        {editingDishId ? (
+                          <Pressable
+                            onPress={() => {
+                              clearTransientFeedback();
+                              exitEditMode();
+                            }}
+                            style={({ pressed }) => [styles.secondaryButton, styles.secondaryButtonMuted, pressed ? styles.buttonPressed : null]}
+                          >
+                            <Text style={styles.secondaryButtonText}>Cancel Edit</Text>
+                          </Pressable>
+                        ) : null}
+                        <Pressable
+                          onPress={() => {
+                            clearTransientFeedback();
+                            setEditingDishId(null);
+                            clearDishForm();
+                          }}
+                          style={({ pressed }) => [styles.secondaryButton, styles.secondaryButtonMuted, pressed ? styles.buttonPressed : null]}
+                        >
+                          <Text style={styles.secondaryButtonText}>Clear All</Text>
+                        </Pressable>
+                      </View>
                     </View>
 
                     <View style={styles.typeChooserTop}>
@@ -932,29 +1004,6 @@ export default function App() {
         )}
       </ScrollView>
       </KeyboardAvoidingView>
-      <View style={styles.bottomTabRow}>
-        <Pressable
-          onPress={() => {
-            clearTransientFeedback();
-            setMode('random');
-          }}
-          style={({ pressed }) => [styles.bottomTab, mode === 'random' ? styles.bottomTabActive : null, pressed ? styles.buttonPressed : null]}
-        >
-          <Text style={styles.bottomTabIcon}>◉</Text>
-          <Text style={[styles.bottomTabLabel, mode === 'random' ? styles.bottomTabLabelActive : null]}>Random</Text>
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            clearTransientFeedback();
-            setMode('manage');
-          }}
-          style={({ pressed }) => [styles.bottomTab, mode === 'manage' ? styles.bottomTabActive : null, pressed ? styles.buttonPressed : null]}
-        >
-          <Text style={styles.bottomTabIcon}>☰</Text>
-          <Text style={[styles.bottomTabLabel, mode === 'manage' ? styles.bottomTabLabelActive : null]}>Manage</Text>
-        </Pressable>
-      </View>
-
       <Modal visible={filterSheetOpen} animationType="fade" transparent onRequestClose={() => setFilterSheetOpen(false)}>
         <View style={styles.sheetBackdrop}>
           <View style={styles.sheetCard}>
@@ -1162,8 +1211,44 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 18,
     paddingTop: 12,
-    paddingBottom: 150,
+    paddingBottom: 36,
     gap: 22,
+  },
+  topModeRow: {
+    flexDirection: 'row',
+    gap: 14,
+    marginBottom: 2,
+  },
+  topModeTab: {
+    flex: 1,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#d0dbea',
+    paddingVertical: 10,
+    backgroundColor: '#f8fbff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+  },
+  topModeTabActive: {
+    borderColor: '#223b5d',
+    backgroundColor: '#eaf2ff',
+  },
+  topModeIcon: {
+    color: '#5f7390',
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  topModeIconActive: {
+    color: '#223b5d',
+  },
+  topModeLabel: {
+    color: '#5f7390',
+    fontWeight: '700',
+    fontSize: 12,
+  },
+  topModeLabelActive: {
+    color: '#223b5d',
   },
   tabRow: {
     flexDirection: 'row',
@@ -1171,9 +1256,14 @@ const styles = StyleSheet.create({
   },
   manageSubTabRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 14,
     marginTop: 12,
     marginBottom: 14,
+  },
+  logoutTab: {
+    minWidth: 100,
+    flexGrow: 1,
   },
   tab: {
     flex: 1,
@@ -1203,19 +1293,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fffdf9',
     padding: 22,
   },
-  randomHero: {
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  randomHeroEmoji: {
-    fontSize: 28,
-    marginBottom: 6,
-  },
-  randomHeroText: {
-    color: '#6e7f92',
-    fontSize: 14,
-    fontWeight: '700',
-  },
   filterFab: {
     alignSelf: 'flex-start',
     borderRadius: 16,
@@ -1243,6 +1320,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 22,
+  },
+  randomFoodLoaderWrap: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f4f7ff',
+    borderWidth: 1,
+    borderColor: '#c3cfdf',
+  },
+  randomFoodLoaderEmoji: {
+    fontSize: 28,
   },
   randomBigButton: {
     width: 260,
@@ -1294,10 +1384,16 @@ const styles = StyleSheet.create({
   },
   formTopBar: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginBottom: 18,
     gap: 10,
+  },
+  formTopActions: {
+    flexDirection: 'row',
+    gap: 8,
+    flexWrap: 'wrap',
+    justifyContent: 'flex-end',
   },
   typeChooserTop: {
     marginBottom: 16,
@@ -1478,47 +1574,6 @@ const styles = StyleSheet.create({
   },
   keyboardWrap: {
     flex: 1,
-  },
-  bottomTabRow: {
-    position: 'absolute',
-    left: 14,
-    right: 14,
-    bottom: 10,
-    flexDirection: 'row',
-    gap: 14,
-    backgroundColor: 'rgba(255, 255, 255, 0.96)',
-    borderWidth: 1,
-    borderColor: '#d0dbea',
-    borderRadius: 18,
-    padding: 10,
-  },
-  bottomTab: {
-    flex: 1,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#d0dbea',
-    paddingVertical: 10,
-    backgroundColor: '#f8fbff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 2,
-  },
-  bottomTabActive: {
-    borderColor: '#223b5d',
-    backgroundColor: '#eaf2ff',
-  },
-  bottomTabIcon: {
-    color: '#5f7390',
-    fontSize: 16,
-    fontWeight: '800',
-  },
-  bottomTabLabel: {
-    color: '#5f7390',
-    fontWeight: '700',
-    fontSize: 12,
-  },
-  bottomTabLabelActive: {
-    color: '#223b5d',
   },
   sheetOverlay: {
     flex: 1,
