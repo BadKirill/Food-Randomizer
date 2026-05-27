@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   HttpCode,
   NotFoundException,
@@ -42,6 +43,9 @@ const ListDishesQuerySchema = z.object({
 @Controller('dishes')
 export class DishesController {
   constructor(private readonly dishesRepository: DishesRepository) {}
+
+  private static readonly OWNER_ONLY_MESSAGE =
+    'Only the creator can edit or archive this dish';
 
   @Post()
   @UseGuards(AuthGuard)
@@ -84,7 +88,11 @@ export class DishesController {
       description: parsed.description ?? null,
     });
     if (!dish) {
-      throw new NotFoundException('Dish not found');
+      const existing = await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
+      if (!existing) {
+        throw new NotFoundException('Dish not found');
+      }
+      throw new ForbiddenException(DishesController.OWNER_ONLY_MESSAGE);
     }
     return this.mapDishDetail(dish);
   }
@@ -95,7 +103,11 @@ export class DishesController {
   async archive(@CurrentUser() user: AuthUser, @Param('dishId') dishId: string) {
     const archived = await this.dishesRepository.archiveDish(dishId, user.id);
     if (!archived) {
-      throw new NotFoundException('Dish not found');
+      const existing = await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
+      if (!existing) {
+        throw new NotFoundException('Dish not found');
+      }
+      throw new ForbiddenException(DishesController.OWNER_ONLY_MESSAGE);
     }
     return {
       id: archived.id,
@@ -109,6 +121,13 @@ export class DishesController {
   async unarchive(@CurrentUser() user: AuthUser, @Param('dishId') dishId: string) {
     const unarchived = await this.dishesRepository.unarchiveDish(dishId, user.id);
     if (!unarchived) {
+      const existing = await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
+      if (!existing) {
+        throw new NotFoundException('Dish not found');
+      }
+      if (existing.createdById && existing.createdById !== user.id) {
+        throw new ForbiddenException(DishesController.OWNER_ONLY_MESSAGE);
+      }
       throw new NotFoundException('Dish not found');
     }
     return {

@@ -75,6 +75,20 @@ export class DishesRepository {
     });
   }
 
+  async findApprovedByIdAnyArchive(dishId: string) {
+    return this.prisma.dish.findFirst({
+      where: {
+        id: dishId,
+        status: 'approved',
+      },
+      select: {
+        id: true,
+        createdById: true,
+        archivedAt: true,
+      },
+    });
+  }
+
   async createDish(input: {
     name: string;
     description?: string;
