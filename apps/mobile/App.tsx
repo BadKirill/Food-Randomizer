@@ -536,6 +536,10 @@ export default function App() {
       >
         {mode === 'random' ? (
           <View style={styles.randomStage}>
+            <View style={styles.randomHero}>
+              <Text style={styles.randomHeroEmoji}>🥗🍲🥑</Text>
+              <Text style={styles.randomHeroText}>Cozy food picker</Text>
+            </View>
             <Pressable onPress={() => setFilterSheetOpen(true)} style={({ pressed }) => [styles.filterFab, pressed ? styles.buttonPressed : null]}>
               <Text style={styles.filterFabIcon}>≡</Text>
               <Text style={styles.filterFabText}>{selectedFilterLabel}</Text>
@@ -557,7 +561,7 @@ export default function App() {
                   <Text style={styles.randomBigButtonText}>{randomLoading ? 'Picking...' : 'Random'}</Text>
                 </Pressable>
               </Animated.View>
-              {randomLoading ? <ActivityIndicator style={styles.loader} color="#52ff9f" /> : null}
+              {randomLoading ? <ActivityIndicator style={styles.loader} color="#223b5d" /> : null}
               {randomError ? <Text style={styles.error}>{randomError}</Text> : null}
             </View>
           </View>
@@ -919,7 +923,7 @@ export default function App() {
                   </>
                 )}
 
-                {listLoading || detailLoading ? <ActivityIndicator style={styles.loader} color="#52ff9f" /> : null}
+                {listLoading || detailLoading ? <ActivityIndicator style={styles.loader} color="#223b5d" /> : null}
                 {manageError ? <Text style={styles.error}>{manageError}</Text> : null}
                 {manageMessage ? <Text style={styles.success}>{manageMessage}</Text> : null}
               </>
@@ -1034,7 +1038,7 @@ export default function App() {
         </View>
       </Modal>
 
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 }
@@ -1135,25 +1139,25 @@ function DishModalScreen({ dish }: { dish: DishDetail }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#040b08',
+    backgroundColor: '#edf3fb',
   },
   glowOne: {
+    position: 'absolute',
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: '#d6ebff',
+    top: -110,
+    left: -120,
+  },
+  glowTwo: {
     position: 'absolute',
     width: 260,
     height: 260,
     borderRadius: 999,
-    backgroundColor: '#0f2e1f',
-    top: -70,
-    left: -80,
-  },
-  glowTwo: {
-    position: 'absolute',
-    width: 220,
-    height: 220,
-    borderRadius: 999,
-    backgroundColor: '#072217',
-    bottom: 80,
-    right: -70,
+    backgroundColor: '#f6e7d6',
+    bottom: 100,
+    right: -100,
   },
   content: {
     paddingHorizontal: 18,
@@ -1176,48 +1180,61 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',
-    backgroundColor: '#0f1915',
+    backgroundColor: '#ffffff',
     borderWidth: 1,
-    borderColor: '#1b3b2a',
+    borderColor: '#c8d5e6',
   },
   tabActive: {
-    backgroundColor: '#0d2d1f',
-    borderColor: '#52ff9f',
+    backgroundColor: '#eaf2ff',
+    borderColor: '#223b5d',
   },
   tabLabel: {
     fontWeight: '700',
-    color: '#98b8a8',
+    color: '#607188',
   },
   tabLabelActive: {
-    color: '#d7ffe9',
+    color: '#223b5d',
   },
   randomStage: {
     minHeight: 620,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#1a3b2a',
-    backgroundColor: '#09120f',
+    borderColor: '#d3dde9',
+    backgroundColor: '#fffdf9',
     padding: 22,
+  },
+  randomHero: {
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  randomHeroEmoji: {
+    fontSize: 28,
+    marginBottom: 6,
+  },
+  randomHeroText: {
+    color: '#6e7f92',
+    fontSize: 14,
+    fontWeight: '700',
   },
   filterFab: {
     alignSelf: 'flex-start',
     borderRadius: 16,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: '#0f2d20',
+    backgroundColor: '#f4f7ff',
     borderWidth: 1,
-    borderColor: '#2f7a55',
+    borderColor: '#c3cfdf',
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
   },
   filterFabIcon: {
-    color: '#52ff9f',
+    color: '#274467',
     fontSize: 18,
     fontWeight: '900',
   },
   filterFabText: {
-    color: '#d7ffe8',
+    color: '#264365',
     fontWeight: '700',
     fontSize: 16,
   },
@@ -1231,47 +1248,47 @@ const styles = StyleSheet.create({
     width: 260,
     height: 260,
     borderRadius: 999,
-    backgroundColor: '#0e3a28',
+    backgroundColor: '#dff5df',
     borderWidth: 2,
-    borderColor: '#52ff9f',
+    borderColor: '#79c57c',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#52ff9f',
-    shadowOpacity: 0.34,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 0 },
-    elevation: 8,
+    shadowColor: '#7fa2c8',
+    shadowOpacity: 0.18,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 4,
   },
   randomBigButtonText: {
-    color: '#d8ffeb',
+    color: '#1f3553',
     fontSize: 38,
     fontWeight: '900',
     letterSpacing: 1,
   },
   sectionCard: {
-    backgroundColor: '#0a1310',
+    backgroundColor: '#fffdf9',
     borderRadius: 18,
     padding: 18,
     borderWidth: 1,
-    borderColor: '#1d3f2e',
+    borderColor: '#d3ddea',
   },
   manageHeaderBar: {
     borderWidth: 1,
-    borderColor: '#1f4a35',
+    borderColor: '#d0dbe8',
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 12,
-    backgroundColor: '#091812',
+    backgroundColor: '#f6f9ff',
     marginBottom: 12,
   },
   manageHeaderTitle: {
-    color: '#c4ffd8',
+    color: '#223b5d',
     fontWeight: '800',
     fontSize: 18,
     marginBottom: 4,
   },
   manageHeaderUser: {
-    color: '#8bb7a1',
+    color: '#6f8096',
     fontWeight: '600',
     fontSize: 13,
   },
@@ -1286,7 +1303,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   typeChooserTitle: {
-    color: '#8af0be',
+    color: '#355776',
     fontWeight: '800',
     fontSize: 14,
     marginBottom: 8,
@@ -1301,17 +1318,17 @@ const styles = StyleSheet.create({
   listHeaderTitle: {
     fontWeight: '800',
     fontSize: 18,
-    color: '#9effcb',
+    color: '#2f4d6d',
     lineHeight: 22,
   },
   button: {
-    backgroundColor: '#0d6f43',
+    backgroundColor: '#223b5d',
     paddingHorizontal: 16,
     paddingVertical: 13,
     borderRadius: 12,
     alignSelf: 'flex-start',
     borderWidth: 1,
-    borderColor: '#52ff9f',
+    borderColor: '#223b5d',
     marginTop: 14,
   },
   buttonPressed: {
@@ -1322,30 +1339,30 @@ const styles = StyleSheet.create({
     opacity: 0.52,
   },
   buttonText: {
-    color: '#e8fff3',
+    color: '#f9fbff',
     fontWeight: '700',
   },
   secondaryButton: {
-    backgroundColor: '#0f1b16',
+    backgroundColor: '#ffffff',
     paddingHorizontal: 14,
     paddingVertical: 12,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#2a4b3a',
+    borderColor: '#c8d5e6',
   },
   secondaryButtonMuted: {
     opacity: 0.9,
   },
   secondaryActive: {
-    backgroundColor: '#163a29',
-    borderColor: '#52ff9f',
+    backgroundColor: '#e9f3ff',
+    borderColor: '#223b5d',
   },
   secondaryDanger: {
-    backgroundColor: '#2d1414',
-    borderColor: '#7a3030',
+    backgroundColor: '#fff1f1',
+    borderColor: '#d56a6a',
   },
   secondaryButtonText: {
-    color: '#ccf7df',
+    color: '#2a435f',
     fontWeight: '600',
   },
   authActionsRow: {
@@ -1371,33 +1388,33 @@ const styles = StyleSheet.create({
   },
   error: {
     marginTop: 10,
-    color: '#ff8b8b',
+    color: '#c45454',
     fontWeight: '700',
   },
   success: {
     marginTop: 10,
-    color: '#52ff9f',
+    color: '#467e53',
     fontWeight: '700',
   },
   fieldLabel: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#8af0be',
+    color: '#375978',
     marginTop: 16,
     marginBottom: 12,
   },
   hintText: {
     fontSize: 13,
-    color: '#86a598',
+    color: '#72859a',
     marginBottom: 8,
   },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: '#29523f',
+    borderColor: '#cfdae8',
     borderWidth: 1,
     borderRadius: 12,
-    backgroundColor: '#06100d',
+    backgroundColor: '#ffffff',
     paddingLeft: 12,
     paddingRight: 8,
     minHeight: 58,
@@ -1409,7 +1426,7 @@ const styles = StyleSheet.create({
   },
   inputControl: {
     flex: 1,
-    color: '#e8fff2',
+    color: '#243c58',
     paddingVertical: 11,
   },
   inputControlMulti: {
@@ -1420,9 +1437,9 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: 'rgba(214, 231, 221, 0.22)',
+    backgroundColor: 'rgba(150, 170, 194, 0.18)',
     borderWidth: 1,
-    borderColor: 'rgba(214, 231, 221, 0.24)',
+    borderColor: 'rgba(121, 144, 170, 0.22)',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8,
@@ -1433,31 +1450,31 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   inputClearBtnText: {
-    color: '#ecf7f1',
+    color: '#4d6078',
     fontWeight: '900',
     lineHeight: 24,
     fontSize: 20,
   },
   empty: {
-    color: '#8da79a',
+    color: '#7a8c9f',
     marginTop: 6,
   },
   listCard: {
-    backgroundColor: '#0b1713',
+    backgroundColor: '#ffffff',
     borderRadius: 12,
     padding: 12,
     marginTop: 10,
     borderWidth: 1,
-    borderColor: '#244734',
+    borderColor: '#d2deec',
   },
   listCardTitle: {
     fontWeight: '800',
     fontSize: 16,
-    color: '#d8ffeb',
+    color: '#2a435f',
   },
   listCardText: {
     marginTop: 4,
-    color: '#9bc7b1',
+    color: '#6f8198',
   },
   keyboardWrap: {
     flex: 1,
@@ -1469,9 +1486,9 @@ const styles = StyleSheet.create({
     bottom: 10,
     flexDirection: 'row',
     gap: 14,
-    backgroundColor: 'rgba(6, 16, 12, 0.94)',
+    backgroundColor: 'rgba(255, 255, 255, 0.96)',
     borderWidth: 1,
-    borderColor: '#204434',
+    borderColor: '#d0dbea',
     borderRadius: 18,
     padding: 10,
   },
@@ -1479,42 +1496,42 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: '#1e3f2f',
+    borderColor: '#d0dbea',
     paddingVertical: 10,
-    backgroundColor: '#0a1712',
+    backgroundColor: '#f8fbff',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 2,
   },
   bottomTabActive: {
-    borderColor: '#52ff9f',
-    backgroundColor: '#103526',
+    borderColor: '#223b5d',
+    backgroundColor: '#eaf2ff',
   },
   bottomTabIcon: {
-    color: '#9bd8b8',
+    color: '#5f7390',
     fontSize: 16,
     fontWeight: '800',
   },
   bottomTabLabel: {
-    color: '#9bd8b8',
+    color: '#5f7390',
     fontWeight: '700',
     fontSize: 12,
   },
   bottomTabLabelActive: {
-    color: '#deffed',
+    color: '#223b5d',
   },
   sheetOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(2, 8, 5, 0.74)',
+    backgroundColor: 'rgba(28, 48, 74, 0.35)',
     justifyContent: 'flex-end',
   },
   selectedDishSheet: {
     maxHeight: '88%',
-    backgroundColor: '#07110d',
+    backgroundColor: '#fffdfb',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderWidth: 1,
-    borderColor: '#1f4936',
+    borderColor: '#d0dcea',
     paddingHorizontal: 14,
     paddingTop: 8,
     paddingBottom: 16,
@@ -1524,7 +1541,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 5,
     borderRadius: 999,
-    backgroundColor: '#406455',
+    backgroundColor: '#b2c2d8',
     marginBottom: 10,
   },
   selectedSheetHeader: {
@@ -1538,20 +1555,20 @@ const styles = StyleSheet.create({
   },
   card: {
     marginTop: 18,
-    backgroundColor: '#08120f',
+    backgroundColor: '#ffffff',
     borderRadius: 14,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#244634',
+    borderColor: '#d3dfec',
   },
   cardTitle: {
     fontSize: 21,
     fontWeight: '800',
     marginBottom: 8,
-    color: '#e3ffee',
+    color: '#223b5d',
   },
   description: {
-    color: '#95bca8',
+    color: '#697f97',
     marginBottom: 12,
   },
   sectionTitle: {
@@ -1559,28 +1576,28 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     fontWeight: '800',
     fontSize: 18,
-    color: '#9effcb',
+    color: '#2f4d6d',
   },
   listItem: {
-    color: '#c7f4de',
+    color: '#405a77',
     marginBottom: 4,
   },
   sheetBackdrop: {
     flex: 1,
-    backgroundColor: 'rgba(2, 8, 5, 0.78)',
+    backgroundColor: 'rgba(28, 48, 74, 0.32)',
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
   sheetCard: {
-    backgroundColor: '#08140f',
+    backgroundColor: '#fffdfb',
     borderRadius: 18,
     borderWidth: 1,
-    borderColor: '#2f6f4d',
+    borderColor: '#d4e0ec',
     padding: 16,
     gap: 8,
   },
   sheetTitle: {
-    color: '#d9ffeb',
+    color: '#223b5d',
     fontWeight: '800',
     fontSize: 18,
     marginBottom: 4,
@@ -1590,15 +1607,15 @@ const styles = StyleSheet.create({
     paddingVertical: 11,
     paddingHorizontal: 12,
     borderWidth: 1,
-    borderColor: '#2c4f3d',
-    backgroundColor: '#101f19',
+    borderColor: '#c9d6e6',
+    backgroundColor: '#f8fbff',
   },
   sheetButtonActive: {
-    borderColor: '#52ff9f',
-    backgroundColor: '#153a29',
+    borderColor: '#223b5d',
+    backgroundColor: '#e9f3ff',
   },
   sheetButtonText: {
-    color: '#d8fce9',
+    color: '#2a435f',
     fontWeight: '700',
   },
   sheetCloseButton: {
@@ -1607,12 +1624,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sheetCloseText: {
-    color: '#8ec9ac',
+    color: '#556f8f',
     fontWeight: '700',
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: '#030a07',
+    backgroundColor: '#edf3fb',
   },
   modalHeaderRow: {
     flexDirection: 'row',
@@ -1621,23 +1638,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#1e4331',
+    borderBottomColor: '#d0dbe8',
   },
   modalHeaderTitle: {
     fontSize: 20,
     fontWeight: '800',
-    color: '#d8ffea',
+    color: '#223b5d',
   },
   modalCloseButton: {
     borderWidth: 1,
-    borderColor: '#52ff9f',
+    borderColor: '#223b5d',
     borderRadius: 10,
     paddingVertical: 7,
     paddingHorizontal: 12,
-    backgroundColor: '#103726',
+    backgroundColor: '#eaf2ff',
   },
   modalCloseText: {
-    color: '#dbffec',
+    color: '#223b5d',
     fontWeight: '700',
   },
   modalContent: {
@@ -1645,19 +1662,19 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   modalDishTitle: {
-    color: '#ecfff5',
+    color: '#223b5d',
     fontSize: 30,
     fontWeight: '900',
   },
   modalInfoBlock: {
-    backgroundColor: '#08130f',
+    backgroundColor: '#ffffff',
     borderWidth: 1,
-    borderColor: '#1f4733',
+    borderColor: '#d0dceb',
     borderRadius: 16,
     padding: 14,
   },
   modalType: {
-    color: '#9deec4',
+    color: '#4a6381',
     fontWeight: '700',
     marginBottom: 6,
   },
