@@ -618,7 +618,20 @@ export default function App() {
         ) : (
           <View style={styles.sectionCard}>
             <View style={styles.manageHeaderBar}>
-              <Text style={styles.manageHeaderTitle}>Manage Dishes</Text>
+              <View style={styles.manageHeaderTop}>
+                <Text style={styles.manageHeaderTitle}>Manage Dishes</Text>
+                {isAuthenticated ? (
+                  <Pressable
+                    onPress={() => {
+                      clearTransientFeedback();
+                      logout();
+                    }}
+                    style={({ pressed }) => [styles.logoutTextBtn, pressed ? styles.buttonPressed : null]}
+                  >
+                    <Text style={styles.logoutText}>Logout</Text>
+                  </Pressable>
+                ) : null}
+              </View>
               <Text style={styles.manageHeaderUser}>{currentUserEmail ? `Logged in: ${currentUserEmail}` : 'Not logged in'}</Text>
             </View>
 
@@ -706,15 +719,6 @@ export default function App() {
                     style={({ pressed }) => [styles.tab, manageTab === 'list' ? styles.tabActive : null, pressed ? styles.buttonPressed : null]}
                   >
                     <Text style={[styles.tabLabel, manageTab === 'list' ? styles.tabLabelActive : null]}>Dishes List</Text>
-                  </Pressable>
-                  <Pressable
-                    onPress={() => {
-                      clearTransientFeedback();
-                      logout();
-                    }}
-                    style={({ pressed }) => [styles.tab, styles.logoutTab, pressed ? styles.buttonPressed : null]}
-                  >
-                    <Text style={styles.tabLabel}>Logout</Text>
                   </Pressable>
                 </View>
 
@@ -1261,10 +1265,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 14,
   },
-  logoutTab: {
-    minWidth: 100,
-    flexGrow: 1,
-  },
   tab: {
     flex: 1,
     borderRadius: 14,
@@ -1371,6 +1371,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f6f9ff',
     marginBottom: 12,
   },
+  manageHeaderTop: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 10,
+  },
   manageHeaderTitle: {
     color: '#223b5d',
     fontWeight: '800',
@@ -1380,6 +1386,15 @@ const styles = StyleSheet.create({
   manageHeaderUser: {
     color: '#6f8096',
     fontWeight: '600',
+    fontSize: 13,
+  },
+  logoutTextBtn: {
+    paddingVertical: 2,
+    paddingHorizontal: 2,
+  },
+  logoutText: {
+    color: '#bf3e3e',
+    fontWeight: '800',
     fontSize: 13,
   },
   formTopBar: {
