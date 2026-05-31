@@ -1,4 +1,5 @@
-import { UnauthorizedException } from '@nestjs/common';
+import { ConflictException, UnauthorizedException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
@@ -59,6 +60,19 @@ describe('AuthService', () => {
     await expect(
       service.login({ email: 'none@food.app', password: 'badpass123' }),
     ).rejects.toThrow(UnauthorizedException);
+  });
+
+  it('register returns readable conflict for existing email', async () => {
+    userCreate.mockRejectedValue(
+      new Prisma.PrismaClientKnownRequestError('Unique constraint failed', {
+        code: 'P2002',
+        clientVersion: 'test',
+      }),
+    );
+
+    await expect(
+      service.register({ email: 'test@food.app', password: 'password123' }),
+    ).rejects.toThrow(ConflictException);
   });
 
   it('getSessionFromBearerHeader rejects missing bearer token', async () => {

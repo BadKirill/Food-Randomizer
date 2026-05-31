@@ -25,6 +25,8 @@ type DishDetail = {
   name: string;
   description?: string;
   dishType?: 'usual' | 'vegetarian' | 'vegan';
+  createdById?: string | null;
+  createdBy?: string | null;
   ingredients: DishIngredient[];
   steps: string[];
   addOnGroups: DishAddOnGroup[];
@@ -71,6 +73,7 @@ export default function App() {
   const [loginEmail, setLoginEmail] = useState(DEFAULT_LOGIN_EMAIL);
   const [loginPassword, setLoginPassword] = useState('');
   const [sessionToken, setSessionToken] = useState<string | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null);
 
   const [randomData, setRandomData] = useState<RandomNextResponse | null>(null);
@@ -93,6 +96,7 @@ export default function App() {
   const [saveLoading, setSaveLoading] = useState(false);
   const [manageError, setManageError] = useState<string | null>(null);
   const [manageMessage, setManageMessage] = useState<string | null>(null);
+  const [manageToast, setManageToast] = useState<string | null>(null);
   const [dishes, setDishes] = useState<DishListItem[]>([]);
 
   const [selectedDish, setSelectedDish] = useState<DishDetail | null>(null);
@@ -110,6 +114,13 @@ export default function App() {
   }, [dishName, dishIngredients, dishSteps]);
 
   const isAuthenticated = Boolean(sessionToken);
+  const OWNER_ONLY_MESSAGE = 'Only the creator can edit or archive this dish';
+
+  useEffect(() => {
+    if (!manageToast) return;
+    const timer = setTimeout(() => setManageToast(null), 3500);
+    return () => clearTimeout(timer);
+  }, [manageToast]);
 
   useEffect(() => {
     if (!randomLoading) {
@@ -226,6 +237,7 @@ export default function App() {
   function clearTransientFeedback() {
     if (manageMessage) setManageMessage(null);
     if (manageError) setManageError(null);
+    if (manageToast) setManageToast(null);
   }
 
   async function fetchDishById(dishId: string, openModal = true) {
@@ -318,6 +330,7 @@ export default function App() {
 
   function logout() {
     setSessionToken(null);
+    setCurrentUserId(null);
     setCurrentUserEmail(null);
     setEditingDishId(null);
     setSelectedDish(null);
@@ -327,6 +340,11 @@ export default function App() {
   }
 
   function loadDishIntoFormForEdit(dish: DishDetail) {
+    if (!canEditDish(dish)) {
+      setManageError(null);
+      setManageToast(OWNER_ONLY_MESSAGE);
+      return;
+    }
     setDishName(dish.name);
     setDishDescription(dish.description ?? '');
     setDishIngredients(dish.ingredients.map((i) => i.name).join('\n'));
@@ -384,7 +402,13 @@ export default function App() {
       await fetchDishById(editingDishId);
       setManageTab('list');
     } catch (e) {
-      setManageError(formatClientError(e, 'Failed to update dish'));
+      const message = formatClientError(e, 'Failed to update dish');
+      if (message === OWNER_ONLY_MESSAGE) {
+        setManageError(null);
+        setManageToast(message);
+      } else {
+        setManageError(message);
+      }
     } finally {
       setSaveLoading(false);
     }
@@ -423,7 +447,13 @@ export default function App() {
       }
       await fetchDishes();
     } catch (e) {
-      setManageError(formatClientError(e, 'Failed to archive dish'));
+      const message = formatClientError(e, 'Failed to archive dish');
+      if (message === OWNER_ONLY_MESSAGE) {
+        setManageError(null);
+        setManageToast(message);
+      } else {
+        setManageError(message);
+      }
     } finally {
       setSaveLoading(false);
     }
@@ -452,7 +482,13 @@ export default function App() {
       setManageMessage('Dish unarchived');
       await fetchDishes(dishListFilter, dishArchivedFilter);
     } catch (e) {
-      setManageError(formatClientError(e, 'Failed to unarchive dish'));
+      const message = formatClientError(e, 'Failed to unarchive dish');
+      if (message === OWNER_ONLY_MESSAGE) {
+        setManageError(null);
+        setManageToast(message);
+      } else {
+        setManageError(message);
+      }
     } finally {
       setSaveLoading(false);
     }
@@ -474,6 +510,7 @@ export default function App() {
       }
       const payload = (await response.json()) as LoginResponse;
       setSessionToken(payload.token);
+      setCurrentUserId(payload.user.id);
       setCurrentUserEmail(payload.user.email);
       setManageMessage('Login successful');
       await fetchDishes();
@@ -500,6 +537,7 @@ export default function App() {
       }
       const payload = (await response.json()) as LoginResponse;
       setSessionToken(payload.token);
+      setCurrentUserId(payload.user.id);
       setCurrentUserEmail(payload.user.email);
       setManageMessage('Registration successful');
       await fetchDishes();
@@ -1065,21 +1103,40 @@ export default function App() {
                 <View style={styles.inlineActions}>
                   <Pressable
                     onPress={() => {
+                      if (!canEditDish(selectedDish)) {
+                        setManageError(null);
+                        setManageToast(OWNER_ONLY_MESSAGE);
+                        return;
+                      }
                       setSelectedDishModalOpen(false);
                       loadDishIntoFormForEdit(selectedDish);
                     }}
-                  style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}
+                    style={({ pressed }) => [
+                      styles.secondaryButton,
+                      !canEditDish(selectedDish) ? styles.buttonDisabled : null,
+                      pressed ? styles.buttonPressed : null,
+                    ]}
                   >
                     <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
                   </Pressable>
                   <Pressable
                     testID="dish-archive-button"
                     onPress={async () => {
+                      if (!canEditDish(selectedDish)) {
+                        setManageError(null);
+                        setManageToast(OWNER_ONLY_MESSAGE);
+                        return;
+                      }
                       await archiveSelectedDish();
                       setSelectedDishModalOpen(false);
                     }}
                     disabled={saveLoading}
-                    style={({ pressed }) => [styles.secondaryButton, styles.secondaryDanger, pressed ? styles.buttonPressed : null]}
+                    style={({ pressed }) => [
+                      styles.secondaryButton,
+                      styles.secondaryDanger,
+                      !canEditDish(selectedDish) ? styles.buttonDisabled : null,
+                      pressed ? styles.buttonPressed : null,
+                    ]}
                   >
                     <Text style={styles.secondaryButtonText}>Archive Dish</Text>
                   </Pressable>
@@ -1092,8 +1149,22 @@ export default function App() {
       </Modal>
 
       <StatusBar style="dark" />
+      {manageToast ? (
+        <View pointerEvents="none" style={styles.toastWrap}>
+          <View style={styles.toastCard}>
+            <Text style={styles.toastText}>{manageToast}</Text>
+          </View>
+        </View>
+      ) : null}
     </SafeAreaView>
   );
+
+  function canEditDish(dish: Pick<DishDetail, 'createdById' | 'createdBy'> | null): boolean {
+    if (!dish) return false;
+    if (dish.createdById && currentUserId) return dish.createdById === currentUserId;
+    if (dish.createdBy && currentUserEmail) return dish.createdBy.toLowerCase() === currentUserEmail.toLowerCase();
+    return false;
+  }
 }
 
 function parseLines(input: string) {
@@ -1246,7 +1317,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   topModeIconActive: {
-    color: '#2E8A4A',
+    color: '#B88A44',
   },
   topModeLabel: {
     color: 'rgba(0,0,0,0.58)',
@@ -1254,7 +1325,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   topModeLabelActive: {
-    color: '#2E8A4A',
+    color: '#B88A44',
   },
   tabRow: {
     flexDirection: 'row',
@@ -1285,7 +1356,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   tabLabelActive: {
-    color: '#2E8A4A',
+    color: '#B88A44',
   },
   randomStage: {
     minHeight: 640,
@@ -1699,6 +1770,27 @@ const styles = StyleSheet.create({
   sheetCloseText: {
     color: '#2E8A4A',
     fontWeight: '700',
+  },
+  toastWrap: {
+    position: 'absolute',
+    left: 16,
+    right: 16,
+    bottom: 24,
+    alignItems: 'center',
+  },
+  toastCard: {
+    backgroundColor: 'rgba(60, 22, 10, 0.92)',
+    paddingHorizontal: 14,
+    paddingVertical: 11,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#E8D9C8',
+    maxWidth: '100%',
+  },
+  toastText: {
+    color: '#FFF4E8',
+    fontWeight: '700',
+    textAlign: 'center',
   },
   modalContainer: {
     flex: 1,

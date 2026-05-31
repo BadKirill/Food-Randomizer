@@ -142,6 +142,7 @@ export class DishesController {
       name: dish.name,
       description: dish.description,
       dishType: dish.dishType,
+      createdById: dish.createdById,
       createdBy: dish.createdBy,
       archivedAt: dish.archivedAt,
       ingredients: dish.ingredients.map((i) => ({
