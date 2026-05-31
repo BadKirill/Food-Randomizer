@@ -1,4 +1,5 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { createHash, randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
 import { PrismaService } from '../../prisma/prisma.service';
 
@@ -21,12 +22,20 @@ export class AuthService {
   async register(input: RegisterInput) {
     const email = input.email.trim().toLowerCase();
     const passwordHash = this.hashPassword(input.password);
-    const user = await this.prisma.user.create({
-      data: {
-        email,
-        passwordHash,
-      },
-    });
+    let user: { id: string; email: string | null };
+    try {
+      user = await this.prisma.user.create({
+        data: {
+          email,
+          passwordHash,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+        throw new ConflictException('User with this email already exists. Please login.');
+      }
+      throw error;
+    }
     return this.createSessionForUser(user.id, user.email ?? null);
   }
 
