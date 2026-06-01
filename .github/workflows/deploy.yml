@@ -24,9 +24,14 @@ jobs:
           set -euo pipefail
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          printf '%s\n' "${{ secrets.OCI_API_SSH_KEY }}" > ~/.ssh/id_rsa
+          if [[ -z "${{ secrets.OCI_API_SSH_KEY }}" ]]; then
+            echo "Missing required secret: OCI_API_SSH_KEY"
+            exit 1
+          fi
+          printf '%s\n' "${{ secrets.OCI_API_SSH_KEY }}" | sed 's/\r$//' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p "${{ secrets.OCI_API_SSH_PORT || '22' }}" "${{ secrets.OCI_API_HOST }}" >> ~/.ssh/known_hosts
+          touch ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy over native SSH with retries
         shell: bash
@@ -49,7 +54,7 @@ jobs:
               -o ConnectTimeout=30 \
               -o ServerAliveInterval=15 \
               -o ServerAliveCountMax=8 \
-              -o StrictHostKeyChecking=yes \
+              -o StrictHostKeyChecking=accept-new \
               -p "$OCI_API_SSH_PORT" \
               "$OCI_API_USER@$OCI_API_HOST" \
               "DEPLOY_REPO_TOKEN='$ESCAPED_DEPLOY_TOKEN' API_ENV_PROD_B64='$API_ENV_PROD_B64' bash -lc $(printf '%q' "$REMOTE_SCRIPT")"
