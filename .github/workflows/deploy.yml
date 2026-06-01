@@ -41,6 +41,7 @@ jobs:
           set -euo pipefail
           API_ENV_PROD_B64="$(printf '%s' "$API_ENV_PROD" | base64 | tr -d '\n')"
           ESCAPED_DEPLOY_TOKEN="${DEPLOY_REPO_TOKEN//\'/\'\\\'\'}"
+          REMOTE_SCRIPT=$'set -euo pipefail\ncd ~/Food-Randomizer\ngit fetch "https://x-access-token:${DEPLOY_REPO_TOKEN}@github.com/BadKirill/Food-Randomizer.git" main\ngit checkout main\ngit reset --hard FETCH_HEAD\necho "$API_ENV_PROD_B64" | base64 -d > apps/api/.env.prod\nchmod 600 apps/api/.env.prod\nbash scripts/deploy-api.sh'
 
           for attempt in 1 2 3; do
             echo "Deploy attempt $attempt/3"
@@ -51,20 +52,7 @@ jobs:
               -o StrictHostKeyChecking=yes \
               -p "$OCI_API_SSH_PORT" \
               "$OCI_API_USER@$OCI_API_HOST" \
-              "DEPLOY_REPO_TOKEN='$ESCAPED_DEPLOY_TOKEN' API_ENV_PROD_B64='$API_ENV_PROD_B64' bash -se" <<'REMOTE'
-          set -euo pipefail
-
-          cd ~/Food-Randomizer
-
-          git fetch "https://x-access-token:${DEPLOY_REPO_TOKEN}@github.com/BadKirill/Food-Randomizer.git" main
-          git checkout main
-          git reset --hard FETCH_HEAD
-
-          echo "$API_ENV_PROD_B64" | base64 -d > apps/api/.env.prod
-
-          chmod 600 apps/api/.env.prod
-          bash scripts/deploy-api.sh
-REMOTE
+              "DEPLOY_REPO_TOKEN='$ESCAPED_DEPLOY_TOKEN' API_ENV_PROD_B64='$API_ENV_PROD_B64' bash -lc $(printf '%q' "$REMOTE_SCRIPT")"
             then
               echo "Deploy succeeded on attempt $attempt"
               exit 0
