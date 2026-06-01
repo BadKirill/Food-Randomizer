@@ -3,10 +3,17 @@ WORKDIR /app
 
 COPY package*.json ./
 COPY tsconfig.base.json ./
+# Copy workspace manifests first so npm ci can be layer-cached
+# across regular source-code deploys.
+COPY apps/api/package*.json ./apps/api/
+COPY packages/contracts/package*.json ./packages/contracts/
+
+RUN npm ci
+
+# Copy full sources only after dependency install.
 COPY apps/api ./apps/api
 COPY packages/contracts ./packages/contracts
 
-RUN npm ci
 RUN npx prisma generate --schema=apps/api/prisma/schema.prisma
 RUN npm run build --workspace packages/contracts
 RUN npm run build --workspace apps/api
