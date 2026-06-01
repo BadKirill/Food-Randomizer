@@ -18,66 +18,63 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy over SSH (attempt 1)
-        id: deploy_first
-        uses: appleboy/ssh-action@v1.0.3
-        continue-on-error: true
-        with:
-          host: ${{ secrets.OCI_API_HOST }}
-          username: ${{ secrets.OCI_API_USER }}
-          key: ${{ secrets.OCI_API_SSH_KEY }}
-          port: ${{ secrets.OCI_API_SSH_PORT || '22' }}
-          timeout: 120s
-          script_stop: true
-          command_timeout: 120m
-          debug: true
-          script: |
-            set -euo pipefail
+      - name: Setup SSH key
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.OCI_API_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p "${{ secrets.OCI_API_SSH_PORT || '22' }}" "${{ secrets.OCI_API_HOST }}" >> ~/.ssh/known_hosts
 
-            cd ~/Food-Randomizer
+      - name: Deploy over native SSH with retries
+        shell: bash
+        timeout-minutes: 120
+        env:
+          OCI_API_HOST: ${{ secrets.OCI_API_HOST }}
+          OCI_API_USER: ${{ secrets.OCI_API_USER }}
+          OCI_API_SSH_PORT: ${{ secrets.OCI_API_SSH_PORT || '22' }}
+          DEPLOY_REPO_TOKEN: ${{ secrets.DEPLOY_REPO_TOKEN }}
+          API_ENV_PROD: ${{ secrets.API_ENV_PROD }}
+        run: |
+          set -euo pipefail
+          API_ENV_PROD_B64="$(printf '%s' "$API_ENV_PROD" | base64 | tr -d '\n')"
+          ESCAPED_DEPLOY_TOKEN="${DEPLOY_REPO_TOKEN//\'/\'\\\'\'}"
 
-            # Force server repo to remote main and avoid local merge conflicts.
-            git fetch "https://x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}@github.com/BadKirill/Food-Randomizer.git" main
-            git checkout main
-            git reset --hard FETCH_HEAD
+          for attempt in 1 2 3; do
+            echo "Deploy attempt $attempt/3"
+            if ssh \
+              -o ConnectTimeout=30 \
+              -o ServerAliveInterval=15 \
+              -o ServerAliveCountMax=8 \
+              -o StrictHostKeyChecking=yes \
+              -p "$OCI_API_SSH_PORT" \
+              "$OCI_API_USER@$OCI_API_HOST" \
+              "DEPLOY_REPO_TOKEN='$ESCAPED_DEPLOY_TOKEN' API_ENV_PROD_B64='$API_ENV_PROD_B64' bash -se" <<'REMOTE'
+          set -euo pipefail
 
-            # Materialize production env from GitHub secret so deploy is deterministic.
-            cat > apps/api/.env.prod <<'EOF'
-            ${{ secrets.API_ENV_PROD }}
-            EOF
+          cd ~/Food-Randomizer
 
-            chmod 600 apps/api/.env.prod
+          git fetch "https://x-access-token:${DEPLOY_REPO_TOKEN}@github.com/BadKirill/Food-Randomizer.git" main
+          git checkout main
+          git reset --hard FETCH_HEAD
 
-            bash scripts/deploy-api.sh
+          echo "$API_ENV_PROD_B64" | base64 -d > apps/api/.env.prod
 
-      - name: Deploy over SSH (attempt 2 retry on handshake/network failure)
-        if: ${{ steps.deploy_first.outcome == 'failure' }}
-        id: deploy_retry
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.OCI_API_HOST }}
-          username: ${{ secrets.OCI_API_USER }}
-          key: ${{ secrets.OCI_API_SSH_KEY }}
-          port: ${{ secrets.OCI_API_SSH_PORT || '22' }}
-          timeout: 120s
-          script_stop: true
-          command_timeout: 120m
-          debug: true
-          script: |
-            set -euo pipefail
+          chmod 600 apps/api/.env.prod
+          bash scripts/deploy-api.sh
+REMOTE
+            then
+              echo "Deploy succeeded on attempt $attempt"
+              exit 0
+            fi
 
-            cd ~/Food-Randomizer
+            if [[ "$attempt" -lt 3 ]]; then
+              echo "Deploy attempt $attempt failed, retrying in 20s..."
+              sleep 20
+            fi
+          done
 
-            # Force server repo to remote main and avoid local merge conflicts.
-            git fetch "https://x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}@github.com/BadKirill/Food-Randomizer.git" main
-            git checkout main
-            git reset --hard FETCH_HEAD
-
-            # Materialize production env from GitHub secret so deploy is deterministic.
-            cat > apps/api/.env.prod <<'EOF'
-            ${{ secrets.API_ENV_PROD }}
-            EOF
-
-            chmod 600 apps/api/.env.prod
-
-            bash scripts/deploy-api.sh
+          echo "Deploy failed after 3 attempts."
+          exit 1
