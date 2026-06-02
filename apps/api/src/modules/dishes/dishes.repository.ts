@@ -175,7 +175,7 @@ export class DishesRepository {
     if (!existing) {
       return null;
     }
-    if (existing.createdById && existing.createdById !== userId) {
+    if (!existing.createdById || existing.createdById !== userId) {
       return null;
     }
 
@@ -249,7 +249,7 @@ export class DishesRepository {
     if (!existing) {
       return null;
     }
-    if (existing.createdById && existing.createdById !== userId) {
+    if (!existing.createdById || existing.createdById !== userId) {
       return null;
     }
 
@@ -268,7 +268,7 @@ export class DishesRepository {
       where: {
         id: dishId,
         status: 'approved',
-        OR: [{ createdById: userId }, { createdById: null }],
+        createdById: userId,
       },
       select: { id: true, archivedAt: true },
     });
