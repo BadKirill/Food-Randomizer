@@ -125,7 +125,7 @@ export class DishesController {
       if (!existing) {
         throw new NotFoundException('Dish not found');
       }
-      if (existing.createdById && existing.createdById !== user.id) {
+      if (!existing.createdById || existing.createdById !== user.id) {
         throw new ForbiddenException(DishesController.OWNER_ONLY_MESSAGE);
       }
       throw new NotFoundException('Dish not found');

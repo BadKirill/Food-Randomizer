@@ -93,4 +93,16 @@ describe('DishesController ownership enforcement', () => {
     await expect(controller.unarchive(user, 'dish-foreign')).rejects.toThrow(ForbiddenException);
     expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-foreign', 'user-1');
   });
+
+  it('returns forbidden when unarchiving legacy dish without creator', async () => {
+    dishesRepositoryMock.unarchiveDish.mockResolvedValue(null);
+    dishesRepositoryMock.findApprovedByIdAnyArchive.mockResolvedValue({
+      id: 'dish-legacy',
+      createdById: null,
+      archivedAt: new Date(),
+    });
+
+    await expect(controller.unarchive(user, 'dish-legacy')).rejects.toThrow(ForbiddenException);
+    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-legacy', 'user-1');
+  });
 });
