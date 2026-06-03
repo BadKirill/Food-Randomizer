@@ -33,11 +33,16 @@ done
 
 echo "[deploy] Env validation passed"
 
-echo "[deploy] Stopping old API container"
-docker compose -f docker-compose.prod.yml down --remove-orphans || true
+API_IMAGE="${API_IMAGE:-ghcr.io/badkirill/food-randomizer-api:latest}"
+export API_IMAGE
 
-echo "[deploy] Building API image and starting production service"
-docker compose -f docker-compose.prod.yml up -d --build api
+echo "[deploy] Using API image: $API_IMAGE"
+
+echo "[deploy] Pulling API image"
+docker compose -f docker-compose.prod.yml pull api
+
+echo "[deploy] Starting production service"
+docker compose -f docker-compose.prod.yml up -d --no-build --remove-orphans api
 
 echo "[deploy] Service status"
 docker compose -f docker-compose.prod.yml ps
