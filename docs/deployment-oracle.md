@@ -13,12 +13,17 @@ bash ./scripts/oracle-vm-bootstrap.sh
 ```
 
 ## 2) Configure production environment (`apps/api/.env.prod`)
+Create this file on the server only, or let GitHub Actions write it from the `API_ENV_PROD` secret. Do not commit real `.env` files to Git.
+See `docs/environment.md` for the full env-file safety rules.
+
 Set real values:
 ```env
 NODE_ENV=production
 PORT=3000
 DATABASE_URL=postgresql://<user>:<password_encoded>@<db-private-ip>:5432/food_randomizer?schema=public
-CORS_ORIGINS=http://<api-public-ip>:8081
+CORS_ORIGINS=https://randomeal.app,https://www.randomeal.app
+DISHES_WRITE_TOKEN=<your-long-random-write-token>
+SESSION_SECRET=<your-long-random-session-secret>
 ```
 
 ### Important: URL-encode special password characters
@@ -27,8 +32,8 @@ If password contains symbols like `#` or `!`, encode them in `DATABASE_URL`:
 - `!` -> `%21`
 
 Example:
-- Real password: `Qw45#531RemR4m!`
-- Encoded in URL: `Qw45%23531RemR4m%21`
+- Real password: `<password-with-#-and-!>`
+- Encoded in URL: `<password-with-%23-and-%21>`
 
 ## 3) Deploy API container
 ```bash
@@ -95,18 +100,21 @@ Set these in: `GitHub -> Settings -> Secrets and variables -> Actions`
 - `OCI_API_SSH_KEY` (private SSH key content, multiline)
 - `OCI_API_SSH_PORT` (optional, usually `22`)
 - `API_ENV_PROD` (full multiline content of `apps/api/.env.prod`)
+- `DEPLOY_REPO_TOKEN` (token with read access to this repository for the VM deploy pull)
 
 Example `API_ENV_PROD` value:
 ```env
 NODE_ENV=production
 PORT=3000
-DATABASE_URL=postgresql://pgadmin:Qw45%23531RemR4m%21@10.0.2.43:5432/food_randomizer?schema=public
-CORS_ORIGINS=http://92.5.190.116:8081
+DATABASE_URL=postgresql://<user>:<password_encoded>@<db-host>:5432/food_randomizer?schema=public
+CORS_ORIGINS=https://randomeal.app,https://www.randomeal.app
+DISHES_WRITE_TOKEN=<your-long-random-write-token>
 SESSION_SECRET=<your-long-random-secret>
 ```
 
 ### Notes
 - Production `apps/api/.env.prod` is intentionally injected from GitHub Secrets during deploy.
+- Local `.env.dev` and `.env.prod` files are intentionally ignored by Git. Use `.env.example` files as templates.
 - `scripts/deploy-api.sh` pulls the image from `API_IMAGE`, runs `docker compose ... up -d --no-build api`, and health checks `/health`.
 - Oracle should not run `npm ci` or build the API image during normal deploys anymore.
 - Because deploy uses `git reset --hard origin/main`, local ad-hoc server edits are discarded on every deploy.
