@@ -4,6 +4,8 @@ services:
     env_file:
       - apps/api/.env.prod
     command: sh -c "npm run prisma:migrate:deploy && node dist/apps/api/src/main.js"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "127.0.0.1:3000:3000"
     restart: unless-stopped
