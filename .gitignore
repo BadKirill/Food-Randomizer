@@ -13,14 +13,9 @@ yarn-error.log*
 # Env
 .env
 .env.*
-!.env.dev
-!.env.prod
 !.env.example
-!apps/api/.env.dev
-!apps/api/.env.prod
 !apps/api/.env.example
-!apps/mobile/.env.dev
-!apps/mobile/.env.prod
+!apps/mobile/.env.example
 
 # Build / cache
 dist/

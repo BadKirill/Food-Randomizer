@@ -20,6 +20,7 @@
     "test:integration": "npm run test:e2e:real --workspace apps/api",
     "test:e2e:critical": "npm run test:e2e --workspace apps/api",
     "test:contract:mobile-api": "node scripts/test-mobile-api-contract.mjs",
+    "check:env": "bash scripts/check-env-files.sh",
     "test:headless": "bash scripts/run-tests-headless.sh",
     "test:background": "bash scripts/run-tests-background.sh",
     "test:headful:mobile": "bash scripts/run-mobile-headful.sh",
