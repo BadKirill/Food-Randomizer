@@ -4,7 +4,7 @@
 - Keep `apps/mobile` as client project.
 - Build `apps/api` image in GitHub Actions and push it to GitHub Container Registry.
 - Deploy `apps/api` to Oracle VM by pulling the prebuilt Docker image.
-- Use Oracle managed PostgreSQL in private subnet.
+- Use PostgreSQL reachable from the API container. Current low-cost setup can use a PostgreSQL Docker container on the same VM.
 - Keep AI keys and DB credentials only on backend env.
 
 ## 1) Prepare Oracle VM
@@ -25,6 +25,14 @@ CORS_ORIGINS=https://randomeal.app,https://www.randomeal.app
 DISHES_WRITE_TOKEN=<your-long-random-write-token>
 SESSION_SECRET=<your-long-random-session-secret>
 ```
+
+If PostgreSQL runs in Docker on the same VM and exposes port `5432` to the host, use:
+
+```env
+DATABASE_URL=postgresql://<user>:<password_encoded>@host.docker.internal:5432/food_randomizer?schema=public
+```
+
+`docker-compose.prod.yml` maps `host.docker.internal` to the Linux Docker host gateway for the API container.
 
 ### Important: URL-encode special password characters
 If password contains symbols like `#` or `!`, encode them in `DATABASE_URL`:
@@ -54,15 +62,15 @@ Expected health response:
 {"status":"ok","service":"food-randomizer-api"}
 ```
 
-## 5) Verify DB is used over private VCN
+## 5) Verify DB connectivity
 On API VM:
 ```bash
 grep DATABASE_URL apps/api/.env.prod
-nc -zv <db-private-ip> 5432
+docker compose -f docker-compose.prod.yml run --rm api sh -lc 'nc -zv host.docker.internal 5432 || true'
 docker compose -f docker-compose.prod.yml logs --tail=50 api
 ```
 
-Expected logs should show Prisma connecting to private IP (for example `10.x.x.x:5432`).
+Expected logs should show Prisma connecting to the DB host from `DATABASE_URL`.
 
 ## 6) Public API reachability
 From your local machine:
@@ -111,6 +119,8 @@ CORS_ORIGINS=https://randomeal.app,https://www.randomeal.app
 DISHES_WRITE_TOKEN=<your-long-random-write-token>
 SESSION_SECRET=<your-long-random-secret>
 ```
+
+For the current same-VM Docker PostgreSQL setup, set `<db-host>` to `host.docker.internal`, not the old OCI managed DB private IP.
 
 ### Notes
 - Production `apps/api/.env.prod` is intentionally injected from GitHub Secrets during deploy.
