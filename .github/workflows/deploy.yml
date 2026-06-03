@@ -11,9 +11,63 @@ concurrency:
   group: deploy-api-main
   cancel-in-progress: false
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
+  build_image:
+    name: Build and push API image
+    timeout-minutes: 45
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+      tag: ${{ steps.image.outputs.tag }}
+      ref: ${{ steps.image.outputs.ref }}
+    steps:
+      - name: Resolve image metadata
+        id: image
+        shell: bash
+        run: |
+          set -euo pipefail
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          ref="${{ github.event.workflow_run.head_sha || github.sha }}"
+          image="ghcr.io/${owner}/food-randomizer-api"
+          echo "image=$image" >> "$GITHUB_OUTPUT"
+          echo "tag=$ref" >> "$GITHUB_OUTPUT"
+          echo "ref=$ref" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.image.outputs.ref }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build and push API image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/api/Dockerfile
+          push: true
+          tags: |
+            ${{ steps.image.outputs.image }}:${{ steps.image.outputs.tag }}
+            ${{ steps.image.outputs.image }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
   deploy:
     name: Deploy to randomizer-api-01
+    needs: build_image
     timeout-minutes: 120
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
@@ -42,11 +96,17 @@ jobs:
           OCI_API_SSH_PORT: ${{ secrets.OCI_API_SSH_PORT || '22' }}
           DEPLOY_REPO_TOKEN: ${{ secrets.DEPLOY_REPO_TOKEN }}
           API_ENV_PROD: ${{ secrets.API_ENV_PROD }}
+          API_IMAGE: ${{ needs.build_image.outputs.image }}:${{ needs.build_image.outputs.tag }}
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           API_ENV_PROD_B64="$(printf '%s' "$API_ENV_PROD" | base64 | tr -d '\n')"
           ESCAPED_DEPLOY_TOKEN="${DEPLOY_REPO_TOKEN//\'/\'\\\'\'}"
-          REMOTE_SCRIPT=$'set -euo pipefail\ncd ~/Food-Randomizer\ngit fetch "https://x-access-token:${DEPLOY_REPO_TOKEN}@github.com/BadKirill/Food-Randomizer.git" main\ngit checkout main\ngit reset --hard FETCH_HEAD\necho "$API_ENV_PROD_B64" | base64 -d > apps/api/.env.prod\nchmod 600 apps/api/.env.prod\nbash scripts/deploy-api.sh'
+          ESCAPED_API_IMAGE="${API_IMAGE//\'/\'\\\'\'}"
+          ESCAPED_GHCR_USER="${GHCR_USER//\'/\'\\\'\'}"
+          ESCAPED_GHCR_TOKEN="${GHCR_TOKEN//\'/\'\\\'\'}"
+          REMOTE_SCRIPT=$'set -euo pipefail\ncd ~/Food-Randomizer\ngit fetch "https://x-access-token:${DEPLOY_REPO_TOKEN}@github.com/BadKirill/Food-Randomizer.git" main\ngit checkout main\ngit reset --hard FETCH_HEAD\necho "$API_ENV_PROD_B64" | base64 -d > apps/api/.env.prod\nchmod 600 apps/api/.env.prod\necho "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin\nAPI_IMAGE="$API_IMAGE" bash scripts/deploy-api.sh'
 
           for attempt in 1 2 3; do
             echo "Deploy attempt $attempt/3"
@@ -57,7 +117,7 @@ jobs:
               -o StrictHostKeyChecking=accept-new \
               -p "$OCI_API_SSH_PORT" \
               "$OCI_API_USER@$OCI_API_HOST" \
-              "DEPLOY_REPO_TOKEN='$ESCAPED_DEPLOY_TOKEN' API_ENV_PROD_B64='$API_ENV_PROD_B64' bash -lc $(printf '%q' "$REMOTE_SCRIPT")"
+              "DEPLOY_REPO_TOKEN='$ESCAPED_DEPLOY_TOKEN' API_ENV_PROD_B64='$API_ENV_PROD_B64' API_IMAGE='$ESCAPED_API_IMAGE' GHCR_USER='$ESCAPED_GHCR_USER' GHCR_TOKEN='$ESCAPED_GHCR_TOKEN' bash -lc $(printf '%q' "$REMOTE_SCRIPT")"
             then
               echo "Deploy succeeded on attempt $attempt"
               exit 0

@@ -2,7 +2,8 @@
 
 ## Recommended production topology
 - Keep `apps/mobile` as client project.
-- Deploy `apps/api` to Oracle VM (Docker container).
+- Build `apps/api` image in GitHub Actions and push it to GitHub Container Registry.
+- Deploy `apps/api` to Oracle VM by pulling the prebuilt Docker image.
 - Use Oracle managed PostgreSQL in private subnet.
 - Keep AI keys and DB credentials only on backend env.
 
@@ -31,8 +32,9 @@ Example:
 
 ## 3) Deploy API container
 ```bash
-docker compose -f docker-compose.prod.yml down
-docker compose -f docker-compose.prod.yml up -d --build api
+export API_IMAGE=ghcr.io/badkirill/food-randomizer-api:latest
+docker login ghcr.io
+bash scripts/deploy-api.sh
 ```
 
 ## 4) Verify deployment
@@ -68,6 +70,8 @@ If it fails, allow inbound TCP `3000` in OCI security rules for your source IP.
 ## 7) Runtime details now reflected in repo
 - API startup command is configured in `docker-compose.prod.yml`:
   - `npm run prisma:migrate:deploy && node dist/apps/api/src/main.js`
+- API image is configured in `docker-compose.prod.yml`:
+  - `${API_IMAGE:-ghcr.io/badkirill/food-randomizer-api:latest}`
 - `apps/api/package.json` includes required runtime deps for `ValidationPipe`:
   - `class-validator`
   - `class-transformer`
@@ -75,7 +79,13 @@ If it fails, allow inbound TCP `3000` in OCI security rules for your source IP.
 ## 8) Automatic deployment from GitHub to Oracle VM
 This repo includes `/.github/workflows/deploy.yml`:
 - trigger: successful `CI` on `main` (or manual run)
-- action: SSH into API VM, reset to `origin/main`, write `apps/api/.env.prod` from secret, run deployment script
+- action:
+  - build and push API image to GitHub Container Registry
+  - SSH into API VM
+  - reset server repo to `origin/main`
+  - write `apps/api/.env.prod` from secret
+  - log in to GitHub Container Registry
+  - pull the prebuilt image and start the service
 
 ### Required GitHub Actions secrets
 Set these in: `GitHub -> Settings -> Secrets and variables -> Actions`
@@ -97,7 +107,8 @@ SESSION_SECRET=<your-long-random-secret>
 
 ### Notes
 - Production `apps/api/.env.prod` is intentionally injected from GitHub Secrets during deploy.
-- `scripts/deploy-api.sh` runs `docker compose ... up -d --build api` and health check (`/health`).
+- `scripts/deploy-api.sh` pulls the image from `API_IMAGE`, runs `docker compose ... up -d --no-build api`, and health checks `/health`.
+- Oracle should not run `npm ci` or build the API image during normal deploys anymore.
 - Because deploy uses `git reset --hard origin/main`, local ad-hoc server edits are discarded on every deploy.
 
 ## Split-ready structure
