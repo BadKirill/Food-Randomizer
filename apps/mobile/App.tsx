@@ -645,17 +645,15 @@ export default function App() {
                   <Text style={styles.randomBigButtonText}>{randomLoading ? 'Picking...' : 'Random'}</Text>
                 </Pressable>
               </Animated.View>
-              {randomLoading ? (
-                <View style={styles.randomFoodLoaderWrap}>
-                  <Text style={styles.randomFoodLoaderEmoji}>{randomLoaderFrame === 0 ? '🍜' : randomLoaderFrame === 1 ? '🍕' : '🥗'}</Text>
-                </View>
-              ) : null}
+              <View style={[styles.randomFoodLoaderWrap, !randomLoading ? styles.randomFoodLoaderHidden : null]}>
+                <Text style={styles.randomFoodLoaderEmoji}>{randomLoaderFrame === 0 ? '🍜' : randomLoaderFrame === 1 ? '🍕' : '🥗'}</Text>
+              </View>
               {randomError ? <Text style={styles.error}>{randomError}</Text> : null}
             </View>
 
             <View style={styles.randomFooterCard}>
-              <Text style={styles.randomFooterKicker}>{"Today's little helper"}</Text>
-              <Text style={styles.randomFooterText}>Use filters to keep the picker cozy: usual, vegetarian, or vegan.</Text>
+              <Text style={styles.randomFooterKicker}>{"Dinner without the overthinking"}</Text>
+              <Text style={styles.randomFooterText}>Tap Random when you cannot choose. We will pick a cozy meal idea and keep repeats away.</Text>
             </View>
           </View>
         ) : (
@@ -1368,7 +1366,7 @@ const styles = StyleSheet.create({
     color: '#B88A44',
   },
   randomStage: {
-    minHeight: 560,
+    minHeight: 640,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#E8D9C8',
@@ -1433,6 +1431,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f7ff',
     borderWidth: 1,
     borderColor: '#c3cfdf',
+  },
+  randomFoodLoaderHidden: {
+    opacity: 0,
   },
   randomFoodLoaderEmoji: {
     fontSize: 28,
@@ -1537,7 +1538,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
   },
   button: {
-    backgroundColor: '#47B36B',
+    backgroundColor: '#FFE9D9',
     paddingHorizontal: 16,
     paddingVertical: 13,
     borderRadius: 999,
@@ -1554,8 +1555,8 @@ const styles = StyleSheet.create({
     opacity: 0.52,
   },
   buttonText: {
-    color: '#f9fbff',
-    fontWeight: '700',
+    color: '#3A403F',
+    fontWeight: '800',
   },
   secondaryButton: {
     backgroundColor: '#FFFDF8',
