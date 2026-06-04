@@ -652,6 +652,11 @@ export default function App() {
               ) : null}
               {randomError ? <Text style={styles.error}>{randomError}</Text> : null}
             </View>
+
+            <View style={styles.randomFooterCard}>
+              <Text style={styles.randomFooterKicker}>{"Today's little helper"}</Text>
+              <Text style={styles.randomFooterText}>Use filters to keep the picker cozy: usual, vegetarian, or vegan.</Text>
+            </View>
           </View>
         ) : (
           <View style={styles.sectionCard}>
@@ -1004,7 +1009,11 @@ export default function App() {
                       </Pressable>
                     </View>
 
-                    {dishes.length === 0 ? <Text style={styles.empty}>No dishes loaded yet.</Text> : null}
+                    {dishes.length === 0 ? (
+                      <Text style={styles.empty}>
+                        {dishArchivedFilter === 'archived' ? 'No dishes archived yet.' : 'No dishes loaded yet.'}
+                      </Text>
+                    ) : null}
 
                     {dishes.map((dish) => (
                       <View key={dish.id} style={styles.listCard}>
@@ -1359,12 +1368,13 @@ const styles = StyleSheet.create({
     color: '#B88A44',
   },
   randomStage: {
-    minHeight: 640,
+    minHeight: 560,
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#E8D9C8',
     backgroundColor: '#FFFDF8',
     padding: 20,
+    justifyContent: 'space-between',
   },
   filterFab: {
     alignSelf: 'flex-start',
@@ -1379,7 +1389,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   filterFabIcon: {
-    color: '#2E8A4A',
+    color: '#B88A44',
     fontSize: 16,
     fontWeight: '900',
   },
@@ -1393,6 +1403,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 22,
+  },
+  randomFooterCard: {
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E8D9C8',
+    backgroundColor: '#FFF8EE',
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    gap: 4,
+  },
+  randomFooterKicker: {
+    color: '#B88A44',
+    fontWeight: '800',
+    fontSize: 13,
+  },
+  randomFooterText: {
+    color: 'rgba(0,0,0,0.62)',
+    fontWeight: '600',
+    fontSize: 13,
+    lineHeight: 18,
   },
   randomFoodLoaderWrap: {
     width: 56,
@@ -1768,7 +1798,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sheetCloseText: {
-    color: '#2E8A4A',
+    color: '#B88A44',
     fontWeight: '700',
   },
   toastWrap: {
