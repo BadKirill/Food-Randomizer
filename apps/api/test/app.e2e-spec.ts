@@ -6,6 +6,7 @@ import { AppController } from '../src/app.controller';
 import { AppService } from '../src/app.service';
 import { AuthGuard } from '../src/common/auth.guard';
 import { UnauthorizedException } from '@nestjs/common';
+import { AuthController } from '../src/modules/auth/auth.controller';
 import { AuthService } from '../src/modules/auth/auth.service';
 import { DishesController } from '../src/modules/dishes/dishes.controller';
 import { DishesRepository } from '../src/modules/dishes/dishes.repository';
@@ -56,6 +57,7 @@ describe('API endpoints (e2e)', () => {
 
   const authServiceMock = {
     getSessionFromBearerHeader: jest.fn(),
+    revokeSession: jest.fn(),
   };
 
   beforeAll(async () => {
@@ -146,7 +148,7 @@ describe('API endpoints (e2e)', () => {
     });
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      controllers: [AppController, DishesController, RandomizerController],
+      controllers: [AppController, AuthController, DishesController, RandomizerController],
       providers: [
         AuthGuard,
         RandomizerService,
@@ -261,11 +263,20 @@ describe('API endpoints (e2e)', () => {
     expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-1', 'user-1');
   });
 
+  it('POST /auth/logout revokes the current session', async () => {
+    await request(app.getHttpServer())
+      .post('/auth/logout')
+      .set('Authorization', 'Bearer test-session-token')
+      .expect(200);
+
+    expect(authServiceMock.revokeSession).toHaveBeenCalledWith('session-1');
+  });
+
   it('POST /random/next returns only filtered dish type', async () => {
     const response = await request(app.getHttpServer())
       .post('/random/next')
+      .set('Authorization', 'Bearer test-session-token')
       .send({
-        userId: 'u-1',
         cooldownClicks: 4,
         dishType: 'vegan',
       })
@@ -280,8 +291,8 @@ describe('API endpoints (e2e)', () => {
 
     const response = await request(app.getHttpServer())
       .post('/random/next')
+      .set('Authorization', 'Bearer test-session-token')
       .send({
-        userId: 'u-empty',
         cooldownClicks: 4,
       })
       .expect(404);

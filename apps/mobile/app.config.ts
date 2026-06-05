@@ -14,6 +14,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       apiBaseUrl,
       defaultLoginEmail: process.env.EXPO_PUBLIC_DEFAULT_LOGIN_EMAIL ?? '',
     },
+    plugins: [...(config.plugins ?? []), 'expo-secure-store'],
   };
 
   resolved.android = {

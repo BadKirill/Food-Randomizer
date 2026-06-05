@@ -1,10 +1,19 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import * as SecureStore from 'expo-secure-store';
 import App from './App';
 
 jest.mock('./src/config/api', () => ({
   API_BASE_URL: 'http://localhost:3000',
   DEFAULT_LOGIN_EMAIL: 'tester@foodrandomizer.app',
 }));
+
+jest.mock('expo-secure-store', () => ({
+  getItemAsync: jest.fn(),
+  setItemAsync: jest.fn(),
+  deleteItemAsync: jest.fn(),
+}));
+
+const secureStore = SecureStore as jest.Mocked<typeof SecureStore>;
 
 function createJsonResponse(body: unknown, status = 200) {
   return {
@@ -16,41 +25,66 @@ function createJsonResponse(body: unknown, status = 200) {
 
 describe('Mobile MVP flows', () => {
   beforeEach(() => {
-    jest.restoreAllMocks();
+    jest.clearAllMocks();
+    secureStore.getItemAsync.mockResolvedValue(null);
+    secureStore.setItemAsync.mockResolvedValue(undefined);
+    secureStore.deleteItemAsync.mockResolvedValue(undefined);
     global.fetch = jest.fn();
   });
 
-  it('sends random request with dishType filter when selected', async () => {
-    (global.fetch as jest.Mock).mockResolvedValueOnce(
-      createJsonResponse({
-        dish: {
-          id: 'd1',
-          name: 'Vegan Bowl',
-          description: 'desc',
-          dishType: 'vegan',
-          ingredients: [{ name: 'tofu' }],
-          steps: ['cook'],
-          addOnGroups: [{ groupKey: 'can_add', options: ['sesame'], selected: 'sesame' }],
-        },
-        selectionMeta: {
-          cooldownApplied: 4,
-          fallbackRelaxationUsed: false,
-        },
-      }),
-    );
+  it('sends authenticated random request with dishType filter when selected', async () => {
+    (global.fetch as jest.Mock)
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          token: 'test-session-token',
+          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+        }),
+      )
+      .mockResolvedValueOnce(createJsonResponse([]))
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          dish: {
+            id: 'd1',
+            name: 'Vegan Bowl',
+            description: 'desc',
+            dishType: 'vegan',
+            ingredients: [{ name: 'tofu' }],
+            steps: ['cook'],
+            addOnGroups: [{ groupKey: 'can_add', options: ['sesame'], selected: 'sesame' }],
+          },
+          selectionMeta: {
+            cooldownApplied: 4,
+            fallbackRelaxationUsed: false,
+          },
+        }),
+      );
 
     render(<App />);
+
+    fireEvent.press(screen.getByText('Manage'));
+    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
+    fireEvent.press(screen.getByTestId('auth-login-button'));
+    await screen.findByText('Logged in: tester@foodrandomizer.app');
+    fireEvent.press(screen.getByText('Random'));
 
     fireEvent.press(screen.getByText('All'));
     fireEvent.press(screen.getByText('Vegan'));
     fireEvent(screen.getByTestId('random-action-button'), 'pressIn');
     fireEvent(screen.getByTestId('random-action-button'), 'pressOut');
 
-    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    await waitFor(() => expect(screen.getByText('Vegan Bowl')).toBeTruthy());
 
-    const [, options] = (global.fetch as jest.Mock).mock.calls[0];
+    const randomCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
+      const url = call[0] as string;
+      return url.includes('/random/next');
+    });
+    expect(randomCall).toBeTruthy();
+    const [, options] = randomCall;
     expect(options.method).toBe('POST');
+    expect(options.headers.Authorization).toBe('Bearer test-session-token');
     expect(options.body).toContain('"dishType":"vegan"');
+    expect(options.body).not.toContain('userId');
   });
 
   it('does not send create request when required fields are empty', async () => {
@@ -189,6 +223,8 @@ describe('Mobile MVP flows', () => {
             dishType: 'vegan',
             createdAt: new Date().toISOString(),
             archivedAt: new Date().toISOString(),
+            createdById: 'user-1',
+            createdBy: 'tester@foodrandomizer.app',
           },
         ]),
       )

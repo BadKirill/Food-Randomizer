@@ -54,6 +54,20 @@ export class AuthService {
     return this.createSessionForUser(user.id, user.email ?? null);
   }
 
+  async revokeSession(sessionId: string) {
+    await this.prisma.userSession.updateMany({
+      where: {
+        id: sessionId,
+        revokedAt: null,
+      },
+      data: {
+        revokedAt: new Date(),
+      },
+    });
+
+    return { ok: true };
+  }
+
   private async createSessionForUser(userId: string, email: string | null) {
     const token = randomBytes(32).toString('hex');
     const tokenHash = this.hashToken(token);
