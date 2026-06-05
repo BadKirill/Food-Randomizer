@@ -33,35 +33,44 @@ describe('Mobile MVP flows', () => {
   });
 
   it('sends authenticated random request with dishType filter when selected', async () => {
-    secureStore.getItemAsync.mockResolvedValueOnce(
-      JSON.stringify({
-        token: 'test-session-token',
-        user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
-        expiresAt: new Date(Date.now() + 3600_000).toISOString(),
-      }),
-    );
-    (global.fetch as jest.Mock).mockResolvedValueOnce(
-      createJsonResponse({
-        dish: {
-          id: 'd1',
-          name: 'Vegan Bowl',
-          description: 'desc',
-          dishType: 'vegan',
-          ingredients: [{ name: 'tofu' }],
-          steps: ['cook'],
-          addOnGroups: [{ groupKey: 'can_add', options: ['sesame'], selected: 'sesame' }],
-        },
-        selectionMeta: {
-          cooldownApplied: 4,
-          fallbackRelaxationUsed: false,
-        },
-      }),
-    );
+    (global.fetch as jest.Mock)
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          token: 'test-session-token',
+          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+        }),
+      )
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          dish: {
+            id: 'd1',
+            name: 'Vegan Bowl',
+            description: 'desc',
+            dishType: 'vegan',
+            ingredients: [{ name: 'tofu' }],
+            steps: ['cook'],
+            addOnGroups: [{ groupKey: 'can_add', options: ['sesame'], selected: 'sesame' }],
+          },
+          selectionMeta: {
+            cooldownApplied: 4,
+            fallbackRelaxationUsed: false,
+          },
+        }),
+      );
 
     render(<App />);
 
     fireEvent.press(screen.getByText('Manage'));
+    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
+    fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');
+
+    expect(secureStore.setItemAsync).toHaveBeenCalledWith(
+      'randomeal.session.v1',
+      expect.stringContaining('"token":"test-session-token"'),
+    );
+
     fireEvent.press(screen.getByText('Random'));
 
     fireEvent.press(screen.getByText('All'));
@@ -85,6 +94,21 @@ describe('Mobile MVP flows', () => {
     expect(options.headers.Authorization).toBe('Bearer test-session-token');
     expect(options.body).toContain('"dishType":"vegan"');
     expect(options.body).not.toContain('userId');
+  });
+
+  it('restores a valid stored session', async () => {
+    secureStore.getItemAsync.mockResolvedValueOnce(
+      JSON.stringify({
+        token: 'test-session-token',
+        user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+        expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+      }),
+    );
+
+    render(<App />);
+
+    fireEvent.press(screen.getByText('Manage'));
+    expect(await screen.findByText('Logged in: tester@foodrandomizer.app')).toBeTruthy();
   });
 
   it('does not send create request when required fields are empty', async () => {
