@@ -153,7 +153,6 @@ export default function App() {
 
   useEffect(() => {
     if (!randomLoading) {
-      setRandomLoaderFrame(0);
       return;
     }
     const timer = setInterval(() => {

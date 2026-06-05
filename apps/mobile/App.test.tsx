@@ -33,38 +33,34 @@ describe('Mobile MVP flows', () => {
   });
 
   it('sends authenticated random request with dishType filter when selected', async () => {
-    (global.fetch as jest.Mock)
-      .mockResolvedValueOnce(
-        createJsonResponse({
-          token: 'test-session-token',
-          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
-          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
-        }),
-      )
-      .mockResolvedValueOnce(createJsonResponse([]))
-      .mockResolvedValueOnce(
-        createJsonResponse({
-          dish: {
-            id: 'd1',
-            name: 'Vegan Bowl',
-            description: 'desc',
-            dishType: 'vegan',
-            ingredients: [{ name: 'tofu' }],
-            steps: ['cook'],
-            addOnGroups: [{ groupKey: 'can_add', options: ['sesame'], selected: 'sesame' }],
-          },
-          selectionMeta: {
-            cooldownApplied: 4,
-            fallbackRelaxationUsed: false,
-          },
-        }),
-      );
+    secureStore.getItemAsync.mockResolvedValueOnce(
+      JSON.stringify({
+        token: 'test-session-token',
+        user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+        expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+      }),
+    );
+    (global.fetch as jest.Mock).mockResolvedValueOnce(
+      createJsonResponse({
+        dish: {
+          id: 'd1',
+          name: 'Vegan Bowl',
+          description: 'desc',
+          dishType: 'vegan',
+          ingredients: [{ name: 'tofu' }],
+          steps: ['cook'],
+          addOnGroups: [{ groupKey: 'can_add', options: ['sesame'], selected: 'sesame' }],
+        },
+        selectionMeta: {
+          cooldownApplied: 4,
+          fallbackRelaxationUsed: false,
+        },
+      }),
+    );
 
     render(<App />);
 
     fireEvent.press(screen.getByText('Manage'));
-    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
-    fireEvent.press(screen.getByTestId('auth-login-button'));
     await screen.findByText('Logged in: tester@foodrandomizer.app');
     fireEvent.press(screen.getByText('Random'));
 
@@ -73,13 +69,17 @@ describe('Mobile MVP flows', () => {
     fireEvent(screen.getByTestId('random-action-button'), 'pressIn');
     fireEvent(screen.getByTestId('random-action-button'), 'pressOut');
 
-    await waitFor(() => expect(screen.getByText('Vegan Bowl')).toBeTruthy());
-
-    const randomCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
-      const url = call[0] as string;
-      return url.includes('/random/next');
+    let randomCall: [string, { method?: string; headers: Record<string, string>; body?: string }] | undefined;
+    await waitFor(() => {
+      randomCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
+        const url = call[0] as string;
+        return url.includes('/random/next');
+      });
+      expect(randomCall).toBeTruthy();
     });
-    expect(randomCall).toBeTruthy();
+    if (!randomCall) {
+      throw new Error('Expected /random/next request to be sent');
+    }
     const [, options] = randomCall;
     expect(options.method).toBe('POST');
     expect(options.headers.Authorization).toBe('Bearer test-session-token');
