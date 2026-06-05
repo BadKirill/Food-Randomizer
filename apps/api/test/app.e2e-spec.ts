@@ -277,6 +277,7 @@ describe('API endpoints (e2e)', () => {
       .post('/random/next')
       .set('Authorization', 'Bearer test-session-token')
       .send({
+        userId: 'spoofed-client-user',
         cooldownClicks: 4,
         dishType: 'vegan',
       })
@@ -284,6 +285,14 @@ describe('API endpoints (e2e)', () => {
 
     expect(response.body.dish.dishType).toBe('vegan');
     expect(dishesRepositoryMock.findApprovedWithRelations).toHaveBeenCalledWith('vegan');
+    expect(historyRepositoryMock.ensureUser).toHaveBeenCalledWith('user-1');
+    expect(historyRepositoryMock.getRecentSelections).toHaveBeenCalledWith('user-1', 20);
+    expect(historyRepositoryMock.getNextClickIndex).toHaveBeenCalledWith('user-1');
+    expect(historyRepositoryMock.addSelection).toHaveBeenCalledWith(
+      expect.objectContaining({
+        userId: 'user-1',
+      }),
+    );
   });
 
   it('POST /random/next returns 404 when there are no dishes', async () => {
