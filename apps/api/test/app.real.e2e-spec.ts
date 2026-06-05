@@ -73,7 +73,8 @@ describeIfDatabase('API real e2e (api -> db -> api)', () => {
 
     const randomRes = await request(app.getHttpServer())
       .post('/random/next')
-      .send({ userId: 'e2e-user-1', cooldownClicks: 4, dishType: 'vegan' })
+      .set('Authorization', `Bearer ${token}`)
+      .send({ cooldownClicks: 4, dishType: 'vegan' })
       .expect(201);
 
     expect(randomRes.body.dish.id).toBe(dishId);
@@ -87,6 +88,17 @@ describeIfDatabase('API real e2e (api -> db -> api)', () => {
       .post(`/dishes/${dishId}/unarchive`)
       .set('Authorization', `Bearer ${token}`)
       .expect(200);
+
+    await request(app.getHttpServer())
+      .post('/auth/logout')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
+
+    await request(app.getHttpServer())
+      .post('/random/next')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ cooldownClicks: 4, dishType: 'vegan' })
+      .expect(401);
   });
 
   it('enforces ownership: another user cannot archive dish', async () => {

@@ -1,5 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { z } from 'zod';
+import { AuthGuard } from '../../common/auth.guard';
+import { CurrentSessionId } from '../../common/current-session-id.decorator';
 import { AuthService } from './auth.service';
 
 const LoginBodySchema = z.object({
@@ -26,5 +28,12 @@ export class AuthController {
   async login(@Body() body: unknown) {
     const parsed = LoginBodySchema.parse(body);
     return this.authService.login(parsed);
+  }
+
+  @Post('logout')
+  @HttpCode(200)
+  @UseGuards(AuthGuard)
+  async logout(@CurrentSessionId() sessionId: string) {
+    return this.authService.revokeSession(sessionId);
   }
 }

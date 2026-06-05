@@ -41,11 +41,25 @@ const getJson = async (path, init) => {
   assert(dishes.response.ok, `/dishes failed with ${dishes.response.status}`);
   assert(Array.isArray(dishes.json), '/dishes must return an array');
 
-  const random = await getJson('/random/next', {
+  const password = `ContractPass123!${Date.now()}`;
+  const auth = await getJson('/auth/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      userId: `contract-${Date.now()}`,
+      email: `contract-${Date.now()}@randomeal.app`,
+      password,
+    }),
+  });
+  assert(auth.response.ok, `/auth/register failed with ${auth.response.status}`);
+  assert(typeof auth.json?.token === 'string', 'auth response must include token');
+
+  const random = await getJson('/random/next', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth.json.token}`,
+    },
+    body: JSON.stringify({
       cooldownClicks: 4,
       dishType: 'vegan',
     }),
@@ -67,6 +81,14 @@ const getJson = async (path, init) => {
       'random response has invalid dishType',
     );
   }
+
+  const logout = await getJson('/auth/logout', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${auth.json.token}`,
+    },
+  });
+  assert(logout.response.ok, `/auth/logout failed with ${logout.response.status}`);
 
   log('Contract checks passed');
 })().catch((error) => {

@@ -50,6 +50,9 @@ export class DishesRepository {
         description: true,
         dishType: true,
         createdAt: true,
+        createdById: true,
+        createdBy: true,
+        archivedAt: true,
       },
     });
   }

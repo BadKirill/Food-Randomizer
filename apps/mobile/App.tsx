@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import * as SecureStore from 'expo-secure-store';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -46,6 +47,8 @@ type DishListItem = {
   description?: string;
   dishType?: 'usual' | 'vegetarian' | 'vegan';
   createdAt: string;
+  createdById?: string | null;
+  createdBy?: string | null;
   archivedAt?: string | null;
 };
 
@@ -65,6 +68,12 @@ type LoginResponse = {
   user: { id: string; email: string | null };
   expiresAt: string;
 };
+
+const SESSION_STORAGE_KEY = 'randomeal.session.v1';
+
+function isStoredSessionUsable(session: LoginResponse): boolean {
+  return Boolean(session.token && session.user?.id && Date.parse(session.expiresAt) > Date.now());
+}
 
 export default function App() {
   const [mode, setMode] = useState<ScreenMode>('random');
@@ -117,6 +126,26 @@ export default function App() {
   const OWNER_ONLY_MESSAGE = 'Only the creator can edit or archive this dish';
 
   useEffect(() => {
+    let mounted = true;
+
+    SecureStore.getItemAsync(SESSION_STORAGE_KEY)
+      .then((rawSession) => {
+        if (!mounted || !rawSession) return;
+        const session = JSON.parse(rawSession) as LoginResponse;
+        if (!isStoredSessionUsable(session)) {
+          void SecureStore.deleteItemAsync(SESSION_STORAGE_KEY);
+          return;
+        }
+        applySessionState(session);
+      })
+      .catch(() => undefined);
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
     if (!manageToast) return;
     const timer = setTimeout(() => setManageToast(null), 3500);
     return () => clearTimeout(timer);
@@ -124,7 +153,6 @@ export default function App() {
 
   useEffect(() => {
     if (!randomLoading) {
-      setRandomLoaderFrame(0);
       return;
     }
     const timer = setInterval(() => {
@@ -161,22 +189,29 @@ export default function App() {
   }
 
   async function fetchRandomDish() {
+    if (!sessionToken) {
+      setRandomError('Login to get personal meal picks and keep repeats away.');
+      return;
+    }
+
     setRandomLoading(true);
     setRandomError(null);
 
     try {
       const payloadBody =
         randomDishTypeFilter === 'all'
-          ? { userId: 'mobile-demo-user', cooldownClicks: 4 }
+          ? { cooldownClicks: 4 }
           : {
-              userId: 'mobile-demo-user',
               cooldownClicks: 4,
               dishType: randomDishTypeFilter,
             };
 
       const response = await fetch(`${API_BASE_URL}/random/next`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionToken}`,
+        },
         body: JSON.stringify(payloadBody),
       });
 
@@ -328,7 +363,28 @@ export default function App() {
     setManageMessage('Edit canceled');
   }
 
-  function logout() {
+  function applySessionState(payload: LoginResponse, message?: string) {
+    setSessionToken(payload.token);
+    setCurrentUserId(payload.user.id);
+    setCurrentUserEmail(payload.user.email);
+    if (payload.user.email) {
+      setLoginEmail(payload.user.email);
+    }
+    if (message) {
+      setManageMessage(message);
+    }
+  }
+
+  async function storeSession(payload: LoginResponse, message: string) {
+    applySessionState(payload, message);
+    try {
+      await SecureStore.setItemAsync(SESSION_STORAGE_KEY, JSON.stringify(payload));
+    } catch {
+      setManageMessage(`${message}. Session will last until the app closes.`);
+    }
+  }
+
+  function clearSessionState() {
     setSessionToken(null);
     setCurrentUserId(null);
     setCurrentUserEmail(null);
@@ -336,6 +392,29 @@ export default function App() {
     setSelectedDish(null);
     setSelectedDishModalOpen(false);
     clearDishForm();
+  }
+
+  async function logout() {
+    const token = sessionToken;
+    try {
+      if (token) {
+        await fetch(`${API_BASE_URL}/auth/logout`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+    } catch {
+      // Logout should still clear the local session if the network is flaky.
+    } finally {
+      try {
+        await SecureStore.deleteItemAsync(SESSION_STORAGE_KEY);
+      } catch {
+        // The in-memory session still needs to be cleared even if storage misbehaves.
+      }
+    }
+    clearSessionState();
     setManageMessage('Logged out');
   }
 
@@ -509,10 +588,7 @@ export default function App() {
         throw new Error(apiMessage ?? `Login failed: ${response.status}`);
       }
       const payload = (await response.json()) as LoginResponse;
-      setSessionToken(payload.token);
-      setCurrentUserId(payload.user.id);
-      setCurrentUserEmail(payload.user.email);
-      setManageMessage('Login successful');
+      await storeSession(payload, 'Login successful');
       await fetchDishes();
     } catch (e) {
       setManageError(formatClientError(e, 'Login failed'));
@@ -536,10 +612,7 @@ export default function App() {
         throw new Error(apiMessage ?? `Register failed: ${response.status}`);
       }
       const payload = (await response.json()) as LoginResponse;
-      setSessionToken(payload.token);
-      setCurrentUserId(payload.user.id);
-      setCurrentUserEmail(payload.user.email);
-      setManageMessage('Registration successful');
+      await storeSession(payload, 'Registration successful');
       await fetchDishes();
     } catch (e) {
       setManageError(formatClientError(e, 'Register failed'));
@@ -665,7 +738,7 @@ export default function App() {
                   <Pressable
                     onPress={() => {
                       clearTransientFeedback();
-                      logout();
+                      void logout();
                     }}
                     style={({ pressed }) => [styles.logoutTextBtn, pressed ? styles.buttonPressed : null]}
                   >
@@ -1031,7 +1104,14 @@ export default function App() {
                         {dishArchivedFilter === 'archived' ? (
                           <Pressable
                             testID={`dish-unarchive-${dish.id}`}
-                            onPress={() => unarchiveDishById(dish.id)}
+                            onPress={() => {
+                              if (!canEditDish(dish)) {
+                                setManageError(null);
+                                setManageToast(OWNER_ONLY_MESSAGE);
+                                return;
+                              }
+                              void unarchiveDishById(dish.id);
+                            }}
                             disabled={saveLoading}
                             style={({ pressed }) => [styles.secondaryButton, styles.secondaryActive, pressed ? styles.buttonPressed : null]}
                           >
