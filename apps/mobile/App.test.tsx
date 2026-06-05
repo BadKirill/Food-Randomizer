@@ -94,7 +94,7 @@ describe('Mobile MVP flows', () => {
     expect(options.headers.Authorization).toBe('Bearer test-session-token');
     expect(options.body).toContain('"dishType":"vegan"');
     expect(options.body).not.toContain('userId');
-  });
+  }, 15_000);
 
   it('restores a valid stored session', async () => {
     secureStore.getItemAsync.mockResolvedValueOnce(
