@@ -37,9 +37,11 @@ const getJson = async (path, init) => {
   assert(health.response.ok, `Health check failed with ${health.response.status}`);
   assert(health.json?.status === 'ok', 'Health payload must include status=ok');
 
-  const dishes = await getJson('/dishes?archived=all');
-  assert(dishes.response.ok, `/dishes failed with ${dishes.response.status}`);
-  assert(Array.isArray(dishes.json), '/dishes must return an array');
+  const anonymousDishes = await getJson('/dishes?archived=all');
+  assert(
+    anonymousDishes.response.status === 401,
+    `/dishes without auth must return 401, got ${anonymousDishes.response.status}`,
+  );
 
   const password = `ContractPass123!${Date.now()}`;
   const auth = await getJson('/auth/register', {
@@ -53,24 +55,22 @@ const getJson = async (path, init) => {
   assert(auth.response.ok, `/auth/register failed with ${auth.response.status}`);
   assert(typeof auth.json?.token === 'string', 'auth response must include token');
 
-  const random = await getJson('/random/next', {
-    method: 'POST',
+  const dishes = await getJson('/dishes?archived=all', {
     headers: {
-      'Content-Type': 'application/json',
       Authorization: `Bearer ${auth.json.token}`,
     },
-    body: JSON.stringify({
-      cooldownClicks: 4,
-      dishType: 'vegan',
-    }),
   });
+  assert(dishes.response.ok, `/dishes with auth failed with ${dishes.response.status}`);
+  assert(Array.isArray(dishes.json), '/dishes must return an array');
 
-  const randomOk = random.response.status === 201;
+  const random = await getJson('/random?dishType=vegan&cooldownClicks=4');
+
+  const randomOk = random.response.status === 200;
   const noDishes = random.response.status === 404 && random.json?.message === 'No dishes available';
 
   assert(
     randomOk || noDishes,
-    `/random/next must return 201 or 404 "No dishes available", got ${random.response.status}`,
+    `/random must return 200 or 404 "No dishes available", got ${random.response.status}`,
   );
 
   if (randomOk) {
