@@ -209,6 +209,7 @@ describe('API endpoints (e2e)', () => {
   it('GET /dishes filters by dishType', async () => {
     const response = await request(app.getHttpServer())
       .get('/dishes?dishType=vegan')
+      .set('Authorization', 'Bearer test-session-token')
       .expect(200);
 
     expect(Array.isArray(response.body)).toBe(true);
@@ -221,7 +222,10 @@ describe('API endpoints (e2e)', () => {
   });
 
   it('GET /dishes supports archived filter', async () => {
-    await request(app.getHttpServer()).get('/dishes?archived=all').expect(200);
+    await request(app.getHttpServer())
+      .get('/dishes?archived=all')
+      .set('Authorization', 'Bearer test-session-token')
+      .expect(200);
     expect(dishesRepositoryMock.listApprovedBasic).toHaveBeenCalledWith(
       undefined,
       'all',
@@ -239,6 +243,7 @@ describe('API endpoints (e2e)', () => {
 
     const response = await request(app.getHttpServer())
       .get('/dishes?search=tofu&page=2&limit=5')
+      .set('Authorization', 'Bearer test-session-token')
       .expect(200);
 
     expect(response.body).toEqual({
@@ -280,6 +285,11 @@ describe('API endpoints (e2e)', () => {
         addOnOptions: [],
       })
       .expect(401);
+  });
+
+  it('GET /dishes and dish details reject missing auth token', async () => {
+    await request(app.getHttpServer()).get('/dishes').expect(401);
+    await request(app.getHttpServer()).get('/dishes/dish-1').expect(401);
   });
 
   it('POST /dishes creates dish with valid auth token', async () => {
@@ -383,6 +393,19 @@ describe('API endpoints (e2e)', () => {
         userId: 'user-1',
       }),
     );
+  });
+
+  it('GET /random returns a filtered dish without authentication', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/random?dishType=vegan&cooldownClicks=4')
+      .expect(200);
+
+    expect(response.body.dish.dishType).toBe('vegan');
+    expect(dishesRepositoryMock.findApprovedWithRelations).toHaveBeenCalledWith(
+      'vegan',
+    );
+    expect(historyRepositoryMock.ensureUser).not.toHaveBeenCalled();
+    expect(historyRepositoryMock.addSelection).not.toHaveBeenCalled();
   });
 
   it('POST /random/next returns 404 when there are no dishes', async () => {

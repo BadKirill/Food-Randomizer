@@ -11,22 +11,39 @@ Base URL: `/v1`
 Create a manual dish.
 
 ### `GET /dishes/:dishId`
+
+Requires `Authorization: Bearer <session-token>`.
 Get canonical dish by ID.
 
 ### `GET /dishes`
+
+Requires `Authorization: Bearer <session-token>`.
 List dishes (filter by source/status/tags).
 
 ## Randomizer
 ### `POST /random/next`
-Returns next randomized dish for user with resolved add-on picks.
+
+Requires `Authorization: Bearer <session-token>` and records selection history for
+the authenticated user.
+
+Returns the next randomized dish with resolved add-on picks.
 
 Request:
 ```json
 {
-  "userId": "usr_123",
-  "cooldownClicks": 4
+  "cooldownClicks": 4,
+  "dishType": "vegan"
 }
 ```
+
+### `GET /random`
+
+Public random dish selection. No login or authorization header is required.
+
+Optional query parameters:
+
+- `dishType=usual|vegetarian|vegan`
+- `cooldownClicks=1..10`
 
 Response:
 ```json

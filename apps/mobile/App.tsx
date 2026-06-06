@@ -99,16 +99,11 @@ export default function App() {
   }
 
   async function fetchRandomDish() {
-    if (!auth.sessionToken) {
-      setRandomError('Login to get personal meal picks and keep repeats away.');
-      return;
-    }
-
     setRandomLoading(true);
     setRandomError(null);
 
     try {
-      const payload = await api.fetchRandomDish(auth.sessionToken, randomDishTypeFilter);
+      const payload = await api.fetchRandomDish(randomDishTypeFilter);
       setRandomData(payload);
       setDishModalOpen(true);
     } catch (e) {
@@ -118,12 +113,21 @@ export default function App() {
     }
   }
 
-  async function fetchDishes(filter: DishFilter = dishListFilter, archived: ArchivedFilter = dishArchivedFilter) {
+  async function fetchDishes(
+    filter: DishFilter = dishListFilter,
+    archived: ArchivedFilter = dishArchivedFilter,
+    token: string | null = auth.sessionToken,
+  ) {
+    if (!token) {
+      setManageError('Login to manage dishes.');
+      return;
+    }
+
     setListLoading(true);
     setManageError(null);
 
     try {
-      const payload = await api.fetchDishes(filter, archived);
+      const payload = await api.fetchDishes(token, filter, archived);
       setDishes(payload);
     } catch (e) {
       setManageError(api.formatClientError(e, 'Failed to load dishes'));
@@ -161,11 +165,16 @@ export default function App() {
   }
 
   async function fetchDishById(dishId: string, openModal = true) {
+    if (!auth.sessionToken) {
+      setManageError('Login to manage dishes.');
+      return;
+    }
+
     setDetailLoading(true);
     setManageError(null);
 
     try {
-      const payload = await api.fetchDishById(dishId);
+      const payload = await api.fetchDishById(auth.sessionToken, dishId);
       setSelectedDish(payload);
       if (openModal) setSelectedDishModalOpen(true);
     } catch (e) {
@@ -394,7 +403,7 @@ export default function App() {
       } catch {
         setManageMessage('Login successful. Session will last until the app closes.');
       }
-      await fetchDishes();
+      await fetchDishes(dishListFilter, dishArchivedFilter, payload.token);
     } catch (e) {
       setManageError(api.formatClientError(e, 'Login failed'));
     } finally {
@@ -414,7 +423,7 @@ export default function App() {
       } catch {
         setManageMessage('Registration successful. Session will last until the app closes.');
       }
-      await fetchDishes();
+      await fetchDishes(dishListFilter, dishArchivedFilter, payload.token);
     } catch (e) {
       setManageError(api.formatClientError(e, 'Register failed'));
     } finally {

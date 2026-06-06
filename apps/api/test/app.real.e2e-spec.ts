@@ -68,7 +68,10 @@ describeIfDatabase('API real e2e (api -> db -> api)', () => {
 
     const dishId = createRes.body.id as string;
 
-    const listRes = await request(app.getHttpServer()).get('/dishes?archived=all').expect(200);
+    const listRes = await request(app.getHttpServer())
+      .get('/dishes?archived=all')
+      .set('Authorization', `Bearer ${token}`)
+      .expect(200);
     expect(listRes.body.some((d: { id: string }) => d.id === dishId)).toBe(true);
 
     const randomRes = await request(app.getHttpServer())
@@ -99,6 +102,11 @@ describeIfDatabase('API real e2e (api -> db -> api)', () => {
       .set('Authorization', `Bearer ${token}`)
       .send({ cooldownClicks: 4, dishType: 'vegan' })
       .expect(401);
+
+    const publicRandomRes = await request(app.getHttpServer())
+      .get('/random?dishType=vegan')
+      .expect(200);
+    expect(publicRandomRes.body.dish.id).toBe(dishId);
   });
 
   it('enforces ownership: another user cannot archive dish', async () => {

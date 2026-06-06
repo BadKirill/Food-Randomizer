@@ -56,29 +56,27 @@ export async function logout(token: string) {
   });
 }
 
-export async function fetchRandomDish(token: string, dishTypeFilter: DishFilter) {
-  const body = dishTypeFilter === 'all' ? { cooldownClicks: 4 } : { cooldownClicks: 4, dishType: dishTypeFilter };
-  const response = await fetch(`${API_BASE_URL}/random/next`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(body),
-  });
+export async function fetchRandomDish(dishTypeFilter: DishFilter) {
+  const params = new URLSearchParams({ cooldownClicks: '4' });
+  if (dishTypeFilter !== 'all') params.set('dishType', dishTypeFilter);
+  const response = await fetch(`${API_BASE_URL}/random?${params.toString()}`);
   return readJson<RandomNextResponse>(response, 'API error');
 }
 
-export async function fetchDishes(filter: DishFilter, archived: ArchivedFilter) {
+export async function fetchDishes(token: string, filter: DishFilter, archived: ArchivedFilter) {
   const params = new URLSearchParams();
   params.set('archived', archived);
   if (filter !== 'all') params.set('dishType', filter);
-  const response = await fetch(`${API_BASE_URL}/dishes?${params.toString()}`);
+  const response = await fetch(`${API_BASE_URL}/dishes?${params.toString()}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return readJson<DishListItem[]>(response, 'API error');
 }
 
-export async function fetchDishById(dishId: string) {
-  const response = await fetch(`${API_BASE_URL}/dishes/${dishId}`);
+export async function fetchDishById(token: string, dishId: string) {
+  const response = await fetch(`${API_BASE_URL}/dishes/${dishId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return readJson<DishDetail>(response, 'API error');
 }
 

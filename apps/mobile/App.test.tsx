@@ -32,17 +32,9 @@ describe('Mobile MVP flows', () => {
     global.fetch = jest.fn();
   });
 
-  it('sends authenticated random request with dishType filter when selected', async () => {
-    (global.fetch as jest.Mock)
-      .mockResolvedValueOnce(
-        createJsonResponse({
-          token: 'test-session-token',
-          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
-          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
-        }),
-      )
-      .mockResolvedValueOnce(
-        createJsonResponse({
+  it('sends public random request with dishType filter when selected', async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce(
+      createJsonResponse({
           dish: {
             id: 'd1',
             name: 'Vegan Bowl',
@@ -57,43 +49,29 @@ describe('Mobile MVP flows', () => {
             fallbackRelaxationUsed: false,
           },
         }),
-      );
-
-    render(<App />);
-
-    fireEvent.press(screen.getByText('Manage'));
-    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
-    fireEvent.press(screen.getByTestId('auth-login-button'));
-    await screen.findByText('Logged in: tester@foodrandomizer.app');
-
-    expect(secureStore.setItemAsync).toHaveBeenCalledWith(
-      'randomeal.session.v1',
-      expect.stringContaining('"token":"test-session-token"'),
     );
 
-    fireEvent.press(screen.getByText('Random'));
+    render(<App />);
 
     fireEvent.press(screen.getByText('All'));
     fireEvent.press(screen.getByText('Vegan'));
     fireEvent(screen.getByTestId('random-action-button'), 'pressIn');
     fireEvent(screen.getByTestId('random-action-button'), 'pressOut');
 
-    let randomCall: [string, { method?: string; headers: Record<string, string>; body?: string }] | undefined;
+    let randomCall: [string, { method?: string; headers?: Record<string, string>; body?: string }?] | undefined;
     await waitFor(() => {
       randomCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
         const url = call[0] as string;
-        return url.includes('/random/next');
+        return url.includes('/random?');
       });
       expect(randomCall).toBeTruthy();
     });
     if (!randomCall) {
-      throw new Error('Expected /random/next request to be sent');
+      throw new Error('Expected /random request to be sent');
     }
-    const [, options] = randomCall;
-    expect(options.method).toBe('POST');
-    expect(options.headers.Authorization).toBe('Bearer test-session-token');
-    expect(options.body).toContain('"dishType":"vegan"');
-    expect(options.body).not.toContain('userId');
+    const [url, options] = randomCall;
+    expect(url).toContain('dishType=vegan');
+    expect(options).toBeUndefined();
   }, 15_000);
 
   it('restores a valid stored session', async () => {
