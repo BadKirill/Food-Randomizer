@@ -130,4 +130,30 @@ describe('RandomizerService', () => {
     });
     expect(result.dish.id).toBe('dish-1');
   });
+
+  it('getRandom returns a dish without reading or writing user history', async () => {
+    dishesRepositoryMock.findApprovedWithRelations.mockResolvedValue([
+      {
+        id: 'dish-1',
+        name: 'Dish 1',
+        description: null,
+        source: 'manual',
+        status: 'approved',
+        dishType: 'vegan',
+        ingredients: [{ name: 'tofu', amount: null, unit: null, optional: false }],
+        steps: [{ text: 'cook', position: 1 }],
+        addGroups: [],
+      },
+    ]);
+
+    const result = await service.getRandom({
+      cooldownClicks: 4,
+      dishType: 'vegan',
+    });
+
+    expect(result.dish.id).toBe('dish-1');
+    expect(historyRepositoryMock.ensureUser).not.toHaveBeenCalled();
+    expect(historyRepositoryMock.getRecentSelections).not.toHaveBeenCalled();
+    expect(historyRepositoryMock.addSelection).not.toHaveBeenCalled();
+  });
 });

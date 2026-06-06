@@ -21,6 +21,28 @@ export class RandomizerService {
     private readonly historyRepository: HistoryRepository,
   ) {}
 
+  async getRandom(params: {
+    cooldownClicks: number;
+    dishType?: 'usual' | 'vegetarian' | 'vegan';
+  }): Promise<RandomNextResponse> {
+    const dishesFromDb = await this.dishesRepository.findApprovedWithRelations(
+      params.dishType,
+    );
+    const picked = this.pickNextDish({
+      dishes: dishesFromDb.map((dish) => this.mapDish(dish)),
+      history: [],
+      cooldownClicks: params.cooldownClicks,
+    });
+
+    return {
+      dish: picked.selectedDish,
+      selectionMeta: {
+        cooldownApplied: picked.cooldownApplied,
+        fallbackRelaxationUsed: picked.fallbackRelaxationUsed,
+      },
+    };
+  }
+
   async getNextForUser(params: {
     userId: string;
     cooldownClicks: number;

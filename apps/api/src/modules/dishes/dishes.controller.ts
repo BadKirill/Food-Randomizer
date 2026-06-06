@@ -66,6 +66,7 @@ export class DishesController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   async list(@Query() query: unknown) {
     const parsed = ListDishesQuerySchema.parse(query);
     if (parsed.search || parsed.page || parsed.limit) {
@@ -84,6 +85,7 @@ export class DishesController {
   }
 
   @Get(':dishId')
+  @UseGuards(AuthGuard)
   async getById(@Param('dishId') dishId: string) {
     const dish = await this.dishesRepository.findApprovedById(dishId);
     if (!dish) {
