@@ -49,7 +49,7 @@ type ManageScreenProps = {
   fetchDishById: (dishId: string, openModal?: boolean) => void;
   applyDishFilter: (filter: DishFilter) => void;
   applyArchivedFilter: (filter: ArchivedFilter) => void;
-  unarchiveDishById: (dishId: string) => void;
+  requestUnarchiveDish: (dish: DishListItem) => void;
   showOwnerToast: () => void;
 };
 
@@ -100,7 +100,7 @@ export function ManageScreen(props: ManageScreenProps) {
     fetchDishById,
     applyDishFilter,
     applyArchivedFilter,
-    unarchiveDishById,
+    requestUnarchiveDish,
     showOwnerToast,
   } = props;
 
@@ -187,6 +187,8 @@ export function ManageScreen(props: ManageScreenProps) {
           ) : (
             <DishList
               dishes={dishes}
+              listLoading={listLoading}
+              detailLoading={detailLoading}
               dishListFilter={dishListFilter}
               dishArchivedFilter={dishArchivedFilter}
               saveLoading={saveLoading}
@@ -196,12 +198,11 @@ export function ManageScreen(props: ManageScreenProps) {
               fetchDishById={fetchDishById}
               applyDishFilter={applyDishFilter}
               applyArchivedFilter={applyArchivedFilter}
-              unarchiveDishById={unarchiveDishById}
+              requestUnarchiveDish={requestUnarchiveDish}
               showOwnerToast={showOwnerToast}
             />
           )}
 
-          {listLoading || detailLoading ? <ActivityIndicator style={styles.loader} color="#223b5d" /> : null}
           {manageError ? <Text style={styles.error}>{manageError}</Text> : null}
           {manageMessage ? <Text style={styles.success}>{manageMessage}</Text> : null}
         </>
@@ -361,6 +362,8 @@ function FormInput({ label, value, placeholder, multiline, onChange, onClear, cl
 type DishListProps = Pick<
   ManageScreenProps,
   | 'dishes'
+  | 'listLoading'
+  | 'detailLoading'
   | 'dishListFilter'
   | 'dishArchivedFilter'
   | 'saveLoading'
@@ -370,12 +373,14 @@ type DishListProps = Pick<
   | 'fetchDishById'
   | 'applyDishFilter'
   | 'applyArchivedFilter'
-  | 'unarchiveDishById'
+  | 'requestUnarchiveDish'
   | 'showOwnerToast'
 >;
 
 function DishList({
   dishes,
+  listLoading,
+  detailLoading,
   dishListFilter,
   dishArchivedFilter,
   saveLoading,
@@ -385,7 +390,7 @@ function DishList({
   fetchDishById,
   applyDishFilter,
   applyArchivedFilter,
-  unarchiveDishById,
+  requestUnarchiveDish,
   showOwnerToast,
 }: DishListProps) {
   return (
@@ -434,10 +439,41 @@ function DishList({
         ))}
       </View>
 
-      {dishes.length === 0 ? <Text style={styles.empty}>{dishArchivedFilter === 'archived' ? 'No dishes archived yet.' : 'No dishes loaded yet.'}</Text> : null}
+      {listLoading ? (
+        <View style={styles.stateCard}>
+          <ActivityIndicator color="#B88A44" />
+          <Text style={styles.stateTitle}>{dishArchivedFilter === 'archived' ? 'Opening the pantry archive...' : 'Gathering your dishes...'}</Text>
+          <Text style={styles.stateText}>This should only take a moment.</Text>
+        </View>
+      ) : null}
 
-      {dishes.map((dish) => (
-        <View key={dish.id} style={styles.listCard}>
+      {!listLoading && dishes.length === 0 ? (
+        <View style={styles.stateCard}>
+          <Text style={styles.stateEmoji}>{dishArchivedFilter === 'archived' ? '📦' : dishListFilter === 'all' ? '🍽️' : '🔎'}</Text>
+          <Text style={styles.stateTitle}>
+            {dishArchivedFilter === 'archived' ? 'No dishes archived yet' : dishListFilter === 'all' ? 'Your dish list is ready for its first favorite' : `No ${dishListFilter} dishes found`}
+          </Text>
+          <Text style={styles.stateText}>
+            {dishArchivedFilter === 'archived'
+              ? 'Dishes you archive will rest here until you want them back.'
+              : dishListFilter === 'all'
+                ? 'Add a dish from the form, then it can join your random picks.'
+                : 'Try another filter or add a new dish with this type.'}
+          </Text>
+        </View>
+      ) : null}
+
+      {!listLoading && detailLoading ? (
+        <View style={styles.inlineLoading}>
+          <ActivityIndicator color="#B88A44" />
+          <Text style={styles.inlineLoadingText}>Opening dish...</Text>
+        </View>
+      ) : null}
+
+      {!listLoading && dishes.map((dish) => {
+        const editable = canEditDish(dish);
+        return (
+        <View key={dish.id} style={[styles.listCard, dishArchivedFilter === 'archived' ? styles.archivedListCard : null]}>
           <Pressable
             testID={`dish-row-${dish.id}`}
             onPress={() => {
@@ -445,28 +481,47 @@ function DishList({
             }}
             style={({ pressed }) => [pressed ? styles.buttonPressed : null]}
           >
-            <Text style={styles.listCardTitle}>{dish.name}</Text>
-            <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
+            <View style={styles.listCardTitleRow}>
+              <Text style={styles.listCardTitle}>{dish.name}</Text>
+              <Text style={styles.typeBadge}>{dish.dishType ?? 'usual'}</Text>
+            </View>
+            <Text style={styles.metadataText}>By {dish.createdBy ?? 'legacy collection'} · {formatDishDate(dish.createdAt)}</Text>
+            {dishArchivedFilter === 'archived' && dish.archivedAt ? <Text style={styles.archivedMeta}>Archived {formatDishDate(dish.archivedAt)}</Text> : null}
             {dish.description ? <Text style={styles.listCardText}>{dish.description}</Text> : null}
           </Pressable>
           {dishArchivedFilter === 'archived' ? (
-            <Pressable
-              testID={`dish-unarchive-${dish.id}`}
-              onPress={() => {
-                if (!canEditDish(dish)) {
+            editable ? (
+              <Pressable
+                testID={`dish-unarchive-${dish.id}`}
+                onPress={() => {
+                  requestUnarchiveDish(dish);
+                }}
+                disabled={saveLoading}
+                style={({ pressed }) => [styles.secondaryButton, styles.secondaryActive, pressed ? styles.buttonPressed : null]}
+              >
+                <Text style={styles.secondaryButtonText}>Restore to active</Text>
+              </Pressable>
+            ) : (
+              <Pressable
+                testID={`dish-unarchive-${dish.id}`}
+                onPress={() => {
                   showOwnerToast();
-                  return;
-                }
-                unarchiveDishById(dish.id);
-              }}
-              disabled={saveLoading}
-              style={({ pressed }) => [styles.secondaryButton, styles.secondaryActive, pressed ? styles.buttonPressed : null]}
-            >
-              <Text style={styles.secondaryButtonText}>Unarchive</Text>
-            </Pressable>
+                }}
+                style={({ pressed }) => [styles.lockedAction, pressed ? styles.buttonPressed : null]}
+              >
+                <Text style={styles.lockedActionText}>View only · creator can restore</Text>
+              </Pressable>
+            )
           ) : null}
         </View>
-      ))}
+      )})}
     </>
   );
+}
+
+function formatDishDate(value?: string | null): string {
+  if (!value) return 'date unknown';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return 'date unknown';
+  return date.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
 }

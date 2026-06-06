@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, KeyboardAvoidingView, PanResponder, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as api from './src/api';
-import { DishModal, SelectedDishModal } from './src/components/DishModal';
+import { ConfirmDishActionModal, DishModal, SelectedDishModal } from './src/components/DishModal';
 import { useAuthSession } from './src/hooks/useAuthSession';
 import { ManageScreen } from './src/screens/ManageScreen';
 import { RandomScreen } from './src/screens/RandomScreen';
@@ -12,6 +12,7 @@ import type { ArchivedFilter, CreateDishPayload, DishDetail, DishFilter, DishLis
 import { parseLines } from './src/utils/forms';
 
 const OWNER_ONLY_MESSAGE = 'Only the creator can edit or archive this dish';
+type PendingDishAction = { action: 'archive' | 'unarchive'; dishId: string; dishName: string } | null;
 
 export default function App() {
   const [mode, setMode] = useState<ScreenMode>('random');
@@ -46,6 +47,7 @@ export default function App() {
   const [detailLoading, setDetailLoading] = useState(false);
   const [dishListFilter, setDishListFilter] = useState<DishFilter>('all');
   const [dishArchivedFilter, setDishArchivedFilter] = useState<ArchivedFilter>('active');
+  const [pendingDishAction, setPendingDishAction] = useState<PendingDishAction>(null);
 
   const randomButtonScale = useRef(new Animated.Value(1)).current;
   const randomButtonOpacity = useRef(new Animated.Value(1)).current;
@@ -152,6 +154,12 @@ export default function App() {
     setManageToast(OWNER_ONLY_MESSAGE);
   }
 
+  function showManageToast(message: string) {
+    setManageError(null);
+    setManageMessage(null);
+    setManageToast(message);
+  }
+
   async function fetchDishById(dishId: string, openModal = true) {
     setDetailLoading(true);
     setManageError(null);
@@ -194,7 +202,7 @@ export default function App() {
 
     try {
       await api.createDish(auth.sessionToken, buildDishPayload());
-      setManageMessage('Dish created');
+      showManageToast('Dish saved and ready for future picks.');
       clearDishForm();
       setEditingDishId(null);
       setSelectedDish(null);
@@ -273,7 +281,7 @@ export default function App() {
 
     try {
       await api.updateDish(auth.sessionToken, editingDishId, buildDishPayload());
-      setManageMessage('Dish updated');
+      showManageToast('Dish changes saved.');
       await fetchDishes();
       await fetchDishById(editingDishId);
       setManageTab('list');
@@ -306,7 +314,7 @@ export default function App() {
 
     try {
       await api.archiveDish(auth.sessionToken, selectedDish.id);
-      setManageMessage('Dish archived');
+      showManageToast('Dish moved to Archived. You can restore it anytime.');
       setSelectedDish(null);
       if (editingDishId === selectedDish.id) {
         setEditingDishId(null);
@@ -334,7 +342,7 @@ export default function App() {
 
     try {
       await api.unarchiveDish(auth.sessionToken, dishId);
-      setManageMessage('Dish unarchived');
+      showManageToast('Dish restored to your active list.');
       await fetchDishes(dishListFilter, dishArchivedFilter);
     } catch (e) {
       const message = api.formatClientError(e, 'Failed to unarchive dish');
@@ -343,6 +351,35 @@ export default function App() {
     } finally {
       setSaveLoading(false);
     }
+  }
+
+  function requestArchiveSelectedDish() {
+    if (!selectedDish) return;
+    if (!canEditDish(selectedDish)) {
+      showOwnerToast();
+      return;
+    }
+    setPendingDishAction({ action: 'archive', dishId: selectedDish.id, dishName: selectedDish.name });
+  }
+
+  function requestUnarchiveDish(dish: DishListItem) {
+    if (!canEditDish(dish)) {
+      showOwnerToast();
+      return;
+    }
+    setPendingDishAction({ action: 'unarchive', dishId: dish.id, dishName: dish.name });
+  }
+
+  async function confirmPendingDishAction() {
+    if (!pendingDishAction) return;
+    const action = pendingDishAction;
+    if (action.action === 'archive') {
+      await archiveSelectedDish();
+      setSelectedDishModalOpen(false);
+    } else {
+      await unarchiveDishById(action.dishId);
+    }
+    setPendingDishAction(null);
   }
 
   async function login() {
@@ -524,7 +561,7 @@ export default function App() {
               fetchDishById={(dishId, openModal) => void fetchDishById(dishId, openModal)}
               applyDishFilter={(filter) => void applyDishFilter(filter)}
               applyArchivedFilter={(filter) => void applyArchivedFilter(filter)}
-              unarchiveDishById={(dishId) => void unarchiveDishById(dishId)}
+              requestUnarchiveDish={requestUnarchiveDish}
               showOwnerToast={showOwnerToast}
             />
           )}
@@ -548,14 +585,15 @@ export default function App() {
           setSelectedDishModalOpen(false);
           loadDishIntoFormForEdit(dish);
         }}
-        onArchive={async () => {
-          if (!canEditDish(selectedDish)) {
-            showOwnerToast();
-            return;
-          }
-          await archiveSelectedDish();
-          setSelectedDishModalOpen(false);
-        }}
+        onArchive={async () => requestArchiveSelectedDish()}
+      />
+      <ConfirmDishActionModal
+        visible={Boolean(pendingDishAction)}
+        action={pendingDishAction?.action ?? 'archive'}
+        dishName={pendingDishAction?.dishName ?? ''}
+        loading={saveLoading}
+        onCancel={() => setPendingDishAction(null)}
+        onConfirm={() => void confirmPendingDishAction()}
       />
 
       <StatusBar style="dark" />

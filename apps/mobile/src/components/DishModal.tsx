@@ -7,7 +7,11 @@ export function DishDetailsBlock({ dish }: { dish: DishDetail }) {
   return (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>{dish.name}</Text>
-      <Text style={styles.listCardText}>Type: {dish.dishType ?? 'usual'}</Text>
+      <View style={styles.metadataRow}>
+        <Text style={styles.typeBadge}>{dish.dishType ?? 'usual'}</Text>
+        <Text style={styles.metadataText}>By {dish.createdBy ?? 'legacy collection'}</Text>
+      </View>
+      {dish.createdAt ? <Text style={styles.metadataText}>Added {formatDishDate(dish.createdAt)}</Text> : null}
       {dish.description ? <Text style={styles.description}>{dish.description}</Text> : null}
 
       <Text style={styles.sectionTitle}>Ingredients</Text>
@@ -31,6 +35,57 @@ export function DishDetailsBlock({ dish }: { dish: DishDetail }) {
         </Text>
       ))}
     </View>
+  );
+}
+
+function formatDishDate(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return 'on an unknown date';
+  return date.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+export function ConfirmDishActionModal({
+  visible,
+  action,
+  dishName,
+  loading,
+  onCancel,
+  onConfirm,
+}: {
+  visible: boolean;
+  action: 'archive' | 'unarchive';
+  dishName: string;
+  loading: boolean;
+  onCancel: () => void;
+  onConfirm: () => void;
+}) {
+  const isArchive = action === 'archive';
+
+  return (
+    <Modal visible={visible} animationType="fade" transparent onRequestClose={onCancel}>
+      <View style={styles.sheetBackdrop}>
+        <View style={styles.confirmCard}>
+          <Text style={styles.confirmKicker}>{isArchive ? 'Move out of your active list?' : 'Bring this dish back?'}</Text>
+          <Text style={styles.confirmTitle}>{dishName}</Text>
+          <Text style={styles.confirmText}>
+            {isArchive ? 'You can restore it later from Archived dishes.' : 'This dish will return to your active dishes.'}
+          </Text>
+          <View style={styles.confirmActions}>
+            <Pressable testID="dish-confirm-cancel" onPress={onCancel} disabled={loading} style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}>
+              <Text style={styles.secondaryButtonText}>Not now</Text>
+            </Pressable>
+            <Pressable
+              testID="dish-confirm-action"
+              onPress={onConfirm}
+              disabled={loading}
+              style={({ pressed }) => [styles.secondaryButton, isArchive ? styles.secondaryDanger : styles.secondaryActive, pressed ? styles.buttonPressed : null]}
+            >
+              <Text style={styles.secondaryButtonText}>{loading ? 'Working...' : isArchive ? 'Archive dish' : 'Restore dish'}</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 }
 
@@ -119,27 +174,26 @@ export function SelectedDishModal({
           </View>
           {selectedDish ? (
             <ScrollView contentContainerStyle={styles.selectedSheetBody} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
-              <View style={styles.inlineActions}>
-                <Pressable
-                  onPress={() => onEdit(selectedDish)}
-                  style={({ pressed }) => [styles.secondaryButton, !canEditDish(selectedDish) ? styles.buttonDisabled : null, pressed ? styles.buttonPressed : null]}
-                >
-                  <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
-                </Pressable>
-                <Pressable
-                  testID="dish-archive-button"
-                  onPress={onArchive}
-                  disabled={saveLoading}
-                  style={({ pressed }) => [
-                    styles.secondaryButton,
-                    styles.secondaryDanger,
-                    !canEditDish(selectedDish) ? styles.buttonDisabled : null,
-                    pressed ? styles.buttonPressed : null,
-                  ]}
-                >
-                  <Text style={styles.secondaryButtonText}>Archive Dish</Text>
-                </Pressable>
-              </View>
+              {canEditDish(selectedDish) ? (
+                <View style={styles.inlineActions}>
+                  <Pressable onPress={() => onEdit(selectedDish)} style={({ pressed }) => [styles.secondaryButton, pressed ? styles.buttonPressed : null]}>
+                    <Text style={styles.secondaryButtonText}>Edit This Dish</Text>
+                  </Pressable>
+                  <Pressable
+                    testID="dish-archive-button"
+                    onPress={onArchive}
+                    disabled={saveLoading}
+                    style={({ pressed }) => [styles.secondaryButton, styles.secondaryDanger, pressed ? styles.buttonPressed : null]}
+                  >
+                    <Text style={styles.secondaryButtonText}>Archive Dish</Text>
+                  </Pressable>
+                </View>
+              ) : (
+                <View style={styles.ownerNotice}>
+                  <Text style={styles.ownerNoticeTitle}>View only</Text>
+                  <Text style={styles.ownerNoticeText}>Only the creator can edit or archive this dish.</Text>
+                </View>
+              )}
               <DishDetailsBlock dish={selectedDish} />
             </ScrollView>
           ) : null}

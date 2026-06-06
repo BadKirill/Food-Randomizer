@@ -218,6 +218,8 @@ describe('Mobile MVP flows', () => {
     expect(await screen.findByText('Archive Dish')).toBeTruthy();
 
     fireEvent.press(screen.getByTestId('dish-archive-button'));
+    expect(await screen.findByText('Move out of your active list?')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('dish-confirm-action'));
 
     await waitFor(() => {
       const deleteCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
@@ -265,6 +267,8 @@ describe('Mobile MVP flows', () => {
 
     await waitFor(() => expect(screen.getByText('Archived Dish')).toBeTruthy());
     fireEvent.press(screen.getByTestId('dish-unarchive-dish-2'));
+    expect(await screen.findByText('Bring this dish back?')).toBeTruthy();
+    fireEvent.press(screen.getByTestId('dish-confirm-action'));
 
     await waitFor(() => {
       const postCall = (global.fetch as jest.Mock).mock.calls.find((call) => {
@@ -274,5 +278,77 @@ describe('Mobile MVP flows', () => {
       });
       expect(postCall).toBeTruthy();
     });
+  });
+
+  it('shows a useful empty state for a filtered dish list', async () => {
+    (global.fetch as jest.Mock)
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          token: 'test-session-token',
+          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+        }),
+      )
+      .mockResolvedValue(createJsonResponse([]));
+
+    render(<App />);
+    fireEvent.press(screen.getByText('Manage'));
+    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
+    fireEvent.press(screen.getByTestId('auth-login-button'));
+    await screen.findByText('Logged in: tester@foodrandomizer.app');
+    fireEvent.press(screen.getByText('Dishes List'));
+    fireEvent.press(screen.getByText('Vegetarian'));
+
+    expect(await screen.findByText('No vegetarian dishes found')).toBeTruthy();
+    expect(screen.getByText('Try another filter or add a new dish with this type.')).toBeTruthy();
+  });
+
+  it('shows view-only actions for a dish created by someone else', async () => {
+    (global.fetch as jest.Mock)
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          token: 'test-session-token',
+          user: { id: 'user-1', email: 'tester@foodrandomizer.app' },
+          expiresAt: new Date(Date.now() + 3600_000).toISOString(),
+        }),
+      )
+      .mockResolvedValueOnce(
+        createJsonResponse([
+          {
+            id: 'dish-foreign',
+            name: 'Shared Soup',
+            dishType: 'usual',
+            createdAt: new Date().toISOString(),
+            createdById: 'user-2',
+            createdBy: 'friend@example.com',
+          },
+        ]),
+      )
+      .mockResolvedValueOnce(
+        createJsonResponse({
+          id: 'dish-foreign',
+          name: 'Shared Soup',
+          dishType: 'usual',
+          createdAt: new Date().toISOString(),
+          createdById: 'user-2',
+          createdBy: 'friend@example.com',
+          ingredients: [{ name: 'broth' }],
+          steps: ['warm'],
+          addOnGroups: [],
+        }),
+      );
+
+    render(<App />);
+    fireEvent.press(screen.getByText('Manage'));
+    fireEvent.changeText(screen.getByPlaceholderText('Password (min 8 chars)'), 'password123');
+    fireEvent.press(screen.getByTestId('auth-login-button'));
+    await screen.findByText('Logged in: tester@foodrandomizer.app');
+    fireEvent.press(screen.getByText('Dishes List'));
+    await screen.findByText('Shared Soup');
+    fireEvent.press(screen.getByTestId('dish-row-dish-foreign'));
+
+    expect(await screen.findByText('View only')).toBeTruthy();
+    expect(screen.queryByText('Edit This Dish')).toBeNull();
+    expect(screen.queryByText('Archive Dish')).toBeNull();
   });
 });
