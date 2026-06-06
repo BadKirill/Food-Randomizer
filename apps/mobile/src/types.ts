@@ -12,8 +12,10 @@ export type DishDetail = {
   name: string;
   description?: string;
   dishType?: DishType;
+  createdAt?: string;
   createdById?: string | null;
   createdBy?: string | null;
+  archivedAt?: string | null;
   ingredients: DishIngredient[];
   steps: string[];
   addOnGroups: DishAddOnGroup[];
