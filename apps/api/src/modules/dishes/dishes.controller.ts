@@ -14,7 +14,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '../../common/auth.guard';
-import { CurrentUser, type AuthUser } from '../../common/current-user.decorator';
+import {
+  CurrentUser,
+  type AuthUser,
+} from '../../common/current-user.decorator';
 import { DishesRepository } from './dishes.repository';
 
 const CreateDishRequestSchema = z.object({
@@ -38,6 +41,9 @@ const UpdateDishRequestSchema = z.object({
 const ListDishesQuerySchema = z.object({
   dishType: z.enum(['usual', 'vegetarian', 'vegan']).optional(),
   archived: z.enum(['active', 'archived', 'all']).default('active'),
+  search: z.string().trim().min(1).max(100).optional(),
+  page: z.coerce.number().int().min(1).optional(),
+  limit: z.coerce.number().int().min(1).max(100).optional(),
 });
 
 @Controller('dishes')
@@ -62,7 +68,19 @@ export class DishesController {
   @Get()
   async list(@Query() query: unknown) {
     const parsed = ListDishesQuerySchema.parse(query);
-    return this.dishesRepository.listApprovedBasic(parsed.dishType, parsed.archived);
+    if (parsed.search || parsed.page || parsed.limit) {
+      return this.dishesRepository.listApprovedPaginated({
+        dishType: parsed.dishType,
+        archived: parsed.archived,
+        search: parsed.search,
+        page: parsed.page ?? 1,
+        limit: parsed.limit ?? 20,
+      });
+    }
+    return this.dishesRepository.listApprovedBasic(
+      parsed.dishType,
+      parsed.archived,
+    );
   }
 
   @Get(':dishId')
@@ -88,7 +106,8 @@ export class DishesController {
       description: parsed.description ?? null,
     });
     if (!dish) {
-      const existing = await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
+      const existing =
+        await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
       if (!existing) {
         throw new NotFoundException('Dish not found');
       }
@@ -100,10 +119,14 @@ export class DishesController {
   @Delete(':dishId')
   @HttpCode(200)
   @UseGuards(AuthGuard)
-  async archive(@CurrentUser() user: AuthUser, @Param('dishId') dishId: string) {
+  async archive(
+    @CurrentUser() user: AuthUser,
+    @Param('dishId') dishId: string,
+  ) {
     const archived = await this.dishesRepository.archiveDish(dishId, user.id);
     if (!archived) {
-      const existing = await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
+      const existing =
+        await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
       if (!existing) {
         throw new NotFoundException('Dish not found');
       }
@@ -118,10 +141,17 @@ export class DishesController {
   @Post(':dishId/unarchive')
   @HttpCode(200)
   @UseGuards(AuthGuard)
-  async unarchive(@CurrentUser() user: AuthUser, @Param('dishId') dishId: string) {
-    const unarchived = await this.dishesRepository.unarchiveDish(dishId, user.id);
+  async unarchive(
+    @CurrentUser() user: AuthUser,
+    @Param('dishId') dishId: string,
+  ) {
+    const unarchived = await this.dishesRepository.unarchiveDish(
+      dishId,
+      user.id,
+    );
     if (!unarchived) {
-      const existing = await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
+      const existing =
+        await this.dishesRepository.findApprovedByIdAnyArchive(dishId);
       if (!existing) {
         throw new NotFoundException('Dish not found');
       }
@@ -136,12 +166,15 @@ export class DishesController {
     };
   }
 
-  private mapDishDetail(dish: Awaited<ReturnType<DishesRepository['createDish']>>) {
+  private mapDishDetail(
+    dish: Awaited<ReturnType<DishesRepository['createDish']>>,
+  ) {
     return {
       id: dish.id,
       name: dish.name,
       description: dish.description,
       dishType: dish.dishType,
+      createdAt: dish.createdAt,
       createdById: dish.createdById,
       createdBy: dish.createdBy,
       archivedAt: dish.archivedAt,

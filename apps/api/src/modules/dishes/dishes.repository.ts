@@ -35,7 +35,11 @@ export class DishesRepository {
     archived: 'active' | 'archived' | 'all' = 'active',
   ) {
     const archivedFilter =
-      archived === 'active' ? null : archived === 'archived' ? { not: null } : undefined;
+      archived === 'active'
+        ? null
+        : archived === 'archived'
+          ? { not: null }
+          : undefined;
 
     return this.prisma.dish.findMany({
       where: {
@@ -55,6 +59,67 @@ export class DishesRepository {
         archivedAt: true,
       },
     });
+  }
+
+  async listApprovedPaginated(params: {
+    dishType?: 'usual' | 'vegetarian' | 'vegan';
+    archived: 'active' | 'archived' | 'all';
+    search?: string;
+    page: number;
+    limit: number;
+  }) {
+    const archivedFilter =
+      params.archived === 'active'
+        ? null
+        : params.archived === 'archived'
+          ? { not: null }
+          : undefined;
+    const where = {
+      status: 'approved' as const,
+      archivedAt: archivedFilter,
+      dishType: params.dishType,
+      OR: params.search
+        ? [
+            { name: { contains: params.search, mode: 'insensitive' as const } },
+            {
+              description: {
+                contains: params.search,
+                mode: 'insensitive' as const,
+              },
+            },
+          ]
+        : undefined,
+    };
+    const skip = (params.page - 1) * params.limit;
+    const select = {
+      id: true,
+      name: true,
+      description: true,
+      dishType: true,
+      createdAt: true,
+      createdById: true,
+      createdBy: true,
+      archivedAt: true,
+    } as const;
+
+    const [items, total] = await this.prisma.$transaction([
+      this.prisma.dish.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take: params.limit,
+        select,
+      }),
+      this.prisma.dish.count({ where }),
+    ]);
+
+    return {
+      items,
+      page: params.page,
+      limit: params.limit,
+      total,
+      totalPages: Math.ceil(total / params.limit),
+    };
   }
 
   async findApprovedById(dishId: string) {

@@ -28,7 +28,8 @@
     "prisma:migrate:status": "prisma migrate status",
     "prisma:migrate:check": "DATABASE_URL=postgresql://local:local@localhost:5432/local?schema=public prisma validate && test -f prisma/migrations/migration_lock.toml && ls prisma/migrations/*/migration.sql >/dev/null",
     "prisma:studio": "prisma studio",
-    "prisma:seed": "node prisma/seed.js"
+    "prisma:seed": "node prisma/seed.js",
+    "prisma:assign-legacy-owner": "node prisma/assign-legacy-owner.js"
   },
   "dependencies": {
     "@food/contracts": "*",
@@ -40,7 +41,8 @@
     "class-validator": "^0.14.4",
     "prisma": "^6.16.3",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

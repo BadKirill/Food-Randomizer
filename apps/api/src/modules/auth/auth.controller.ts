@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { z } from 'zod';
 import { AuthGuard } from '../../common/auth.guard';
+import { AuthRateLimitGuard } from '../../common/auth-rate-limit.guard';
 import { CurrentSessionId } from '../../common/current-session-id.decorator';
 import { AuthService } from './auth.service';
 
@@ -19,12 +20,14 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
+  @UseGuards(AuthRateLimitGuard)
   async register(@Body() body: unknown) {
     const parsed = RegisterBodySchema.parse(body);
     return this.authService.register(parsed);
   }
 
   @Post('login')
+  @UseGuards(AuthRateLimitGuard)
   async login(@Body() body: unknown) {
     const parsed = LoginBodySchema.parse(body);
     return this.authService.login(parsed);

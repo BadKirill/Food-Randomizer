@@ -67,6 +67,9 @@ model Dish {
   addGroups   DishAddOptionGroup[]
   history     DishHistory[]
   images      DishImage[]
+
+  @@index([status, archivedAt, dishType, createdAt])
+  @@index([createdById, archivedAt])
 }
 
 model DishIngredient {
@@ -121,6 +124,8 @@ model DishHistory {
   shownAt   DateTime @default(now())
 
   @@index([userId, shownAt])
+  @@index([userId, clickIdx])
+  @@index([dishId, shownAt])
 }
 
 model AiGeneration {
