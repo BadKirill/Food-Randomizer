@@ -8,6 +8,7 @@ describe('DishesController ownership enforcement', () => {
     archiveDish: jest.fn(),
     unarchiveDish: jest.fn(),
     listApprovedBasic: jest.fn(),
+    listApprovedPaginated: jest.fn(),
     findApprovedById: jest.fn(),
     findApprovedByIdAnyArchive: jest.fn(),
   } as any;
@@ -49,6 +50,26 @@ describe('DishesController ownership enforcement', () => {
     );
   });
 
+  it('uses paginated repository listing when page/search is requested', async () => {
+    dishesRepositoryMock.listApprovedPaginated.mockResolvedValue({
+      items: [],
+      page: 1,
+      limit: 20,
+      total: 0,
+      totalPages: 0,
+    });
+
+    await controller.list({ search: 'tofu' });
+
+    expect(dishesRepositoryMock.listApprovedPaginated).toHaveBeenCalledWith({
+      archived: 'active',
+      dishType: undefined,
+      search: 'tofu',
+      page: 1,
+      limit: 20,
+    });
+  });
+
   it('returns forbidden when updating dish owned by another user', async () => {
     dishesRepositoryMock.updateDish.mockResolvedValue(null);
     dishesRepositoryMock.findApprovedByIdAnyArchive.mockResolvedValue({
@@ -78,8 +99,13 @@ describe('DishesController ownership enforcement', () => {
       archivedAt: null,
     });
 
-    await expect(controller.archive(user, 'dish-foreign')).rejects.toThrow(ForbiddenException);
-    expect(dishesRepositoryMock.archiveDish).toHaveBeenCalledWith('dish-foreign', 'user-1');
+    await expect(controller.archive(user, 'dish-foreign')).rejects.toThrow(
+      ForbiddenException,
+    );
+    expect(dishesRepositoryMock.archiveDish).toHaveBeenCalledWith(
+      'dish-foreign',
+      'user-1',
+    );
   });
 
   it('returns forbidden when unarchiving dish owned by another user', async () => {
@@ -90,8 +116,13 @@ describe('DishesController ownership enforcement', () => {
       archivedAt: new Date(),
     });
 
-    await expect(controller.unarchive(user, 'dish-foreign')).rejects.toThrow(ForbiddenException);
-    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-foreign', 'user-1');
+    await expect(controller.unarchive(user, 'dish-foreign')).rejects.toThrow(
+      ForbiddenException,
+    );
+    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith(
+      'dish-foreign',
+      'user-1',
+    );
   });
 
   it('returns forbidden when unarchiving legacy dish without creator', async () => {
@@ -102,7 +133,12 @@ describe('DishesController ownership enforcement', () => {
       archivedAt: new Date(),
     });
 
-    await expect(controller.unarchive(user, 'dish-legacy')).rejects.toThrow(ForbiddenException);
-    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith('dish-legacy', 'user-1');
+    await expect(controller.unarchive(user, 'dish-legacy')).rejects.toThrow(
+      ForbiddenException,
+    );
+    expect(dishesRepositoryMock.unarchiveDish).toHaveBeenCalledWith(
+      'dish-legacy',
+      'user-1',
+    );
   });
 });

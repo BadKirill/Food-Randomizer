@@ -24,6 +24,7 @@ async function bootstrap() {
     bufferLogs: true,
   });
   const logger = new Logger('Bootstrap');
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
 
   app.useGlobalPipes(
     new ValidationPipe({

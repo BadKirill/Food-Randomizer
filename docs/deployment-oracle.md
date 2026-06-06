@@ -24,6 +24,9 @@ DATABASE_URL=postgresql://<user>:<password_encoded>@<db-private-ip>:5432/food_ra
 CORS_ORIGINS=https://randomeal.app,https://www.randomeal.app
 DISHES_WRITE_TOKEN=<your-long-random-write-token>
 SESSION_SECRET=<your-long-random-session-secret>
+AUTH_LOGIN_RATE_LIMIT=10
+AUTH_REGISTER_RATE_LIMIT=5
+AUTH_RATE_LIMIT_WINDOW_MS=900000
 ```
 
 If PostgreSQL runs in Docker on the same VM and exposes port `5432` to the host, use:

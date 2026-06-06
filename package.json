@@ -28,6 +28,7 @@
     "migrate:deploy": "npm run prisma:migrate:deploy --workspace apps/api",
     "prisma:generate": "npm run prisma:generate --workspace apps/api",
     "seed:api": "npm run prisma:seed --workspace apps/api",
+    "assign-legacy-owner": "npm run prisma:assign-legacy-owner --workspace apps/api --",
     "deploy:api": "bash ./scripts/deploy-api.sh",
     "typecheck": "npm run build:api",
     "lint": "npm run lint --workspace apps/api",
