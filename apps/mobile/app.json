@@ -13,7 +13,15 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.foodrandomizer",
+      "infoPlist": {
+        "NSLocalNetworkUsageDescription": "Food Randomizer needs local network access to load the development bundle from your Mac while debugging.",
+        "NSBonjourServices": [
+          "_expo._tcp",
+          "_react-native-packager._tcp"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {

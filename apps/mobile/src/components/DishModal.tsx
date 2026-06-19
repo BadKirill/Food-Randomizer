@@ -92,7 +92,7 @@ export function ConfirmDishActionModal({
 export function DishModal({ visible, dish, onClose }: { visible: boolean; dish: DishDetail | null; onClose: () => void }) {
   return (
     <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
-      <SafeAreaView style={styles.modalContainer}>
+      <SafeAreaView style={styles.modalContainer} edges={['top', 'right', 'bottom', 'left']}>
         <View style={styles.modalHeaderRow}>
           <Text style={styles.modalHeaderTitle}>Your Dish</Text>
           <Pressable onPress={onClose} style={({ pressed }) => [styles.modalCloseButton, pressed ? styles.buttonPressed : null]}>
