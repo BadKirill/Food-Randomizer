@@ -474,7 +474,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'right', 'bottom', 'left']}>
       <View style={styles.glowOne} />
       <View style={styles.glowTwo} />
       <KeyboardAvoidingView style={styles.keyboardWrap} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={Platform.OS === 'ios' ? 18 : 0}>
