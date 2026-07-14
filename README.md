@@ -1,5 +1,7 @@
 # Food Randomizer Monorepo Blueprint
 
+> Productization source of truth: [`docs/product/README.md`](docs/product/README.md).
+
 AI-ready cross-platform architecture for a Food Randomizer app (iOS + Android) with:
 - Random dish selection with cooldown rules
 - Structured recipe storage
@@ -42,6 +44,9 @@ Key variables:
 - `CORS_ORIGINS` (comma-separated)
 
 ## Local Development
+Prerequisite: Node.js `20.19.4` or newer. The repository pins the current baseline in `.nvmrc`.
+Run `npm run preflight` before installing or starting work.
+
 1. Start DB
 ```bash
 npm run dev:db

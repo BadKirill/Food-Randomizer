@@ -1,5 +1,8 @@
 # Architecture
 
+> This document describes the original MVP architecture. The accepted product target and
+> migration plan are in [`docs/product/README.md`](product/README.md).
+
 ## 1) Goals
 - Cross-platform app (iOS/Android) for random dish selection.
 - Hard randomizer constraints:
