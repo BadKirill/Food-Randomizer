@@ -114,3 +114,5 @@ export type InferStepsRequest = z.infer<typeof InferStepsRequestSchema>;
 export type InferStepsResponse = z.infer<typeof InferStepsResponseSchema>;
 export type RecognizeDishFromImageRequest = z.infer<typeof RecognizeDishFromImageRequestSchema>;
 export type RecognizeDishFromImageResponse = z.infer<typeof RecognizeDishFromImageResponseSchema>;
+
+export * from './product-v2';

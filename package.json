@@ -5,11 +5,13 @@
   "engines": {
     "node": ">=20.19.4"
   },
+  "packageManager": "npm@10.8.2",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
+    "preflight": "node scripts/check-node-version.mjs",
     "dev:mobile": "npm run start --workspace apps/mobile",
     "dev:api": "npm run start:dev --workspace apps/api",
     "dev:db": "docker compose up -d postgres",

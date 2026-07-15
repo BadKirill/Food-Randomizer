@@ -1,0 +1,185 @@
+# Design and quality operating model
+
+## 1. Design workflow
+
+Figma is the collaboration and interaction-spec tool. The design system is token-first and uses
+Figma Variables for color, type, spacing, radius, elevation and semantic state. Reviewed token
+JSON in the repository is the implementation source for mobile and future admin web.
+
+Required Figma pages:
+
+1. Foundations and accessibility.
+2. Components with variants and states.
+3. Onboarding and first-value flow.
+4. Home, filters and recommendation.
+5. Recipe and Cooking Mode.
+6. Saved, history and My recipes.
+7. Pantry and photo confirmation.
+8. Profile, auth and preference correction.
+9. Premium preview, limits, paywall and subscription.
+10. Prototypes, content rules and redlines.
+
+Before the recommendation page becomes an approved product spec, add a `Stage 0 concepts` page:
+
+- equal-fidelity A/B cards for one recommendation and a shortlist of two or three;
+- a feed/search control for H3, clearly separate from a Pantry-first concept for H7;
+- randomized presentation order and identical recipe quality, explanations and CTA semantics;
+- a moderator annotation layer that is hidden from participants;
+- no visual treatment that makes the team's preferred concept look more complete.
+
+The component library still prepares `RecommendationCard`, `RecommendationSingle`,
+`RecommendationShortlist` and optional `RecommendationHybrid` from shared primitives. This keeps
+implementation reversible; it does not pre-decide the launch mode.
+
+Every screen is delivered in default, loading/skeleton, empty, error, offline, long text, large
+font, missing image, disabled, Premium locked and limit-reached states where applicable. Include
+small iPhone, large iPhone and representative Android widths; portrait is P0.
+
+Component handoff includes:
+
+- anatomy, variants, states and interaction behavior;
+- semantic tokens rather than raw colors/spacing;
+- min/max dimensions and text wrapping;
+- safe-area and keyboard behavior;
+- accessibility name, role, state, hint and focus order;
+- image ratio/crop/fallback and reduced-motion behavior;
+- localization expansion examples (English + 30% expansion; Serbian/Russian when supported).
+
+The current green/Starbucks-inspired document is not the final brand source. Preserve warmth,
+large tap targets and the recognizable decisive CTA, but validate a distinct RandoMeal identity
+through discovery and accessibility checks.
+
+## 2. QA strategy
+
+```text
+Many:   pure domain and component tests
+Some:   repository/integration and API contract tests
+Few:    device E2E critical journeys
+Always: production telemetry and synthetic health checks
+```
+
+| Layer     | Tools                                                   | Required scope                                                                      |
+| --------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Domain    | Jest, property-based tests where valuable               | hard filters, scoring, repeat rules, serving math, entitlements, merge conflicts    |
+| API       | Supertest + real PostgreSQL/Testcontainers              | auth, idempotency, transactions, migrations, problem responses                      |
+| Contracts | Zod fixtures and compatibility tests                    | mobile/API request and response examples                                            |
+| Mobile    | Jest + React Native Testing Library                     | screen states, accessibility, analytics calls, offline/retry                        |
+| Visual    | Storybook snapshots and screenshot review               | tokens/components across platforms and font scales                                  |
+| E2E       | Maestro on EAS/dev binaries                             | first value, guest persistence, account link, recommendation, save, cooking, limits |
+| Analytics | schema fixtures + event integration tests               | exposure cardinality, owner, deduplication, assignment and funnel joins             |
+| Load      | k6                                                      | recommendation/read endpoints, idempotent retries, pool extremes                    |
+| Security  | dependency scan, secret scan, Semgrep/CodeQL, OWASP ZAP | auth, uploads, admin, webhooks, PII/logging                                         |
+| AI eval   | versioned fixture set                                   | schema, forbidden ingredients, constraints, fallback, cost/latency                  |
+
+## 3. Critical invariant suite
+
+These tests block release and cannot be muted as flaky:
+
+- vegan candidates contain no animal-derived canonical ingredient;
+- vegetarian candidates contain no meat/fish ingredient;
+- all actor allergens and permanent exclusions remove a candidate;
+- uncertain ingredient/allergen mapping fails closed;
+- permanently hidden dishes never return;
+- the last 10 shown dishes are excluded unless the user explicitly accepts a documented small-pool
+  relaxation that never relaxes safety;
+- AI never mutates the canonical recipe and variants reference the exact base content version;
+- post-generation hard-constraint validation runs before a variant can be shown/accepted;
+- serving changes scale quantities and total nutrition while preserving per-serving values;
+- retries with the same idempotency key do not create a new session, interaction, usage charge or
+  cooking transition;
+- entitlement and usage checks are server-side and atomic under concurrency;
+- account merge preserves guest history, saved dishes, Pantry and usage without duplication;
+- user recipe IDs/ownership survive every migration and rollback rehearsal;
+- empty candidate pools return a bounded, actionable response, never an endless loader.
+- presentation mode changes only exposure shape: hard-filter results and candidate scores are
+  identical for the same actor/context/config/seed;
+- an exposure contains 1-3 unique recommendations with contiguous positions, and idempotent retry
+  returns the same exposure/order;
+- sequential `Another` creates a new exposure and advances offer indexes without double-counting
+  the original impression.
+
+Recommendation matrix generation covers:
+
+```text
+Diet x Meal type x Time x Goal x Pantry x Exclusions x History x Entitlement
+```
+
+Use pairwise generation for routine CI plus explicit full combinations for safety dimensions.
+
+## 4. AI evaluation
+
+Version evaluation cases in Git with input canonical recipe, user request, hard constraints,
+expected structural changes, forbidden ingredients, nutrition tolerance and expected schema. Start
+with every case listed in the PRD and add each production failure as a regression.
+
+Release gates for an AI prompt/model version:
+
+- 100% hard-constraint validation pass on safety fixtures;
+- > =95% schema + domain validation pass;
+- no canonical mutation;
+- bounded retry/fallback behavior;
+- cost and P95 latency within configured budgets;
+- human culinary review sample approved;
+- prompt/model/config version emitted in every event.
+
+## 5. Accessibility and localization gates
+
+- WCAG 2.2 AA color contrast.
+- 44x44 pt minimum targets, logical focus, screen-reader labels and state.
+- Dynamic Type / large font without clipped actions or hidden content.
+- Reduced motion, adequate non-color status indicators, accessible error summaries.
+- All user strings use localization keys; no concatenated sentences.
+- Test LTR now; avoid layouts that make future RTL impossible.
+
+## 6. CI and release gates
+
+Pull requests:
+
+1. format/lint/typecheck all workspaces;
+2. contract and domain tests;
+3. API unit + real DB integration tests;
+4. migration from a production-shaped snapshot and schema drift check;
+5. mobile unit/component tests;
+6. dependency, secret and static security scans;
+7. changed critical Maestro smoke flow when applicable.
+
+Release candidate:
+
+- signed iOS/Android EAS builds tested on supported OS/device matrix;
+- full critical Maestro suite;
+- content coverage and safety report green;
+- k6 smoke meets SLO;
+- Sentry release/source maps and PostHog environment verified;
+- feature kill switch and rollback exercised;
+- database backup, restore and forward-fix migration rehearsed;
+- privacy text/store metadata/support runbook complete.
+
+Suggested initial SLOs (validate under beta traffic):
+
+- API availability: 99.9% monthly for recommendation/profile reads;
+- non-AI recommendation latency: P95 <500 ms server-side, P99 <1 s;
+- crash-free mobile users: >=99.5%;
+- authoritative event outbox delivery: 99.9% within 5 minutes;
+- hard dietary constraint violations: 0.
+
+## 7. Definition of Done
+
+A product task is done only when code, contracts, migrations/backfill, tests, analytics, feature
+flag, accessibility, localization, docs/runbook and rollback impact are handled as applicable. A UI
+that renders the happy path without these parts is not done.
+
+## 8. Discovery quality gate
+
+Stage 0 is a release dependency, not an informal design workshop:
+
+- complete 12 interviews in batches of three; recruit up to three more only for unstable evidence;
+- log exact quotes/actions and participant-level H1-H10 outcomes in the workbook;
+- count participants rather than quote volume;
+- record concept order to detect ordering bias;
+- keep H3 (choice presentation) and H7 (Pantry value/input) separate;
+- lock GO/PIVOT/STOP thresholds before synthesis;
+- attach a signed decision record (`GO_SINGLE`, `GO_HYBRID`, `PIVOT_SHORTLIST`, another pivot, or
+  `STOP`) before approving Phase 2 recommendation UX.
+
+Research output must identify evidence gaps and dissenting participants. "Users liked it" is not
+acceptance evidence without a recent problem, observed behavior or explicit trade-off.

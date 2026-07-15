@@ -4,6 +4,10 @@
 
 Food Randomizer, also called Randomeal, is a mobile-first app for picking a meal when the user cannot decide what to eat.
 
+For all product-v2 work, read `docs/product/README.md` and its linked architecture, data, API,
+analytics, quality, migration and delivery documents before changing code. They supersede the MVP
+mental model where the documents differ.
+
 The core idea must stay simple:
 
 - A big circular `Random` button on the main screen picks a dish.

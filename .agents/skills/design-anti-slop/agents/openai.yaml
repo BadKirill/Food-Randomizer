@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design Anti-Slop"
+  short_description: "Аудит UI на типовые AI-паттерны"
+  default_prompt: "Use $design-anti-slop to audit this RandoMeal UI before implementation or handoff."
