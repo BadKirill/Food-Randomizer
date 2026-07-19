@@ -1,0 +1,47 @@
+- [Home](Home)
+- [Knowledge Protocol](Knowledge-Protocol)
+- [File Index](File-Index)
+- **Governance**
+  - [Knowledge system](RandoMeal--Governance--Knowledge-System)
+  - [Agent governance](RandoMeal--Governance--Agents)
+  - [Complete repository inventory](RandoMeal--Governance--Repository-Inventory)
+- **Product**
+  - [Product strategy and discovery gates](RandoMeal--Product--Strategy)
+  - [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate)
+  - [Product delivery roadmap](RandoMeal--Product--Delivery-Roadmap)
+- **Architecture**
+  - [Target product architecture](RandoMeal--Architecture--Target)
+  - [Current versus target migration map](RandoMeal--Architecture--Current-vs-Target)
+  - [Target recommendation engine](RandoMeal--Architecture--Recommendation-Engine)
+- **Data**
+  - [Current Prisma data model](RandoMeal--Data--Current-Prisma)
+  - [Target product data model](RandoMeal--Data--Target-Model)
+  - [Seed and legacy content](RandoMeal--Data--Seed-Content)
+- **API and Contracts**
+  - [Current legacy API surface](RandoMeal--API--Current-Legacy-Surface)
+  - [Target API v2 contract](RandoMeal--API--Target-v2)
+  - [Legacy shared contracts](RandoMeal--Contracts--Legacy)
+  - [Product v2 contracts scaffold](RandoMeal--Contracts--Product-v2)
+- **Backend**
+  - [Current backend bootstrap and cross-cutting behavior](RandoMeal--Backend--Bootstrap)
+  - [Current authentication and sessions](RandoMeal--Backend--Auth-Sessions)
+  - [Current dish catalog and ownership](RandoMeal--Backend--Catalog-Ownership)
+  - [Current randomizer and history](RandoMeal--Backend--Randomizer-History)
+  - [Current AI boundary scaffold](RandoMeal--Backend--AI-Scaffold)
+- **Mobile**
+  - [Current mobile shell](RandoMeal--Mobile--Current-Shell)
+  - [Current mobile API and authentication](RandoMeal--Mobile--API-Auth)
+  - [Current mobile random flow](RandoMeal--Mobile--Random-Flow)
+  - [Current mobile dish management flow](RandoMeal--Mobile--Manage-Flow)
+  - [Current mobile theme and visual debt](RandoMeal--Mobile--Theme-Debt)
+- **Analytics and Quality**
+  - [Analytics and measurement plan](RandoMeal--Analytics--Measurement)
+  - [Design system and product quality](RandoMeal--Design--System-and-Quality)
+  - [QA, security, and release gates](RandoMeal--Quality--QA-Strategy)
+- **Delivery and Operations**
+  - [Workspace runtime and tooling](RandoMeal--Tooling--Workspace)
+  - [Continuous integration and test runners](RandoMeal--Delivery--CI)
+  - [Local runtime and environment](RandoMeal--Infrastructure--Local)
+  - [Production deployment and operations](RandoMeal--Infrastructure--Production)
+- **Legacy Reference**
+  - [Legacy and contradictory documentation map](RandoMeal--Legacy--Documentation-Map)

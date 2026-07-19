@@ -1,0 +1,819 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "name": "RandoMeal",
+    "repository": "BadKirill/Food-Randomizer",
+    "summary": "RandoMeal is a fast, trusted meal-decision engine. The product must move a person from uncertainty to starting to cook without a browsing feed, while preserving hard dietary safety and keeping the single-versus-shortlist interaction as an evidence gate."
+  },
+  "readingPolicy": {
+    "maxNodes": 7,
+    "maxFilesPerNode": 12,
+    "fallbackNodes": [
+      "knowledge-system",
+      "repository-inventory",
+      "agent-governance"
+    ],
+    "steps": [
+      "Run the knowledge query with the task text and every known changed path.",
+      "Read the selected catalog nodes and their listed source ranges before opening broader files.",
+      "Read direct dependencies, contracts, and narrow tests when the first packet is insufficient.",
+      "Use repository-wide search only after the packet is empty, stale, or contradictory.",
+      "Classify evidence as current, target, legacy, mixed, or generated before making a decision.",
+      "After a material change, update affected catalog rules, regenerate the index and Wiki bundle, and validate both."
+    ]
+  },
+  "syncPolicy": {
+    "mode": "fail-closed",
+    "requiredCapability": "A connected MCP server with explicit GitHub Wiki page list, read, create, update, and post-write verification tools",
+    "steps": [
+      "Treat knowledge/catalog.json as canonical and knowledge/wiki as a generated human-readable mirror.",
+      "Regenerate knowledge/wiki-manifest.json and compare its page hashes with the remote Wiki.",
+      "Upsert only changed managed pages and preserve external pages that are not owned by the manifest.",
+      "Read every written page back through the same MCP and verify its normalized SHA-256.",
+      "Record external synchronization only after all page hashes are verified.",
+      "If native Wiki MCP capability is absent or the repository Wiki is disabled, report synchronization as blocked.",
+      "Never substitute git push, gh, regular repository files, browser automation, or an unverified claim for Wiki MCP synchronization."
+    ]
+  },
+  "nodes": [
+    {
+      "id": "knowledge-system",
+      "title": "Knowledge system",
+      "group": "Governance",
+      "wikiSlug": "RandoMeal--Governance--Knowledge-System",
+      "status": "current",
+      "authority": "canonical",
+      "summary": "Deterministic catalog, repository index, selective query, Wiki renderer, validation gate, repo skill, and read-only retrieval agent.",
+      "tags": ["knowledge", "graph", "catalog", "index", "wiki", "mcp", "контекст", "дерево знаний", "поиск"],
+      "sources": ["knowledge/catalog.json", "knowledge/README.md", "scripts/knowledge/**", ".agents/skills/randomeal-knowledge/**", ".codex/agents/knowledge-retriever.toml"],
+      "rules": [
+        "The catalog is the canonical semantic graph; the index and Wiki bundle are deterministic derivatives.",
+        "Every repository file receives an index record; generated outputs use managed records without recursive self-hashes.",
+        "Retrieval must return evidence paths and line ranges, not unsupported summaries.",
+        "External Wiki sync fails closed unless a native Wiki MCP writes and reads back every managed page."
+      ],
+      "dependsOn": [],
+      "related": ["repository-inventory", "ci-quality"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "agent-governance",
+      "title": "Agent governance",
+      "group": "Governance",
+      "wikiSlug": "RandoMeal--Governance--Agents",
+      "status": "current",
+      "authority": "canonical",
+      "summary": "Mandatory project instructions, design workflow, repository safety, selective knowledge retrieval, and the source-code comment prohibition.",
+      "tags": ["agents", "skill", "rules", "comments", "design anti slop", "агент", "правила", "комментарии"],
+      "sources": ["AGENTS.md", ".agents/**", ".codex/**", "AI_CONTEXT.md"],
+      "rules": [
+        "Use the RandoMeal knowledge skill before code changes, reviews, architecture, data, API, QA, or design work.",
+        "Use the design anti-slop skill before creating, reviewing, or changing user-facing design or UI.",
+        "Do not add source-code comments, TODO or FIXME notes, commented-out code, or explanatory blocks.",
+        "Preserve unrelated dirty work and use additive database migrations."
+      ],
+      "dependsOn": ["knowledge-system"],
+      "related": ["design-system-quality", "qa-strategy"],
+      "supersedes": ["legacy-documentation-map"],
+      "supersededBy": []
+    },
+    {
+      "id": "repository-inventory",
+      "title": "Complete repository inventory",
+      "group": "Governance",
+      "wikiSlug": "RandoMeal--Governance--Repository-Inventory",
+      "status": "generated",
+      "authority": "generated-index",
+      "summary": "Catch-all coverage node ensuring every tracked or non-ignored untracked repository file is represented even when no specialist node exists yet.",
+      "tags": ["files", "inventory", "coverage", "repository", "файлы", "покрытие"],
+      "sources": ["**/*"],
+      "rules": [
+        "Coverage uses null-delimited git ls-files output for tracked and non-ignored untracked files.",
+        "Ignored dependencies and build outputs are outside repository coverage.",
+        "Binary assets are indexed by path, byte size, type, and hash without extracting text.",
+        "Managed knowledge outputs remain in coverage but do not participate in the source fingerprint."
+      ],
+      "dependsOn": ["knowledge-system"],
+      "related": ["workspace-tooling"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "product-strategy",
+      "title": "Product strategy and discovery gates",
+      "group": "Product",
+      "wikiSlug": "RandoMeal--Product--Strategy",
+      "status": "target",
+      "authority": "product-source-of-truth",
+      "summary": "RandoMeal is a decision engine rather than a recipe generator or catalog; discovery evidence gates implementation assumptions.",
+      "tags": ["product", "discovery", "decision engine", "strategy", "продукт", "исследование", "решение"],
+      "sources": ["docs/product/README.md", "docs/product/discovery-decisions.md"],
+      "rules": [
+        "Optimize for a trusted decision and start of cooking in less than 30 seconds, not content browsing.",
+        "AI can adapt canonical recipes but cannot be required for normal recommendations.",
+        "Hard safety and discovery gates override feature breadth and legacy UI assumptions.",
+        "Do not treat Stage 0 hypotheses or beta targets as validated facts."
+      ],
+      "dependsOn": [],
+      "related": ["choice-cardinality-gate", "target-architecture", "analytics-measurement"],
+      "supersedes": ["legacy-documentation-map"],
+      "supersededBy": []
+    },
+    {
+      "id": "choice-cardinality-gate",
+      "title": "Single versus shortlist evidence gate",
+      "group": "Product",
+      "wikiSlug": "RandoMeal--Product--Choice-Cardinality-Gate",
+      "status": "target",
+      "authority": "discovery-gate",
+      "summary": "The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy.",
+      "tags": ["single", "shortlist", "hybrid", "experiment", "H3", "одно блюдо", "2-3 варианта", "гипотеза"],
+      "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/delivery-plan.md"],
+      "rules": [
+        "Keep ranking cardinality server-owned and versioned.",
+        "Never hard-code one recommendation as a proven product truth.",
+        "Measure time to decision, acceptance, replacement, abandonment, trust, and safety separately by policy.",
+        "Do not build final launch navigation or recommendation UI before the Stage 0 gate is signed."
+      ],
+      "dependsOn": ["product-strategy"],
+      "related": ["recommendation-engine-target", "analytics-measurement", "design-system-quality"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "delivery-roadmap",
+      "title": "Product delivery roadmap",
+      "group": "Product",
+      "wikiSlug": "RandoMeal--Product--Delivery-Roadmap",
+      "status": "target",
+      "authority": "accepted-plan",
+      "summary": "Dependency-ordered product delivery from discovery gates through foundations, recommendation beta, measurement, hardening, and later expansion.",
+      "tags": ["delivery", "roadmap", "milestone", "implementation plan", "план", "этап", "разработка"],
+      "sources": ["docs/product/delivery-plan.md", "docs/product/audit-and-migration.md", "docs/releases/**"],
+      "rules": [
+        "Complete discovery exit criteria before irreversible product UI decisions.",
+        "Prefer vertical slices with contracts, persistence, analytics, tests, and operability in the same increment.",
+        "Migrate additively and keep legacy behavior available until replacement acceptance gates pass.",
+        "Release claims must be backed by current tests rather than historical test-count snapshots."
+      ],
+      "dependsOn": ["product-strategy", "current-vs-target"],
+      "related": ["qa-strategy", "production-infrastructure"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "target-architecture",
+      "title": "Target product architecture",
+      "group": "Architecture",
+      "wikiSlug": "RandoMeal--Architecture--Target",
+      "status": "target",
+      "authority": "accepted-architecture",
+      "summary": "Target modular monolith, Expo mobile architecture, PostgreSQL data model, event outbox, analytics, reliability, storage, and future queue boundaries.",
+      "tags": ["architecture", "stack", "modular monolith", "backend", "mobile", "архитектура", "стек"],
+      "sources": ["docs/product/architecture.md"],
+      "rules": [
+        "Retain TypeScript npm workspaces, Expo React Native, NestJS, Prisma, and PostgreSQL.",
+        "Separate ranking from presentation policy and persist reproducibility inputs for every exposure.",
+        "Module repositories cannot query another module's tables outside its public application boundary.",
+        "Introduce Redis and BullMQ only when queue or cache use cases ship."
+      ],
+      "dependsOn": ["product-strategy", "choice-cardinality-gate"],
+      "related": ["target-data-model", "api-v2-contract", "analytics-measurement"],
+      "supersedes": ["legacy-documentation-map"],
+      "supersededBy": []
+    },
+    {
+      "id": "current-vs-target",
+      "title": "Current versus target migration map",
+      "group": "Architecture",
+      "wikiSlug": "RandoMeal--Architecture--Current-vs-Target",
+      "status": "mixed",
+      "authority": "migration-audit",
+      "summary": "Reuse, refactor, replace, and build decisions separating the working MVP from the accepted product architecture.",
+      "tags": ["audit", "migration", "reuse", "rewrite", "current target", "аудит", "миграция", "переиспользовать"],
+      "sources": ["docs/product/audit-and-migration.md", "README.md", "apps/api/README.md", "apps/mobile/README.md"],
+      "rules": [
+        "Treat audit machine versions and test counts as historical snapshots until re-verified.",
+        "Reuse operational NestJS, Prisma, Expo, auth, ownership, and test foundations where behavior remains valid.",
+        "Refactor flat modules and the monolithic mobile shell incrementally behind stable contracts.",
+        "Do not confuse target-only analytics, AI, photo, recommendation, or offline capabilities with current implementation."
+      ],
+      "dependsOn": ["target-architecture"],
+      "related": ["legacy-documentation-map", "backend-bootstrap-current", "mobile-shell-current"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "recommendation-engine-target",
+      "title": "Target recommendation engine",
+      "group": "Architecture",
+      "wikiSlug": "RandoMeal--Architecture--Recommendation-Engine",
+      "status": "target",
+      "authority": "accepted-architecture",
+      "summary": "Fail-closed hard filters, configurable scoring, seeded selection, versioned presentation policy, persisted exposures, reasons, and reproducibility metadata.",
+      "tags": ["recommendation", "ranking", "hard filters", "scoring", "exposure", "рекомендация", "ранжирование"],
+      "sources": ["docs/product/architecture.md", "docs/product/api-v2.md", "packages/contracts/src/product-v2.ts"],
+      "rules": [
+        "Allergy, diet, explicit bans, permanent exclusions, and critical equipment are fail-closed hard constraints.",
+        "Persist component scores, seed, algorithm and configuration versions, candidate pool, reasons, and ordered exposure membership.",
+        "The client cannot choose arbitrary result cardinality.",
+        "An empty safe result explains the constraint and relaxes only soft filters after confirmation."
+      ],
+      "dependsOn": ["choice-cardinality-gate", "target-data-model", "api-v2-contract"],
+      "related": ["randomizer-history-current", "analytics-measurement"],
+      "supersedes": ["randomizer-history-current"],
+      "supersededBy": []
+    },
+    {
+      "id": "current-data-model",
+      "title": "Current Prisma data model",
+      "group": "Data",
+      "wikiSlug": "RandoMeal--Data--Current-Prisma",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "MVP PostgreSQL schema for users, sessions, dishes, structured recipe children, history, AI generation records, and image recognition records.",
+      "tags": ["prisma", "postgresql", "schema", "migration", "database", "база данных", "модель"],
+      "sources": ["apps/api/prisma/schema.prisma", "apps/api/prisma/migrations/**/*.sql", "apps/api/prisma/migrations/migration_lock.toml"],
+      "rules": [
+        "All schema evolution uses additive migrations; applied migrations are immutable.",
+        "Current ingredient values are free-form and cannot enforce target taxonomy or allergen safety.",
+        "Dish updates replace child ingredient, step, and add-on rows transactionally.",
+        "DishHistory clickIdx is not an atomic unique sequence and requires redesign for concurrent recommendation sessions."
+      ],
+      "dependsOn": ["workspace-tooling"],
+      "related": ["target-data-model", "seed-content", "backend-auth-current"],
+      "supersedes": [],
+      "supersededBy": ["target-data-model"]
+    },
+    {
+      "id": "target-data-model",
+      "title": "Target product data model",
+      "group": "Data",
+      "wikiSlug": "RandoMeal--Data--Target-Model",
+      "status": "target",
+      "authority": "accepted-data-design",
+      "summary": "Normalized product model for identity, profiles, taxonomy, content versions, recommendation sessions and exposures, interactions, cooking, pantry, entitlements, configuration, and outbox events.",
+      "tags": ["target schema", "tables", "indexes", "constraints", "outbox", "целевая бд", "таблицы"],
+      "sources": ["docs/product/data-model.md"],
+      "rules": [
+        "Identity, safety constraints, recommendation reproducibility, and event delivery have explicit durable models.",
+        "Use database constraints and indexes for invariants that cannot rely on application timing.",
+        "Recipe content is versioned and canonical ingredient taxonomy is separate from display text.",
+        "Profile, interaction, and analytics retention follows documented privacy rules."
+      ],
+      "dependsOn": ["target-architecture", "product-strategy"],
+      "related": ["current-data-model", "api-v2-contract", "analytics-measurement"],
+      "supersedes": ["current-data-model"],
+      "supersededBy": []
+    },
+    {
+      "id": "seed-content",
+      "title": "Seed and legacy content",
+      "group": "Data",
+      "wikiSlug": "RandoMeal--Data--Seed-Content",
+      "status": "mixed",
+      "authority": "current-code-with-audit-constraints",
+      "summary": "Legacy dish seed, ownership backfill, and data-quality risks that require quarantine, normalization, provenance, and review before product recommendations.",
+      "tags": ["seed", "content", "legacy data", "backfill", "recipes", "контент", "рецепты"],
+      "sources": ["apps/api/prisma/seed.js", "apps/api/prisma/assign-legacy-owner.js", "docs/product/audit-and-migration.md"],
+      "rules": [
+        "Do not treat seed content as verified or allergen-safe product inventory.",
+        "Preserve provenance and quarantine status during migration.",
+        "Normalize ingredients, units, dietary labels, steps, and duplicate content before recommendation eligibility.",
+        "Legacy ownership assignment must be explicit and auditable."
+      ],
+      "dependsOn": ["current-data-model"],
+      "related": ["target-data-model", "catalog-ownership-current"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "api-legacy-surface",
+      "title": "Current legacy API surface",
+      "group": "API and Contracts",
+      "wikiSlug": "RandoMeal--API--Current-Legacy-Surface",
+      "status": "mixed",
+      "authority": "current-code-over-legacy-docs",
+      "summary": "Unversioned NestJS auth, dishes, randomizer, health, and root routes with local Zod parsing; legacy API documentation contains unimplemented target claims.",
+      "tags": ["api", "controller", "route", "rest", "legacy", "эндпоинт", "контроллер"],
+      "sources": ["apps/api/src/**/*controller.ts", "docs/api-spec.md", "scripts/test-mobile-api-contract.mjs"],
+      "rules": [
+        "Current controller code is authoritative for implemented routes; docs/api-spec.md is not.",
+        "Current routes have no global /v1 prefix, OpenAPI surface, or problem+json envelope.",
+        "Controller-local Zod schemas and the shared exception filter define current transport validation behavior.",
+        "The live mobile/API contract script can skip when TEST_API_BASE_URL is absent and is not a standalone proof of coverage."
+      ],
+      "dependsOn": ["backend-bootstrap-current", "legacy-contracts"],
+      "related": ["api-v2-contract", "mobile-api-auth-current"],
+      "supersedes": [],
+      "supersededBy": ["api-v2-contract"]
+    },
+    {
+      "id": "api-v2-contract",
+      "title": "Target API v2 contract",
+      "group": "API and Contracts",
+      "wikiSlug": "RandoMeal--API--Target-v2",
+      "status": "target",
+      "authority": "accepted-api-design",
+      "summary": "Target versioned REST contract for identity, profiles, recommendations, interactions, cooking, saved content, pantry, entitlements, configuration, analytics, and administration.",
+      "tags": ["api v2", "rest v1", "idempotency", "contract", "target api", "целевой api"],
+      "sources": ["docs/product/api-v2.md", "packages/contracts/src/product-v2.ts"],
+      "rules": [
+        "Transport contracts are shared and runtime-validated with Zod.",
+        "Mutation endpoints define idempotency, authorization, error, and analytics semantics.",
+        "Recommendation cardinality remains server policy rather than client input.",
+        "Add target endpoints without breaking the current mobile client until migration gates pass."
+      ],
+      "dependsOn": ["target-architecture", "target-data-model"],
+      "related": ["api-legacy-surface", "product-v2-contracts"],
+      "supersedes": ["api-legacy-surface"],
+      "supersededBy": []
+    },
+    {
+      "id": "legacy-contracts",
+      "title": "Legacy shared contracts",
+      "group": "API and Contracts",
+      "wikiSlug": "RandoMeal--Contracts--Legacy",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Zod schemas for dishes, random selection, and scaffolded AI operations; only a subset is imported by current API code and none by mobile.",
+      "tags": ["zod", "contracts", "schemas", "legacy", "контракты", "схемы"],
+      "sources": ["packages/contracts/src/index.ts", "apps/api/test/mocks/contracts.ts"],
+      "rules": [
+        "Runtime schema use must be verified by imports; declaration alone does not mean an endpoint exists.",
+        "The mobile client currently maintains duplicate manual DTO types and casts responses without shared runtime parsing.",
+        "API and contracts currently use different Zod major versions and the exception filter tolerates cross-copy error shapes.",
+        "Contract changes require narrow API and mobile compatibility tests."
+      ],
+      "dependsOn": ["workspace-tooling"],
+      "related": ["product-v2-contracts", "api-legacy-surface"],
+      "supersedes": [],
+      "supersededBy": ["product-v2-contracts"]
+    },
+    {
+      "id": "product-v2-contracts",
+      "title": "Product v2 contracts scaffold",
+      "group": "API and Contracts",
+      "wikiSlug": "RandoMeal--Contracts--Product-v2",
+      "status": "target",
+      "authority": "accepted-contract-scaffold",
+      "summary": "Additive Zod contracts for actor identity, recommendation requests and exposures, interactions, entitlements, configuration, and product events; not yet wired to API or mobile.",
+      "tags": ["product v2", "recommendation", "events", "identity", "entitlements", "контракты v2"],
+      "sources": ["packages/contracts/src/product-v2.ts", "packages/contracts/src/index.ts"],
+      "rules": [
+        "Treat these schemas as target scaffolding until concrete API and mobile imports exist.",
+        "Preserve additive compatibility while legacy endpoints remain active.",
+        "Event names and property meaning require analytics compatibility review when changed.",
+        "Identity and recommendation schemas must align with database and API idempotency design."
+      ],
+      "dependsOn": ["api-v2-contract", "analytics-measurement"],
+      "related": ["legacy-contracts", "target-data-model"],
+      "supersedes": ["legacy-contracts"],
+      "supersededBy": []
+    },
+    {
+      "id": "backend-bootstrap-current",
+      "title": "Current backend bootstrap and cross-cutting behavior",
+      "group": "Backend",
+      "wikiSlug": "RandoMeal--Backend--Bootstrap",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Flat NestJS AppModule, global Zod exception filter, request logging middleware, Prisma lifecycle service, environment validation, and process bootstrap.",
+      "tags": ["nestjs", "app module", "bootstrap", "middleware", "prisma service", "бэкенд"],
+      "sources": ["apps/api/src/app.controller.ts", "apps/api/src/app.controller.spec.ts", "apps/api/src/app.module.ts", "apps/api/src/app.service.ts", "apps/api/src/main.ts", "apps/api/src/common/**", "apps/api/src/prisma/**"],
+      "rules": [
+        "The current implementation is a flat module, not the target feature-module architecture.",
+        "Controllers validate transport while services and repositories hold current behavior, though boundaries are inconsistent.",
+        "Request logging exists but target correlation, structured observability, Sentry, and actor-safe tagging do not.",
+        "Global exception behavior must remain compatible during contract migration."
+      ],
+      "dependsOn": ["current-data-model"],
+      "related": ["target-architecture", "backend-auth-current", "api-legacy-surface"],
+      "supersedes": [],
+      "supersededBy": ["target-architecture"]
+    },
+    {
+      "id": "backend-auth-current",
+      "title": "Current authentication and sessions",
+      "group": "Backend",
+      "wikiSlug": "RandoMeal--Backend--Auth-Sessions",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Email/password auth, opaque bearer sessions stored as secret-derived SHA-256 hashes, guards, current-user decorators, and in-memory IP rate limiting.",
+      "tags": ["auth", "session", "bearer", "guard", "rate limit", "авторизация", "сессия"],
+      "sources": ["apps/api/src/modules/auth/**", "apps/api/src/common/auth*.ts", "apps/api/src/common/current-*.ts", "apps/api/prisma/migrations/2026052012*/migration.sql", "apps/api/prisma/migrations/20260520133000_user_password_hash/migration.sql"],
+      "rules": [
+        "Session tokens are opaque and only derived hashes are stored in PostgreSQL.",
+        "Password hashing uses the current synchronous scrypt implementation and needs a separately planned upgrade if changed.",
+        "The in-memory rate limiter is process-local and resets on restart, so it is not a distributed production control.",
+        "Auth changes require unit, mocked E2E, real database E2E, and mobile session regression coverage."
+      ],
+      "dependsOn": ["backend-bootstrap-current", "current-data-model"],
+      "related": ["mobile-api-auth-current", "api-v2-contract"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "catalog-ownership-current",
+      "title": "Current dish catalog and ownership",
+      "group": "Backend",
+      "wikiSlug": "RandoMeal--Backend--Catalog-Ownership",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Dish CRUD repository and controller with creator-only edit/archive behavior, filtering, pagination, transactional child replacement, and legacy ownership constraints.",
+      "tags": ["dishes", "catalog", "ownership", "archive", "repository", "блюда", "каталог"],
+      "sources": ["apps/api/src/modules/dishes/**", "apps/api/prisma/migrations/20260519111000_dish_type_archive_creator/migration.sql", "apps/api/prisma/migrations/20260519204000_backfill_dish_type_vegan/migration.sql"],
+      "rules": [
+        "Only the creator can update, archive, or unarchive a dish.",
+        "Legacy rows without creator identity remain locked until explicitly assigned.",
+        "Archiving uses archivedAt and list filters must preserve owner and visibility semantics.",
+        "Current catalog content is not sufficient evidence for target dietary safety."
+      ],
+      "dependsOn": ["backend-auth-current", "current-data-model"],
+      "related": ["mobile-manage-current", "seed-content"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "randomizer-history-current",
+      "title": "Current randomizer and history",
+      "group": "Backend",
+      "wikiSlug": "RandoMeal--Backend--Randomizer-History",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Uniform random dish selection, randomized add-ons, optional dish-type filter, authenticated history cooldown, and stateless public random behavior.",
+      "tags": ["randomizer", "history", "cooldown", "random", "рандомайзер", "история"],
+      "sources": ["apps/api/src/modules/randomizer/**", "apps/api/src/modules/history/**", "apps/api/prisma/migrations/20260606120000_api_quality_indexes/migration.sql"],
+      "rules": [
+        "Authenticated POST /random/next records history and gradually relaxes cooldown when the candidate pool is small.",
+        "Public GET /random is stateless and does not provide durable repeat avoidance.",
+        "Selection and add-on choice use Math.random and are not reproducible.",
+        "This behavior is a reusable MVP fallback, not the target decision engine."
+      ],
+      "dependsOn": ["catalog-ownership-current", "backend-auth-current"],
+      "related": ["recommendation-engine-target", "mobile-random-current"],
+      "supersedes": [],
+      "supersededBy": ["recommendation-engine-target"]
+    },
+    {
+      "id": "backend-ai-scaffold",
+      "title": "Current AI boundary scaffold",
+      "group": "Backend",
+      "wikiSlug": "RandoMeal--Backend--AI-Scaffold",
+      "status": "mixed",
+      "authority": "current-code",
+      "summary": "Provider interface, legacy AI Zod schemas, and Prisma storage models exist, but there are no provider adapters, controllers, jobs, validation pipeline, or shipped AI endpoints.",
+      "tags": ["ai", "provider", "vision", "generation", "scaffold", "ии", "распознавание"],
+      "sources": ["apps/api/src/modules/ai/**", "packages/contracts/src/index.ts", "apps/api/prisma/schema.prisma"],
+      "rules": [
+        "Do not describe AI generation, inference, or vision as implemented product capability.",
+        "Future AI output must be schema-validated, safety-checked, cost-observed, and non-authoritative for hard dietary constraints.",
+        "Raw prompts and responses require privacy and retention controls before persistence.",
+        "Normal recommendations must remain available without AI."
+      ],
+      "dependsOn": ["backend-bootstrap-current", "legacy-contracts"],
+      "related": ["target-architecture", "analytics-measurement"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "mobile-shell-current",
+      "title": "Current mobile shell",
+      "group": "Mobile",
+      "wikiSlug": "RandoMeal--Mobile--Current-Shell",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Expo 54 React Native app with a large App orchestrator, manual Random and Manage modes, local hook state, direct fetch flows, and partially extracted screens and modals.",
+      "tags": ["expo", "react native", "App.tsx", "navigation", "mobile", "мобилка", "навигация"],
+      "sources": ["apps/mobile/App.tsx", "apps/mobile/App.test.tsx", "apps/mobile/index.ts", "apps/mobile/app.config.ts", "apps/mobile/app.json", "apps/mobile/src/types.ts", "apps/mobile/src/utils/**"],
+      "rules": [
+        "Current navigation is manual state switching; Expo Router is target-only.",
+        "App.tsx owns too much orchestration and should be decomposed behind preserved behavior and tests.",
+        "Server entities must not be duplicated into future Zustand local state.",
+        "UI redesign remains gated by product discovery and the mandatory design workflow."
+      ],
+      "dependsOn": ["api-legacy-surface"],
+      "related": ["target-architecture", "mobile-random-current", "mobile-manage-current"],
+      "supersedes": [],
+      "supersededBy": ["target-architecture"]
+    },
+    {
+      "id": "mobile-api-auth-current",
+      "title": "Current mobile API and authentication",
+      "group": "Mobile",
+      "wikiSlug": "RandoMeal--Mobile--API-Auth",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Direct fetch client, API URL configuration, manual DTO types, error formatting, and SecureStore-backed bearer session hook.",
+      "tags": ["mobile api", "fetch", "securestore", "auth hook", "client", "мобильный api"],
+      "sources": ["apps/mobile/src/api/**", "apps/mobile/src/config/**", "apps/mobile/src/hooks/**", "apps/mobile/.env.example"],
+      "rules": [
+        "Credentials belong in SecureStore and must not move to AsyncStorage.",
+        "Current responses are TypeScript-cast without shared runtime parsing.",
+        "The mobile package does not currently depend on the contracts workspace.",
+        "TanStack Query, offline persistence, retry policy, and Sentry are target-only."
+      ],
+      "dependsOn": ["mobile-shell-current", "backend-auth-current"],
+      "related": ["legacy-contracts", "api-legacy-surface"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "mobile-random-current",
+      "title": "Current mobile random flow",
+      "group": "Mobile",
+      "wikiSlug": "RandoMeal--Mobile--Random-Flow",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Random action, dish-type filter sheet, loading/error state, dish result modal, press animation, and public random API request.",
+      "tags": ["random screen", "dish modal", "recommendation ui", "filter", "экран рандома"],
+      "sources": ["apps/mobile/src/screens/RandomScreen.tsx", "apps/mobile/src/components/DishModal.tsx", "apps/mobile/App.tsx", "apps/mobile/App.test.tsx"],
+      "rules": [
+        "This legacy flow does not implement the target recommendation session, exposure, acceptance, rejection, or cooking lifecycle.",
+        "Do not lock the redesign to one visible dish before the cardinality gate passes.",
+        "Preserve complete loading, error, empty, and recovery states in any replacement.",
+        "Apply the design anti-slop creation review before visual handoff."
+      ],
+      "dependsOn": ["mobile-shell-current", "randomizer-history-current"],
+      "related": ["choice-cardinality-gate", "design-system-quality"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "mobile-manage-current",
+      "title": "Current mobile dish management flow",
+      "group": "Mobile",
+      "wikiSlug": "RandoMeal--Mobile--Manage-Flow",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Authenticated create, edit, list, filter, inspect, archive, and unarchive flows with owner-only feedback and manual form state.",
+      "tags": ["manage screen", "dish form", "crud", "archive", "управление блюдами"],
+      "sources": ["apps/mobile/src/screens/ManageScreen.tsx", "apps/mobile/src/components/AuthPanel.tsx", "apps/mobile/src/components/DishModal.tsx", "apps/mobile/App.tsx", "apps/mobile/App.test.tsx"],
+      "rules": [
+        "Creator-only backend ownership remains the authorization source regardless of visible UI actions.",
+        "Current manual form validation is not the target React Hook Form and shared Zod architecture.",
+        "Archive confirmation and owner feedback require regression coverage during decomposition.",
+        "This admin-like MVP surface is not evidence for final consumer navigation."
+      ],
+      "dependsOn": ["mobile-api-auth-current", "catalog-ownership-current"],
+      "related": ["design-system-quality"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "mobile-theme-current",
+      "title": "Current mobile theme and visual debt",
+      "group": "Mobile",
+      "wikiSlug": "RandoMeal--Mobile--Theme-Debt",
+      "status": "mixed",
+      "authority": "current-code-over-legacy-design-doc",
+      "summary": "Large global StyleSheet with hard-coded warm orange and cream values; semantic tokens, component primitives, Figma variables, themes, and accessibility state contracts are not yet implemented.",
+      "tags": ["theme", "styles", "tokens", "colors", "design debt", "тема", "стили", "токены"],
+      "sources": ["apps/mobile/src/theme/**", "DESIGN.md", "docs/product/quality-and-design.md"],
+      "rules": [
+        "Current code is orange and cream while DESIGN.md describes a legacy green Starbucks-like direction.",
+        "Product quality constraints and approved future brand choices override DESIGN.md.",
+        "Build semantic tokens and reusable state-complete components before screen-scale polish.",
+        "Figma and code must share token and component contracts."
+      ],
+      "dependsOn": ["design-system-quality", "mobile-shell-current"],
+      "related": ["legacy-documentation-map"],
+      "supersedes": ["legacy-documentation-map"],
+      "supersededBy": ["design-system-quality"]
+    },
+    {
+      "id": "analytics-measurement",
+      "title": "Analytics and measurement plan",
+      "group": "Analytics and Quality",
+      "wikiSlug": "RandoMeal--Analytics--Measurement",
+      "status": "target",
+      "authority": "accepted-analytics-design",
+      "summary": "Actor identity, event ownership, recommendation funnel, experiment dimensions, decision metrics, dashboards, privacy controls, outbox delivery, and observability boundaries.",
+      "tags": ["analytics", "posthog", "events", "metrics", "funnel", "experiment", "аналитика", "метрики"],
+      "sources": ["docs/product/analytics.md", "packages/contracts/src/product-v2.ts"],
+      "rules": [
+        "Measure decision success and time to start cooking rather than catalog engagement.",
+        "Server owns durable recommendation, exposure, acceptance, rejection, cooking, entitlement, and delivery events.",
+        "Client owns presentation and interaction UX events with stable actor and session correlation.",
+        "Do not send allergy details, sensitive free text, credentials, prompts, or raw model responses to analytics."
+      ],
+      "dependsOn": ["product-strategy", "choice-cardinality-gate", "target-data-model"],
+      "related": ["product-v2-contracts", "qa-strategy"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "design-system-quality",
+      "title": "Design system and product quality",
+      "group": "Analytics and Quality",
+      "wikiSlug": "RandoMeal--Design--System-and-Quality",
+      "status": "target",
+      "authority": "product-design-source-of-truth",
+      "summary": "Figma variables, semantic tokens, component contracts, accessibility, complete interaction states, content trust, responsive behavior, and anti-slop creation review.",
+      "tags": ["design", "figma", "tokens", "components", "accessibility", "anti slop", "дизайн", "фигма"],
+      "sources": ["docs/product/quality-and-design.md", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
+      "rules": [
+        "Use the design anti-slop skill for every Figma or user-facing UI task.",
+        "Product safety, accessibility, signed discovery decisions, project tokens, and approved brand choices override the anti-slop catalog.",
+        "New work requires creation review; existing work starts with audit unless immediate fixes are authorized.",
+        "DESIGN.md is legacy reference and cannot define the final brand or navigation."
+      ],
+      "dependsOn": ["product-strategy", "choice-cardinality-gate", "agent-governance"],
+      "related": ["qa-strategy", "mobile-theme-current"],
+      "supersedes": ["legacy-documentation-map", "mobile-theme-current"],
+      "supersededBy": []
+    },
+    {
+      "id": "qa-strategy",
+      "title": "QA, security, and release gates",
+      "group": "Analytics and Quality",
+      "wikiSlug": "RandoMeal--Quality--QA-Strategy",
+      "status": "mixed",
+      "authority": "accepted-quality-design-plus-current-tests",
+      "summary": "Current Jest and E2E suites plus target contract, Testcontainers, Maestro, accessibility, load, security, migration, analytics, and release acceptance gates.",
+      "tags": ["qa", "tests", "jest", "e2e", "maestro", "security", "тесты", "качество"],
+      "sources": ["docs/product/quality-and-design.md", "**/*.spec.ts", "**/*.test.tsx", "apps/api/test/**", "apps/mobile/jest*.js", "apps/mobile/jest.setup.ts"],
+      "rules": [
+        "Run narrow affected tests before full relevant workspace checks.",
+        "Current CI covers API build, unit coverage, mocked and real E2E, mobile Jest and typecheck, and a live contract smoke.",
+        "Target release gates add deterministic recommendations, migration/backfill, analytics integrity, accessibility, Maestro, k6, ZAP, and store-build checks.",
+        "Historical test counts and skipped smoke tests are not release evidence."
+      ],
+      "dependsOn": ["product-strategy", "ci-quality"],
+      "related": ["analytics-measurement", "design-system-quality"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "workspace-tooling",
+      "title": "Workspace runtime and tooling",
+      "group": "Delivery and Operations",
+      "wikiSlug": "RandoMeal--Tooling--Workspace",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "npm workspaces, pinned Node and npm policy, root and package scripts, TypeScript configuration, linting, lockfiles, and environment checks.",
+      "tags": ["npm", "workspace", "node", "typescript", "package", "tooling", "инструменты"],
+      "sources": ["package.json", "apps/*/package.json", "packages/*/package.json", "**/tsconfig*.json", ".nvmrc", ".npmrc", "**/package-lock.json", "apps/api/eslint.config.mjs", "apps/api/nest-cli.json", "scripts/check-node-version.mjs", "scripts/check-env-files.sh"],
+      "rules": [
+        "Use Node 20.19.4 and npm 10.8.2 for reproducible local and CI behavior.",
+        "Three lockfiles currently exist and require careful workspace dependency updates.",
+        "Root typecheck currently builds only the API; mobile typecheck is a separate command.",
+        "Do not add a new runtime dependency when a deterministic standard-library implementation is sufficient."
+      ],
+      "dependsOn": ["repository-inventory"],
+      "related": ["ci-quality", "local-infrastructure"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "ci-quality",
+      "title": "Continuous integration and test runners",
+      "group": "Delivery and Operations",
+      "wikiSlug": "RandoMeal--Delivery--CI",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "GitHub Actions API, mobile, and live contract jobs plus local headless, background, and mobile headful runners.",
+      "tags": ["ci", "github actions", "test runner", "coverage", "pipeline", "пайплайн"],
+      "sources": [".github/workflows/ci.yml", "scripts/run-tests*.sh", "scripts/run-mobile-headful.sh", "scripts/test-mobile-api-contract.mjs"],
+      "rules": [
+        "Knowledge validation must run before expensive build and test jobs.",
+        "API CI uses PostgreSQL 16 and applies current Prisma migrations before real E2E tests.",
+        "Mobile CI runs Jest and TypeScript no-emit checks.",
+        "The headless runner does not itself start the live API required by the contract smoke."
+      ],
+      "dependsOn": ["workspace-tooling", "knowledge-system"],
+      "related": ["qa-strategy", "production-infrastructure"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "local-infrastructure",
+      "title": "Local runtime and environment",
+      "group": "Delivery and Operations",
+      "wikiSlug": "RandoMeal--Infrastructure--Local",
+      "status": "current",
+      "authority": "current-code",
+      "summary": "Local PostgreSQL Docker Compose, API and mobile environment examples, runtime safety checks, and development setup documentation.",
+      "tags": ["docker compose", "environment", "postgres", "local", "env", "локальная среда"],
+      "sources": ["docker-compose.yml", ".env.example", "apps/api/.env.example", "apps/mobile/.env.example", "docs/environment.md", "apps/api/.dockerignore", "apps/mobile/.gitignore", ".gitignore"],
+      "rules": [
+        "Environment examples may expose key names and roles but never real secret values.",
+        "PostgreSQL 16 is the supported local and CI baseline.",
+        "Mobile cleartext development policy is controlled by app.config.ts and must align with its environment documentation.",
+        "Secrets and local environment files remain ignored and outside the knowledge index."
+      ],
+      "dependsOn": ["workspace-tooling"],
+      "related": ["production-infrastructure"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "production-infrastructure",
+      "title": "Production deployment and operations",
+      "group": "Delivery and Operations",
+      "wikiSlug": "RandoMeal--Infrastructure--Production",
+      "status": "current",
+      "authority": "current-code-and-runbooks",
+      "summary": "API container build, GHCR publication, Oracle VM SSH deployment, production Compose, startup migration behavior, HTTPS setup, and operational runbooks.",
+      "tags": ["deploy", "docker", "oracle", "ghcr", "https", "production", "деплой", "прод"],
+      "sources": ["apps/api/Dockerfile", "docker-compose.prod.yml", ".github/workflows/deploy.yml", "scripts/deploy-api.sh", "scripts/oracle-vm-bootstrap.sh", "docs/deployment-oracle.md", "docs/https-nginx-letsencrypt.md", "docs/releases/**"],
+      "rules": [
+        "The current deployment pulls an image and updates the Oracle VM through GitHub Actions and SSH.",
+        "Database migrations run as part of API startup and need zero-downtime compatibility discipline.",
+        "Production secrets are injected externally and must never enter repository or knowledge content.",
+        "Target Sentry, object storage, worker, PostHog, and RevenueCat operations are not current infrastructure."
+      ],
+      "dependsOn": ["workspace-tooling", "current-data-model"],
+      "related": ["ci-quality", "target-architecture"],
+      "supersedes": [],
+      "supersededBy": []
+    },
+    {
+      "id": "legacy-documentation-map",
+      "title": "Legacy and contradictory documentation map",
+      "group": "Legacy Reference",
+      "wikiSlug": "RandoMeal--Legacy--Documentation-Map",
+      "status": "legacy",
+      "authority": "reference-only",
+      "summary": "README, AI context, original architecture, API spec, and design documents that contain useful MVP context alongside superseded visual, route, capability, or implementation claims.",
+      "tags": ["legacy", "stale docs", "contradiction", "superseded", "устаревшее", "противоречие"],
+      "sources": ["README.md", "AI_CONTEXT.md", "DESIGN.md", "docs/api-spec.md", "docs/architecture.md", "apps/api/README.md", "apps/mobile/README.md"],
+      "rules": [
+        "Product discovery and product engineering documents supersede legacy product, brand, and target-architecture claims.",
+        "Current code supersedes legacy API and capability claims when implementation differs.",
+        "AI, vision, analytics, local cache, and provider-adapter statements in legacy docs may describe intent rather than shipped behavior.",
+        "Keep useful historical context but label it legacy before retrieval or reuse."
+      ],
+      "dependsOn": ["current-vs-target"],
+      "related": ["product-strategy", "api-legacy-surface", "mobile-theme-current"],
+      "supersedes": [],
+      "supersededBy": ["product-strategy", "target-architecture", "design-system-quality", "api-legacy-surface"]
+    }
+  ],
+  "routes": [
+    {
+      "id": "code-change",
+      "terms": ["code", "implementation", "refactor", "bug", "fix", "код", "изменение", "рефакторинг", "ошибка"],
+      "paths": ["apps/**", "packages/**", "scripts/**"],
+      "nodes": ["current-vs-target", "qa-strategy", "workspace-tooling"],
+      "required": ["agent-governance", "knowledge-system"]
+    },
+    {
+      "id": "backend-change",
+      "terms": ["backend", "nestjs", "controller", "service", "repository", "auth", "бэкенд", "авторизация"],
+      "paths": ["apps/api/**"],
+      "nodes": ["backend-bootstrap-current", "backend-auth-current", "catalog-ownership-current", "randomizer-history-current", "api-legacy-surface"],
+      "required": ["agent-governance", "qa-strategy"]
+    },
+    {
+      "id": "database-change",
+      "terms": ["database", "prisma", "migration", "schema", "postgres", "база", "миграция"],
+      "paths": ["apps/api/prisma/**"],
+      "nodes": ["current-data-model", "target-data-model", "seed-content"],
+      "required": ["agent-governance", "qa-strategy"]
+    },
+    {
+      "id": "mobile-change",
+      "terms": ["mobile", "expo", "react native", "screen", "component", "мобилка", "экран", "компонент"],
+      "paths": ["apps/mobile/**"],
+      "nodes": ["mobile-shell-current", "mobile-api-auth-current", "mobile-random-current", "mobile-manage-current"],
+      "required": ["agent-governance", "qa-strategy"]
+    },
+    {
+      "id": "design-change",
+      "terms": ["design", "figma", "ui", "ux", "theme", "token", "дизайн", "фигма", "интерфейс"],
+      "paths": ["apps/mobile/src/theme/**", "apps/mobile/src/components/**", "apps/mobile/src/screens/**", ".agents/skills/design-anti-slop/**"],
+      "nodes": ["design-system-quality", "mobile-theme-current", "choice-cardinality-gate"],
+      "required": ["agent-governance", "product-strategy"]
+    },
+    {
+      "id": "contracts-change",
+      "terms": ["api", "contract", "zod", "schema", "endpoint", "контракт", "эндпоинт"],
+      "paths": ["packages/contracts/**", "docs/product/api-v2.md", "docs/api-spec.md"],
+      "nodes": ["api-legacy-surface", "api-v2-contract", "legacy-contracts", "product-v2-contracts"],
+      "required": ["agent-governance", "qa-strategy"]
+    },
+    {
+      "id": "analytics-change",
+      "terms": ["analytics", "metric", "event", "posthog", "experiment", "аналитика", "метрика", "событие"],
+      "paths": ["docs/product/analytics.md"],
+      "nodes": ["analytics-measurement", "choice-cardinality-gate", "product-v2-contracts"],
+      "required": ["product-strategy", "agent-governance"]
+    },
+    {
+      "id": "delivery-change",
+      "terms": ["ci", "deploy", "release", "docker", "workflow", "деплой", "релиз", "пайплайн"],
+      "paths": [".github/**", "docker-compose*.yml", "scripts/**", "docs/deployment-oracle.md"],
+      "nodes": ["ci-quality", "production-infrastructure", "workspace-tooling", "delivery-roadmap"],
+      "required": ["agent-governance", "qa-strategy"]
+    },
+    {
+      "id": "knowledge-change",
+      "terms": ["knowledge", "catalog", "index", "wiki", "agent", "дерево знаний", "каталог", "агент"],
+      "paths": ["knowledge/**", "scripts/knowledge/**", ".agents/**", ".codex/**", "AGENTS.md"],
+      "nodes": ["knowledge-system", "repository-inventory", "agent-governance"],
+      "required": ["agent-governance"]
+    }
+  ]
+}

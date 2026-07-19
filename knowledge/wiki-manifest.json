@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "owner": "randomeal-knowledge",
+  "repository": "BadKirill/Food-Randomizer",
+  "contentFingerprint": "c0360ea67112661460fd2a02f9bf2baff91f8015102c238a10ce4196857ff07f",
+  "externalSync": {
+    "mode": "fail-closed",
+    "requiredCapability": "A connected MCP server with explicit GitHub Wiki page list, read, create, update, and post-write verification tools"
+  },
+  "pages": [
+    {
+      "file": "knowledge/wiki/Home.md",
+      "slug": "Home",
+      "sha256": "5bb57e77fcb88648a88f5014984db826df2b309d885120acee9cc404052cf162",
+      "nodeId": null
+    },
+    {
+      "file": "knowledge/wiki/_Sidebar.md",
+      "slug": "_Sidebar",
+      "sha256": "8e8715c19d0d2bbe4b5da72fc947cad5086b54eda551c73209104119c1f162f4",
+      "nodeId": null
+    },
+    {
+      "file": "knowledge/wiki/Knowledge-Protocol.md",
+      "slug": "Knowledge-Protocol",
+      "sha256": "009bf01f77e1caeb09b7dea597ea3c5fd45e3f4145e3196b02c116feb855aead",
+      "nodeId": null
+    },
+    {
+      "file": "knowledge/wiki/File-Index.md",
+      "slug": "File-Index",
+      "sha256": "c14b2b9c91c01762ad7bb66cb2f1b8d824013b2dae98dd6d6844c42ac908e8e6",
+      "nodeId": null
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Governance--Knowledge-System.md",
+      "slug": "RandoMeal--Governance--Knowledge-System",
+      "sha256": "139490f697115e013583feb522bda7be1716413aef575971828f595368496b2c",
+      "nodeId": "knowledge-system"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Governance--Agents.md",
+      "slug": "RandoMeal--Governance--Agents",
+      "sha256": "3f8cd1645a581ecdcfb0897e5c74cd2f6295b3609ce71f2f99c7e5509e0b1a5e",
+      "nodeId": "agent-governance"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Governance--Repository-Inventory.md",
+      "slug": "RandoMeal--Governance--Repository-Inventory",
+      "sha256": "0a370596a8f80d8bd6abe671aa7dae27ffc8e458b9928a40158198e611a49900",
+      "nodeId": "repository-inventory"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Product--Strategy.md",
+      "slug": "RandoMeal--Product--Strategy",
+      "sha256": "8852840a0bd54dcb3a14bc6d644dc7261836fd20efee6e41e6b94ed165793c89",
+      "nodeId": "product-strategy"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Product--Choice-Cardinality-Gate.md",
+      "slug": "RandoMeal--Product--Choice-Cardinality-Gate",
+      "sha256": "92d070a5c81ce5f1aef466956005aee1f0247a277cd1b4729974a61f123359a1",
+      "nodeId": "choice-cardinality-gate"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Product--Delivery-Roadmap.md",
+      "slug": "RandoMeal--Product--Delivery-Roadmap",
+      "sha256": "58d30cf766792bb647983360e25c7eb143f848da3f66c5f31f4c6898b3f3266c",
+      "nodeId": "delivery-roadmap"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Architecture--Target.md",
+      "slug": "RandoMeal--Architecture--Target",
+      "sha256": "683cd64fec2b87e3f16430229d6ac69f9c8353c54c114727841e153b0b0978e0",
+      "nodeId": "target-architecture"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Architecture--Current-vs-Target.md",
+      "slug": "RandoMeal--Architecture--Current-vs-Target",
+      "sha256": "84df89ba57cfcfdc044877fdb860ce50343782fee44f0059ee96e25356df4c02",
+      "nodeId": "current-vs-target"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Architecture--Recommendation-Engine.md",
+      "slug": "RandoMeal--Architecture--Recommendation-Engine",
+      "sha256": "292581e3e0f8576b512fc9b1b2576c1ce34dc57de19fffec67d7a277c5282d69",
+      "nodeId": "recommendation-engine-target"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Data--Current-Prisma.md",
+      "slug": "RandoMeal--Data--Current-Prisma",
+      "sha256": "f501a44884ca29c61d8b39ac1793e09a8433e1bb6d93bbb0a0a69eefa0dff90b",
+      "nodeId": "current-data-model"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Data--Target-Model.md",
+      "slug": "RandoMeal--Data--Target-Model",
+      "sha256": "b2d867314d5ffb17a6b6ee4157d104a4140402f67db4a069f774d63e2e64ee11",
+      "nodeId": "target-data-model"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Data--Seed-Content.md",
+      "slug": "RandoMeal--Data--Seed-Content",
+      "sha256": "3198f0967a8626e98c3ce237f08eefec9b34b3d68f0535a70ee91d9dd84113c3",
+      "nodeId": "seed-content"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--API--Current-Legacy-Surface.md",
+      "slug": "RandoMeal--API--Current-Legacy-Surface",
+      "sha256": "1f7cfaff9ef478467d18ca5643afe880fed0baeb2329a86998bb064027c1ca3e",
+      "nodeId": "api-legacy-surface"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--API--Target-v2.md",
+      "slug": "RandoMeal--API--Target-v2",
+      "sha256": "b6560ef8e285967de240a31cfabc3be302b0b7853a29eb655ca5706867e82f22",
+      "nodeId": "api-v2-contract"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Contracts--Legacy.md",
+      "slug": "RandoMeal--Contracts--Legacy",
+      "sha256": "64e4032d7b8ee6188036e709705638bcf2468f0605a826da9553099f4969e89f",
+      "nodeId": "legacy-contracts"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Contracts--Product-v2.md",
+      "slug": "RandoMeal--Contracts--Product-v2",
+      "sha256": "f1135f99dd19327de4528f4cb4adc760a64fb6806cc42dc82afffe981922aa69",
+      "nodeId": "product-v2-contracts"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Backend--Bootstrap.md",
+      "slug": "RandoMeal--Backend--Bootstrap",
+      "sha256": "b9800740f7abdaa9c6c4236635804cfd11e504f5d625b19df38807eb9742d3e7",
+      "nodeId": "backend-bootstrap-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Backend--Auth-Sessions.md",
+      "slug": "RandoMeal--Backend--Auth-Sessions",
+      "sha256": "38e698453e071a71c7fca52bad3f3bcfa72d125faf8c597c6a7a5feef351824b",
+      "nodeId": "backend-auth-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Backend--Catalog-Ownership.md",
+      "slug": "RandoMeal--Backend--Catalog-Ownership",
+      "sha256": "489757e43edb5dfba7c29310b523792fa9ad5cb356f550f528b3752b6774a76e",
+      "nodeId": "catalog-ownership-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Backend--Randomizer-History.md",
+      "slug": "RandoMeal--Backend--Randomizer-History",
+      "sha256": "950d51bb5c5b893fc6fac6ecbc77b3dd8e6d75b779dbf865cff3e147ce788d77",
+      "nodeId": "randomizer-history-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Backend--AI-Scaffold.md",
+      "slug": "RandoMeal--Backend--AI-Scaffold",
+      "sha256": "387c78264327b6811489324d316e7b15c4bebcf1d92d76d73036c09346554cad",
+      "nodeId": "backend-ai-scaffold"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Mobile--Current-Shell.md",
+      "slug": "RandoMeal--Mobile--Current-Shell",
+      "sha256": "7bd0c1781c23cab21281e205bedb47b1e081b155eaf6077204957695f3ea9738",
+      "nodeId": "mobile-shell-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Mobile--API-Auth.md",
+      "slug": "RandoMeal--Mobile--API-Auth",
+      "sha256": "891dd29d02a293100d045d251cbf7a515bcf3457d6c834ccb753e0a9c0f90832",
+      "nodeId": "mobile-api-auth-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Mobile--Random-Flow.md",
+      "slug": "RandoMeal--Mobile--Random-Flow",
+      "sha256": "d55186c2a269ec077d58ba7b43d7f7f40b39b1e4a6c49d0e00b77428d4020311",
+      "nodeId": "mobile-random-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Mobile--Manage-Flow.md",
+      "slug": "RandoMeal--Mobile--Manage-Flow",
+      "sha256": "a7d25c766c23c55783f70aa33d90ee0cf883a10272130c6a80508b5bd384b38d",
+      "nodeId": "mobile-manage-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Mobile--Theme-Debt.md",
+      "slug": "RandoMeal--Mobile--Theme-Debt",
+      "sha256": "76dbb430c592691205f9f0b028581fcc286e6b00ce9c6400a1cc60a33881a655",
+      "nodeId": "mobile-theme-current"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Analytics--Measurement.md",
+      "slug": "RandoMeal--Analytics--Measurement",
+      "sha256": "9b141bd9102b4e3b69021fe331db1805010cf8870a7943b32098476898b27bf1",
+      "nodeId": "analytics-measurement"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Design--System-and-Quality.md",
+      "slug": "RandoMeal--Design--System-and-Quality",
+      "sha256": "0bc352135e021567a6e5c736d7e061b45274c4680392bc727c7bc5edeac64c8f",
+      "nodeId": "design-system-quality"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Quality--QA-Strategy.md",
+      "slug": "RandoMeal--Quality--QA-Strategy",
+      "sha256": "d77d0dcb9ca0a9d0232bd42fe16ea874e0e8b460d66ce0c9748c8da9abcb0e96",
+      "nodeId": "qa-strategy"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Tooling--Workspace.md",
+      "slug": "RandoMeal--Tooling--Workspace",
+      "sha256": "c23a2b7ee6fdd6df45e36fcf028153f55403fa8f0936b3e518733cdf1b4f6363",
+      "nodeId": "workspace-tooling"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Delivery--CI.md",
+      "slug": "RandoMeal--Delivery--CI",
+      "sha256": "1d48d5568b8a3440130ca29d1edf80989f766a675c45040c96aa40cdfade6451",
+      "nodeId": "ci-quality"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Infrastructure--Local.md",
+      "slug": "RandoMeal--Infrastructure--Local",
+      "sha256": "94662b919325efb4c6681df9593df387bf89871c05ffc023516553ff5a770698",
+      "nodeId": "local-infrastructure"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Infrastructure--Production.md",
+      "slug": "RandoMeal--Infrastructure--Production",
+      "sha256": "8b89e56ad364acb592fd08d667d2079ea49520cba07635fd607e26f8bfd90559",
+      "nodeId": "production-infrastructure"
+    },
+    {
+      "file": "knowledge/wiki/RandoMeal--Legacy--Documentation-Map.md",
+      "slug": "RandoMeal--Legacy--Documentation-Map",
+      "sha256": "25beb3d72d530c9dac0a2dd8e7abe810c6263e206699777527534a2c89cd60cf",
+      "nodeId": "legacy-documentation-map"
+    }
+  ]
+}
