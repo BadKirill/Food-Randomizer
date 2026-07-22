@@ -7,6 +7,13 @@ function pageLink(title, slug) {
   return `[${title}](${slug})`;
 }
 
+function wikiPageTitle(file, content) {
+  const heading = /^#\s+(.+?)\s*$/m.exec(content)?.[1];
+  if (heading) return heading;
+  if (file === '_Sidebar.md') return 'Knowledge Navigation';
+  return basename(file, '.md').replaceAll('-', ' ');
+}
+
 function sourceList(files) {
   if (files.length === 0) return ['No current repository files are assigned.'];
   return files.map((file) => {
@@ -156,20 +163,27 @@ export function buildWikiPages(catalog, index) {
 
 export function buildWikiManifest(catalog, index, pages) {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     owner: 'randomeal-knowledge',
     repository: catalog.project.repository,
     contentFingerprint: index.contentFingerprint,
     externalSync: {
+      provider: catalog.syncPolicy.provider,
       mode: catalog.syncPolicy.mode,
       requiredCapability: catalog.syncPolicy.requiredCapability,
+      target: catalog.syncPolicy.target,
     },
-    pages: [...pages].map(([file, content]) => ({
-      file: `knowledge/wiki/${file}`,
-      slug: basename(file, '.md'),
-      sha256: sha256(content),
-      nodeId: catalog.nodes.find((node) => `${node.wikiSlug}.md` === file)?.id ?? null,
-    })),
+    pages: [...pages].map(([file, content]) => {
+      const node = catalog.nodes.find((candidate) => `${candidate.wikiSlug}.md` === file) ?? null;
+      return {
+        file: `knowledge/wiki/${file}`,
+        slug: basename(file, '.md'),
+        title: wikiPageTitle(file, content),
+        group: node?.group ?? 'System',
+        sha256: sha256(content),
+        nodeId: node?.id ?? null,
+      };
+    }),
   };
 }
 

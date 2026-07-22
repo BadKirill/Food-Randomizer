@@ -1,11 +1,11 @@
 interface:
   display_name: "RandoMeal Knowledge"
-  short_description: "Selective project knowledge retrieval and Wiki sync"
+  short_description: "Selective project knowledge and verified Notion Wiki sync"
   default_prompt: "Use $randomeal-knowledge to build a concise source-backed context packet for this RandoMeal task."
 policy:
   allow_implicit_invocation: true
 dependencies:
   tools:
     - type: "mcp"
-      value: "githubWiki"
-      description: "Native GitHub Wiki page list, read, create, update, and verification tools"
+      value: "notion"
+      description: "Notion identity, fetch, search, create-pages, update-page, and verification tools"

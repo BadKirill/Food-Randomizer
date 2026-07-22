@@ -47,6 +47,12 @@ jobs:
       - name: Knowledge graph freshness
         run: npm run knowledge:check
 
+      - name: Knowledge sync contract tests
+        run: npm run test:knowledge
+
+      - name: Verified Notion mirror state
+        run: npm run knowledge:notion:check
+
       - name: Generate Prisma Client
         run: npm run prisma:generate --workspace apps/api
 

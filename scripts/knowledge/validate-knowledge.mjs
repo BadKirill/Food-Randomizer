@@ -9,6 +9,11 @@ const index = readJson(indexPath);
 const nodeIds = new Set();
 const slugs = new Set();
 
+if (catalog.syncPolicy.provider !== 'notion') errors.push('Knowledge sync provider must be notion');
+if (!catalog.syncPolicy.target?.workspaceId) errors.push('Missing Notion workspace ID');
+if (!catalog.syncPolicy.target?.rootPageId) errors.push('Missing Notion root page ID');
+if (!catalog.syncPolicy.target?.rootPageUrl) errors.push('Missing Notion root page URL');
+
 for (const node of catalog.nodes) {
   if (nodeIds.has(node.id)) errors.push(`Duplicate node id: ${node.id}`);
   if (slugs.has(node.wikiSlug)) errors.push(`Duplicate Wiki slug: ${node.wikiSlug}`);
@@ -83,6 +88,9 @@ for (const [file, expected] of expectedPages) {
 const expectedManifest = buildWikiManifest(catalog, index, expectedPages);
 if (!existsSync(wikiManifestPath)) errors.push('Missing knowledge/wiki-manifest.json');
 else if (readFileSync(wikiManifestPath, 'utf8') !== stableJson(expectedManifest)) errors.push('knowledge/wiki-manifest.json is stale');
+
+const manifestTitles = expectedManifest.pages.map((page) => page.title);
+if (new Set(manifestTitles).size !== manifestTitles.length) errors.push('Duplicate managed Notion page title');
 
 if (errors.length > 0) {
   process.stderr.write(`${errors.map((error) => `- ${error}`).join('\n')}\n`);

@@ -1,15 +1,16 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "c0360ea67112661460fd2a02f9bf2baff91f8015102c238a10ce4196857ff07f",
+  "contentFingerprint": "c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d",
   "coverage": {
-    "repositoryFiles": 178,
-    "indexedFiles": 178,
+    "repositoryFiles": 184,
+    "indexedFiles": 184,
     "binaryFiles": 4,
-    "filesWithSections": 134,
+    "filesWithSections": 139,
     "generatedManaged": [
       "knowledge/index.json",
       "knowledge/wiki-manifest.json",
+      "knowledge/wiki-sync-state.json",
       "knowledge/wiki/_Sidebar.md",
       "knowledge/wiki/File-Index.md",
       "knowledge/wiki/Home.md",
@@ -56,21 +57,21 @@
       "asset": 4,
       "configuration": 25,
       "documentation": 20,
-      "generated": 40,
+      "generated": 41,
       "lockfile": 3,
       "migration": 7,
       "other": 1,
       "skill": 6,
       "source": 42,
-      "test": 14,
-      "tooling": 13
+      "test": 15,
+      "tooling": 17
     },
     "filesByLanguage": {
       "configuration": 5,
       "dockerfile": 1,
       "environment": 3,
-      "generated": 40,
-      "javascript": 11,
+      "generated": 41,
+      "javascript": 16,
       "json": 17,
       "markdown": 26,
       "prisma": 1,
@@ -83,9 +84,9 @@
       "yaml": 6
     },
     "filesByNode": {
-      "knowledge-system": 11,
+      "knowledge-system": 16,
       "agent-governance": 9,
-      "repository-inventory": 178,
+      "repository-inventory": 184,
       "product-strategy": 2,
       "choice-cardinality-gate": 3,
       "delivery-roadmap": 3,
@@ -118,10 +119,10 @@
       "production-infrastructure": 8,
       "legacy-documentation-map": 7
     },
-    "sections": 1136,
-    "symbols": 341,
+    "sections": 1170,
+    "symbols": 364,
     "routes": 13,
-    "localRelations": 84
+    "localRelations": 93
   },
   "files": [
     {
@@ -600,9 +601,9 @@
       "kind": "skill",
       "binary": false,
       "generated": false,
-      "bytes": 447,
+      "bytes": 456,
       "lines": 12,
-      "sha256": "1d99eaae348d4e8a35fcba20114ee44940d7b673f179659b65383a639efba5a9",
+      "sha256": "d1957248ac8e3537b0f26e8e3dd7d3a5b551ebec9a2a07172fa16204b40ae015",
       "summary": "10 indexed sections: interface, display_name, short_description, default_prompt, policy, …",
       "nodeIds": [
         "knowledge-system",
@@ -705,16 +706,16 @@
       "symbols": []
     },
     {
-      "id": "file:.agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md",
-      "path": ".agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md",
+      "id": "file:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md",
+      "path": ".agents/skills/randomeal-knowledge/references/notion-sync-protocol.md",
       "language": "markdown",
       "kind": "skill",
       "binary": false,
       "generated": false,
-      "bytes": 2073,
-      "lines": 43,
-      "sha256": "674c5c59c831aea6eec4140ccf92f95e0847fa472289293ca4593be12f17d706",
-      "summary": "5 indexed sections: Native GitHub Wiki MCP sync protocol, Preconditions, Upsert, Verification, Failure behavior",
+      "bytes": 4314,
+      "lines": 81,
+      "sha256": "e70f14d148e45627d302f2d7230f57c5623f5539f7585c54f8f8b53733caba0e",
+      "summary": "7 indexed sections: Verified Notion Wiki MCP sync protocol, Fixed target, Pre-change retrieval, Local preparation, Bootstrap and upsert, …",
       "nodeIds": [
         "knowledge-system",
         "agent-governance",
@@ -725,52 +726,68 @@
       "routes": [],
       "sections": [
         {
-          "id": "section:.agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md#1",
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#1",
           "kind": "file",
-          "title": ".agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md",
+          "title": ".agents/skills/randomeal-knowledge/references/notion-sync-protocol.md",
           "line": 1,
           "depth": 0,
-          "endLine": 43
+          "endLine": 81
         },
         {
-          "id": "section:.agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md#2",
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#2",
           "kind": "heading",
-          "title": "Native GitHub Wiki MCP sync protocol",
+          "title": "Verified Notion Wiki MCP sync protocol",
           "line": 1,
           "depth": 1,
-          "endLine": 43
+          "endLine": 81
         },
         {
-          "id": "section:.agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md#3",
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#3",
           "kind": "heading",
-          "title": "Preconditions",
+          "title": "Fixed target",
           "line": 6,
           "depth": 2,
-          "endLine": 16
+          "endLine": 19
         },
         {
-          "id": "section:.agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md#4",
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#4",
           "kind": "heading",
-          "title": "Upsert",
-          "line": 17,
+          "title": "Pre-change retrieval",
+          "line": 20,
           "depth": 2,
-          "endLine": 26
+          "endLine": 33
         },
         {
-          "id": "section:.agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md#5",
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#5",
           "kind": "heading",
-          "title": "Verification",
-          "line": 27,
+          "title": "Local preparation",
+          "line": 34,
           "depth": 2,
-          "endLine": 35
+          "endLine": 46
         },
         {
-          "id": "section:.agents/skills/randomeal-knowledge/references/wiki-sync-protocol.md#6",
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#6",
+          "kind": "heading",
+          "title": "Bootstrap and upsert",
+          "line": 47,
+          "depth": 2,
+          "endLine": 58
+        },
+        {
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#7",
+          "kind": "heading",
+          "title": "Verification and state",
+          "line": 59,
+          "depth": 2,
+          "endLine": 71
+        },
+        {
+          "id": "section:.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md#8",
           "kind": "heading",
           "title": "Failure behavior",
-          "line": 36,
+          "line": 72,
           "depth": 2,
-          "endLine": 43
+          "endLine": 81
         }
       ],
       "symbols": []
@@ -782,10 +799,10 @@
       "kind": "skill",
       "binary": false,
       "generated": false,
-      "bytes": 4852,
-      "lines": 95,
-      "sha256": "90b77d8e7b32104f6fbe092b666b33344a8436dcd249d3e835b72a20a56ce8d6",
-      "summary": "6 indexed sections: RandoMeal Knowledge, Retrieval workflow, Retrieval agent, Change lifecycle, External GitHub Wiki synchronization, …",
+      "bytes": 6344,
+      "lines": 113,
+      "sha256": "f23f8815c22c4f0e329e94006abaffbf0e7ca7882e8a152c20e5f80c69fc8d9c",
+      "summary": "6 indexed sections: RandoMeal Knowledge, Retrieval workflow, Retrieval agent, Change lifecycle, External Notion Wiki synchronization, …",
       "nodeIds": [
         "knowledge-system",
         "agent-governance",
@@ -801,7 +818,7 @@
           "title": ".agents/skills/randomeal-knowledge/SKILL.md",
           "line": 1,
           "depth": 0,
-          "endLine": 95
+          "endLine": 113
         },
         {
           "id": "section:.agents/skills/randomeal-knowledge/SKILL.md#2",
@@ -809,7 +826,7 @@
           "title": "RandoMeal Knowledge",
           "line": 6,
           "depth": 1,
-          "endLine": 95
+          "endLine": 113
         },
         {
           "id": "section:.agents/skills/randomeal-knowledge/SKILL.md#3",
@@ -817,39 +834,39 @@
           "title": "Retrieval workflow",
           "line": 12,
           "depth": 2,
-          "endLine": 38
+          "endLine": 44
         },
         {
           "id": "section:.agents/skills/randomeal-knowledge/SKILL.md#4",
           "kind": "heading",
           "title": "Retrieval agent",
-          "line": 39,
+          "line": 45,
           "depth": 2,
-          "endLine": 54
+          "endLine": 64
         },
         {
           "id": "section:.agents/skills/randomeal-knowledge/SKILL.md#5",
           "kind": "heading",
           "title": "Change lifecycle",
-          "line": 55,
+          "line": 65,
           "depth": 2,
-          "endLine": 70
+          "endLine": 84
         },
         {
           "id": "section:.agents/skills/randomeal-knowledge/SKILL.md#6",
           "kind": "heading",
-          "title": "External GitHub Wiki synchronization",
-          "line": 71,
+          "title": "External Notion Wiki synchronization",
+          "line": 85,
           "depth": 2,
-          "endLine": 84
+          "endLine": 100
         },
         {
           "id": "section:.agents/skills/randomeal-knowledge/SKILL.md#7",
           "kind": "heading",
           "title": "Handoff",
-          "line": 85,
+          "line": 101,
           "depth": 2,
-          "endLine": 95
+          "endLine": 113
         }
       ],
       "symbols": []
@@ -861,9 +878,9 @@
       "kind": "agent-rule",
       "binary": false,
       "generated": false,
-      "bytes": 1349,
-      "lines": 13,
-      "sha256": "0d120ea2f7f5c4adde405381fc2a05c9021f2d5c0fa0907e1f2726c109cd7c52",
+      "bytes": 1850,
+      "lines": 15,
+      "sha256": "31ae20b47f9e57dfb80cf2b6b61f245e978a7877f28e9fec7981d08a41d982aa",
       "summary": "toml file knowledge-retriever.toml",
       "nodeIds": [
         "knowledge-system",
@@ -880,7 +897,7 @@
           "title": ".codex/agents/knowledge-retriever.toml",
           "line": 1,
           "depth": 0,
-          "endLine": 13
+          "endLine": 15
         }
       ],
       "symbols": []
@@ -970,10 +987,10 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 4035,
-      "lines": 152,
-      "sha256": "496a1004283fde4be6980dc82b26fc90b603303910d604c8ef450d7ab0a9e1f3",
-      "summary": "106 indexed sections: name, on, pull_request, branches, push, …",
+      "bytes": 4204,
+      "lines": 158,
+      "sha256": "c7ddb530ca573ab844bc640490fffa6c4bf0839207c3c2fbd786d6cb05dcc602",
+      "summary": "110 indexed sections: name, on, pull_request, branches, push, …",
       "nodeIds": [
         "repository-inventory",
         "ci-quality"
@@ -988,7 +1005,7 @@
           "title": ".github/workflows/ci.yml",
           "line": 1,
           "depth": 0,
-          "endLine": 152
+          "endLine": 158
         },
         {
           "id": "section:.github/workflows/ci.yml#2",
@@ -1044,7 +1061,7 @@
           "title": "jobs",
           "line": 9,
           "depth": 1,
-          "endLine": 152
+          "endLine": 158
         },
         {
           "id": "section:.github/workflows/ci.yml#9",
@@ -1052,7 +1069,7 @@
           "title": "api",
           "line": 10,
           "depth": 2,
-          "endLine": 67
+          "endLine": 73
         },
         {
           "id": "section:.github/workflows/ci.yml#10",
@@ -1289,7 +1306,7 @@
         {
           "id": "section:.github/workflows/ci.yml#39",
           "kind": "step",
-          "title": "Generate Prisma Client",
+          "title": "Knowledge sync contract tests",
           "line": 50,
           "depth": 3,
           "endLine": 52
@@ -1305,7 +1322,7 @@
         {
           "id": "section:.github/workflows/ci.yml#41",
           "kind": "step",
-          "title": "Apply Prisma migrations",
+          "title": "Verified Notion mirror state",
           "line": 53,
           "depth": 3,
           "endLine": 55
@@ -1321,7 +1338,7 @@
         {
           "id": "section:.github/workflows/ci.yml#43",
           "kind": "step",
-          "title": "Build API",
+          "title": "Generate Prisma Client",
           "line": 56,
           "depth": 3,
           "endLine": 58
@@ -1337,7 +1354,7 @@
         {
           "id": "section:.github/workflows/ci.yml#45",
           "kind": "step",
-          "title": "API unit tests + coverage gate",
+          "title": "Apply Prisma migrations",
           "line": 59,
           "depth": 3,
           "endLine": 61
@@ -1353,7 +1370,7 @@
         {
           "id": "section:.github/workflows/ci.yml#47",
           "kind": "step",
-          "title": "API mocked e2e tests",
+          "title": "Build API",
           "line": 62,
           "depth": 3,
           "endLine": 64
@@ -1369,7 +1386,7 @@
         {
           "id": "section:.github/workflows/ci.yml#49",
           "kind": "step",
-          "title": "API real e2e tests (API <-> DB)",
+          "title": "API unit tests + coverage gate",
           "line": 65,
           "depth": 3,
           "endLine": 67
@@ -1384,128 +1401,128 @@
         },
         {
           "id": "section:.github/workflows/ci.yml#51",
-          "kind": "section",
-          "title": "mobile",
+          "kind": "step",
+          "title": "API mocked e2e tests",
           "line": 68,
-          "depth": 2,
-          "endLine": 89
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#52",
-          "kind": "section",
-          "title": "name",
-          "line": 69,
-          "depth": 3,
-          "endLine": 69
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#53",
-          "kind": "section",
-          "title": "runs-on",
-          "line": 70,
           "depth": 3,
           "endLine": 70
         },
         {
-          "id": "section:.github/workflows/ci.yml#54",
+          "id": "section:.github/workflows/ci.yml#52",
           "kind": "section",
-          "title": "steps",
+          "title": "run",
+          "line": 69,
+          "depth": 5,
+          "endLine": 70
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#53",
+          "kind": "step",
+          "title": "API real e2e tests (API <-> DB)",
           "line": 71,
           "depth": 3,
-          "endLine": 71
+          "endLine": 73
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#54",
+          "kind": "section",
+          "title": "run",
+          "line": 72,
+          "depth": 5,
+          "endLine": 73
         },
         {
           "id": "section:.github/workflows/ci.yml#55",
-          "kind": "step",
-          "title": "Checkout",
-          "line": 72,
-          "depth": 3,
-          "endLine": 74
+          "kind": "section",
+          "title": "mobile",
+          "line": 74,
+          "depth": 2,
+          "endLine": 95
         },
         {
           "id": "section:.github/workflows/ci.yml#56",
           "kind": "section",
-          "title": "uses",
-          "line": 73,
-          "depth": 5,
-          "endLine": 74
+          "title": "name",
+          "line": 75,
+          "depth": 3,
+          "endLine": 75
         },
         {
           "id": "section:.github/workflows/ci.yml#57",
-          "kind": "step",
-          "title": "Setup Node",
-          "line": 75,
+          "kind": "section",
+          "title": "runs-on",
+          "line": 76,
           "depth": 3,
-          "endLine": 80
+          "endLine": 76
         },
         {
           "id": "section:.github/workflows/ci.yml#58",
           "kind": "section",
-          "title": "uses",
-          "line": 76,
-          "depth": 5,
-          "endLine": 76
+          "title": "steps",
+          "line": 77,
+          "depth": 3,
+          "endLine": 77
         },
         {
           "id": "section:.github/workflows/ci.yml#59",
-          "kind": "section",
-          "title": "with",
-          "line": 77,
-          "depth": 5,
+          "kind": "step",
+          "title": "Checkout",
+          "line": 78,
+          "depth": 3,
           "endLine": 80
         },
         {
           "id": "section:.github/workflows/ci.yml#60",
           "kind": "section",
-          "title": "node-version",
-          "line": 78,
-          "depth": 6,
-          "endLine": 78
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#61",
-          "kind": "section",
-          "title": "cache",
+          "title": "uses",
           "line": 79,
-          "depth": 6,
+          "depth": 5,
           "endLine": 80
         },
         {
-          "id": "section:.github/workflows/ci.yml#62",
+          "id": "section:.github/workflows/ci.yml#61",
           "kind": "step",
-          "title": "Install dependencies",
+          "title": "Setup Node",
           "line": 81,
-          "depth": 3,
-          "endLine": 83
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#63",
-          "kind": "section",
-          "title": "run",
-          "line": 82,
-          "depth": 5,
-          "endLine": 83
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#64",
-          "kind": "step",
-          "title": "Mobile tests",
-          "line": 84,
           "depth": 3,
           "endLine": 86
         },
         {
+          "id": "section:.github/workflows/ci.yml#62",
+          "kind": "section",
+          "title": "uses",
+          "line": 82,
+          "depth": 5,
+          "endLine": 82
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#63",
+          "kind": "section",
+          "title": "with",
+          "line": 83,
+          "depth": 5,
+          "endLine": 86
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#64",
+          "kind": "section",
+          "title": "node-version",
+          "line": 84,
+          "depth": 6,
+          "endLine": 84
+        },
+        {
           "id": "section:.github/workflows/ci.yml#65",
           "kind": "section",
-          "title": "run",
+          "title": "cache",
           "line": 85,
-          "depth": 5,
+          "depth": 6,
           "endLine": 86
         },
         {
           "id": "section:.github/workflows/ci.yml#66",
           "kind": "step",
-          "title": "Mobile typecheck",
+          "title": "Install dependencies",
           "line": 87,
           "depth": 3,
           "endLine": 89
@@ -1520,240 +1537,240 @@
         },
         {
           "id": "section:.github/workflows/ci.yml#68",
-          "kind": "section",
-          "title": "app_api_contract",
+          "kind": "step",
+          "title": "Mobile tests",
           "line": 90,
-          "depth": 2,
-          "endLine": 152
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#69",
-          "kind": "section",
-          "title": "name",
-          "line": 91,
-          "depth": 3,
-          "endLine": 91
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#70",
-          "kind": "section",
-          "title": "runs-on",
-          "line": 92,
           "depth": 3,
           "endLine": 92
         },
         {
-          "id": "section:.github/workflows/ci.yml#71",
+          "id": "section:.github/workflows/ci.yml#69",
           "kind": "section",
-          "title": "services",
+          "title": "run",
+          "line": 91,
+          "depth": 5,
+          "endLine": 92
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#70",
+          "kind": "step",
+          "title": "Mobile typecheck",
           "line": 93,
           "depth": 3,
-          "endLine": 106
+          "endLine": 95
         },
         {
-          "id": "section:.github/workflows/ci.yml#72",
+          "id": "section:.github/workflows/ci.yml#71",
           "kind": "section",
-          "title": "postgres",
+          "title": "run",
           "line": 94,
-          "depth": 4,
-          "endLine": 106
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#73",
-          "kind": "section",
-          "title": "image",
-          "line": 95,
           "depth": 5,
           "endLine": 95
         },
         {
+          "id": "section:.github/workflows/ci.yml#72",
+          "kind": "section",
+          "title": "app_api_contract",
+          "line": 96,
+          "depth": 2,
+          "endLine": 158
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#73",
+          "kind": "section",
+          "title": "name",
+          "line": 97,
+          "depth": 3,
+          "endLine": 97
+        },
+        {
           "id": "section:.github/workflows/ci.yml#74",
           "kind": "section",
-          "title": "env",
-          "line": 96,
-          "depth": 5,
-          "endLine": 99
+          "title": "runs-on",
+          "line": 98,
+          "depth": 3,
+          "endLine": 98
         },
         {
           "id": "section:.github/workflows/ci.yml#75",
           "kind": "section",
-          "title": "POSTGRES_USER",
-          "line": 97,
-          "depth": 6,
-          "endLine": 97
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#76",
-          "kind": "section",
-          "title": "POSTGRES_PASSWORD",
-          "line": 98,
-          "depth": 6,
-          "endLine": 98
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#77",
-          "kind": "section",
-          "title": "POSTGRES_DB",
+          "title": "services",
           "line": 99,
-          "depth": 6,
-          "endLine": 99
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#78",
-          "kind": "section",
-          "title": "ports",
-          "line": 100,
-          "depth": 5,
-          "endLine": 101
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#79",
-          "kind": "section",
-          "title": "options",
-          "line": 102,
-          "depth": 5,
-          "endLine": 106
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#80",
-          "kind": "section",
-          "title": "env",
-          "line": 107,
-          "depth": 3,
-          "endLine": 111
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#81",
-          "kind": "section",
-          "title": "DATABASE_URL",
-          "line": 108,
-          "depth": 4,
-          "endLine": 108
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#82",
-          "kind": "section",
-          "title": "SESSION_SECRET",
-          "line": 109,
-          "depth": 4,
-          "endLine": 109
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#83",
-          "kind": "section",
-          "title": "DISHES_WRITE_TOKEN",
-          "line": 110,
-          "depth": 4,
-          "endLine": 110
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#84",
-          "kind": "section",
-          "title": "TEST_API_BASE_URL",
-          "line": 111,
-          "depth": 4,
-          "endLine": 111
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#85",
-          "kind": "section",
-          "title": "steps",
-          "line": 112,
           "depth": 3,
           "endLine": 112
         },
         {
-          "id": "section:.github/workflows/ci.yml#86",
-          "kind": "step",
-          "title": "Checkout",
+          "id": "section:.github/workflows/ci.yml#76",
+          "kind": "section",
+          "title": "postgres",
+          "line": 100,
+          "depth": 4,
+          "endLine": 112
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#77",
+          "kind": "section",
+          "title": "image",
+          "line": 101,
+          "depth": 5,
+          "endLine": 101
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#78",
+          "kind": "section",
+          "title": "env",
+          "line": 102,
+          "depth": 5,
+          "endLine": 105
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#79",
+          "kind": "section",
+          "title": "POSTGRES_USER",
+          "line": 103,
+          "depth": 6,
+          "endLine": 103
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#80",
+          "kind": "section",
+          "title": "POSTGRES_PASSWORD",
+          "line": 104,
+          "depth": 6,
+          "endLine": 104
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#81",
+          "kind": "section",
+          "title": "POSTGRES_DB",
+          "line": 105,
+          "depth": 6,
+          "endLine": 105
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#82",
+          "kind": "section",
+          "title": "ports",
+          "line": 106,
+          "depth": 5,
+          "endLine": 107
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#83",
+          "kind": "section",
+          "title": "options",
+          "line": 108,
+          "depth": 5,
+          "endLine": 112
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#84",
+          "kind": "section",
+          "title": "env",
           "line": 113,
           "depth": 3,
+          "endLine": 117
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#85",
+          "kind": "section",
+          "title": "DATABASE_URL",
+          "line": 114,
+          "depth": 4,
+          "endLine": 114
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#86",
+          "kind": "section",
+          "title": "SESSION_SECRET",
+          "line": 115,
+          "depth": 4,
           "endLine": 115
         },
         {
           "id": "section:.github/workflows/ci.yml#87",
           "kind": "section",
-          "title": "uses",
-          "line": 114,
-          "depth": 5,
-          "endLine": 115
+          "title": "DISHES_WRITE_TOKEN",
+          "line": 116,
+          "depth": 4,
+          "endLine": 116
         },
         {
           "id": "section:.github/workflows/ci.yml#88",
-          "kind": "step",
-          "title": "Setup Node",
-          "line": 116,
-          "depth": 3,
-          "endLine": 121
+          "kind": "section",
+          "title": "TEST_API_BASE_URL",
+          "line": 117,
+          "depth": 4,
+          "endLine": 117
         },
         {
           "id": "section:.github/workflows/ci.yml#89",
           "kind": "section",
-          "title": "uses",
-          "line": 117,
-          "depth": 5,
-          "endLine": 117
+          "title": "steps",
+          "line": 118,
+          "depth": 3,
+          "endLine": 118
         },
         {
           "id": "section:.github/workflows/ci.yml#90",
-          "kind": "section",
-          "title": "with",
-          "line": 118,
-          "depth": 5,
+          "kind": "step",
+          "title": "Checkout",
+          "line": 119,
+          "depth": 3,
           "endLine": 121
         },
         {
           "id": "section:.github/workflows/ci.yml#91",
           "kind": "section",
-          "title": "node-version",
-          "line": 119,
-          "depth": 6,
-          "endLine": 119
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#92",
-          "kind": "section",
-          "title": "cache",
+          "title": "uses",
           "line": 120,
-          "depth": 6,
+          "depth": 5,
           "endLine": 121
         },
         {
-          "id": "section:.github/workflows/ci.yml#93",
+          "id": "section:.github/workflows/ci.yml#92",
           "kind": "step",
-          "title": "Install dependencies",
+          "title": "Setup Node",
           "line": 122,
-          "depth": 3,
-          "endLine": 124
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#94",
-          "kind": "section",
-          "title": "run",
-          "line": 123,
-          "depth": 5,
-          "endLine": 124
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#95",
-          "kind": "step",
-          "title": "Generate Prisma Client",
-          "line": 125,
           "depth": 3,
           "endLine": 127
         },
         {
+          "id": "section:.github/workflows/ci.yml#93",
+          "kind": "section",
+          "title": "uses",
+          "line": 123,
+          "depth": 5,
+          "endLine": 123
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#94",
+          "kind": "section",
+          "title": "with",
+          "line": 124,
+          "depth": 5,
+          "endLine": 127
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#95",
+          "kind": "section",
+          "title": "node-version",
+          "line": 125,
+          "depth": 6,
+          "endLine": 125
+        },
+        {
           "id": "section:.github/workflows/ci.yml#96",
           "kind": "section",
-          "title": "run",
+          "title": "cache",
           "line": 126,
-          "depth": 5,
+          "depth": 6,
           "endLine": 127
         },
         {
           "id": "section:.github/workflows/ci.yml#97",
           "kind": "step",
-          "title": "Apply Prisma migrations",
+          "title": "Install dependencies",
           "line": 128,
           "depth": 3,
           "endLine": 130
@@ -1769,7 +1786,7 @@
         {
           "id": "section:.github/workflows/ci.yml#99",
           "kind": "step",
-          "title": "Build API",
+          "title": "Generate Prisma Client",
           "line": 131,
           "depth": 3,
           "endLine": 133
@@ -1785,10 +1802,10 @@
         {
           "id": "section:.github/workflows/ci.yml#101",
           "kind": "step",
-          "title": "Start API in background",
+          "title": "Apply Prisma migrations",
           "line": 134,
           "depth": 3,
-          "endLine": 145
+          "endLine": 136
         },
         {
           "id": "section:.github/workflows/ci.yml#102",
@@ -1796,47 +1813,79 @@
           "title": "run",
           "line": 135,
           "depth": 5,
-          "endLine": 145
+          "endLine": 136
         },
         {
           "id": "section:.github/workflows/ci.yml#103",
           "kind": "step",
-          "title": "Run app <-> API contract tests",
-          "line": 146,
+          "title": "Build API",
+          "line": 137,
           "depth": 3,
-          "endLine": 148
+          "endLine": 139
         },
         {
           "id": "section:.github/workflows/ci.yml#104",
           "kind": "section",
           "title": "run",
-          "line": 147,
+          "line": 138,
           "depth": 5,
-          "endLine": 148
+          "endLine": 139
         },
         {
           "id": "section:.github/workflows/ci.yml#105",
           "kind": "step",
-          "title": "API logs (on failure)",
-          "line": 149,
+          "title": "Start API in background",
+          "line": 140,
           "depth": 3,
-          "endLine": 152
+          "endLine": 151
         },
         {
           "id": "section:.github/workflows/ci.yml#106",
           "kind": "section",
-          "title": "if",
-          "line": 150,
+          "title": "run",
+          "line": 141,
           "depth": 5,
-          "endLine": 150
+          "endLine": 151
         },
         {
           "id": "section:.github/workflows/ci.yml#107",
+          "kind": "step",
+          "title": "Run app <-> API contract tests",
+          "line": 152,
+          "depth": 3,
+          "endLine": 154
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#108",
           "kind": "section",
           "title": "run",
-          "line": 151,
+          "line": 153,
           "depth": 5,
-          "endLine": 152
+          "endLine": 154
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#109",
+          "kind": "step",
+          "title": "API logs (on failure)",
+          "line": 155,
+          "depth": 3,
+          "endLine": 158
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#110",
+          "kind": "section",
+          "title": "if",
+          "line": 156,
+          "depth": 5,
+          "endLine": 156
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#111",
+          "kind": "section",
+          "title": "run",
+          "line": 157,
+          "depth": 5,
+          "endLine": 158
         }
       ],
       "symbols": []
@@ -2544,9 +2593,9 @@
       "kind": "agent-rule",
       "binary": false,
       "generated": false,
-      "bytes": 2995,
-      "lines": 48,
-      "sha256": "945f82cd7e56594d4dc306ec1bdfb365ff6a70f69832ecfccb919f2dcc06aee5",
+      "bytes": 3744,
+      "lines": 56,
+      "sha256": "fd2ba91037cb9c24247bb8a5a7a77728b68c949e029470b7716473a50ee74058",
       "summary": "5 indexed sections: RandoMeal agent instructions, Mandatory knowledge workflow, Mandatory design workflow, Repository safety, Source code comments",
       "nodeIds": [
         "agent-governance",
@@ -2562,7 +2611,7 @@
           "title": "AGENTS.md",
           "line": 1,
           "depth": 0,
-          "endLine": 48
+          "endLine": 56
         },
         {
           "id": "section:AGENTS.md#2",
@@ -2570,7 +2619,7 @@
           "title": "RandoMeal agent instructions",
           "line": 1,
           "depth": 1,
-          "endLine": 48
+          "endLine": 56
         },
         {
           "id": "section:AGENTS.md#3",
@@ -2578,31 +2627,31 @@
           "title": "Mandatory knowledge workflow",
           "line": 3,
           "depth": 2,
-          "endLine": 21
+          "endLine": 29
         },
         {
           "id": "section:AGENTS.md#4",
           "kind": "heading",
           "title": "Mandatory design workflow",
-          "line": 22,
+          "line": 30,
           "depth": 2,
-          "endLine": 34
+          "endLine": 42
         },
         {
           "id": "section:AGENTS.md#5",
           "kind": "heading",
           "title": "Repository safety",
-          "line": 35,
+          "line": 43,
           "depth": 2,
-          "endLine": 40
+          "endLine": 48
         },
         {
           "id": "section:AGENTS.md#6",
           "kind": "heading",
           "title": "Source code comments",
-          "line": 41,
+          "line": 49,
           "depth": 2,
-          "endLine": 48
+          "endLine": 56
         }
       ],
       "symbols": []
@@ -12423,9 +12472,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 49669,
-      "lines": 820,
-      "sha256": "3eb4ebf653c68cbaf8686be591f411fdc024f2bfa25643e3e878b53e257d912d",
+      "bytes": 50543,
+      "lines": 830,
+      "sha256": "076677e3756dbda25c09a885012c440d8f9a9b49972d9ff2cbeedd8a86f92569",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -12441,7 +12490,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 820
+          "endLine": 830
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -12465,31 +12514,31 @@
           "title": "readingPolicy",
           "line": 8,
           "depth": 1,
-          "endLine": 24
+          "endLine": 25
         },
         {
           "id": "section:knowledge/catalog.json#5",
           "kind": "key",
           "title": "syncPolicy",
-          "line": 25,
+          "line": 26,
           "depth": 1,
-          "endLine": 37
+          "endLine": 47
         },
         {
           "id": "section:knowledge/catalog.json#6",
           "kind": "key",
           "title": "nodes",
-          "line": 38,
+          "line": 48,
           "depth": 1,
-          "endLine": 753
+          "endLine": 763
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 754,
+          "line": 764,
           "depth": 1,
-          "endLine": 820
+          "endLine": 830
         }
       ],
       "symbols": []
@@ -12520,10 +12569,10 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 2261,
-      "lines": 52,
-      "sha256": "0ef98574d100953d26e00aaf095da002693e44c7f0270b7c8b2d14dc49ecb02d",
-      "summary": "5 indexed sections: RandoMeal repository knowledge graph, Canonical and generated files, Selective retrieval, Update lifecycle, External GitHub Wiki",
+      "bytes": 2780,
+      "lines": 57,
+      "sha256": "7ffc07e4e9e7da58955e273dea78c01b462db9439249d406abe1042ffd5c2d2c",
+      "summary": "5 indexed sections: RandoMeal repository knowledge graph, Canonical and generated files, Selective retrieval, Update lifecycle, External Notion Wiki",
       "nodeIds": [
         "knowledge-system",
         "repository-inventory"
@@ -12538,7 +12587,7 @@
           "title": "knowledge/README.md",
           "line": 1,
           "depth": 0,
-          "endLine": 52
+          "endLine": 57
         },
         {
           "id": "section:knowledge/README.md#2",
@@ -12546,7 +12595,7 @@
           "title": "RandoMeal repository knowledge graph",
           "line": 1,
           "depth": 1,
-          "endLine": 52
+          "endLine": 57
         },
         {
           "id": "section:knowledge/README.md#3",
@@ -12554,31 +12603,31 @@
           "title": "Canonical and generated files",
           "line": 5,
           "depth": 2,
-          "endLine": 16
+          "endLine": 17
         },
         {
           "id": "section:knowledge/README.md#4",
           "kind": "heading",
           "title": "Selective retrieval",
-          "line": 17,
+          "line": 18,
           "depth": 2,
-          "endLine": 28
+          "endLine": 30
         },
         {
           "id": "section:knowledge/README.md#5",
           "kind": "heading",
           "title": "Update lifecycle",
-          "line": 29,
+          "line": 31,
           "depth": 2,
-          "endLine": 41
+          "endLine": 46
         },
         {
           "id": "section:knowledge/README.md#6",
           "kind": "heading",
-          "title": "External GitHub Wiki",
-          "line": 42,
+          "title": "External Notion Wiki",
+          "line": 47,
           "depth": 2,
-          "endLine": 52
+          "endLine": 57
         }
       ],
       "symbols": []
@@ -12586,6 +12635,25 @@
     {
       "id": "file:knowledge/wiki-manifest.json",
       "path": "knowledge/wiki-manifest.json",
+      "language": "generated",
+      "kind": "generated",
+      "binary": false,
+      "generated": true,
+      "bytes": null,
+      "lines": null,
+      "sha256": null,
+      "summary": "Managed output validated by deterministic re-render",
+      "nodeIds": [
+        "repository-inventory"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": []
+    },
+    {
+      "id": "file:knowledge/wiki-sync-state.json",
+      "path": "knowledge/wiki-sync-state.json",
       "language": "generated",
       "kind": "generated",
       "binary": false,
@@ -13401,9 +13469,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 2212,
-      "lines": 51,
-      "sha256": "1123bb31118d9111c6d0d2b64a35382e100edee598ba2c00c9021623a5652765",
+      "bytes": 2516,
+      "lines": 55,
+      "sha256": "84c82d10a2855c5ee73848316e230260d1f4fc36a03dcdfcc761339bd95a6ff3",
       "summary": "8 indexed sections: name, private, version, engines, packageManager, …",
       "nodeIds": [
         "repository-inventory",
@@ -13419,7 +13487,7 @@
           "title": "package.json",
           "line": 1,
           "depth": 0,
-          "endLine": 51
+          "endLine": 55
         },
         {
           "id": "section:package.json#2",
@@ -13475,15 +13543,15 @@
           "title": "scripts",
           "line": 13,
           "depth": 1,
-          "endLine": 44
+          "endLine": 48
         },
         {
           "id": "section:package.json#9",
           "kind": "key",
           "title": "dependencies",
-          "line": 45,
+          "line": 49,
           "depth": 1,
-          "endLine": 51
+          "endLine": 55
         }
       ],
       "symbols": []
@@ -14816,10 +14884,10 @@
       "kind": "tooling",
       "binary": false,
       "generated": false,
-      "bytes": 16762,
-      "lines": 446,
-      "sha256": "f1c8cfbc15d851e91cbb786117cd2dd8d4ca65ce367fd6c7308c62feec0021ee",
-      "summary": "34 indexed sections: rootDir, catalogPath, indexPath, wikiDir, wikiManifestPath, …",
+      "bytes": 16844,
+      "lines": 447,
+      "sha256": "505f758e4cd6e885300f3e7cd4614470e9e2fb8be88de06e6f03f04fdfda0983",
+      "summary": "35 indexed sections: rootDir, catalogPath, indexPath, wikiDir, wikiManifestPath, …",
       "nodeIds": [
         "knowledge-system",
         "repository-inventory"
@@ -14840,7 +14908,7 @@
           "title": "scripts/knowledge/lib.mjs",
           "line": 1,
           "depth": 0,
-          "endLine": 446
+          "endLine": 447
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#2",
@@ -14880,239 +14948,247 @@
           "title": "wikiManifestPath",
           "line": 11,
           "depth": 1,
-          "endLine": 52
+          "endLine": 11
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#7",
-          "kind": "function",
-          "title": "sha256",
-          "line": 53,
+          "kind": "export",
+          "title": "wikiSyncStatePath",
+          "line": 12,
           "depth": 1,
-          "endLine": 56
+          "endLine": 53
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#8",
           "kind": "function",
-          "title": "readJson",
-          "line": 57,
+          "title": "sha256",
+          "line": 54,
           "depth": 1,
-          "endLine": 60
+          "endLine": 57
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#9",
           "kind": "function",
-          "title": "stableJson",
-          "line": 61,
+          "title": "readJson",
+          "line": 58,
           "depth": 1,
-          "endLine": 64
+          "endLine": 61
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#10",
           "kind": "function",
-          "title": "toRepoPath",
-          "line": 65,
+          "title": "stableJson",
+          "line": 62,
           "depth": 1,
-          "endLine": 68
+          "endLine": 65
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#11",
           "kind": "function",
-          "title": "globToRegex",
-          "line": 69,
+          "title": "toRepoPath",
+          "line": 66,
           "depth": 1,
-          "endLine": 93
+          "endLine": 69
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#12",
           "kind": "function",
-          "title": "matchesGlob",
-          "line": 94,
+          "title": "globToRegex",
+          "line": 70,
           "depth": 1,
-          "endLine": 97
+          "endLine": 94
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#13",
           "kind": "function",
-          "title": "isGeneratedPath",
-          "line": 98,
+          "title": "matchesGlob",
+          "line": 95,
           "depth": 1,
-          "endLine": 101
+          "endLine": 98
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#14",
           "kind": "function",
-          "title": "listRepositoryFiles",
-          "line": 102,
+          "title": "isGeneratedPath",
+          "line": 99,
           "depth": 1,
-          "endLine": 115
+          "endLine": 102
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#15",
           "kind": "function",
-          "title": "languageForPath",
-          "line": 116,
+          "title": "listRepositoryFiles",
+          "line": 103,
           "depth": 1,
-          "endLine": 125
+          "endLine": 116
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#16",
           "kind": "function",
-          "title": "kindForPath",
-          "line": 126,
+          "title": "languageForPath",
+          "line": 117,
           "depth": 1,
-          "endLine": 141
+          "endLine": 126
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#17",
           "kind": "function",
-          "title": "isBinary",
-          "line": 142,
+          "title": "kindForPath",
+          "line": 127,
           "depth": 1,
-          "endLine": 145
+          "endLine": 142
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#18",
           "kind": "function",
-          "title": "lineOfOffset",
-          "line": 146,
+          "title": "isBinary",
+          "line": 143,
           "depth": 1,
-          "endLine": 149
+          "endLine": 146
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#19",
           "kind": "function",
-          "title": "finalizeSections",
-          "line": 150,
+          "title": "lineOfOffset",
+          "line": 147,
           "depth": 1,
-          "endLine": 163
+          "endLine": 150
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#20",
           "kind": "function",
-          "title": "markdownSections",
-          "line": 164,
+          "title": "finalizeSections",
+          "line": 151,
           "depth": 1,
-          "endLine": 181
+          "endLine": 164
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#21",
           "kind": "function",
-          "title": "codeSections",
-          "line": 182,
+          "title": "markdownSections",
+          "line": 165,
           "depth": 1,
-          "endLine": 206
+          "endLine": 182
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#22",
           "kind": "function",
-          "title": "prismaSections",
-          "line": 207,
+          "title": "codeSections",
+          "line": 183,
           "depth": 1,
-          "endLine": 215
+          "endLine": 207
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#23",
           "kind": "function",
-          "title": "sqlSections",
-          "line": 216,
+          "title": "prismaSections",
+          "line": 208,
           "depth": 1,
-          "endLine": 224
+          "endLine": 216
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#24",
           "kind": "function",
-          "title": "configSections",
-          "line": 225,
+          "title": "sqlSections",
+          "line": 217,
           "depth": 1,
-          "endLine": 248
+          "endLine": 225
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#25",
           "kind": "function",
-          "title": "jsonSections",
-          "line": 249,
+          "title": "configSections",
+          "line": 226,
           "depth": 1,
-          "endLine": 263
+          "endLine": 249
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#26",
           "kind": "function",
-          "title": "extractSections",
-          "line": 264,
+          "title": "jsonSections",
+          "line": 250,
           "depth": 1,
-          "endLine": 285
+          "endLine": 264
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#27",
           "kind": "function",
-          "title": "extractImports",
-          "line": 286,
+          "title": "extractSections",
+          "line": 265,
           "depth": 1,
-          "endLine": 299
+          "endLine": 286
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#28",
           "kind": "function",
-          "title": "extractRoutes",
-          "line": 300,
+          "title": "extractImports",
+          "line": 287,
           "depth": 1,
-          "endLine": 311
+          "endLine": 300
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#29",
           "kind": "function",
-          "title": "summarizeFile",
-          "line": 312,
+          "title": "extractRoutes",
+          "line": 301,
           "depth": 1,
-          "endLine": 322
+          "endLine": 312
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#30",
           "kind": "function",
-          "title": "resolveImport",
-          "line": 323,
+          "title": "summarizeFile",
+          "line": 313,
           "depth": 1,
-          "endLine": 339
+          "endLine": 323
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#31",
           "kind": "function",
-          "title": "catalogNodeIdsForPath",
-          "line": 340,
+          "title": "resolveImport",
+          "line": 324,
           "depth": 1,
-          "endLine": 345
+          "endLine": 340
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#32",
           "kind": "function",
-          "title": "buildIndex",
-          "line": 346,
+          "title": "catalogNodeIdsForPath",
+          "line": 341,
           "depth": 1,
-          "endLine": 429
+          "endLine": 346
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#33",
           "kind": "function",
-          "title": "filesForNode",
-          "line": 430,
+          "title": "buildIndex",
+          "line": 347,
           "depth": 1,
-          "endLine": 433
+          "endLine": 430
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#34",
           "kind": "function",
-          "title": "nodeById",
-          "line": 434,
+          "title": "filesForNode",
+          "line": 431,
           "depth": 1,
-          "endLine": 437
+          "endLine": 434
         },
         {
           "id": "section:scripts/knowledge/lib.mjs#35",
           "kind": "function",
-          "title": "relatedNodeIds",
-          "line": 438,
+          "title": "nodeById",
+          "line": 435,
           "depth": 1,
-          "endLine": 446
+          "endLine": 438
+        },
+        {
+          "id": "section:scripts/knowledge/lib.mjs#36",
+          "kind": "function",
+          "title": "relatedNodeIds",
+          "line": 439,
+          "depth": 1,
+          "endLine": 447
         }
       ],
       "symbols": [
@@ -15149,212 +15225,631 @@
           "kind": "export",
           "name": "wikiManifestPath",
           "line": 11,
-          "endLine": 52
+          "endLine": 11
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:sha256:53",
+          "id": "symbol:scripts/knowledge/lib.mjs#export:wikiSyncStatePath:12",
+          "kind": "export",
+          "name": "wikiSyncStatePath",
+          "line": 12,
+          "endLine": 53
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:sha256:54",
           "kind": "function",
           "name": "sha256",
-          "line": 53,
-          "endLine": 56
+          "line": 54,
+          "endLine": 57
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:readJson:57",
+          "id": "symbol:scripts/knowledge/lib.mjs#function:readJson:58",
           "kind": "function",
           "name": "readJson",
-          "line": 57,
-          "endLine": 60
+          "line": 58,
+          "endLine": 61
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:stableJson:61",
+          "id": "symbol:scripts/knowledge/lib.mjs#function:stableJson:62",
           "kind": "function",
           "name": "stableJson",
-          "line": 61,
-          "endLine": 64
+          "line": 62,
+          "endLine": 65
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:toRepoPath:65",
+          "id": "symbol:scripts/knowledge/lib.mjs#function:toRepoPath:66",
           "kind": "function",
           "name": "toRepoPath",
-          "line": 65,
-          "endLine": 68
+          "line": 66,
+          "endLine": 69
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:globToRegex:69",
+          "id": "symbol:scripts/knowledge/lib.mjs#function:globToRegex:70",
           "kind": "function",
           "name": "globToRegex",
-          "line": 69,
+          "line": 70,
+          "endLine": 94
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:matchesGlob:95",
+          "kind": "function",
+          "name": "matchesGlob",
+          "line": 95,
+          "endLine": 98
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:isGeneratedPath:99",
+          "kind": "function",
+          "name": "isGeneratedPath",
+          "line": 99,
+          "endLine": 102
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:listRepositoryFiles:103",
+          "kind": "function",
+          "name": "listRepositoryFiles",
+          "line": 103,
+          "endLine": 116
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:languageForPath:117",
+          "kind": "function",
+          "name": "languageForPath",
+          "line": 117,
+          "endLine": 126
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:kindForPath:127",
+          "kind": "function",
+          "name": "kindForPath",
+          "line": 127,
+          "endLine": 142
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:isBinary:143",
+          "kind": "function",
+          "name": "isBinary",
+          "line": 143,
+          "endLine": 146
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:lineOfOffset:147",
+          "kind": "function",
+          "name": "lineOfOffset",
+          "line": 147,
+          "endLine": 150
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:finalizeSections:151",
+          "kind": "function",
+          "name": "finalizeSections",
+          "line": 151,
+          "endLine": 164
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:markdownSections:165",
+          "kind": "function",
+          "name": "markdownSections",
+          "line": 165,
+          "endLine": 182
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:codeSections:183",
+          "kind": "function",
+          "name": "codeSections",
+          "line": 183,
+          "endLine": 207
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:prismaSections:208",
+          "kind": "function",
+          "name": "prismaSections",
+          "line": 208,
+          "endLine": 216
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:sqlSections:217",
+          "kind": "function",
+          "name": "sqlSections",
+          "line": 217,
+          "endLine": 225
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:configSections:226",
+          "kind": "function",
+          "name": "configSections",
+          "line": 226,
+          "endLine": 249
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:jsonSections:250",
+          "kind": "function",
+          "name": "jsonSections",
+          "line": 250,
+          "endLine": 264
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:extractSections:265",
+          "kind": "function",
+          "name": "extractSections",
+          "line": 265,
+          "endLine": 286
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:extractImports:287",
+          "kind": "function",
+          "name": "extractImports",
+          "line": 287,
+          "endLine": 300
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:extractRoutes:301",
+          "kind": "function",
+          "name": "extractRoutes",
+          "line": 301,
+          "endLine": 312
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:summarizeFile:313",
+          "kind": "function",
+          "name": "summarizeFile",
+          "line": 313,
+          "endLine": 323
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:resolveImport:324",
+          "kind": "function",
+          "name": "resolveImport",
+          "line": 324,
+          "endLine": 340
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:catalogNodeIdsForPath:341",
+          "kind": "function",
+          "name": "catalogNodeIdsForPath",
+          "line": 341,
+          "endLine": 346
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:buildIndex:347",
+          "kind": "function",
+          "name": "buildIndex",
+          "line": 347,
+          "endLine": 430
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:filesForNode:431",
+          "kind": "function",
+          "name": "filesForNode",
+          "line": 431,
+          "endLine": 434
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:nodeById:435",
+          "kind": "function",
+          "name": "nodeById",
+          "line": 435,
+          "endLine": 438
+        },
+        {
+          "id": "symbol:scripts/knowledge/lib.mjs#function:relatedNodeIds:439",
+          "kind": "function",
+          "name": "relatedNodeIds",
+          "line": 439,
+          "endLine": 447
+        }
+      ]
+    },
+    {
+      "id": "file:scripts/knowledge/notion-sync.mjs",
+      "path": "scripts/knowledge/notion-sync.mjs",
+      "language": "javascript",
+      "kind": "tooling",
+      "binary": false,
+      "generated": false,
+      "bytes": 8283,
+      "lines": 197,
+      "sha256": "94a1abc40ceaf694c4ed38e2c4649960545d8cba16b00c28deb70bb47841b810",
+      "summary": "14 indexed sections: managedOwner, normalizeLineEndings, canonicalNotionBody, stripPageTitle, tableCells, …",
+      "nodeIds": [
+        "knowledge-system",
+        "repository-inventory"
+      ],
+      "imports": [
+        "./lib.mjs"
+      ],
+      "localDependencies": [
+        "scripts/knowledge/lib.mjs"
+      ],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#1",
+          "kind": "file",
+          "title": "scripts/knowledge/notion-sync.mjs",
+          "line": 1,
+          "depth": 0,
+          "endLine": 197
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#2",
+          "kind": "export",
+          "title": "managedOwner",
+          "line": 3,
+          "depth": 1,
+          "endLine": 4
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#3",
+          "kind": "function",
+          "title": "normalizeLineEndings",
+          "line": 5,
+          "depth": 1,
+          "endLine": 8
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#4",
+          "kind": "function",
+          "title": "canonicalNotionBody",
+          "line": 9,
+          "depth": 1,
+          "endLine": 20
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#5",
+          "kind": "function",
+          "title": "stripPageTitle",
+          "line": 21,
+          "depth": 1,
+          "endLine": 27
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#6",
+          "kind": "function",
+          "title": "tableCells",
+          "line": 28,
+          "depth": 1,
+          "endLine": 46
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#7",
+          "kind": "function",
+          "title": "isTableSeparator",
+          "line": 47,
+          "depth": 1,
+          "endLine": 51
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#8",
+          "kind": "function",
+          "title": "convertMarkdownTables",
+          "line": 52,
+          "depth": 1,
+          "endLine": 77
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#9",
+          "kind": "function",
+          "title": "rewriteManagedLinks",
+          "line": 78,
+          "depth": 1,
+          "endLine": 86
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#10",
+          "kind": "function",
+          "title": "normalizeListIndentation",
+          "line": 87,
+          "depth": 1,
+          "endLine": 90
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#11",
+          "kind": "function",
+          "title": "buildManagedNotionPayload",
+          "line": 91,
+          "depth": 1,
+          "endLine": 107
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#12",
+          "kind": "function",
+          "title": "parseNotionFetchText",
+          "line": 108,
+          "depth": 1,
+          "endLine": 140
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#13",
+          "kind": "function",
+          "title": "verifyNotionFetch",
+          "line": 141,
+          "depth": 1,
+          "endLine": 152
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#14",
+          "kind": "function",
+          "title": "planNotionSync",
+          "line": 153,
+          "depth": 1,
+          "endLine": 164
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.mjs#15",
+          "kind": "function",
+          "title": "validateSyncState",
+          "line": 165,
+          "depth": 1,
+          "endLine": 197
+        }
+      ],
+      "symbols": [
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#export:managedOwner:3",
+          "kind": "export",
+          "name": "managedOwner",
+          "line": 3,
+          "endLine": 4
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:normalizeLineEndings:5",
+          "kind": "function",
+          "name": "normalizeLineEndings",
+          "line": 5,
+          "endLine": 8
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:canonicalNotionBody:9",
+          "kind": "function",
+          "name": "canonicalNotionBody",
+          "line": 9,
+          "endLine": 20
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:stripPageTitle:21",
+          "kind": "function",
+          "name": "stripPageTitle",
+          "line": 21,
+          "endLine": 27
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:tableCells:28",
+          "kind": "function",
+          "name": "tableCells",
+          "line": 28,
+          "endLine": 46
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:isTableSeparator:47",
+          "kind": "function",
+          "name": "isTableSeparator",
+          "line": 47,
+          "endLine": 51
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:convertMarkdownTables:52",
+          "kind": "function",
+          "name": "convertMarkdownTables",
+          "line": 52,
+          "endLine": 77
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:rewriteManagedLinks:78",
+          "kind": "function",
+          "name": "rewriteManagedLinks",
+          "line": 78,
+          "endLine": 86
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:normalizeListIndentation:87",
+          "kind": "function",
+          "name": "normalizeListIndentation",
+          "line": 87,
+          "endLine": 90
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:buildManagedNotionPayload:91",
+          "kind": "function",
+          "name": "buildManagedNotionPayload",
+          "line": 91,
+          "endLine": 107
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:parseNotionFetchText:108",
+          "kind": "function",
+          "name": "parseNotionFetchText",
+          "line": 108,
+          "endLine": 140
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:verifyNotionFetch:141",
+          "kind": "function",
+          "name": "verifyNotionFetch",
+          "line": 141,
+          "endLine": 152
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:planNotionSync:153",
+          "kind": "function",
+          "name": "planNotionSync",
+          "line": 153,
+          "endLine": 164
+        },
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.mjs#function:validateSyncState:165",
+          "kind": "function",
+          "name": "validateSyncState",
+          "line": 165,
+          "endLine": 197
+        }
+      ]
+    },
+    {
+      "id": "file:scripts/knowledge/notion-sync.spec.mjs",
+      "path": "scripts/knowledge/notion-sync.spec.mjs",
+      "language": "javascript",
+      "kind": "test",
+      "binary": false,
+      "generated": false,
+      "bytes": 4675,
+      "lines": 128,
+      "sha256": "63b994eb7361643df21dd262dc681063ffea2d98ae4b52a5a57fbf7f5c662cc7",
+      "summary": "6 indexed sections: rewrites managed links and preserves external links, converts markdown tables to Notion table blocks, builds and verifies a managed Notion payload, rejects a body that changed while keeping the declared hash, plans create, update, and skip without deleting unmanaged pages, …",
+      "nodeIds": [
+        "knowledge-system",
+        "repository-inventory"
+      ],
+      "imports": [
+        "./lib.mjs",
+        "./notion-sync.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "localDependencies": [
+        "scripts/knowledge/lib.mjs",
+        "scripts/knowledge/notion-sync.mjs"
+      ],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:scripts/knowledge/notion-sync.spec.mjs#1",
+          "kind": "file",
+          "title": "scripts/knowledge/notion-sync.spec.mjs",
+          "line": 1,
+          "depth": 0,
+          "endLine": 128
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.spec.mjs#2",
+          "kind": "test-case",
+          "title": "rewrites managed links and preserves external links",
+          "line": 24,
+          "depth": 1,
+          "endLine": 28
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.spec.mjs#3",
+          "kind": "test-case",
+          "title": "converts markdown tables to Notion table blocks",
+          "line": 29,
+          "depth": 1,
+          "endLine": 36
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.spec.mjs#4",
+          "kind": "test-case",
+          "title": "builds and verifies a managed Notion payload",
+          "line": 37,
+          "depth": 1,
+          "endLine": 58
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.spec.mjs#5",
+          "kind": "test-case",
+          "title": "rejects a body that changed while keeping the declared hash",
+          "line": 59,
+          "depth": 1,
+          "endLine": 78
+        },
+        {
+          "id": "section:scripts/knowledge/notion-sync.spec.mjs#6",
+          "kind": "test-case",
+          "title": "plans create, update, and skip without deleting unmanaged pages",
+          "line": 79,
+          "depth": 1,
           "endLine": 93
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:matchesGlob:94",
-          "kind": "function",
-          "name": "matchesGlob",
+          "id": "section:scripts/knowledge/notion-sync.spec.mjs#7",
+          "kind": "test-case",
+          "title": "requires a complete current verified sync state",
           "line": 94,
-          "endLine": 97
+          "depth": 1,
+          "endLine": 128
+        }
+      ],
+      "symbols": [
+        {
+          "id": "symbol:scripts/knowledge/notion-sync.spec.mjs#test-case:rewrites managed links and preserves external links:24",
+          "kind": "test-case",
+          "name": "rewrites managed links and preserves external links",
+          "line": 24,
+          "endLine": 28
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:isGeneratedPath:98",
-          "kind": "function",
-          "name": "isGeneratedPath",
-          "line": 98,
-          "endLine": 101
+          "id": "symbol:scripts/knowledge/notion-sync.spec.mjs#test-case:converts markdown tables to Notion table blocks:29",
+          "kind": "test-case",
+          "name": "converts markdown tables to Notion table blocks",
+          "line": 29,
+          "endLine": 36
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:listRepositoryFiles:102",
-          "kind": "function",
-          "name": "listRepositoryFiles",
-          "line": 102,
-          "endLine": 115
+          "id": "symbol:scripts/knowledge/notion-sync.spec.mjs#test-case:builds and verifies a managed Notion payload:37",
+          "kind": "test-case",
+          "name": "builds and verifies a managed Notion payload",
+          "line": 37,
+          "endLine": 58
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:languageForPath:116",
-          "kind": "function",
-          "name": "languageForPath",
-          "line": 116,
-          "endLine": 125
+          "id": "symbol:scripts/knowledge/notion-sync.spec.mjs#test-case:rejects a body that changed while keeping the declared hash:59",
+          "kind": "test-case",
+          "name": "rejects a body that changed while keeping the declared hash",
+          "line": 59,
+          "endLine": 78
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:kindForPath:126",
-          "kind": "function",
-          "name": "kindForPath",
-          "line": 126,
-          "endLine": 141
+          "id": "symbol:scripts/knowledge/notion-sync.spec.mjs#test-case:plans create, update, and skip without deleting unmanaged pages:79",
+          "kind": "test-case",
+          "name": "plans create, update, and skip without deleting unmanaged pages",
+          "line": 79,
+          "endLine": 93
         },
         {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:isBinary:142",
-          "kind": "function",
-          "name": "isBinary",
-          "line": 142,
-          "endLine": 145
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:lineOfOffset:146",
-          "kind": "function",
-          "name": "lineOfOffset",
-          "line": 146,
-          "endLine": 149
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:finalizeSections:150",
-          "kind": "function",
-          "name": "finalizeSections",
-          "line": 150,
-          "endLine": 163
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:markdownSections:164",
-          "kind": "function",
-          "name": "markdownSections",
-          "line": 164,
-          "endLine": 181
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:codeSections:182",
-          "kind": "function",
-          "name": "codeSections",
-          "line": 182,
-          "endLine": 206
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:prismaSections:207",
-          "kind": "function",
-          "name": "prismaSections",
-          "line": 207,
-          "endLine": 215
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:sqlSections:216",
-          "kind": "function",
-          "name": "sqlSections",
-          "line": 216,
-          "endLine": 224
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:configSections:225",
-          "kind": "function",
-          "name": "configSections",
-          "line": 225,
-          "endLine": 248
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:jsonSections:249",
-          "kind": "function",
-          "name": "jsonSections",
-          "line": 249,
-          "endLine": 263
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:extractSections:264",
-          "kind": "function",
-          "name": "extractSections",
-          "line": 264,
-          "endLine": 285
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:extractImports:286",
-          "kind": "function",
-          "name": "extractImports",
-          "line": 286,
-          "endLine": 299
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:extractRoutes:300",
-          "kind": "function",
-          "name": "extractRoutes",
-          "line": 300,
-          "endLine": 311
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:summarizeFile:312",
-          "kind": "function",
-          "name": "summarizeFile",
-          "line": 312,
-          "endLine": 322
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:resolveImport:323",
-          "kind": "function",
-          "name": "resolveImport",
-          "line": 323,
-          "endLine": 339
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:catalogNodeIdsForPath:340",
-          "kind": "function",
-          "name": "catalogNodeIdsForPath",
-          "line": 340,
-          "endLine": 345
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:buildIndex:346",
-          "kind": "function",
-          "name": "buildIndex",
-          "line": 346,
-          "endLine": 429
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:filesForNode:430",
-          "kind": "function",
-          "name": "filesForNode",
-          "line": 430,
-          "endLine": 433
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:nodeById:434",
-          "kind": "function",
-          "name": "nodeById",
-          "line": 434,
-          "endLine": 437
-        },
-        {
-          "id": "symbol:scripts/knowledge/lib.mjs#function:relatedNodeIds:438",
-          "kind": "function",
-          "name": "relatedNodeIds",
-          "line": 438,
-          "endLine": 446
+          "id": "symbol:scripts/knowledge/notion-sync.spec.mjs#test-case:requires a complete current verified sync state:94",
+          "kind": "test-case",
+          "name": "requires a complete current verified sync state",
+          "line": 94,
+          "endLine": 128
         }
       ]
+    },
+    {
+      "id": "file:scripts/knowledge/plan-notion-sync.mjs",
+      "path": "scripts/knowledge/plan-notion-sync.mjs",
+      "language": "javascript",
+      "kind": "tooling",
+      "binary": false,
+      "generated": false,
+      "bytes": 2147,
+      "lines": 47,
+      "sha256": "8cacfd9262110679ba1b0bd97aaad3f9e284c4194b54495856935413fb15d875",
+      "summary": "javascript file plan-notion-sync.mjs",
+      "nodeIds": [
+        "knowledge-system",
+        "repository-inventory"
+      ],
+      "imports": [
+        "./lib.mjs",
+        "./notion-sync.mjs",
+        "node:fs",
+        "node:path"
+      ],
+      "localDependencies": [
+        "scripts/knowledge/lib.mjs",
+        "scripts/knowledge/notion-sync.mjs"
+      ],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:scripts/knowledge/plan-notion-sync.mjs#1",
+          "kind": "file",
+          "title": "scripts/knowledge/plan-notion-sync.mjs",
+          "line": 1,
+          "depth": 0,
+          "endLine": 47
+        }
+      ],
+      "symbols": []
     },
     {
       "id": "file:scripts/knowledge/query-knowledge.mjs",
@@ -15503,10 +15998,10 @@
       "kind": "tooling",
       "binary": false,
       "generated": false,
-      "bytes": 7321,
-      "lines": 195,
-      "sha256": "e8e89d4a833e246546ad2b1ae0c3b752c1748fb7c6b1f460dd988fa465e76f09",
-      "summary": "10 indexed sections: pageLink, sourceList, renderHome, renderSidebar, renderProtocol, …",
+      "bytes": 7809,
+      "lines": 209,
+      "sha256": "173a603cb93c99f15256c1aedeadf16a443dd4c584390c5d0540e01839f23634",
+      "summary": "11 indexed sections: pageLink, wikiPageTitle, sourceList, renderHome, renderSidebar, …",
       "nodeIds": [
         "knowledge-system",
         "repository-inventory"
@@ -15528,7 +16023,7 @@
           "title": "scripts/knowledge/render-wiki.mjs",
           "line": 1,
           "depth": 0,
-          "endLine": 195
+          "endLine": 209
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#2",
@@ -15541,74 +16036,82 @@
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#3",
           "kind": "function",
-          "title": "sourceList",
+          "title": "wikiPageTitle",
           "line": 10,
           "depth": 1,
-          "endLine": 17
+          "endLine": 16
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#4",
           "kind": "function",
-          "title": "renderHome",
-          "line": 18,
+          "title": "sourceList",
+          "line": 17,
           "depth": 1,
-          "endLine": 53
+          "endLine": 24
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#5",
           "kind": "function",
-          "title": "renderSidebar",
-          "line": 54,
+          "title": "renderHome",
+          "line": 25,
           "depth": 1,
-          "endLine": 66
+          "endLine": 60
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#6",
           "kind": "function",
-          "title": "renderProtocol",
-          "line": 67,
+          "title": "renderSidebar",
+          "line": 61,
           "depth": 1,
-          "endLine": 90
+          "endLine": 73
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#7",
           "kind": "function",
-          "title": "renderNode",
-          "line": 91,
+          "title": "renderProtocol",
+          "line": 74,
           "depth": 1,
-          "endLine": 127
+          "endLine": 97
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#8",
           "kind": "function",
-          "title": "renderFileIndex",
-          "line": 128,
+          "title": "renderNode",
+          "line": 98,
           "depth": 1,
-          "endLine": 145
+          "endLine": 134
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#9",
           "kind": "function",
-          "title": "buildWikiPages",
-          "line": 146,
+          "title": "renderFileIndex",
+          "line": 135,
           "depth": 1,
-          "endLine": 156
+          "endLine": 152
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#10",
           "kind": "function",
-          "title": "buildWikiManifest",
-          "line": 157,
+          "title": "buildWikiPages",
+          "line": 153,
           "depth": 1,
-          "endLine": 175
+          "endLine": 163
         },
         {
           "id": "section:scripts/knowledge/render-wiki.mjs#11",
           "kind": "function",
-          "title": "renderWiki",
-          "line": 176,
+          "title": "buildWikiManifest",
+          "line": 164,
           "depth": 1,
-          "endLine": 195
+          "endLine": 189
+        },
+        {
+          "id": "section:scripts/knowledge/render-wiki.mjs#12",
+          "kind": "function",
+          "title": "renderWiki",
+          "line": 190,
+          "depth": 1,
+          "endLine": 209
         }
       ],
       "symbols": [
@@ -15620,67 +16123,74 @@
           "endLine": 9
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:sourceList:10",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:wikiPageTitle:10",
+          "kind": "function",
+          "name": "wikiPageTitle",
+          "line": 10,
+          "endLine": 16
+        },
+        {
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:sourceList:17",
           "kind": "function",
           "name": "sourceList",
-          "line": 10,
-          "endLine": 17
+          "line": 17,
+          "endLine": 24
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderHome:18",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderHome:25",
           "kind": "function",
           "name": "renderHome",
-          "line": 18,
-          "endLine": 53
+          "line": 25,
+          "endLine": 60
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderSidebar:54",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderSidebar:61",
           "kind": "function",
           "name": "renderSidebar",
-          "line": 54,
-          "endLine": 66
+          "line": 61,
+          "endLine": 73
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderProtocol:67",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderProtocol:74",
           "kind": "function",
           "name": "renderProtocol",
-          "line": 67,
-          "endLine": 90
+          "line": 74,
+          "endLine": 97
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderNode:91",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderNode:98",
           "kind": "function",
           "name": "renderNode",
-          "line": 91,
-          "endLine": 127
+          "line": 98,
+          "endLine": 134
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderFileIndex:128",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderFileIndex:135",
           "kind": "function",
           "name": "renderFileIndex",
-          "line": 128,
-          "endLine": 145
+          "line": 135,
+          "endLine": 152
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:buildWikiPages:146",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:buildWikiPages:153",
           "kind": "function",
           "name": "buildWikiPages",
-          "line": 146,
-          "endLine": 156
+          "line": 153,
+          "endLine": 163
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:buildWikiManifest:157",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:buildWikiManifest:164",
           "kind": "function",
           "name": "buildWikiManifest",
-          "line": 157,
-          "endLine": 175
+          "line": 164,
+          "endLine": 189
         },
         {
-          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderWiki:176",
+          "id": "symbol:scripts/knowledge/render-wiki.mjs#function:renderWiki:190",
           "kind": "function",
           "name": "renderWiki",
-          "line": 176,
-          "endLine": 195
+          "line": 190,
+          "endLine": 209
         }
       ]
     },
@@ -15691,9 +16201,9 @@
       "kind": "tooling",
       "binary": false,
       "generated": false,
-      "bytes": 4163,
-      "lines": 93,
-      "sha256": "56a199d549ebe68a30be2d4abdda7f9ef620c8d322687fcc1307ca83cbb86790",
+      "bytes": 4718,
+      "lines": 101,
+      "sha256": "43c51d8af84dac164c98ebbfa79c038fa30e860c61778ad24c5506a8a78f3042",
       "summary": "1 indexed section: findDependencyCycle",
       "nodeIds": [
         "knowledge-system",
@@ -15717,24 +16227,116 @@
           "title": "scripts/knowledge/validate-knowledge.mjs",
           "line": 1,
           "depth": 0,
-          "endLine": 93
+          "endLine": 101
         },
         {
           "id": "section:scripts/knowledge/validate-knowledge.mjs#2",
           "kind": "function",
           "title": "findDependencyCycle",
-          "line": 28,
+          "line": 33,
           "depth": 1,
-          "endLine": 93
+          "endLine": 101
         }
       ],
       "symbols": [
         {
-          "id": "symbol:scripts/knowledge/validate-knowledge.mjs#function:findDependencyCycle:28",
+          "id": "symbol:scripts/knowledge/validate-knowledge.mjs#function:findDependencyCycle:33",
           "kind": "function",
           "name": "findDependencyCycle",
-          "line": 28,
-          "endLine": 93
+          "line": 33,
+          "endLine": 101
+        }
+      ]
+    },
+    {
+      "id": "file:scripts/knowledge/validate-notion-sync.mjs",
+      "path": "scripts/knowledge/validate-notion-sync.mjs",
+      "language": "javascript",
+      "kind": "tooling",
+      "binary": false,
+      "generated": false,
+      "bytes": 994,
+      "lines": 21,
+      "sha256": "3c8fa043f47ce920ee822b355b74f405c3a0d44cf992afc6a56f1a7772799029",
+      "summary": "javascript file validate-notion-sync.mjs",
+      "nodeIds": [
+        "knowledge-system",
+        "repository-inventory"
+      ],
+      "imports": [
+        "./lib.mjs",
+        "./notion-sync.mjs",
+        "node:fs",
+        "node:path"
+      ],
+      "localDependencies": [
+        "scripts/knowledge/lib.mjs",
+        "scripts/knowledge/notion-sync.mjs"
+      ],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:scripts/knowledge/validate-notion-sync.mjs#1",
+          "kind": "file",
+          "title": "scripts/knowledge/validate-notion-sync.mjs",
+          "line": 1,
+          "depth": 0,
+          "endLine": 21
+        }
+      ],
+      "symbols": []
+    },
+    {
+      "id": "file:scripts/knowledge/verify-notion-fetch.mjs",
+      "path": "scripts/knowledge/verify-notion-fetch.mjs",
+      "language": "javascript",
+      "kind": "tooling",
+      "binary": false,
+      "generated": false,
+      "bytes": 2077,
+      "lines": 59,
+      "sha256": "eec4084e05174aeb495dec7c38d1c38db6fd7ba7c444413d8041eeac52363842",
+      "summary": "1 indexed section: argument",
+      "nodeIds": [
+        "knowledge-system",
+        "repository-inventory"
+      ],
+      "imports": [
+        "./lib.mjs",
+        "./notion-sync.mjs",
+        "node:fs",
+        "node:path"
+      ],
+      "localDependencies": [
+        "scripts/knowledge/lib.mjs",
+        "scripts/knowledge/notion-sync.mjs"
+      ],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:scripts/knowledge/verify-notion-fetch.mjs#1",
+          "kind": "file",
+          "title": "scripts/knowledge/verify-notion-fetch.mjs",
+          "line": 1,
+          "depth": 0,
+          "endLine": 59
+        },
+        {
+          "id": "section:scripts/knowledge/verify-notion-fetch.mjs#2",
+          "kind": "function",
+          "title": "argument",
+          "line": 6,
+          "depth": 1,
+          "endLine": 59
+        }
+      ],
+      "symbols": [
+        {
+          "id": "symbol:scripts/knowledge/verify-notion-fetch.mjs#function:argument:6",
+          "kind": "function",
+          "name": "argument",
+          "line": 6,
+          "endLine": 59
         }
       ]
     },
