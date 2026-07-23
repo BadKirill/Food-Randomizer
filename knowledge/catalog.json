@@ -19,20 +19,30 @@
       "Read direct dependencies, contracts, and narrow tests when the first packet is insufficient.",
       "Use repository-wide search only after the packet is empty, stale, or contradictory.",
       "Classify evidence as current, target, legacy, mixed, or generated before making a decision.",
-      "After a material change, update affected catalog rules, regenerate the index and Wiki bundle, and validate both."
+      "Fetch and verify the Notion pages mapped to selected nodes before a material change.",
+      "After a material change, update affected catalog rules, regenerate the index and Wiki bundle, validate both, and complete verified Notion synchronization."
     ]
   },
   "syncPolicy": {
-    "mode": "fail-closed",
-    "requiredCapability": "A connected MCP server with explicit GitHub Wiki page list, read, create, update, and post-write verification tools",
+    "mode": "fail-closed-at-handoff",
+    "provider": "notion",
+    "target": {
+      "workspaceId": "0e583eb3-1385-4f9f-b553-1405b74be641",
+      "workspaceName": "Кирилл Плохой's Notion",
+      "rootPageId": "3a57e183-0c32-80cc-8237-deed329685d5",
+      "rootPageTitle": "Food-Randomizer Wiki",
+      "rootPageUrl": "https://app.notion.com/p/3a57e1830c3280cc8237deed329685d5"
+    },
+    "requiredCapability": "Connected Notion MCP identity, fetch, search, create-pages, update-page, and post-write fetch verification",
     "steps": [
       "Treat knowledge/catalog.json as canonical and knowledge/wiki as a generated human-readable mirror.",
-      "Regenerate knowledge/wiki-manifest.json and compare its page hashes with the remote Wiki.",
-      "Upsert only changed managed pages and preserve external pages that are not owned by the manifest.",
-      "Read every written page back through the same MCP and verify its normalized SHA-256.",
-      "Record external synchronization only after all page hashes are verified.",
-      "If native Wiki MCP capability is absent or the repository Wiki is disabled, report synchronization as blocked.",
-      "Never substitute git push, gh, regular repository files, browser automation, or an unverified claim for Wiki MCP synchronization."
+      "Before implementation, fetch the configured Notion identity, root, and managed pages mapped to the selected graph nodes.",
+      "Regenerate knowledge/wiki-manifest.json and plan changed managed pages against knowledge/wiki-sync-state.json.",
+      "Upsert only changed managed child pages under the configured root and preserve every unmanaged page.",
+      "Fetch immediately before every update and stop if remote content diverged from the last verified state.",
+      "Read every written page back and verify its managed key, local source hash, canonical body hash, and internal page links.",
+      "Record synchronization only after every attempted page verifies, then run knowledge:notion:check.",
+      "Never substitute browser automation, direct API scripts, GitHub Wiki, Git operations, or an unverified claim for Notion MCP synchronization."
     ]
   },
   "nodes": [
@@ -43,14 +53,14 @@
       "wikiSlug": "RandoMeal--Governance--Knowledge-System",
       "status": "current",
       "authority": "canonical",
-      "summary": "Deterministic catalog, repository index, selective query, Wiki renderer, validation gate, repo skill, and read-only retrieval agent.",
-      "tags": ["knowledge", "graph", "catalog", "index", "wiki", "mcp", "контекст", "дерево знаний", "поиск"],
+      "summary": "Deterministic catalog, repository index, selective query, local Wiki renderer, verified Notion mirror, validation gates, repo skill, and read-only retrieval agent.",
+      "tags": ["knowledge", "graph", "catalog", "index", "wiki", "notion", "mcp", "контекст", "дерево знаний", "поиск"],
       "sources": ["knowledge/catalog.json", "knowledge/README.md", "scripts/knowledge/**", ".agents/skills/randomeal-knowledge/**", ".codex/agents/knowledge-retriever.toml"],
       "rules": [
         "The catalog is the canonical semantic graph; the index and Wiki bundle are deterministic derivatives.",
         "Every repository file receives an index record; generated outputs use managed records without recursive self-hashes.",
-        "Retrieval must return evidence paths and line ranges, not unsupported summaries.",
-        "External Wiki sync fails closed unless a native Wiki MCP writes and reads back every managed page."
+        "Retrieval must return evidence paths and line ranges and verify the relevant managed Notion pages before implementation.",
+        "External Notion synchronization fails closed at handoff unless every changed managed page is written, read back, body-hash verified, and recorded in the sync state."
       ],
       "dependsOn": [],
       "related": ["repository-inventory", "ci-quality"],
@@ -810,7 +820,7 @@
     },
     {
       "id": "knowledge-change",
-      "terms": ["knowledge", "catalog", "index", "wiki", "agent", "дерево знаний", "каталог", "агент"],
+      "terms": ["knowledge", "catalog", "index", "wiki", "notion", "agent", "дерево знаний", "каталог", "агент"],
       "paths": ["knowledge/**", "scripts/knowledge/**", ".agents/**", ".codex/**", "AGENTS.md"],
       "nodes": ["knowledge-system", "repository-inventory", "agent-governance"],
       "required": ["agent-governance"]

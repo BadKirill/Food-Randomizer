@@ -7,7 +7,8 @@
 3. Read direct dependencies, contracts, and narrow tests when the first packet is insufficient.
 4. Use repository-wide search only after the packet is empty, stale, or contradictory.
 5. Classify evidence as current, target, legacy, mixed, or generated before making a decision.
-6. After a material change, update affected catalog rules, regenerate the index and Wiki bundle, and validate both.
+6. Fetch and verify the Notion pages mapped to selected nodes before a material change.
+7. After a material change, update affected catalog rules, regenerate the index and Wiki bundle, validate both, and complete verified Notion synchronization.
 
 ## Limits
 
@@ -18,11 +19,12 @@
 ## Update and external mirror
 
 1. Treat knowledge/catalog.json as canonical and knowledge/wiki as a generated human-readable mirror.
-2. Regenerate knowledge/wiki-manifest.json and compare its page hashes with the remote Wiki.
-3. Upsert only changed managed pages and preserve external pages that are not owned by the manifest.
-4. Read every written page back through the same MCP and verify its normalized SHA-256.
-5. Record external synchronization only after all page hashes are verified.
-6. If native Wiki MCP capability is absent or the repository Wiki is disabled, report synchronization as blocked.
-7. Never substitute git push, gh, regular repository files, browser automation, or an unverified claim for Wiki MCP synchronization.
+2. Before implementation, fetch the configured Notion identity, root, and managed pages mapped to the selected graph nodes.
+3. Regenerate knowledge/wiki-manifest.json and plan changed managed pages against knowledge/wiki-sync-state.json.
+4. Upsert only changed managed child pages under the configured root and preserve every unmanaged page.
+5. Fetch immediately before every update and stop if remote content diverged from the last verified state.
+6. Read every written page back and verify its managed key, local source hash, canonical body hash, and internal page links.
+7. Record synchronization only after every attempted page verifies, then run knowledge:notion:check.
+8. Never substitute browser automation, direct API scripts, GitHub Wiki, Git operations, or an unverified claim for Notion MCP synchronization.
 
-External sync mode: **fail-closed**.
+External sync mode: **fail-closed-at-handoff**.

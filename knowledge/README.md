@@ -10,9 +10,10 @@ This directory is the compact entry point for agents and humans working on Rando
   metadata, hashes, extracted sections, symbols, imports, local dependencies, routes, and node
   assignments. Managed generated outputs remain represented without recursive self-hashes.
 - `wiki/` is the generated human-readable Wiki bundle.
-- `wiki-manifest.json` owns external page slugs and SHA-256 values for verified MCP synchronization.
-- `wiki-sync-state.json`, when present, is evidence from the last verified external MCP sync. Its
-  absence means no external sync has been proven.
+- `wiki-manifest.json` owns managed page slugs, deterministic titles and hashes, plus the fixed
+  personal Notion workspace and `Food-Randomizer Wiki` root.
+- `wiki-sync-state.json` is evidence from the last verified Notion MCP synchronization. It maps
+  local nodes to remote page IDs and stores source, body, and complete fetch hashes.
 
 ## Selective retrieval
 
@@ -24,7 +25,8 @@ npm run knowledge:query -- --query "change authentication session expiry" --path
 
 The result is a context packet containing no more than seven semantic nodes, their governing
 rules, and the narrow source ranges to read first. A broad repository scan is allowed only when
-the packet is empty, stale, or contradictory.
+the packet is empty, stale, or contradictory. Before implementation, the retrieval workflow also
+fetches the Notion pages mapped to those nodes and compares them with the last verified state.
 
 ## Update lifecycle
 
@@ -33,19 +35,22 @@ Run:
 ```sh
 npm run knowledge:update
 npm run knowledge:check
+npm run knowledge:notion:plan -- --json
+npm run knowledge:notion:check
 ```
 
 Every material code, contract, schema, product, QA, design, infrastructure, or agent-rule change
 must update affected catalog facts in the same change. The update command regenerates the complete
-file index and local Wiki bundle.
+file index and local Wiki bundle. The Notion plan identifies create, update, and skip operations;
+the final check accepts only a complete verified state for the current manifest.
 
-## External GitHub Wiki
+## External Notion Wiki
 
-External synchronization is deliberately fail-closed. It succeeds only when an attached MCP server
-exposes native GitHub Wiki page list, read, create, update, and post-write verification operations.
-The agent compares the remote page hashes with `wiki-manifest.json`, writes only changed managed
-pages, reads them back, and records verified revisions in `wiki-sync-state.json`.
+The external mirror is the personal Notion workspace and root declared in `wiki-manifest.json`.
+Agents fetch the relevant managed pages before implementation. After a material change they use the
+Notion MCP to create or update only managed child pages, preserve unrelated pages, fetch every write
+back, verify the managed envelope and canonical body, then update `wiki-sync-state.json`.
 
-If the repository Wiki is disabled or native Wiki MCP operations are unavailable, synchronization
-is blocked. Git pushes, `gh`, normal repository file writes, browser automation, or an unverified
-success claim are not substitutes.
+Synchronization is fail-closed at handoff. Wrong identity, missing access, manual divergence,
+partial writes, missing pages, or hash mismatches keep the task incomplete. Browser automation,
+direct API scripts, GitHub Wiki, Git operations, and unverified success claims are not substitutes.

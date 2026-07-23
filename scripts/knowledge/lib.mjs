@@ -9,6 +9,7 @@ export const catalogPath = join(rootDir, 'knowledge/catalog.json');
 export const indexPath = join(rootDir, 'knowledge/index.json');
 export const wikiDir = join(rootDir, 'knowledge/wiki');
 export const wikiManifestPath = join(rootDir, 'knowledge/wiki-manifest.json');
+export const wikiSyncStatePath = join(rootDir, 'knowledge/wiki-sync-state.json');
 
 const generatedPatterns = [
   'knowledge/index.json',

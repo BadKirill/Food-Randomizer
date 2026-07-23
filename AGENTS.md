@@ -12,12 +12,20 @@
 - Read `knowledge/catalog.json` and the generated context packet first. Select no more than seven
   relevant nodes; broad repository reading is allowed only when the packet is empty, stale, or
   contradictory.
+- Before a material change, verify the connected Notion workspace and the `Food-Randomizer Wiki`
+  root from `knowledge/wiki-manifest.json`. Read the managed Notion pages mapped to the selected
+  nodes in `knowledge/wiki-sync-state.json`, compare their source and body hashes, and report any
+  divergence before implementation. A missing initial mirror is valid only during bootstrap.
 - After every material repository change, update affected catalog facts, run
-  `npm run knowledge:update`, then run `npm run knowledge:check` before handoff.
-- Mirror changed managed Wiki pages only through an MCP with explicit native GitHub Wiki page
-  list/read/create/update and post-write verification tools. If the repository Wiki is disabled or
-  those tools are unavailable, report external sync as blocked. Never substitute `git push`, `gh`,
-  ordinary repository content tools, browser automation, or an unverified success claim.
+  `npm run knowledge:update`, then run `npm run knowledge:check` before external synchronization.
+- Mirror changed managed pages only through the Notion MCP configured in
+  `knowledge/wiki-manifest.json`. Fetch every page immediately before writing, preserve unmanaged
+  pages and manual content, read each write back, verify its managed body hash, update
+  `knowledge/wiki-sync-state.json`, then run `npm run knowledge:notion:check` before handoff.
+- Do not mark a material change complete while the Notion mirror is stale or unverified. If the
+  connector is unavailable or remote content diverged, report the exact blocker and leave the task
+  incomplete. Never substitute browser automation, direct Notion API scripts, GitHub Wiki, `git`
+  operations, or an unverified success claim for native Notion MCP synchronization.
 
 ## Mandatory design workflow
 

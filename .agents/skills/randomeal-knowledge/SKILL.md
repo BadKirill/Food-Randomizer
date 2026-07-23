@@ -1,6 +1,6 @@
 ---
 name: randomeal-knowledge
-description: Build a selective, source-backed RandoMeal context packet and keep the repository knowledge graph current. Use before every code change, code review, architecture, database, API, mobile, analytics, QA, infrastructure, agent-rule, product-document, or design task in this repository; also use when asked about project structure, patterns, reuse, contradictions, implementation status, catalog updates, indexing, or GitHub Wiki synchronization. Do not use as a substitute for the mandatory design-anti-slop workflow on user-facing design tasks.
+description: Build a selective, source-backed RandoMeal context packet and keep the repository knowledge graph plus its verified Notion mirror current. Use before every code change, code review, architecture, database, API, mobile, analytics, QA, infrastructure, agent-rule, product-document, or design task in this repository; also use when asked about project structure, patterns, reuse, contradictions, implementation status, catalog updates, indexing, or Notion Wiki synchronization. Do not use as a substitute for the mandatory design-anti-slop workflow on user-facing design tasks.
 ---
 
 # RandoMeal Knowledge
@@ -27,6 +27,12 @@ references explicitly separated.
    enough evidence.
 7. Use repository-wide search only when the packet is empty, stale, or contradictory. State why
    the fallback was necessary.
+8. Read `knowledge/wiki-manifest.json` and `knowledge/wiki-sync-state.json`. Fetch Notion identity,
+   the configured root, and only the managed Notion pages mapped to the selected nodes. Compare the
+   remote managed key, source hash, body hash, and last verified fetch hash before implementation.
+9. Treat an empty configured root as a valid bootstrap state only when no sync state exists. Treat
+   missing mapped pages, stale fingerprints, hash mismatches, unexpected moves, or manual edits as
+   divergence that must be reconciled before a material change.
 
 Never treat a generated summary as stronger evidence than its source. Apply this precedence:
 
@@ -48,6 +54,10 @@ available. Give it the task text and known paths. Require a read-only context pa
 - direct contracts, database effects, and narrow tests;
 - unanswered questions that genuinely block a safe implementation.
 
+The retrieval agent must also return the Notion workspace/root identity, the managed pages checked,
+their verification results, and any local-versus-remote divergence. Notion is a human-readable
+mirror; canonical repository sources keep the precedence defined above.
+
 The retrieval agent must not edit files, run mutating commands, or make implementation decisions
 beyond the evidence it returns. If the custom agent is unavailable, follow the same workflow in the
 current agent.
@@ -64,23 +74,29 @@ After any material repository change:
 4. Run `npm run knowledge:check` and resolve stale coverage, broken relations, unassigned files,
    dependency cycles, or Wiki drift.
 5. Query the changed paths once more and verify the updated packet points to the new sources.
-6. Attempt external Wiki synchronization through the required native Wiki MCP workflow.
+6. Run `npm run knowledge:notion:plan -- --json` and synchronize every planned page through the
+   configured Notion MCP workflow.
+7. Read every created or updated page back, verify its managed body, update
+   `knowledge/wiki-sync-state.json` only after all writes verify, and run
+   `npm run knowledge:notion:check`.
 
 Do not hand off a material change with a stale index or Wiki bundle.
 
-## External GitHub Wiki synchronization
+## External Notion Wiki synchronization
 
-Read `references/wiki-sync-protocol.md` whenever catalog or Wiki pages changed, or whenever external
-Wiki state is requested.
+Read `references/notion-sync-protocol.md` whenever catalog or Wiki pages changed, before reading the
+external mirror for implementation context, or whenever external Wiki state is requested.
 
-Synchronization is fail-closed. It is successful only after a connected MCP with explicit GitHub
-Wiki page operations writes changed managed pages, reads them back, and verifies their hashes
-against `knowledge/wiki-manifest.json`.
+Synchronization is fail-closed at handoff. It is successful only after the configured Notion MCP
+matches the workspace and root in `knowledge/wiki-manifest.json`, writes changed managed child
+pages, reads them back, verifies the metadata envelope and canonical body hash, and records the
+proof in `knowledge/wiki-sync-state.json`.
 
-If the repository Wiki is disabled or the native Wiki MCP operations are unavailable, stop only the
-external synchronization step, report the exact blocker, and keep the local catalog, index, Wiki
-bundle, and manifest valid. Never substitute Git pushes, `gh`, ordinary repository content tools,
-browser automation, or an unverified statement of success.
+If the connector is unavailable, its identity is wrong, the root moved, a managed page changed
+outside the repository, a write only partially succeeds, or a read-back hash differs, report the
+exact blocker and do not complete the task. Preserve unmanaged Notion pages and never delete or
+overwrite divergent content without explicit user authorization. Never substitute browser
+automation, direct API scripts, GitHub Wiki, or an unverified statement of success.
 
 ## Handoff
 
@@ -90,5 +106,7 @@ Report:
 - catalog facts added or changed;
 - index coverage and fingerprint;
 - local Wiki page count and manifest status;
-- external Wiki MCP status, including verified page count or the exact blocker;
+- Notion workspace/root identity, pages consulted before the change, and divergence status;
+- external Notion MCP status, including created, updated, skipped, and verified page counts or the
+  exact blocker;
 - validation and affected product tests.

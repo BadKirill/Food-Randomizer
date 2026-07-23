@@ -8,17 +8,17 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 ## Coverage
 
-- Repository files discovered: 178
-- Files indexed semantically or by metadata: 178
+- Repository files discovered: 184
+- Files indexed semantically or by metadata: 184
 - Binary assets indexed by metadata: 4
-- Files with extracted sections: 134
-- Content fingerprint: `c0360ea67112661460fd2a02f9bf2baff91f8015102c238a10ce4196857ff07f`
+- Files with extracted sections: 139
+- Content fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
 
 ## Knowledge tree
 
 ### Governance
 
-- [Knowledge system](RandoMeal--Governance--Knowledge-System) — Deterministic catalog, repository index, selective query, Wiki renderer, validation gate, repo skill, and read-only retrieval agent.
+- [Knowledge system](RandoMeal--Governance--Knowledge-System) — Deterministic catalog, repository index, selective query, local Wiki renderer, verified Notion mirror, validation gates, repo skill, and read-only retrieval agent.
 - [Agent governance](RandoMeal--Governance--Agents) — Mandatory project instructions, design workflow, repository safety, selective knowledge retrieval, and the source-code comment prohibition.
 - [Complete repository inventory](RandoMeal--Governance--Repository-Inventory) — Catch-all coverage node ensuring every tracked or non-ignored untracked repository file is represented even when no specialist node exists yet.
 
