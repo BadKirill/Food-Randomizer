@@ -1,0 +1,1019 @@
+{
+  "schemaVersion": 1,
+  "system": "RandoMeal Foundations",
+  "version": "1.0.0",
+  "figmaFileKey": "DP7ujNqthXzWwwu1mnFhfj",
+  "colorMode": "Light",
+  "typography": {
+    "display": {
+      "family": "Fraunces",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://github.com/undercasetype/Fraunces"
+    },
+    "body": {
+      "family": "Source Sans 3",
+      "license": "SIL Open Font License 1.1",
+      "source": "https://github.com/adobe-fonts/source-sans"
+    },
+    "styles": [
+      {
+        "name": "Display/XL",
+        "family": "Fraunces",
+        "style": "Bold",
+        "fontSize": 40,
+        "lineHeight": 44,
+        "letterSpacing": -0.4
+      },
+      {
+        "name": "Display/L",
+        "family": "Fraunces",
+        "style": "SemiBold",
+        "fontSize": 32,
+        "lineHeight": 38,
+        "letterSpacing": -0.2
+      },
+      {
+        "name": "Heading/L",
+        "family": "Source Sans 3",
+        "style": "Bold",
+        "fontSize": 28,
+        "lineHeight": 34,
+        "letterSpacing": 0
+      },
+      {
+        "name": "Heading/M",
+        "family": "Source Sans 3",
+        "style": "Bold",
+        "fontSize": 24,
+        "lineHeight": 30,
+        "letterSpacing": 0
+      },
+      {
+        "name": "Heading/S",
+        "family": "Source Sans 3",
+        "style": "SemiBold",
+        "fontSize": 20,
+        "lineHeight": 26,
+        "letterSpacing": 0
+      },
+      {
+        "name": "Body/L",
+        "family": "Source Sans 3",
+        "style": "Regular",
+        "fontSize": 18,
+        "lineHeight": 28,
+        "letterSpacing": 0
+      },
+      {
+        "name": "Body/M",
+        "family": "Source Sans 3",
+        "style": "Regular",
+        "fontSize": 16,
+        "lineHeight": 24,
+        "letterSpacing": 0
+      },
+      {
+        "name": "Body/S",
+        "family": "Source Sans 3",
+        "style": "Regular",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "letterSpacing": 0
+      },
+      {
+        "name": "Label/M",
+        "family": "Source Sans 3",
+        "style": "SemiBold",
+        "fontSize": 14,
+        "lineHeight": 20,
+        "letterSpacing": 0.1
+      },
+      {
+        "name": "Label/S",
+        "family": "Source Sans 3",
+        "style": "SemiBold",
+        "fontSize": 12,
+        "lineHeight": 16,
+        "letterSpacing": 0.2
+      }
+    ]
+  },
+  "effectStyles": [
+    {
+      "name": "Elevation/Subtle",
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#1E1C1914",
+          "offsetX": 0,
+          "offsetY": 1,
+          "radius": 3,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "name": "Elevation/Raised",
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "color": "#1E1C1924",
+          "offsetX": 0,
+          "offsetY": 8,
+          "radius": 20,
+          "spread": -4
+        }
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "name": "Primitives",
+      "mode": "Value",
+      "variables": [
+        {
+          "name": "ivory/0",
+          "type": "COLOR",
+          "value": "#FFFCF7",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-0)",
+            "iOS": "RMTokens.Primitive.ivory0",
+            "ANDROID": "RmTokens.primitiveIvory0"
+          }
+        },
+        {
+          "name": "ivory/50",
+          "type": "COLOR",
+          "value": "#FBF6EE",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-50)",
+            "iOS": "RMTokens.Primitive.ivory50",
+            "ANDROID": "RmTokens.primitiveIvory50"
+          }
+        },
+        {
+          "name": "ivory/100",
+          "type": "COLOR",
+          "value": "#F6EDDF",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-100)",
+            "iOS": "RMTokens.Primitive.ivory100",
+            "ANDROID": "RmTokens.primitiveIvory100"
+          }
+        },
+        {
+          "name": "ivory/200",
+          "type": "COLOR",
+          "value": "#EADBC8",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-200)",
+            "iOS": "RMTokens.Primitive.ivory200",
+            "ANDROID": "RmTokens.primitiveIvory200"
+          }
+        },
+        {
+          "name": "ivory/300",
+          "type": "COLOR",
+          "value": "#D9C4AB",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-300)",
+            "iOS": "RMTokens.Primitive.ivory300",
+            "ANDROID": "RmTokens.primitiveIvory300"
+          }
+        },
+        {
+          "name": "ivory/400",
+          "type": "COLOR",
+          "value": "#C2A989",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-400)",
+            "iOS": "RMTokens.Primitive.ivory400",
+            "ANDROID": "RmTokens.primitiveIvory400"
+          }
+        },
+        {
+          "name": "ivory/500",
+          "type": "COLOR",
+          "value": "#A88C69",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-500)",
+            "iOS": "RMTokens.Primitive.ivory500",
+            "ANDROID": "RmTokens.primitiveIvory500"
+          }
+        },
+        {
+          "name": "ivory/700",
+          "type": "COLOR",
+          "value": "#755D42",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-ivory-700)",
+            "iOS": "RMTokens.Primitive.ivory700",
+            "ANDROID": "RmTokens.primitiveIvory700"
+          }
+        },
+        {
+          "name": "graphite/50",
+          "type": "COLOR",
+          "value": "#F3F1EE",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-50)",
+            "iOS": "RMTokens.Primitive.graphite50",
+            "ANDROID": "RmTokens.primitiveGraphite50"
+          }
+        },
+        {
+          "name": "graphite/100",
+          "type": "COLOR",
+          "value": "#DEDAD4",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-100)",
+            "iOS": "RMTokens.Primitive.graphite100",
+            "ANDROID": "RmTokens.primitiveGraphite100"
+          }
+        },
+        {
+          "name": "graphite/200",
+          "type": "COLOR",
+          "value": "#C4BFB7",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-200)",
+            "iOS": "RMTokens.Primitive.graphite200",
+            "ANDROID": "RmTokens.primitiveGraphite200"
+          }
+        },
+        {
+          "name": "graphite/300",
+          "type": "COLOR",
+          "value": "#A8A29A",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-300)",
+            "iOS": "RMTokens.Primitive.graphite300",
+            "ANDROID": "RmTokens.primitiveGraphite300"
+          }
+        },
+        {
+          "name": "graphite/400",
+          "type": "COLOR",
+          "value": "#817A72",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-400)",
+            "iOS": "RMTokens.Primitive.graphite400",
+            "ANDROID": "RmTokens.primitiveGraphite400"
+          }
+        },
+        {
+          "name": "graphite/500",
+          "type": "COLOR",
+          "value": "#625C55",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-500)",
+            "iOS": "RMTokens.Primitive.graphite500",
+            "ANDROID": "RmTokens.primitiveGraphite500"
+          }
+        },
+        {
+          "name": "graphite/600",
+          "type": "COLOR",
+          "value": "#4A4540",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-600)",
+            "iOS": "RMTokens.Primitive.graphite600",
+            "ANDROID": "RmTokens.primitiveGraphite600"
+          }
+        },
+        {
+          "name": "graphite/700",
+          "type": "COLOR",
+          "value": "#393530",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-700)",
+            "iOS": "RMTokens.Primitive.graphite700",
+            "ANDROID": "RmTokens.primitiveGraphite700"
+          }
+        },
+        {
+          "name": "graphite/800",
+          "type": "COLOR",
+          "value": "#292621",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-800)",
+            "iOS": "RMTokens.Primitive.graphite800",
+            "ANDROID": "RmTokens.primitiveGraphite800"
+          }
+        },
+        {
+          "name": "graphite/900",
+          "type": "COLOR",
+          "value": "#1E1C19",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-900)",
+            "iOS": "RMTokens.Primitive.graphite900",
+            "ANDROID": "RmTokens.primitiveGraphite900"
+          }
+        },
+        {
+          "name": "paprika/50",
+          "type": "COLOR",
+          "value": "#FFF0E8",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-paprika-50)",
+            "iOS": "RMTokens.Primitive.paprika50",
+            "ANDROID": "RmTokens.primitivePaprika50"
+          }
+        },
+        {
+          "name": "paprika/100",
+          "type": "COLOR",
+          "value": "#FFDCCB",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-paprika-100)",
+            "iOS": "RMTokens.Primitive.paprika100",
+            "ANDROID": "RmTokens.primitivePaprika100"
+          }
+        },
+        {
+          "name": "paprika/200",
+          "type": "COLOR",
+          "value": "#FFBA9C",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-paprika-200)",
+            "iOS": "RMTokens.Primitive.paprika200",
+            "ANDROID": "RmTokens.primitivePaprika200"
+          }
+        },
+        {
+          "name": "paprika/300",
+          "type": "COLOR",
+          "value": "#F4936C",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-paprika-300)",
+            "iOS": "RMTokens.Primitive.paprika300",
+            "ANDROID": "RmTokens.primitivePaprika300"
+          }
+        },
+        {
+          "name": "paprika/400",
+          "type": "COLOR",
+          "value": "#DC6D45",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-paprika-400)",
+            "iOS": "RMTokens.Primitive.paprika400",
+            "ANDROID": "RmTokens.primitivePaprika400"
+          }
+        },
+        {
+          "name": "paprika/500",
+          "type": "COLOR",
+          "value": "#C04F2D",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-paprika-500)",
+            "iOS": "RMTokens.Primitive.paprika500",
+            "ANDROID": "RmTokens.primitivePaprika500"
+          }
+        },
+        {
+          "name": "paprika/600",
+          "type": "COLOR",
+          "value": "#A84326",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-paprika-600)",
+            "iOS": "RMTokens.Primitive.paprika600",
+            "ANDROID": "RmTokens.primitivePaprika600"
+          }
+        },
+        {
+          "name": "success/100",
+          "type": "COLOR",
+          "value": "#E7F3E7",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-success-100)",
+            "iOS": "RMTokens.Primitive.success100",
+            "ANDROID": "RmTokens.primitiveSuccess100"
+          }
+        },
+        {
+          "name": "success/600",
+          "type": "COLOR",
+          "value": "#2F6F3E",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-success-600)",
+            "iOS": "RMTokens.Primitive.success600",
+            "ANDROID": "RmTokens.primitiveSuccess600"
+          }
+        },
+        {
+          "name": "warning/100",
+          "type": "COLOR",
+          "value": "#FFF3D6",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-warning-100)",
+            "iOS": "RMTokens.Primitive.warning100",
+            "ANDROID": "RmTokens.primitiveWarning100"
+          }
+        },
+        {
+          "name": "warning/600",
+          "type": "COLOR",
+          "value": "#8A5B00",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-warning-600)",
+            "iOS": "RMTokens.Primitive.warning600",
+            "ANDROID": "RmTokens.primitiveWarning600"
+          }
+        },
+        {
+          "name": "danger/100",
+          "type": "COLOR",
+          "value": "#FCE8E4",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-danger-100)",
+            "iOS": "RMTokens.Primitive.danger100",
+            "ANDROID": "RmTokens.primitiveDanger100"
+          }
+        },
+        {
+          "name": "danger/600",
+          "type": "COLOR",
+          "value": "#A63F32",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-danger-600)",
+            "iOS": "RMTokens.Primitive.danger600",
+            "ANDROID": "RmTokens.primitiveDanger600"
+          }
+        },
+        {
+          "name": "graphite/alpha-16",
+          "type": "COLOR",
+          "value": "#1E1C1929",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-alpha-16)",
+            "iOS": "RMTokens.Primitive.graphiteAlpha16",
+            "ANDROID": "RmTokens.primitiveGraphiteAlpha16"
+          }
+        },
+        {
+          "name": "graphite/alpha-64",
+          "type": "COLOR",
+          "value": "#1E1C19A3",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--rm-primitive-graphite-alpha-64)",
+            "iOS": "RMTokens.Primitive.graphiteAlpha64",
+            "ANDROID": "RmTokens.primitiveGraphiteAlpha64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Color",
+      "mode": "Light",
+      "variables": [
+        {
+          "name": "color/bg/app",
+          "type": "COLOR",
+          "alias": "ivory/50",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-app)",
+            "iOS": "RMTokens.Color.bgApp",
+            "ANDROID": "RmTokens.colorBgApp"
+          }
+        },
+        {
+          "name": "color/bg/surface",
+          "type": "COLOR",
+          "alias": "ivory/0",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-surface)",
+            "iOS": "RMTokens.Color.bgSurface",
+            "ANDROID": "RmTokens.colorBgSurface"
+          }
+        },
+        {
+          "name": "color/bg/surface-raised",
+          "type": "COLOR",
+          "alias": "ivory/0",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-surface-raised)",
+            "iOS": "RMTokens.Color.bgSurfaceRaised",
+            "ANDROID": "RmTokens.colorBgSurfaceRaised"
+          }
+        },
+        {
+          "name": "color/bg/subtle",
+          "type": "COLOR",
+          "alias": "ivory/100",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-subtle)",
+            "iOS": "RMTokens.Color.bgSubtle",
+            "ANDROID": "RmTokens.colorBgSubtle"
+          }
+        },
+        {
+          "name": "color/bg/brand",
+          "type": "COLOR",
+          "alias": "paprika/500",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-brand)",
+            "iOS": "RMTokens.Color.bgBrand",
+            "ANDROID": "RmTokens.colorBgBrand"
+          }
+        },
+        {
+          "name": "color/bg/brand-pressed",
+          "type": "COLOR",
+          "alias": "paprika/600",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-brand-pressed)",
+            "iOS": "RMTokens.Color.bgBrandPressed",
+            "ANDROID": "RmTokens.colorBgBrandPressed"
+          }
+        },
+        {
+          "name": "color/bg/disabled",
+          "type": "COLOR",
+          "alias": "graphite/100",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-disabled)",
+            "iOS": "RMTokens.Color.bgDisabled",
+            "ANDROID": "RmTokens.colorBgDisabled"
+          }
+        },
+        {
+          "name": "color/bg/success",
+          "type": "COLOR",
+          "alias": "success/100",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-success)",
+            "iOS": "RMTokens.Color.bgSuccess",
+            "ANDROID": "RmTokens.colorBgSuccess"
+          }
+        },
+        {
+          "name": "color/bg/warning",
+          "type": "COLOR",
+          "alias": "warning/100",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-warning)",
+            "iOS": "RMTokens.Color.bgWarning",
+            "ANDROID": "RmTokens.colorBgWarning"
+          }
+        },
+        {
+          "name": "color/bg/danger",
+          "type": "COLOR",
+          "alias": "danger/100",
+          "scopes": ["FRAME_FILL", "SHAPE_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-bg-danger)",
+            "iOS": "RMTokens.Color.bgDanger",
+            "ANDROID": "RmTokens.colorBgDanger"
+          }
+        },
+        {
+          "name": "color/text/primary",
+          "type": "COLOR",
+          "alias": "graphite/900",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-primary)",
+            "iOS": "RMTokens.Color.textPrimary",
+            "ANDROID": "RmTokens.colorTextPrimary"
+          }
+        },
+        {
+          "name": "color/text/secondary",
+          "type": "COLOR",
+          "alias": "graphite/600",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-secondary)",
+            "iOS": "RMTokens.Color.textSecondary",
+            "ANDROID": "RmTokens.colorTextSecondary"
+          }
+        },
+        {
+          "name": "color/text/inverse",
+          "type": "COLOR",
+          "alias": "ivory/0",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-inverse)",
+            "iOS": "RMTokens.Color.textInverse",
+            "ANDROID": "RmTokens.colorTextInverse"
+          }
+        },
+        {
+          "name": "color/text/brand",
+          "type": "COLOR",
+          "alias": "paprika/600",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-brand)",
+            "iOS": "RMTokens.Color.textBrand",
+            "ANDROID": "RmTokens.colorTextBrand"
+          }
+        },
+        {
+          "name": "color/text/disabled",
+          "type": "COLOR",
+          "alias": "graphite/400",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-disabled)",
+            "iOS": "RMTokens.Color.textDisabled",
+            "ANDROID": "RmTokens.colorTextDisabled"
+          }
+        },
+        {
+          "name": "color/text/success",
+          "type": "COLOR",
+          "alias": "success/600",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-success)",
+            "iOS": "RMTokens.Color.textSuccess",
+            "ANDROID": "RmTokens.colorTextSuccess"
+          }
+        },
+        {
+          "name": "color/text/warning",
+          "type": "COLOR",
+          "alias": "warning/600",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-warning)",
+            "iOS": "RMTokens.Color.textWarning",
+            "ANDROID": "RmTokens.colorTextWarning"
+          }
+        },
+        {
+          "name": "color/text/danger",
+          "type": "COLOR",
+          "alias": "danger/600",
+          "scopes": ["TEXT_FILL"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-text-danger)",
+            "iOS": "RMTokens.Color.textDanger",
+            "ANDROID": "RmTokens.colorTextDanger"
+          }
+        },
+        {
+          "name": "color/border/default",
+          "type": "COLOR",
+          "alias": "graphite/200",
+          "scopes": ["STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-border-default)",
+            "iOS": "RMTokens.Color.borderDefault",
+            "ANDROID": "RmTokens.colorBorderDefault"
+          }
+        },
+        {
+          "name": "color/border/strong",
+          "type": "COLOR",
+          "alias": "graphite/400",
+          "scopes": ["STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-border-strong)",
+            "iOS": "RMTokens.Color.borderStrong",
+            "ANDROID": "RmTokens.colorBorderStrong"
+          }
+        },
+        {
+          "name": "color/border/brand",
+          "type": "COLOR",
+          "alias": "paprika/500",
+          "scopes": ["STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-border-brand)",
+            "iOS": "RMTokens.Color.borderBrand",
+            "ANDROID": "RmTokens.colorBorderBrand"
+          }
+        },
+        {
+          "name": "color/border/focus",
+          "type": "COLOR",
+          "alias": "paprika/600",
+          "scopes": ["STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-border-focus)",
+            "iOS": "RMTokens.Color.borderFocus",
+            "ANDROID": "RmTokens.colorBorderFocus"
+          }
+        },
+        {
+          "name": "color/border/disabled",
+          "type": "COLOR",
+          "alias": "graphite/200",
+          "scopes": ["STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-border-disabled)",
+            "iOS": "RMTokens.Color.borderDisabled",
+            "ANDROID": "RmTokens.colorBorderDisabled"
+          }
+        },
+        {
+          "name": "color/border/danger",
+          "type": "COLOR",
+          "alias": "danger/600",
+          "scopes": ["STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-border-danger)",
+            "iOS": "RMTokens.Color.borderDanger",
+            "ANDROID": "RmTokens.colorBorderDanger"
+          }
+        },
+        {
+          "name": "color/icon/primary",
+          "type": "COLOR",
+          "alias": "graphite/900",
+          "scopes": ["SHAPE_FILL", "STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-icon-primary)",
+            "iOS": "RMTokens.Color.iconPrimary",
+            "ANDROID": "RmTokens.colorIconPrimary"
+          }
+        },
+        {
+          "name": "color/icon/secondary",
+          "type": "COLOR",
+          "alias": "graphite/600",
+          "scopes": ["SHAPE_FILL", "STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-icon-secondary)",
+            "iOS": "RMTokens.Color.iconSecondary",
+            "ANDROID": "RmTokens.colorIconSecondary"
+          }
+        },
+        {
+          "name": "color/icon/inverse",
+          "type": "COLOR",
+          "alias": "ivory/0",
+          "scopes": ["SHAPE_FILL", "STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-icon-inverse)",
+            "iOS": "RMTokens.Color.iconInverse",
+            "ANDROID": "RmTokens.colorIconInverse"
+          }
+        },
+        {
+          "name": "color/icon/brand",
+          "type": "COLOR",
+          "alias": "paprika/600",
+          "scopes": ["SHAPE_FILL", "STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-icon-brand)",
+            "iOS": "RMTokens.Color.iconBrand",
+            "ANDROID": "RmTokens.colorIconBrand"
+          }
+        },
+        {
+          "name": "color/icon/disabled",
+          "type": "COLOR",
+          "alias": "graphite/400",
+          "scopes": ["SHAPE_FILL", "STROKE_COLOR"],
+          "codeSyntax": {
+            "WEB": "var(--rm-color-icon-disabled)",
+            "iOS": "RMTokens.Color.iconDisabled",
+            "ANDROID": "RmTokens.colorIconDisabled"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Spacing",
+      "mode": "Value",
+      "variables": [
+        {
+          "name": "spacing/0",
+          "type": "FLOAT",
+          "value": 0,
+          "scopes": ["GAP"],
+          "codeSyntax": {
+            "WEB": "var(--rm-spacing-0)",
+            "iOS": "RMTokens.Spacing.x0",
+            "ANDROID": "RmTokens.spacing0"
+          }
+        },
+        {
+          "name": "spacing/2xs",
+          "type": "FLOAT",
+          "value": 4,
+          "scopes": ["GAP"],
+          "codeSyntax": {
+            "WEB": "var(--rm-spacing-2xs)",
+            "iOS": "RMTokens.Spacing.x2xs",
+            "ANDROID": "RmTokens.spacing2xs"
+          }
+        },
+        {
+          "name": "spacing/xs",
+          "type": "FLOAT",
+          "value": 8,
+          "scopes": ["GAP"],
+          "codeSyntax": {
+            "WEB": "var(--rm-spacing-xs)",
+            "iOS": "RMTokens.Spacing.xs",
+            "ANDROID": "RmTokens.spacingXs"
+          }
+        },
+        {
+          "name": "spacing/sm",
+          "type": "FLOAT",
+          "value": 12,
+          "scopes": ["GAP"],
+          "codeSyntax": {
+            "WEB": "var(--rm-spacing-sm)",
+            "iOS": "RMTokens.Spacing.sm",
+            "ANDROID": "RmTokens.spacingSm"
+          }
+        },
+        {
+          "name": "spacing/md",
+          "type": "FLOAT",
+          "value": 16,
+          "scopes": ["GAP"],
+          "codeSyntax": {
+            "WEB": "var(--rm-spacing-md)",
+            "iOS": "RMTokens.Spacing.md",
+            "ANDROID": "RmTokens.spacingMd"
+          }
+        },
+        {
+          "name": "spacing/lg",
+          "type": "FLOAT",
+          "value": 24,
+          "scopes": ["GAP"],
+          "codeSyntax": {
+            "WEB": "var(--rm-spacing-lg)",
+            "iOS": "RMTokens.Spacing.lg",
+            "ANDROID": "RmTokens.spacingLg"
+          }
+        },
+        {
+          "name": "spacing/xl",
+          "type": "FLOAT",
+          "value": 32,
+          "scopes": ["GAP"],
+          "codeSyntax": {
+            "WEB": "var(--rm-spacing-xl)",
+            "iOS": "RMTokens.Spacing.xl",
+            "ANDROID": "RmTokens.spacingXl"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Radius",
+      "mode": "Value",
+      "variables": [
+        {
+          "name": "radius/none",
+          "type": "FLOAT",
+          "value": 0,
+          "scopes": ["CORNER_RADIUS"],
+          "codeSyntax": {
+            "WEB": "var(--rm-radius-none)",
+            "iOS": "RMTokens.Radius.none",
+            "ANDROID": "RmTokens.radiusNone"
+          }
+        },
+        {
+          "name": "radius/sm",
+          "type": "FLOAT",
+          "value": 8,
+          "scopes": ["CORNER_RADIUS"],
+          "codeSyntax": {
+            "WEB": "var(--rm-radius-sm)",
+            "iOS": "RMTokens.Radius.sm",
+            "ANDROID": "RmTokens.radiusSm"
+          }
+        },
+        {
+          "name": "radius/md",
+          "type": "FLOAT",
+          "value": 12,
+          "scopes": ["CORNER_RADIUS"],
+          "codeSyntax": {
+            "WEB": "var(--rm-radius-md)",
+            "iOS": "RMTokens.Radius.md",
+            "ANDROID": "RmTokens.radiusMd"
+          }
+        },
+        {
+          "name": "radius/lg",
+          "type": "FLOAT",
+          "value": 20,
+          "scopes": ["CORNER_RADIUS"],
+          "codeSyntax": {
+            "WEB": "var(--rm-radius-lg)",
+            "iOS": "RMTokens.Radius.lg",
+            "ANDROID": "RmTokens.radiusLg"
+          }
+        },
+        {
+          "name": "radius/full",
+          "type": "FLOAT",
+          "value": 999,
+          "scopes": ["CORNER_RADIUS"],
+          "codeSyntax": {
+            "WEB": "var(--rm-radius-full)",
+            "iOS": "RMTokens.Radius.full",
+            "ANDROID": "RmTokens.radiusFull"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Size",
+      "mode": "Value",
+      "variables": [
+        {
+          "name": "control/compact",
+          "type": "FLOAT",
+          "value": 36,
+          "scopes": ["WIDTH_HEIGHT"],
+          "codeSyntax": {
+            "WEB": "var(--rm-size-control-compact)",
+            "iOS": "RMTokens.Size.controlCompact",
+            "ANDROID": "RmTokens.sizeControlCompact"
+          }
+        },
+        {
+          "name": "control/default",
+          "type": "FLOAT",
+          "value": 44,
+          "scopes": ["WIDTH_HEIGHT"],
+          "codeSyntax": {
+            "WEB": "var(--rm-size-control-default)",
+            "iOS": "RMTokens.Size.controlDefault",
+            "ANDROID": "RmTokens.sizeControlDefault"
+          }
+        },
+        {
+          "name": "control/large",
+          "type": "FLOAT",
+          "value": 52,
+          "scopes": ["WIDTH_HEIGHT"],
+          "codeSyntax": {
+            "WEB": "var(--rm-size-control-large)",
+            "iOS": "RMTokens.Size.controlLarge",
+            "ANDROID": "RmTokens.sizeControlLarge"
+          }
+        },
+        {
+          "name": "touch/min",
+          "type": "FLOAT",
+          "value": 44,
+          "scopes": ["WIDTH_HEIGHT"],
+          "codeSyntax": {
+            "WEB": "var(--rm-size-touch-min)",
+            "iOS": "RMTokens.Size.touchMin",
+            "ANDROID": "RmTokens.sizeTouchMin"
+          }
+        }
+      ]
+    }
+  ]
+}

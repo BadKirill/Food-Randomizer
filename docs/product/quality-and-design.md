@@ -5,6 +5,8 @@
 Figma is the collaboration and interaction-spec tool. The design system is token-first and uses
 Figma Variables for color, type, spacing, radius, elevation and semantic state. Reviewed token
 JSON in the repository is the implementation source for mobile and future admin web.
+All project design work uses only the canonical file and deny-by-default policy defined in
+`docs/product/figma-governance.md` and `design/figma-project.json`.
 
 Required Figma pages:
 
@@ -48,6 +50,47 @@ Component handoff includes:
 The current green/Starbucks-inspired document is not the final brand source. Preserve warmth,
 large tap targets and the recognizable decisive CTA, but validate a distinct RandoMeal identity
 through discovery and accessibility checks.
+
+### Foundation v1
+
+The first approved foundation is implemented in the only authorized Figma file,
+[`RandoMeal — Product Design`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj), and mirrored
+as reviewed implementation input in `design/foundations.tokens.json`.
+
+The Figma variable inventory is exact:
+
+| Collection | Variables | Mode  | Purpose                                                |
+| ---------- | --------- | ----- | ------------------------------------------------------ |
+| Primitives | 33        | Value | Ivory, Graphite, Paprika and state source values       |
+| Color      | 29        | Light | Semantic background, text, border and icon aliases     |
+| Spacing    | 7         | Value | 0, 4, 8, 12, 16, 24 and 32 px                         |
+| Radius     | 5         | Value | none, small, medium, large and full                    |
+| Size       | 4         | Value | 36, 44 and 52 px controls plus the 44 px touch minimum |
+
+The total is 78 variables. Semantic colors alias primitives; components must not bind directly to
+raw palette values. The approved base palette is warm Ivory, neutral Graphite and action-focused
+Paprika. Success, warning, danger and disabled states are explicit. Only the Light color mode is
+approved in this foundation; a dark mode requires separate product and accessibility validation.
+
+Every variable declares platform syntax with exact platform keys:
+
+- Web: CSS custom-property references such as `var(--rm-color-bg-app)`;
+- iOS: `RMTokens` names such as `RMTokens.Color.bgApp`;
+- Android: `RmTokens` names such as `RmTokens.colorBgApp`.
+
+The type system contains ten local styles. Fraunces is reserved for expressive display text and
+Source Sans 3 is used for interface, body and label text. Both families use the SIL Open Font
+License 1.1 and therefore require no commercial font licence:
+
+- Fraunces: <https://github.com/undercasetype/Fraunces>
+- Source Sans 3: <https://github.com/adobe-fonts/source-sans>
+
+The Figma file also contains two restrained elevation styles, a 1440 px cover, and a variable-bound
+Foundations page documenting all 33 primitives, all 29 semantic colors, typography and the numeric
+scales. Validation on 2026-07-28 found no broken aliases, unrestricted scopes, missing platform
+syntax, missing fonts or text overflow. Ivory text on the Paprika brand background has a WCAG
+contrast ratio of 4.67:1. Mobile still uses its current hard-coded theme until a separate
+implementation task migrates it to this reviewed source.
 
 ## 2. QA strategy
 

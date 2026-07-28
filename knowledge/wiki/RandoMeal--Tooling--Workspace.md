@@ -26,7 +26,7 @@ Authority: **current-code**
 - `apps/mobile/package.json` — 7 indexed sections: name, version, main, scripts, dependencies, …. Sections: apps/mobile/package.json (L1–31); name (L2–2); version (L3–3); main (L4–4); scripts (L5–11); dependencies (L12–19); devDependencies (L20–28); private (L29–31)
 - `apps/mobile/tsconfig.json` — 2 indexed sections: extends, compilerOptions. Sections: apps/mobile/tsconfig.json (L1–7); extends (L2–2); compilerOptions (L3–7)
 - `package-lock.json` — 5 indexed sections: name, version, lockfileVersion, requires, packages. Sections: package-lock.json (L1–19357); name (L2–2); version (L3–3); lockfileVersion (L4–4); requires (L5–5); packages (L6–19357)
-- `package.json` — 8 indexed sections: name, private, version, engines, packageManager, …. Sections: package.json (L1–55); name (L2–2); private (L3–3); version (L4–4); engines (L5–7); packageManager (L8–8); workspaces (L9–12); scripts (L13–48)
+- `package.json` — 8 indexed sections: name, private, version, engines, packageManager, …. Sections: package.json (L1–57); name (L2–2); private (L3–3); version (L4–4); engines (L5–7); packageManager (L8–8); workspaces (L9–12); scripts (L13–50)
 - `packages/contracts/package.json` — 7 indexed sections: name, version, private, main, types, …. Sections: packages/contracts/package.json (L1–14); name (L2–2); version (L3–3); private (L4–4); main (L5–5); types (L6–6); scripts (L7–9); dependencies (L10–14)
 - `packages/contracts/tsconfig.json` — 3 indexed sections: extends, compilerOptions, include. Sections: packages/contracts/tsconfig.json (L1–15); extends (L2–2); compilerOptions (L3–12); include (L13–15)
 - `scripts/check-env-files.sh` — shell file check-env-files.sh. Sections: scripts/check-env-files.sh (L1–19)

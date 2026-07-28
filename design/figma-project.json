@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "project": "RandoMeal",
+  "policy": "deny-by-default",
+  "file": {
+    "name": "RandoMeal — Canonical Product Design",
+    "key": "DP7ujNqthXzWwwu1mnFhfj",
+    "url": "https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj"
+  },
+  "allowedFileKeys": [
+    "DP7ujNqthXzWwwu1mnFhfj"
+  ],
+  "operations": {
+    "allowCreateNewFile": false,
+    "requireGuardBeforeMcpOperation": true,
+    "migrationRequiresExplicitUserApproval": true
+  }
+}

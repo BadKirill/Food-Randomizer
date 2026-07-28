@@ -44,6 +44,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Canonical Figma file policy
+        run: npm run figma:guard
+
+      - name: Canonical Figma file policy tests
+        run: npm run test:figma-governance
+
       - name: Knowledge graph freshness
         run: npm run knowledge:check
 

@@ -8,11 +8,11 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 ## Coverage
 
-- Repository files discovered: 184
-- Files indexed semantically or by metadata: 184
+- Repository files discovered: 190
+- Files indexed semantically or by metadata: 190
 - Binary assets indexed by metadata: 4
-- Files with extracted sections: 139
-- Content fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
+- Files with extracted sections: 144
+- Content fingerprint: `ca13dbaee3a436ffe817473bc60ac06394f0240c8732b0496d2e37ecd7ab76fd`
 
 ## Knowledge tree
 
@@ -20,6 +20,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 - [Knowledge system](RandoMeal--Governance--Knowledge-System) — Deterministic catalog, repository index, selective query, local Wiki renderer, verified Notion mirror, validation gates, repo skill, and read-only retrieval agent.
 - [Agent governance](RandoMeal--Governance--Agents) — Mandatory project instructions, design workflow, repository safety, selective knowledge retrieval, and the source-code comment prohibition.
+- [Canonical Figma file governance](RandoMeal--Governance--Canonical-Figma) — Deny-by-default project governance allowing all RandoMeal design operations only in one canonical Figma file.
 - [Complete repository inventory](RandoMeal--Governance--Repository-Inventory) — Catch-all coverage node ensuring every tracked or non-ignored untracked repository file is represented even when no specialist node exists yet.
 
 ### Product
@@ -61,12 +62,12 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 - [Current mobile API and authentication](RandoMeal--Mobile--API-Auth) — Direct fetch client, API URL configuration, manual DTO types, error formatting, and SecureStore-backed bearer session hook.
 - [Current mobile random flow](RandoMeal--Mobile--Random-Flow) — Random action, dish-type filter sheet, loading/error state, dish result modal, press animation, and public random API request.
 - [Current mobile dish management flow](RandoMeal--Mobile--Manage-Flow) — Authenticated create, edit, list, filter, inspect, archive, and unarchive flows with owner-only feedback and manual form state.
-- [Current mobile theme and visual debt](RandoMeal--Mobile--Theme-Debt) — Large global StyleSheet with hard-coded warm orange and cream values; semantic tokens, component primitives, Figma variables, themes, and accessibility state contracts are not yet implemented.
+- [Current mobile theme and visual debt](RandoMeal--Mobile--Theme-Debt) — The mobile app still uses a large global StyleSheet with hard-coded warm orange and cream values. The reviewed Foundation v1 target now exists in the repository and canonical Figma file, but mobile has not yet migrated to it.
 
 ### Analytics and Quality
 
 - [Analytics and measurement plan](RandoMeal--Analytics--Measurement) — Actor identity, event ownership, recommendation funnel, experiment dimensions, decision metrics, dashboards, privacy controls, outbox delivery, and observability boundaries.
-- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Figma variables, semantic tokens, component contracts, accessibility, complete interaction states, content trust, responsive behavior, and anti-slop creation review.
+- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1 is implemented and validated in the canonical Figma file and repository token source; component contracts, full interaction states and mobile adoption remain target work.
 - [QA, security, and release gates](RandoMeal--Quality--QA-Strategy) — Current Jest and E2E suites plus target contract, Testcontainers, Maestro, accessibility, load, security, migration, analytics, and release acceptance gates.
 
 ### Delivery and Operations

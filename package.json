@@ -23,6 +23,8 @@
     "test:e2e:critical": "npm run test:e2e --workspace apps/api",
     "test:contract:mobile-api": "node scripts/test-mobile-api-contract.mjs",
     "check:env": "bash scripts/check-env-files.sh",
+    "figma:guard": "node scripts/check-figma-governance.mjs",
+    "test:figma-governance": "node --test scripts/check-figma-governance.spec.mjs",
     "knowledge:index": "node scripts/knowledge/index-repository.mjs",
     "knowledge:render": "node scripts/knowledge/render-wiki.mjs",
     "knowledge:update": "npm run knowledge:index && npm run knowledge:render && npm run knowledge:index && npm run knowledge:render",

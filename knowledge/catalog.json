@@ -80,12 +80,45 @@
       "rules": [
         "Use the RandoMeal knowledge skill before code changes, reviews, architecture, data, API, QA, or design work.",
         "Use the design anti-slop skill before creating, reviewing, or changing user-facing design or UI.",
+        "Use only the canonical Figma file key declared in design/figma-project.json and run the deny-by-default guard before every Figma MCP operation.",
         "Do not add source-code comments, TODO or FIXME notes, commented-out code, or explanatory blocks.",
         "Preserve unrelated dirty work and use additive database migrations."
       ],
       "dependsOn": ["knowledge-system"],
-      "related": ["design-system-quality", "qa-strategy"],
+      "related": ["design-system-quality", "figma-canonical-file", "qa-strategy"],
       "supersedes": ["legacy-documentation-map"],
+      "supersededBy": []
+    },
+    {
+      "id": "figma-canonical-file",
+      "title": "Canonical Figma file governance",
+      "group": "Governance",
+      "wikiSlug": "RandoMeal--Governance--Canonical-Figma",
+      "status": "current",
+      "authority": "canonical",
+      "summary": "Deny-by-default project governance allowing all RandoMeal design operations only in one canonical Figma file.",
+      "tags": ["figma", "design governance", "allowlist", "file key", "mcp", "фигма", "дизайн", "ограничения"],
+      "sources": [
+        "design/figma-project.json",
+        "design/foundations.tokens.json",
+        "docs/product/figma-governance.md",
+        "scripts/check-figma-governance.mjs",
+        "AGENTS.md",
+        ".agents/skills/design-anti-slop/SKILL.md",
+        "package.json",
+        ".github/workflows/ci.yml"
+      ],
+      "rules": [
+        "The only authorized RandoMeal Figma file key is DP7ujNqthXzWwwu1mnFhfj.",
+        "Run npm run figma:guard with the target file key before every Figma MCP read or write.",
+        "Deny every Figma project operation whose file key differs from the canonical allowlist.",
+        "Do not create or adopt another project Figma file without explicit user approval and an atomic governance, catalog, Wiki, and integration migration.",
+        "CI rejects repository URLs and explicit file-key declarations for non-canonical Figma design, FigJam, Slides, or legacy files.",
+        "The canonical file contains Foundation v1 with five collections, 78 variables, ten text styles, two elevation styles, and variable-bound documentation."
+      ],
+      "dependsOn": ["agent-governance", "design-system-quality", "knowledge-system"],
+      "related": ["workspace-tooling", "mobile-theme-current"],
+      "supersedes": [],
       "supersededBy": []
     },
     {
@@ -578,14 +611,15 @@
       "wikiSlug": "RandoMeal--Mobile--Theme-Debt",
       "status": "mixed",
       "authority": "current-code-over-legacy-design-doc",
-      "summary": "Large global StyleSheet with hard-coded warm orange and cream values; semantic tokens, component primitives, Figma variables, themes, and accessibility state contracts are not yet implemented.",
+      "summary": "The mobile app still uses a large global StyleSheet with hard-coded warm orange and cream values. The reviewed Foundation v1 target now exists in the repository and canonical Figma file, but mobile has not yet migrated to it.",
       "tags": ["theme", "styles", "tokens", "colors", "design debt", "тема", "стили", "токены"],
-      "sources": ["apps/mobile/src/theme/**", "DESIGN.md", "docs/product/quality-and-design.md"],
+      "sources": ["apps/mobile/src/theme/**", "design/foundations.tokens.json", "DESIGN.md", "docs/product/quality-and-design.md"],
       "rules": [
         "Current code is orange and cream while DESIGN.md describes a legacy green Starbucks-like direction.",
         "Product quality constraints and approved future brand choices override DESIGN.md.",
         "Build semantic tokens and reusable state-complete components before screen-scale polish.",
-        "Figma and code must share token and component contracts."
+        "Figma and code must share token and component contracts.",
+        "Migrate mobile through a separate tested implementation task; the presence of Foundation v1 does not mean the current theme already consumes it."
       ],
       "dependsOn": ["design-system-quality", "mobile-shell-current"],
       "related": ["legacy-documentation-map"],
@@ -618,19 +652,26 @@
       "title": "Design system and product quality",
       "group": "Analytics and Quality",
       "wikiSlug": "RandoMeal--Design--System-and-Quality",
-      "status": "target",
+      "status": "mixed",
       "authority": "product-design-source-of-truth",
-      "summary": "Figma variables, semantic tokens, component contracts, accessibility, complete interaction states, content trust, responsive behavior, and anti-slop creation review.",
+      "summary": "Foundation v1 is implemented and validated in the canonical Figma file and repository token source; component contracts, full interaction states and mobile adoption remain target work.",
       "tags": ["design", "figma", "tokens", "components", "accessibility", "anti slop", "дизайн", "фигма"],
-      "sources": ["docs/product/quality-and-design.md", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
+      "sources": ["docs/product/quality-and-design.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
       "rules": [
         "Use the design anti-slop skill for every Figma or user-facing UI task.",
+        "Use the single canonical Figma file declared in design/figma-project.json for every project design operation.",
         "Product safety, accessibility, signed discovery decisions, project tokens, and approved brand choices override the anti-slop catalog.",
         "New work requires creation review; existing work starts with audit unless immediate fixes are authorized.",
-        "DESIGN.md is legacy reference and cannot define the final brand or navigation."
+        "DESIGN.md is legacy reference and cannot define the final brand or navigation.",
+        "Foundation v1 has five collections and exactly 78 variables: 33 primitives, 29 semantic colors, seven spacing values, five radii and four sizes.",
+        "Ivory, Graphite and Paprika are the approved base palette; success, warning, danger and disabled are explicit semantic states.",
+        "Fraunces and Source Sans 3 are the approved SIL Open Font License 1.1 families for display and interface text.",
+        "Every token has Web, iOS and Android syntax, and the minimum touch target is 44 px.",
+        "Ivory text on the Paprika brand background must remain at or above WCAG AA contrast; Foundation v1 validates at 4.67:1.",
+        "Only the Light color mode is approved; dark mode requires separate validation."
       ],
       "dependsOn": ["product-strategy", "choice-cardinality-gate", "agent-governance"],
-      "related": ["qa-strategy", "mobile-theme-current"],
+      "related": ["figma-canonical-file", "qa-strategy", "mobile-theme-current"],
       "supersedes": ["legacy-documentation-map", "mobile-theme-current"],
       "supersededBy": []
     },

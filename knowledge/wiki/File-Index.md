@@ -1,23 +1,23 @@
 # Complete File Index
 
-Fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
+Fingerprint: `ca13dbaee3a436ffe817473bc60ac06394f0240c8732b0496d2e37ecd7ab76fd`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
 | `.agents/skills/design-anti-slop/agents/openai.yaml` | yaml | agent-governance, repository-inventory, design-system-quality | 4 indexed sections: interface, display_name, short_description, default_prompt |
 | `.agents/skills/design-anti-slop/references/catalog.md` | markdown | agent-governance, repository-inventory, design-system-quality | 36 indexed sections: Project interpretation, Каталог слоп-теллов (правила детекции и фиксы), Баны (чинить всегда), T6 · Indigo/violet акцент и градиент без брифа — ban · вес 6/6, Reddit 2.3% (самый цитируемый), T16 · Нетронутый shadcn/Tailwind-кит — ban · вес 4/6, Reddit 2.5% (№1 в жалобах), … |
-| `.agents/skills/design-anti-slop/SKILL.md` | markdown | agent-governance, repository-inventory, design-system-quality | 7 indexed sections: Design anti-slop for RandoMeal, Приоритет источников, Режимы, Обязательный workflow, Интерпретация каталога в мобильном продукте, … |
+| `.agents/skills/design-anti-slop/SKILL.md` | markdown | agent-governance, figma-canonical-file, repository-inventory, design-system-quality | 7 indexed sections: Design anti-slop for RandoMeal, Приоритет источников, Режимы, Обязательный workflow, Интерпретация каталога в мобильном продукте, … |
 | `.agents/skills/randomeal-knowledge/agents/openai.yaml` | yaml | knowledge-system, agent-governance, repository-inventory | 10 indexed sections: interface, display_name, short_description, default_prompt, policy, … |
 | `.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md` | markdown | knowledge-system, agent-governance, repository-inventory | 7 indexed sections: Verified Notion Wiki MCP sync protocol, Fixed target, Pre-change retrieval, Local preparation, Bootstrap and upsert, … |
 | `.agents/skills/randomeal-knowledge/SKILL.md` | markdown | knowledge-system, agent-governance, repository-inventory | 6 indexed sections: RandoMeal Knowledge, Retrieval workflow, Retrieval agent, Change lifecycle, External Notion Wiki synchronization, … |
 | `.codex/agents/knowledge-retriever.toml` | toml | knowledge-system, agent-governance, repository-inventory | toml file knowledge-retriever.toml |
 | `.env.example` | environment | repository-inventory, local-infrastructure | 6 indexed sections: NODE_ENV, PORT, CORS_ORIGINS, DISHES_WRITE_TOKEN, SESSION_SECRET, … |
-| `.github/workflows/ci.yml` | yaml | repository-inventory, ci-quality | 110 indexed sections: name, on, pull_request, branches, push, … |
+| `.github/workflows/ci.yml` | yaml | figma-canonical-file, repository-inventory, ci-quality | 114 indexed sections: name, on, pull_request, branches, push, … |
 | `.github/workflows/deploy.yml` | yaml | repository-inventory, production-infrastructure | 72 indexed sections: name, on, workflow_run, workflows, types, … |
 | `.gitignore` | configuration | repository-inventory, local-infrastructure | configuration file .gitignore |
 | `.npmrc` | configuration | repository-inventory, workspace-tooling | configuration file .npmrc |
 | `.nvmrc` | configuration | repository-inventory, workspace-tooling | configuration file .nvmrc |
-| `AGENTS.md` | markdown | agent-governance, repository-inventory | 5 indexed sections: RandoMeal agent instructions, Mandatory knowledge workflow, Mandatory design workflow, Repository safety, Source code comments |
+| `AGENTS.md` | markdown | agent-governance, figma-canonical-file, repository-inventory | 5 indexed sections: RandoMeal agent instructions, Mandatory knowledge workflow, Mandatory design workflow, Repository safety, Source code comments |
 | `AI_CONTEXT.md` | markdown | agent-governance, repository-inventory, legacy-documentation-map | 14 indexed sections: AI Context, Project, Product Rules, Architecture, Stack, … |
 | `apps/api/.dockerignore` | configuration | repository-inventory, local-infrastructure | configuration file .dockerignore |
 | `apps/api/.env.example` | environment | repository-inventory, local-infrastructure | 9 indexed sections: NODE_ENV, PORT, DATABASE_URL, SESSION_SECRET, CORS_ORIGINS, … |
@@ -102,6 +102,8 @@ Fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
 | `apps/mobile/src/utils/forms.ts` | typescript | repository-inventory, mobile-shell-current | 1 indexed section: parseLines |
 | `apps/mobile/tsconfig.json` | json | repository-inventory, workspace-tooling | 2 indexed sections: extends, compilerOptions |
 | `DESIGN.md` | markdown | repository-inventory, mobile-theme-current, design-system-quality, legacy-documentation-map | 20 indexed sections: Food Randomizer Design System (Starbucks-Inspired), 1. Design Direction, 2. Brand Tokens, Color Tokens, Radius Tokens, … |
+| `design/figma-project.json` | json | figma-canonical-file, repository-inventory, design-system-quality | 6 indexed sections: schemaVersion, project, policy, file, allowedFileKeys, … |
+| `design/foundations.tokens.json` | json | figma-canonical-file, repository-inventory, mobile-theme-current, design-system-quality | 8 indexed sections: schemaVersion, system, version, figmaFileKey, colorMode, … |
 | `docker-compose.prod.yml` | yaml | repository-inventory, production-infrastructure | 14 indexed sections: services, api, image, env_file, command, … |
 | `docker-compose.yml` | yaml | repository-inventory, local-infrastructure | 13 indexed sections: services, postgres, image, container_name, restart, … |
 | `docs/api-spec.md` | markdown | repository-inventory, api-legacy-surface, legacy-documentation-map | 17 indexed sections: API Spec (v1 draft), Health, `GET /health`, Dishes, `POST /dishes`, … |
@@ -116,7 +118,8 @@ Fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
 | `docs/product/data-model.md` | markdown | repository-inventory, target-data-model | 37 indexed sections: Target database model, 1. Identity and profile, `users` (existing, retained), `product_identities`, `anonymous_identities`, … |
 | `docs/product/delivery-plan.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap | 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, … |
 | `docs/product/discovery-decisions.md` | markdown | repository-inventory, product-strategy, choice-cardinality-gate | 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, … |
-| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 9 indexed sections: Design and quality operating model, 1. Design workflow, 2. QA strategy, 3. Critical invariant suite, 4. AI evaluation, … |
+| `docs/product/figma-governance.md` | markdown | figma-canonical-file, repository-inventory, design-system-quality | 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff |
+| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 10 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, 2. QA strategy, 3. Critical invariant suite, … |
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |
@@ -147,6 +150,7 @@ Fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
 | `knowledge/wiki/RandoMeal--Delivery--CI.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki/RandoMeal--Design--System-and-Quality.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki/RandoMeal--Governance--Agents.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
+| `knowledge/wiki/RandoMeal--Governance--Canonical-Figma.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki/RandoMeal--Governance--Knowledge-System.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki/RandoMeal--Governance--Repository-Inventory.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki/RandoMeal--Infrastructure--Local.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
@@ -163,13 +167,15 @@ Fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
 | `knowledge/wiki/RandoMeal--Quality--QA-Strategy.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki/RandoMeal--Tooling--Workspace.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `package-lock.json` | json | repository-inventory, workspace-tooling | 5 indexed sections: name, version, lockfileVersion, requires, packages |
-| `package.json` | json | repository-inventory, workspace-tooling | 8 indexed sections: name, private, version, engines, packageManager, … |
+| `package.json` | json | figma-canonical-file, repository-inventory, workspace-tooling | 8 indexed sections: name, private, version, engines, packageManager, … |
 | `packages/contracts/package.json` | json | repository-inventory, workspace-tooling | 7 indexed sections: name, version, private, main, types, … |
 | `packages/contracts/src/index.ts` | typescript | repository-inventory, legacy-contracts, product-v2-contracts, backend-ai-scaffold | 27 indexed sections: IngredientSchema, AddOnGroupSchema, DishSchema, RandomNextRequestSchema, ResolvedAddOnGroupSchema, … |
 | `packages/contracts/src/product-v2.ts` | typescript | repository-inventory, recommendation-engine-target, api-v2-contract, product-v2-contracts, analytics-measurement | 31 indexed sections: ProductIdentityHeadersSchema, DietTypeSchema, MealTypeSchema, RecommendationGoalSchema, PantryModeSchema, … |
 | `packages/contracts/tsconfig.json` | json | repository-inventory, workspace-tooling | 3 indexed sections: extends, compilerOptions, include |
 | `README.md` | markdown | repository-inventory, current-vs-target, legacy-documentation-map | 10 indexed sections: Food Randomizer Monorepo Blueprint, Stack, Repo Layout, Environment Strategy, Mobile, … |
 | `scripts/check-env-files.sh` | shell | repository-inventory, workspace-tooling | shell file check-env-files.sh |
+| `scripts/check-figma-governance.mjs` | javascript | figma-canonical-file, repository-inventory | 1 indexed section: fail |
+| `scripts/check-figma-governance.spec.mjs` | javascript | repository-inventory | 5 indexed sections: run, accepts the canonical file key, rejects another file key, accepts the canonical design URL, rejects a non-design URL even with the canonical key |
 | `scripts/check-node-version.mjs` | javascript | repository-inventory, workspace-tooling | javascript file check-node-version.mjs |
 | `scripts/deploy-api.sh` | shell | repository-inventory, production-infrastructure | shell file deploy-api.sh |
 | `scripts/knowledge/index-repository.mjs` | javascript | knowledge-system, repository-inventory | javascript file index-repository.mjs |
@@ -217,6 +223,7 @@ Fingerprint: `c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d`
 - `knowledge/wiki/RandoMeal--Delivery--CI.md`
 - `knowledge/wiki/RandoMeal--Design--System-and-Quality.md`
 - `knowledge/wiki/RandoMeal--Governance--Agents.md`
+- `knowledge/wiki/RandoMeal--Governance--Canonical-Figma.md`
 - `knowledge/wiki/RandoMeal--Governance--Knowledge-System.md`
 - `knowledge/wiki/RandoMeal--Governance--Repository-Inventory.md`
 - `knowledge/wiki/RandoMeal--Infrastructure--Local.md`

@@ -4,6 +4,7 @@
 - **Governance**
   - [Knowledge system](RandoMeal--Governance--Knowledge-System)
   - [Agent governance](RandoMeal--Governance--Agents)
+  - [Canonical Figma file governance](RandoMeal--Governance--Canonical-Figma)
   - [Complete repository inventory](RandoMeal--Governance--Repository-Inventory)
 - **Product**
   - [Product strategy and discovery gates](RandoMeal--Product--Strategy)
