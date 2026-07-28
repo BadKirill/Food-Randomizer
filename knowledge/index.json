@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "c90dab94f82005f53401812c819ba3ed9bf7b3a2de94ca1673a5e155cee5ad3d",
+  "contentFingerprint": "ca13dbaee3a436ffe817473bc60ac06394f0240c8732b0496d2e37ecd7ab76fd",
   "coverage": {
-    "repositoryFiles": 184,
-    "indexedFiles": 184,
+    "repositoryFiles": 190,
+    "indexedFiles": 190,
     "binaryFiles": 4,
-    "filesWithSections": 139,
+    "filesWithSections": 144,
     "generatedManaged": [
       "knowledge/index.json",
       "knowledge/wiki-manifest.json",
@@ -34,6 +34,7 @@
       "knowledge/wiki/RandoMeal--Delivery--CI.md",
       "knowledge/wiki/RandoMeal--Design--System-and-Quality.md",
       "knowledge/wiki/RandoMeal--Governance--Agents.md",
+      "knowledge/wiki/RandoMeal--Governance--Canonical-Figma.md",
       "knowledge/wiki/RandoMeal--Governance--Knowledge-System.md",
       "knowledge/wiki/RandoMeal--Governance--Repository-Inventory.md",
       "knowledge/wiki/RandoMeal--Infrastructure--Local.md",
@@ -55,25 +56,25 @@
     "filesByKind": {
       "agent-rule": 3,
       "asset": 4,
-      "configuration": 25,
-      "documentation": 20,
-      "generated": 41,
+      "configuration": 27,
+      "documentation": 21,
+      "generated": 42,
       "lockfile": 3,
       "migration": 7,
       "other": 1,
       "skill": 6,
       "source": 42,
-      "test": 15,
-      "tooling": 17
+      "test": 16,
+      "tooling": 18
     },
     "filesByLanguage": {
       "configuration": 5,
       "dockerfile": 1,
       "environment": 3,
-      "generated": 41,
-      "javascript": 16,
-      "json": 17,
-      "markdown": 26,
+      "generated": 42,
+      "javascript": 18,
+      "json": 19,
+      "markdown": 27,
       "prisma": 1,
       "shell": 6,
       "sql": 6,
@@ -86,7 +87,8 @@
     "filesByNode": {
       "knowledge-system": 16,
       "agent-governance": 9,
-      "repository-inventory": 184,
+      "figma-canonical-file": 8,
+      "repository-inventory": 190,
       "product-strategy": 2,
       "choice-cardinality-gate": 3,
       "delivery-roadmap": 3,
@@ -109,9 +111,9 @@
       "mobile-api-auth-current": 4,
       "mobile-random-current": 4,
       "mobile-manage-current": 5,
-      "mobile-theme-current": 3,
+      "mobile-theme-current": 4,
       "analytics-measurement": 2,
-      "design-system-quality": 5,
+      "design-system-quality": 8,
       "qa-strategy": 17,
       "workspace-tooling": 18,
       "ci-quality": 5,
@@ -119,8 +121,8 @@
       "production-infrastructure": 8,
       "legacy-documentation-map": 7
     },
-    "sections": 1170,
-    "symbols": 364,
+    "sections": 1204,
+    "symbols": 370,
     "routes": 13,
     "localRelations": 93
   },
@@ -514,12 +516,13 @@
       "kind": "skill",
       "binary": false,
       "generated": false,
-      "bytes": 8493,
-      "lines": 96,
-      "sha256": "45901078ee197b0da0055f5ba33dacdabdd4dd5b9a2998492c6efcb459f035b1",
+      "bytes": 9005,
+      "lines": 100,
+      "sha256": "e0b434f8b3cbe8647a5be58e282bf363f8bcd9b6fb9a3eff8d9aa9333a8bf0b7",
       "summary": "7 indexed sections: Design anti-slop for RandoMeal, Приоритет источников, Режимы, Обязательный workflow, Интерпретация каталога в мобильном продукте, …",
       "nodeIds": [
         "agent-governance",
+        "figma-canonical-file",
         "repository-inventory",
         "design-system-quality"
       ],
@@ -533,7 +536,7 @@
           "title": ".agents/skills/design-anti-slop/SKILL.md",
           "line": 1,
           "depth": 0,
-          "endLine": 96
+          "endLine": 100
         },
         {
           "id": "section:.agents/skills/design-anti-slop/SKILL.md#2",
@@ -541,7 +544,7 @@
           "title": "Design anti-slop for RandoMeal",
           "line": 6,
           "depth": 1,
-          "endLine": 96
+          "endLine": 100
         },
         {
           "id": "section:.agents/skills/design-anti-slop/SKILL.md#3",
@@ -565,31 +568,31 @@
           "title": "Обязательный workflow",
           "line": 33,
           "depth": 2,
-          "endLine": 55
+          "endLine": 59
         },
         {
           "id": "section:.agents/skills/design-anti-slop/SKILL.md#6",
           "kind": "heading",
           "title": "Интерпретация каталога в мобильном продукте",
-          "line": 56,
+          "line": 60,
           "depth": 2,
-          "endLine": 67
+          "endLine": 71
         },
         {
           "id": "section:.agents/skills/design-anti-slop/SKILL.md#7",
           "kind": "heading",
           "title": "Figma и реализация",
-          "line": 68,
+          "line": 72,
           "depth": 2,
-          "endLine": 78
+          "endLine": 82
         },
         {
           "id": "section:.agents/skills/design-anti-slop/SKILL.md#8",
           "kind": "heading",
           "title": "Формат аудита",
-          "line": 79,
+          "line": 83,
           "depth": 2,
-          "endLine": 96
+          "endLine": 100
         }
       ],
       "symbols": []
@@ -987,11 +990,12 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 4204,
-      "lines": 158,
-      "sha256": "c7ddb530ca573ab844bc640490fffa6c4bf0839207c3c2fbd786d6cb05dcc602",
-      "summary": "110 indexed sections: name, on, pull_request, branches, push, …",
+      "bytes": 4372,
+      "lines": 164,
+      "sha256": "58cdee10327b963c34b1bac7852d7e86a06f075b9a6154707b0bdc5767900bed",
+      "summary": "114 indexed sections: name, on, pull_request, branches, push, …",
       "nodeIds": [
+        "figma-canonical-file",
         "repository-inventory",
         "ci-quality"
       ],
@@ -1005,7 +1009,7 @@
           "title": ".github/workflows/ci.yml",
           "line": 1,
           "depth": 0,
-          "endLine": 158
+          "endLine": 164
         },
         {
           "id": "section:.github/workflows/ci.yml#2",
@@ -1061,7 +1065,7 @@
           "title": "jobs",
           "line": 9,
           "depth": 1,
-          "endLine": 158
+          "endLine": 164
         },
         {
           "id": "section:.github/workflows/ci.yml#9",
@@ -1069,7 +1073,7 @@
           "title": "api",
           "line": 10,
           "depth": 2,
-          "endLine": 73
+          "endLine": 79
         },
         {
           "id": "section:.github/workflows/ci.yml#10",
@@ -1290,7 +1294,7 @@
         {
           "id": "section:.github/workflows/ci.yml#37",
           "kind": "step",
-          "title": "Knowledge graph freshness",
+          "title": "Canonical Figma file policy",
           "line": 47,
           "depth": 3,
           "endLine": 49
@@ -1306,7 +1310,7 @@
         {
           "id": "section:.github/workflows/ci.yml#39",
           "kind": "step",
-          "title": "Knowledge sync contract tests",
+          "title": "Canonical Figma file policy tests",
           "line": 50,
           "depth": 3,
           "endLine": 52
@@ -1322,7 +1326,7 @@
         {
           "id": "section:.github/workflows/ci.yml#41",
           "kind": "step",
-          "title": "Verified Notion mirror state",
+          "title": "Knowledge graph freshness",
           "line": 53,
           "depth": 3,
           "endLine": 55
@@ -1338,7 +1342,7 @@
         {
           "id": "section:.github/workflows/ci.yml#43",
           "kind": "step",
-          "title": "Generate Prisma Client",
+          "title": "Knowledge sync contract tests",
           "line": 56,
           "depth": 3,
           "endLine": 58
@@ -1354,7 +1358,7 @@
         {
           "id": "section:.github/workflows/ci.yml#45",
           "kind": "step",
-          "title": "Apply Prisma migrations",
+          "title": "Verified Notion mirror state",
           "line": 59,
           "depth": 3,
           "endLine": 61
@@ -1370,7 +1374,7 @@
         {
           "id": "section:.github/workflows/ci.yml#47",
           "kind": "step",
-          "title": "Build API",
+          "title": "Generate Prisma Client",
           "line": 62,
           "depth": 3,
           "endLine": 64
@@ -1386,7 +1390,7 @@
         {
           "id": "section:.github/workflows/ci.yml#49",
           "kind": "step",
-          "title": "API unit tests + coverage gate",
+          "title": "Apply Prisma migrations",
           "line": 65,
           "depth": 3,
           "endLine": 67
@@ -1402,7 +1406,7 @@
         {
           "id": "section:.github/workflows/ci.yml#51",
           "kind": "step",
-          "title": "API mocked e2e tests",
+          "title": "Build API",
           "line": 68,
           "depth": 3,
           "endLine": 70
@@ -1418,7 +1422,7 @@
         {
           "id": "section:.github/workflows/ci.yml#53",
           "kind": "step",
-          "title": "API real e2e tests (API <-> DB)",
+          "title": "API unit tests + coverage gate",
           "line": 71,
           "depth": 3,
           "endLine": 73
@@ -1433,128 +1437,128 @@
         },
         {
           "id": "section:.github/workflows/ci.yml#55",
-          "kind": "section",
-          "title": "mobile",
+          "kind": "step",
+          "title": "API mocked e2e tests",
           "line": 74,
-          "depth": 2,
-          "endLine": 95
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#56",
-          "kind": "section",
-          "title": "name",
-          "line": 75,
-          "depth": 3,
-          "endLine": 75
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#57",
-          "kind": "section",
-          "title": "runs-on",
-          "line": 76,
           "depth": 3,
           "endLine": 76
         },
         {
-          "id": "section:.github/workflows/ci.yml#58",
+          "id": "section:.github/workflows/ci.yml#56",
           "kind": "section",
-          "title": "steps",
+          "title": "run",
+          "line": 75,
+          "depth": 5,
+          "endLine": 76
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#57",
+          "kind": "step",
+          "title": "API real e2e tests (API <-> DB)",
           "line": 77,
           "depth": 3,
-          "endLine": 77
+          "endLine": 79
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#58",
+          "kind": "section",
+          "title": "run",
+          "line": 78,
+          "depth": 5,
+          "endLine": 79
         },
         {
           "id": "section:.github/workflows/ci.yml#59",
-          "kind": "step",
-          "title": "Checkout",
-          "line": 78,
-          "depth": 3,
-          "endLine": 80
+          "kind": "section",
+          "title": "mobile",
+          "line": 80,
+          "depth": 2,
+          "endLine": 101
         },
         {
           "id": "section:.github/workflows/ci.yml#60",
           "kind": "section",
-          "title": "uses",
-          "line": 79,
-          "depth": 5,
-          "endLine": 80
+          "title": "name",
+          "line": 81,
+          "depth": 3,
+          "endLine": 81
         },
         {
           "id": "section:.github/workflows/ci.yml#61",
-          "kind": "step",
-          "title": "Setup Node",
-          "line": 81,
+          "kind": "section",
+          "title": "runs-on",
+          "line": 82,
           "depth": 3,
-          "endLine": 86
+          "endLine": 82
         },
         {
           "id": "section:.github/workflows/ci.yml#62",
           "kind": "section",
-          "title": "uses",
-          "line": 82,
-          "depth": 5,
-          "endLine": 82
+          "title": "steps",
+          "line": 83,
+          "depth": 3,
+          "endLine": 83
         },
         {
           "id": "section:.github/workflows/ci.yml#63",
-          "kind": "section",
-          "title": "with",
-          "line": 83,
-          "depth": 5,
+          "kind": "step",
+          "title": "Checkout",
+          "line": 84,
+          "depth": 3,
           "endLine": 86
         },
         {
           "id": "section:.github/workflows/ci.yml#64",
           "kind": "section",
-          "title": "node-version",
-          "line": 84,
-          "depth": 6,
-          "endLine": 84
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#65",
-          "kind": "section",
-          "title": "cache",
+          "title": "uses",
           "line": 85,
-          "depth": 6,
+          "depth": 5,
           "endLine": 86
         },
         {
-          "id": "section:.github/workflows/ci.yml#66",
+          "id": "section:.github/workflows/ci.yml#65",
           "kind": "step",
-          "title": "Install dependencies",
+          "title": "Setup Node",
           "line": 87,
-          "depth": 3,
-          "endLine": 89
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#67",
-          "kind": "section",
-          "title": "run",
-          "line": 88,
-          "depth": 5,
-          "endLine": 89
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#68",
-          "kind": "step",
-          "title": "Mobile tests",
-          "line": 90,
           "depth": 3,
           "endLine": 92
         },
         {
+          "id": "section:.github/workflows/ci.yml#66",
+          "kind": "section",
+          "title": "uses",
+          "line": 88,
+          "depth": 5,
+          "endLine": 88
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#67",
+          "kind": "section",
+          "title": "with",
+          "line": 89,
+          "depth": 5,
+          "endLine": 92
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#68",
+          "kind": "section",
+          "title": "node-version",
+          "line": 90,
+          "depth": 6,
+          "endLine": 90
+        },
+        {
           "id": "section:.github/workflows/ci.yml#69",
           "kind": "section",
-          "title": "run",
+          "title": "cache",
           "line": 91,
-          "depth": 5,
+          "depth": 6,
           "endLine": 92
         },
         {
           "id": "section:.github/workflows/ci.yml#70",
           "kind": "step",
-          "title": "Mobile typecheck",
+          "title": "Install dependencies",
           "line": 93,
           "depth": 3,
           "endLine": 95
@@ -1569,240 +1573,240 @@
         },
         {
           "id": "section:.github/workflows/ci.yml#72",
-          "kind": "section",
-          "title": "app_api_contract",
+          "kind": "step",
+          "title": "Mobile tests",
           "line": 96,
-          "depth": 2,
-          "endLine": 158
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#73",
-          "kind": "section",
-          "title": "name",
-          "line": 97,
-          "depth": 3,
-          "endLine": 97
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#74",
-          "kind": "section",
-          "title": "runs-on",
-          "line": 98,
           "depth": 3,
           "endLine": 98
         },
         {
-          "id": "section:.github/workflows/ci.yml#75",
+          "id": "section:.github/workflows/ci.yml#73",
           "kind": "section",
-          "title": "services",
+          "title": "run",
+          "line": 97,
+          "depth": 5,
+          "endLine": 98
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#74",
+          "kind": "step",
+          "title": "Mobile typecheck",
           "line": 99,
           "depth": 3,
-          "endLine": 112
+          "endLine": 101
         },
         {
-          "id": "section:.github/workflows/ci.yml#76",
+          "id": "section:.github/workflows/ci.yml#75",
           "kind": "section",
-          "title": "postgres",
+          "title": "run",
           "line": 100,
-          "depth": 4,
-          "endLine": 112
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#77",
-          "kind": "section",
-          "title": "image",
-          "line": 101,
           "depth": 5,
           "endLine": 101
         },
         {
+          "id": "section:.github/workflows/ci.yml#76",
+          "kind": "section",
+          "title": "app_api_contract",
+          "line": 102,
+          "depth": 2,
+          "endLine": 164
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#77",
+          "kind": "section",
+          "title": "name",
+          "line": 103,
+          "depth": 3,
+          "endLine": 103
+        },
+        {
           "id": "section:.github/workflows/ci.yml#78",
           "kind": "section",
-          "title": "env",
-          "line": 102,
-          "depth": 5,
-          "endLine": 105
+          "title": "runs-on",
+          "line": 104,
+          "depth": 3,
+          "endLine": 104
         },
         {
           "id": "section:.github/workflows/ci.yml#79",
           "kind": "section",
-          "title": "POSTGRES_USER",
-          "line": 103,
-          "depth": 6,
-          "endLine": 103
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#80",
-          "kind": "section",
-          "title": "POSTGRES_PASSWORD",
-          "line": 104,
-          "depth": 6,
-          "endLine": 104
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#81",
-          "kind": "section",
-          "title": "POSTGRES_DB",
+          "title": "services",
           "line": 105,
-          "depth": 6,
-          "endLine": 105
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#82",
-          "kind": "section",
-          "title": "ports",
-          "line": 106,
-          "depth": 5,
-          "endLine": 107
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#83",
-          "kind": "section",
-          "title": "options",
-          "line": 108,
-          "depth": 5,
-          "endLine": 112
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#84",
-          "kind": "section",
-          "title": "env",
-          "line": 113,
-          "depth": 3,
-          "endLine": 117
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#85",
-          "kind": "section",
-          "title": "DATABASE_URL",
-          "line": 114,
-          "depth": 4,
-          "endLine": 114
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#86",
-          "kind": "section",
-          "title": "SESSION_SECRET",
-          "line": 115,
-          "depth": 4,
-          "endLine": 115
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#87",
-          "kind": "section",
-          "title": "DISHES_WRITE_TOKEN",
-          "line": 116,
-          "depth": 4,
-          "endLine": 116
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#88",
-          "kind": "section",
-          "title": "TEST_API_BASE_URL",
-          "line": 117,
-          "depth": 4,
-          "endLine": 117
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#89",
-          "kind": "section",
-          "title": "steps",
-          "line": 118,
           "depth": 3,
           "endLine": 118
         },
         {
-          "id": "section:.github/workflows/ci.yml#90",
-          "kind": "step",
-          "title": "Checkout",
+          "id": "section:.github/workflows/ci.yml#80",
+          "kind": "section",
+          "title": "postgres",
+          "line": 106,
+          "depth": 4,
+          "endLine": 118
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#81",
+          "kind": "section",
+          "title": "image",
+          "line": 107,
+          "depth": 5,
+          "endLine": 107
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#82",
+          "kind": "section",
+          "title": "env",
+          "line": 108,
+          "depth": 5,
+          "endLine": 111
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#83",
+          "kind": "section",
+          "title": "POSTGRES_USER",
+          "line": 109,
+          "depth": 6,
+          "endLine": 109
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#84",
+          "kind": "section",
+          "title": "POSTGRES_PASSWORD",
+          "line": 110,
+          "depth": 6,
+          "endLine": 110
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#85",
+          "kind": "section",
+          "title": "POSTGRES_DB",
+          "line": 111,
+          "depth": 6,
+          "endLine": 111
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#86",
+          "kind": "section",
+          "title": "ports",
+          "line": 112,
+          "depth": 5,
+          "endLine": 113
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#87",
+          "kind": "section",
+          "title": "options",
+          "line": 114,
+          "depth": 5,
+          "endLine": 118
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#88",
+          "kind": "section",
+          "title": "env",
           "line": 119,
           "depth": 3,
+          "endLine": 123
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#89",
+          "kind": "section",
+          "title": "DATABASE_URL",
+          "line": 120,
+          "depth": 4,
+          "endLine": 120
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#90",
+          "kind": "section",
+          "title": "SESSION_SECRET",
+          "line": 121,
+          "depth": 4,
           "endLine": 121
         },
         {
           "id": "section:.github/workflows/ci.yml#91",
           "kind": "section",
-          "title": "uses",
-          "line": 120,
-          "depth": 5,
-          "endLine": 121
+          "title": "DISHES_WRITE_TOKEN",
+          "line": 122,
+          "depth": 4,
+          "endLine": 122
         },
         {
           "id": "section:.github/workflows/ci.yml#92",
-          "kind": "step",
-          "title": "Setup Node",
-          "line": 122,
-          "depth": 3,
-          "endLine": 127
+          "kind": "section",
+          "title": "TEST_API_BASE_URL",
+          "line": 123,
+          "depth": 4,
+          "endLine": 123
         },
         {
           "id": "section:.github/workflows/ci.yml#93",
           "kind": "section",
-          "title": "uses",
-          "line": 123,
-          "depth": 5,
-          "endLine": 123
+          "title": "steps",
+          "line": 124,
+          "depth": 3,
+          "endLine": 124
         },
         {
           "id": "section:.github/workflows/ci.yml#94",
-          "kind": "section",
-          "title": "with",
-          "line": 124,
-          "depth": 5,
+          "kind": "step",
+          "title": "Checkout",
+          "line": 125,
+          "depth": 3,
           "endLine": 127
         },
         {
           "id": "section:.github/workflows/ci.yml#95",
           "kind": "section",
-          "title": "node-version",
-          "line": 125,
-          "depth": 6,
-          "endLine": 125
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#96",
-          "kind": "section",
-          "title": "cache",
+          "title": "uses",
           "line": 126,
-          "depth": 6,
+          "depth": 5,
           "endLine": 127
         },
         {
-          "id": "section:.github/workflows/ci.yml#97",
+          "id": "section:.github/workflows/ci.yml#96",
           "kind": "step",
-          "title": "Install dependencies",
+          "title": "Setup Node",
           "line": 128,
-          "depth": 3,
-          "endLine": 130
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#98",
-          "kind": "section",
-          "title": "run",
-          "line": 129,
-          "depth": 5,
-          "endLine": 130
-        },
-        {
-          "id": "section:.github/workflows/ci.yml#99",
-          "kind": "step",
-          "title": "Generate Prisma Client",
-          "line": 131,
           "depth": 3,
           "endLine": 133
         },
         {
+          "id": "section:.github/workflows/ci.yml#97",
+          "kind": "section",
+          "title": "uses",
+          "line": 129,
+          "depth": 5,
+          "endLine": 129
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#98",
+          "kind": "section",
+          "title": "with",
+          "line": 130,
+          "depth": 5,
+          "endLine": 133
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#99",
+          "kind": "section",
+          "title": "node-version",
+          "line": 131,
+          "depth": 6,
+          "endLine": 131
+        },
+        {
           "id": "section:.github/workflows/ci.yml#100",
           "kind": "section",
-          "title": "run",
+          "title": "cache",
           "line": 132,
-          "depth": 5,
+          "depth": 6,
           "endLine": 133
         },
         {
           "id": "section:.github/workflows/ci.yml#101",
           "kind": "step",
-          "title": "Apply Prisma migrations",
+          "title": "Install dependencies",
           "line": 134,
           "depth": 3,
           "endLine": 136
@@ -1818,7 +1822,7 @@
         {
           "id": "section:.github/workflows/ci.yml#103",
           "kind": "step",
-          "title": "Build API",
+          "title": "Generate Prisma Client",
           "line": 137,
           "depth": 3,
           "endLine": 139
@@ -1834,10 +1838,10 @@
         {
           "id": "section:.github/workflows/ci.yml#105",
           "kind": "step",
-          "title": "Start API in background",
+          "title": "Apply Prisma migrations",
           "line": 140,
           "depth": 3,
-          "endLine": 151
+          "endLine": 142
         },
         {
           "id": "section:.github/workflows/ci.yml#106",
@@ -1845,47 +1849,79 @@
           "title": "run",
           "line": 141,
           "depth": 5,
-          "endLine": 151
+          "endLine": 142
         },
         {
           "id": "section:.github/workflows/ci.yml#107",
           "kind": "step",
-          "title": "Run app <-> API contract tests",
-          "line": 152,
+          "title": "Build API",
+          "line": 143,
           "depth": 3,
-          "endLine": 154
+          "endLine": 145
         },
         {
           "id": "section:.github/workflows/ci.yml#108",
           "kind": "section",
           "title": "run",
-          "line": 153,
+          "line": 144,
           "depth": 5,
-          "endLine": 154
+          "endLine": 145
         },
         {
           "id": "section:.github/workflows/ci.yml#109",
           "kind": "step",
-          "title": "API logs (on failure)",
-          "line": 155,
+          "title": "Start API in background",
+          "line": 146,
           "depth": 3,
-          "endLine": 158
+          "endLine": 157
         },
         {
           "id": "section:.github/workflows/ci.yml#110",
           "kind": "section",
-          "title": "if",
-          "line": 156,
+          "title": "run",
+          "line": 147,
           "depth": 5,
-          "endLine": 156
+          "endLine": 157
         },
         {
           "id": "section:.github/workflows/ci.yml#111",
+          "kind": "step",
+          "title": "Run app <-> API contract tests",
+          "line": 158,
+          "depth": 3,
+          "endLine": 160
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#112",
           "kind": "section",
           "title": "run",
-          "line": 157,
+          "line": 159,
           "depth": 5,
-          "endLine": 158
+          "endLine": 160
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#113",
+          "kind": "step",
+          "title": "API logs (on failure)",
+          "line": 161,
+          "depth": 3,
+          "endLine": 164
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#114",
+          "kind": "section",
+          "title": "if",
+          "line": 162,
+          "depth": 5,
+          "endLine": 162
+        },
+        {
+          "id": "section:.github/workflows/ci.yml#115",
+          "kind": "section",
+          "title": "run",
+          "line": 163,
+          "depth": 5,
+          "endLine": 164
         }
       ],
       "symbols": []
@@ -2593,12 +2629,13 @@
       "kind": "agent-rule",
       "binary": false,
       "generated": false,
-      "bytes": 3744,
-      "lines": 56,
-      "sha256": "fd2ba91037cb9c24247bb8a5a7a77728b68c949e029470b7716473a50ee74058",
+      "bytes": 4669,
+      "lines": 67,
+      "sha256": "a4b08e8128f7412245bff0cf48c5230d343dfc6d96537ce2b036ae812560e5d2",
       "summary": "5 indexed sections: RandoMeal agent instructions, Mandatory knowledge workflow, Mandatory design workflow, Repository safety, Source code comments",
       "nodeIds": [
         "agent-governance",
+        "figma-canonical-file",
         "repository-inventory"
       ],
       "imports": [],
@@ -2611,7 +2648,7 @@
           "title": "AGENTS.md",
           "line": 1,
           "depth": 0,
-          "endLine": 56
+          "endLine": 67
         },
         {
           "id": "section:AGENTS.md#2",
@@ -2619,7 +2656,7 @@
           "title": "RandoMeal agent instructions",
           "line": 1,
           "depth": 1,
-          "endLine": 56
+          "endLine": 67
         },
         {
           "id": "section:AGENTS.md#3",
@@ -2635,23 +2672,23 @@
           "title": "Mandatory design workflow",
           "line": 30,
           "depth": 2,
-          "endLine": 42
+          "endLine": 53
         },
         {
           "id": "section:AGENTS.md#5",
           "kind": "heading",
           "title": "Repository safety",
-          "line": 43,
+          "line": 54,
           "depth": 2,
-          "endLine": 48
+          "endLine": 59
         },
         {
           "id": "section:AGENTS.md#6",
           "kind": "heading",
           "title": "Source code comments",
-          "line": 49,
+          "line": 60,
           "depth": 2,
-          "endLine": 56
+          "endLine": 67
         }
       ],
       "symbols": []
@@ -10057,6 +10094,181 @@
       "symbols": []
     },
     {
+      "id": "file:design/figma-project.json",
+      "path": "design/figma-project.json",
+      "language": "json",
+      "kind": "configuration",
+      "binary": false,
+      "generated": false,
+      "bytes": 462,
+      "lines": 19,
+      "sha256": "c6704761c6b13a56c751d705ea716c9c49df6e67bcb604e7fce47b34797d7dd5",
+      "summary": "6 indexed sections: schemaVersion, project, policy, file, allowedFileKeys, …",
+      "nodeIds": [
+        "figma-canonical-file",
+        "repository-inventory",
+        "design-system-quality"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:design/figma-project.json#1",
+          "kind": "file",
+          "title": "design/figma-project.json",
+          "line": 1,
+          "depth": 0,
+          "endLine": 19
+        },
+        {
+          "id": "section:design/figma-project.json#2",
+          "kind": "key",
+          "title": "schemaVersion",
+          "line": 2,
+          "depth": 1,
+          "endLine": 2
+        },
+        {
+          "id": "section:design/figma-project.json#3",
+          "kind": "key",
+          "title": "project",
+          "line": 3,
+          "depth": 1,
+          "endLine": 3
+        },
+        {
+          "id": "section:design/figma-project.json#4",
+          "kind": "key",
+          "title": "policy",
+          "line": 4,
+          "depth": 1,
+          "endLine": 4
+        },
+        {
+          "id": "section:design/figma-project.json#5",
+          "kind": "key",
+          "title": "file",
+          "line": 5,
+          "depth": 1,
+          "endLine": 9
+        },
+        {
+          "id": "section:design/figma-project.json#6",
+          "kind": "key",
+          "title": "allowedFileKeys",
+          "line": 10,
+          "depth": 1,
+          "endLine": 12
+        },
+        {
+          "id": "section:design/figma-project.json#7",
+          "kind": "key",
+          "title": "operations",
+          "line": 13,
+          "depth": 1,
+          "endLine": 19
+        }
+      ],
+      "symbols": []
+    },
+    {
+      "id": "file:design/foundations.tokens.json",
+      "path": "design/foundations.tokens.json",
+      "language": "json",
+      "kind": "configuration",
+      "binary": false,
+      "generated": false,
+      "bytes": 29547,
+      "lines": 1020,
+      "sha256": "fd1a181219a6d838c43e8d36fe7f2b38d716490ce550990be41292ee8ea54844",
+      "summary": "8 indexed sections: schemaVersion, system, version, figmaFileKey, colorMode, …",
+      "nodeIds": [
+        "figma-canonical-file",
+        "repository-inventory",
+        "mobile-theme-current",
+        "design-system-quality"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:design/foundations.tokens.json#1",
+          "kind": "file",
+          "title": "design/foundations.tokens.json",
+          "line": 1,
+          "depth": 0,
+          "endLine": 1020
+        },
+        {
+          "id": "section:design/foundations.tokens.json#2",
+          "kind": "key",
+          "title": "schemaVersion",
+          "line": 2,
+          "depth": 1,
+          "endLine": 2
+        },
+        {
+          "id": "section:design/foundations.tokens.json#3",
+          "kind": "key",
+          "title": "system",
+          "line": 3,
+          "depth": 1,
+          "endLine": 3
+        },
+        {
+          "id": "section:design/foundations.tokens.json#4",
+          "kind": "key",
+          "title": "version",
+          "line": 4,
+          "depth": 1,
+          "endLine": 4
+        },
+        {
+          "id": "section:design/foundations.tokens.json#5",
+          "kind": "key",
+          "title": "figmaFileKey",
+          "line": 5,
+          "depth": 1,
+          "endLine": 5
+        },
+        {
+          "id": "section:design/foundations.tokens.json#6",
+          "kind": "key",
+          "title": "colorMode",
+          "line": 6,
+          "depth": 1,
+          "endLine": 6
+        },
+        {
+          "id": "section:design/foundations.tokens.json#7",
+          "kind": "key",
+          "title": "typography",
+          "line": 7,
+          "depth": 1,
+          "endLine": 100
+        },
+        {
+          "id": "section:design/foundations.tokens.json#8",
+          "kind": "key",
+          "title": "effectStyles",
+          "line": 101,
+          "depth": 1,
+          "endLine": 128
+        },
+        {
+          "id": "section:design/foundations.tokens.json#9",
+          "kind": "key",
+          "title": "collections",
+          "line": 129,
+          "depth": 1,
+          "endLine": 1020
+        }
+      ],
+      "symbols": []
+    },
+    {
       "id": "file:docker-compose.prod.yml",
       "path": "docker-compose.prod.yml",
       "language": "yaml",
@@ -12212,16 +12424,79 @@
       "symbols": []
     },
     {
+      "id": "file:docs/product/figma-governance.md",
+      "path": "docs/product/figma-governance.md",
+      "language": "markdown",
+      "kind": "documentation",
+      "binary": false,
+      "generated": false,
+      "bytes": 2024,
+      "lines": 42,
+      "sha256": "e33b97fd53497d3a2d055c3e2fe66233ecc2de2002d6983922724ebbc7dca808",
+      "summary": "4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff",
+      "nodeIds": [
+        "figma-canonical-file",
+        "repository-inventory",
+        "design-system-quality"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:docs/product/figma-governance.md#1",
+          "kind": "file",
+          "title": "docs/product/figma-governance.md",
+          "line": 1,
+          "depth": 0,
+          "endLine": 42
+        },
+        {
+          "id": "section:docs/product/figma-governance.md#2",
+          "kind": "heading",
+          "title": "Canonical Figma file governance",
+          "line": 1,
+          "depth": 1,
+          "endLine": 42
+        },
+        {
+          "id": "section:docs/product/figma-governance.md#3",
+          "kind": "heading",
+          "title": "Canonical project file",
+          "line": 3,
+          "depth": 2,
+          "endLine": 15
+        },
+        {
+          "id": "section:docs/product/figma-governance.md#4",
+          "kind": "heading",
+          "title": "Deny-by-default rules",
+          "line": 16,
+          "depth": 2,
+          "endLine": 36
+        },
+        {
+          "id": "section:docs/product/figma-governance.md#5",
+          "kind": "heading",
+          "title": "Ownership and handoff",
+          "line": 37,
+          "depth": 2,
+          "endLine": 42
+        }
+      ],
+      "symbols": []
+    },
+    {
       "id": "file:docs/product/quality-and-design.md",
       "path": "docs/product/quality-and-design.md",
       "language": "markdown",
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 9736,
-      "lines": 186,
-      "sha256": "c40101d4e6f0ecf7bf2ad96969f4c88b361d5904e92f34e298064b53b5a43758",
-      "summary": "9 indexed sections: Design and quality operating model, 1. Design workflow, 2. QA strategy, 3. Critical invariant suite, 4. AI evaluation, …",
+      "bytes": 12403,
+      "lines": 229,
+      "sha256": "966c1c720b536b88ca639dd9442d79696422588e53023005cf5d72a8e0dbcd5c",
+      "summary": "10 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, 2. QA strategy, 3. Critical invariant suite, …",
       "nodeIds": [
         "repository-inventory",
         "choice-cardinality-gate",
@@ -12239,7 +12514,7 @@
           "title": "docs/product/quality-and-design.md",
           "line": 1,
           "depth": 0,
-          "endLine": 186
+          "endLine": 229
         },
         {
           "id": "section:docs/product/quality-and-design.md#2",
@@ -12247,7 +12522,7 @@
           "title": "Design and quality operating model",
           "line": 1,
           "depth": 1,
-          "endLine": 186
+          "endLine": 229
         },
         {
           "id": "section:docs/product/quality-and-design.md#3",
@@ -12255,63 +12530,71 @@
           "title": "1. Design workflow",
           "line": 3,
           "depth": 2,
-          "endLine": 51
+          "endLine": 94
         },
         {
           "id": "section:docs/product/quality-and-design.md#4",
           "kind": "heading",
-          "title": "2. QA strategy",
-          "line": 52,
-          "depth": 2,
-          "endLine": 73
+          "title": "Foundation v1",
+          "line": 54,
+          "depth": 3,
+          "endLine": 94
         },
         {
           "id": "section:docs/product/quality-and-design.md#5",
           "kind": "heading",
-          "title": "3. Critical invariant suite",
-          "line": 74,
+          "title": "2. QA strategy",
+          "line": 95,
           "depth": 2,
-          "endLine": 108
+          "endLine": 116
         },
         {
           "id": "section:docs/product/quality-and-design.md#6",
           "kind": "heading",
-          "title": "4. AI evaluation",
-          "line": 109,
+          "title": "3. Critical invariant suite",
+          "line": 117,
           "depth": 2,
-          "endLine": 124
+          "endLine": 151
         },
         {
           "id": "section:docs/product/quality-and-design.md#7",
           "kind": "heading",
-          "title": "5. Accessibility and localization gates",
-          "line": 125,
+          "title": "4. AI evaluation",
+          "line": 152,
           "depth": 2,
-          "endLine": 133
+          "endLine": 167
         },
         {
           "id": "section:docs/product/quality-and-design.md#8",
           "kind": "heading",
-          "title": "6. CI and release gates",
-          "line": 134,
+          "title": "5. Accessibility and localization gates",
+          "line": 168,
           "depth": 2,
-          "endLine": 164
+          "endLine": 176
         },
         {
           "id": "section:docs/product/quality-and-design.md#9",
           "kind": "heading",
-          "title": "7. Definition of Done",
-          "line": 165,
+          "title": "6. CI and release gates",
+          "line": 177,
           "depth": 2,
-          "endLine": 170
+          "endLine": 207
         },
         {
           "id": "section:docs/product/quality-and-design.md#10",
           "kind": "heading",
-          "title": "8. Discovery quality gate",
-          "line": 171,
+          "title": "7. Definition of Done",
+          "line": 208,
           "depth": 2,
-          "endLine": 186
+          "endLine": 213
+        },
+        {
+          "id": "section:docs/product/quality-and-design.md#11",
+          "kind": "heading",
+          "title": "8. Discovery quality gate",
+          "line": 214,
+          "depth": 2,
+          "endLine": 229
         }
       ],
       "symbols": []
@@ -12472,9 +12755,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 50543,
-      "lines": 830,
-      "sha256": "076677e3756dbda25c09a885012c440d8f9a9b49972d9ff2cbeedd8a86f92569",
+      "bytes": 53744,
+      "lines": 871,
+      "sha256": "066b195df6df4b3acc14a218b988bd3c8f4fa47492870a44070fae436df292bc",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -12490,7 +12773,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 830
+          "endLine": 871
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -12530,15 +12813,15 @@
           "title": "nodes",
           "line": 48,
           "depth": 1,
-          "endLine": 763
+          "endLine": 804
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 764,
+          "line": 805,
           "depth": 1,
-          "endLine": 830
+          "endLine": 871
         }
       ],
       "symbols": []
@@ -13108,6 +13391,25 @@
       "sections": []
     },
     {
+      "id": "file:knowledge/wiki/RandoMeal--Governance--Canonical-Figma.md",
+      "path": "knowledge/wiki/RandoMeal--Governance--Canonical-Figma.md",
+      "language": "generated",
+      "kind": "generated",
+      "binary": false,
+      "generated": true,
+      "bytes": null,
+      "lines": null,
+      "sha256": null,
+      "summary": "Managed output validated by deterministic re-render",
+      "nodeIds": [
+        "repository-inventory"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": []
+    },
+    {
       "id": "file:knowledge/wiki/RandoMeal--Governance--Knowledge-System.md",
       "path": "knowledge/wiki/RandoMeal--Governance--Knowledge-System.md",
       "language": "generated",
@@ -13469,11 +13771,12 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 2516,
-      "lines": 55,
-      "sha256": "84c82d10a2855c5ee73848316e230260d1f4fc36a03dcdfcc761339bd95a6ff3",
+      "bytes": 2662,
+      "lines": 57,
+      "sha256": "2e0c40b081374a02d1a657c85f9a37563f2b42d5e4c1823fc7fae7129f7455c1",
       "summary": "8 indexed sections: name, private, version, engines, packageManager, …",
       "nodeIds": [
+        "figma-canonical-file",
         "repository-inventory",
         "workspace-tooling"
       ],
@@ -13487,7 +13790,7 @@
           "title": "package.json",
           "line": 1,
           "depth": 0,
-          "endLine": 55
+          "endLine": 57
         },
         {
           "id": "section:package.json#2",
@@ -13543,15 +13846,15 @@
           "title": "scripts",
           "line": 13,
           "depth": 1,
-          "endLine": 48
+          "endLine": 50
         },
         {
           "id": "section:package.json#9",
           "kind": "key",
           "title": "dependencies",
-          "line": 49,
+          "line": 51,
           "depth": 1,
-          "endLine": 55
+          "endLine": 57
         }
       ],
       "symbols": []
@@ -14780,6 +15083,168 @@
         }
       ],
       "symbols": []
+    },
+    {
+      "id": "file:scripts/check-figma-governance.mjs",
+      "path": "scripts/check-figma-governance.mjs",
+      "language": "javascript",
+      "kind": "tooling",
+      "binary": false,
+      "generated": false,
+      "bytes": 3830,
+      "lines": 107,
+      "sha256": "42aa36c45592e7d58b54f04c68df2ca8295268d14fa0ede660b55caef63eb6b3",
+      "summary": "1 indexed section: fail",
+      "nodeIds": [
+        "figma-canonical-file",
+        "repository-inventory"
+      ],
+      "imports": [
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:url"
+      ],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:scripts/check-figma-governance.mjs#1",
+          "kind": "file",
+          "title": "scripts/check-figma-governance.mjs",
+          "line": 1,
+          "depth": 0,
+          "endLine": 107
+        },
+        {
+          "id": "section:scripts/check-figma-governance.mjs#2",
+          "kind": "function",
+          "title": "fail",
+          "line": 14,
+          "depth": 1,
+          "endLine": 107
+        }
+      ],
+      "symbols": [
+        {
+          "id": "symbol:scripts/check-figma-governance.mjs#function:fail:14",
+          "kind": "function",
+          "name": "fail",
+          "line": 14,
+          "endLine": 107
+        }
+      ]
+    },
+    {
+      "id": "file:scripts/check-figma-governance.spec.mjs",
+      "path": "scripts/check-figma-governance.spec.mjs",
+      "language": "javascript",
+      "kind": "test",
+      "binary": false,
+      "generated": false,
+      "bytes": 1295,
+      "lines": 39,
+      "sha256": "fb5a50c1701681e981535afb6edbb73db84dcf285f8dbf7bb03a599d97dece3a",
+      "summary": "5 indexed sections: run, accepts the canonical file key, rejects another file key, accepts the canonical design URL, rejects a non-design URL even with the canonical key",
+      "nodeIds": [
+        "repository-inventory"
+      ],
+      "imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:scripts/check-figma-governance.spec.mjs#1",
+          "kind": "file",
+          "title": "scripts/check-figma-governance.spec.mjs",
+          "line": 1,
+          "depth": 0,
+          "endLine": 39
+        },
+        {
+          "id": "section:scripts/check-figma-governance.spec.mjs#2",
+          "kind": "function",
+          "title": "run",
+          "line": 11,
+          "depth": 1,
+          "endLine": 16
+        },
+        {
+          "id": "section:scripts/check-figma-governance.spec.mjs#3",
+          "kind": "test-case",
+          "title": "accepts the canonical file key",
+          "line": 17,
+          "depth": 1,
+          "endLine": 22
+        },
+        {
+          "id": "section:scripts/check-figma-governance.spec.mjs#4",
+          "kind": "test-case",
+          "title": "rejects another file key",
+          "line": 23,
+          "depth": 1,
+          "endLine": 28
+        },
+        {
+          "id": "section:scripts/check-figma-governance.spec.mjs#5",
+          "kind": "test-case",
+          "title": "accepts the canonical design URL",
+          "line": 29,
+          "depth": 1,
+          "endLine": 33
+        },
+        {
+          "id": "section:scripts/check-figma-governance.spec.mjs#6",
+          "kind": "test-case",
+          "title": "rejects a non-design URL even with the canonical key",
+          "line": 34,
+          "depth": 1,
+          "endLine": 39
+        }
+      ],
+      "symbols": [
+        {
+          "id": "symbol:scripts/check-figma-governance.spec.mjs#function:run:11",
+          "kind": "function",
+          "name": "run",
+          "line": 11,
+          "endLine": 16
+        },
+        {
+          "id": "symbol:scripts/check-figma-governance.spec.mjs#test-case:accepts the canonical file key:17",
+          "kind": "test-case",
+          "name": "accepts the canonical file key",
+          "line": 17,
+          "endLine": 22
+        },
+        {
+          "id": "symbol:scripts/check-figma-governance.spec.mjs#test-case:rejects another file key:23",
+          "kind": "test-case",
+          "name": "rejects another file key",
+          "line": 23,
+          "endLine": 28
+        },
+        {
+          "id": "symbol:scripts/check-figma-governance.spec.mjs#test-case:accepts the canonical design URL:29",
+          "kind": "test-case",
+          "name": "accepts the canonical design URL",
+          "line": 29,
+          "endLine": 33
+        },
+        {
+          "id": "symbol:scripts/check-figma-governance.spec.mjs#test-case:rejects a non-design URL even with the canonical key:34",
+          "kind": "test-case",
+          "name": "rejects a non-design URL even with the canonical key",
+          "line": 34,
+          "endLine": 39
+        }
+      ]
     },
     {
       "id": "file:scripts/check-node-version.mjs",

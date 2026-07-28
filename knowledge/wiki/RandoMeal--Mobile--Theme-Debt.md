@@ -1,6 +1,6 @@
 # Current mobile theme and visual debt
 
-Large global StyleSheet with hard-coded warm orange and cream values; semantic tokens, component primitives, Figma variables, themes, and accessibility state contracts are not yet implemented.
+The mobile app still uses a large global StyleSheet with hard-coded warm orange and cream values. The reviewed Foundation v1 target now exists in the repository and canonical Figma file, but mobile has not yet migrated to it.
 
 Status: **mixed**
 Authority: **current-code-over-legacy-design-doc**
@@ -11,12 +11,14 @@ Authority: **current-code-over-legacy-design-doc**
 - Product quality constraints and approved future brand choices override DESIGN.md.
 - Build semantic tokens and reusable state-complete components before screen-scale polish.
 - Figma and code must share token and component contracts.
+- Migrate mobile through a separate tested implementation task; the presence of Foundation v1 does not mean the current theme already consumes it.
 
 ## Source coverage
 
 - `apps/mobile/src/theme/index.ts` — 1 indexed section: styles. Sections: apps/mobile/src/theme/index.ts (L1–756); styles (L3–756)
 - `DESIGN.md` — 20 indexed sections: Food Randomizer Design System (Starbucks-Inspired), 1. Design Direction, 2. Brand Tokens, Color Tokens, Radius Tokens, …. Sections: DESIGN.md (L1–218); Food Randomizer Design System (Starbucks-Inspired) (L1–218); 1. Design Direction (L3–19); 2. Brand Tokens (L20–82); Color Tokens (L22–46); Radius Tokens (L47–58); Spacing Tokens (L59–70); Shadow Tokens (L71–82)
-- `docs/product/quality-and-design.md` — 9 indexed sections: Design and quality operating model, 1. Design workflow, 2. QA strategy, 3. Critical invariant suite, 4. AI evaluation, …. Sections: docs/product/quality-and-design.md (L1–186); Design and quality operating model (L1–186); 1. Design workflow (L3–51); 2. QA strategy (L52–73); 3. Critical invariant suite (L74–108); 4. AI evaluation (L109–124); 5. Accessibility and localization gates (L125–133); 6. CI and release gates (L134–164)
+- `design/foundations.tokens.json` — 8 indexed sections: schemaVersion, system, version, figmaFileKey, colorMode, …. Sections: design/foundations.tokens.json (L1–1020); schemaVersion (L2–2); system (L3–3); version (L4–4); figmaFileKey (L5–5); colorMode (L6–6); typography (L7–100); effectStyles (L101–128)
+- `docs/product/quality-and-design.md` — 10 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, 2. QA strategy, 3. Critical invariant suite, …. Sections: docs/product/quality-and-design.md (L1–229); Design and quality operating model (L1–229); 1. Design workflow (L3–94); Foundation v1 (L54–94); 2. QA strategy (L95–116); 3. Critical invariant suite (L117–151); 4. AI evaluation (L152–167); 5. Accessibility and localization gates (L168–176)
 
 ## Graph relations
 

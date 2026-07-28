@@ -32,6 +32,17 @@
 - For every task that creates, reviews, or changes user-facing UI, Figma files, screenshots,
   design tokens, component libraries, React Native/Expo UI, or web/admin UI, use the repo skill
   `$design-anti-slop` from `.agents/skills/design-anti-slop/SKILL.md` before taking design action.
+- Use only the canonical Figma file declared in `design/figma-project.json`:
+  `https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj`. Its file key
+  `DP7ujNqthXzWwwu1mnFhfj` is the sole allowlisted key for every Figma MCP read, write, export,
+  screenshot, variable, component, prototype, library, Code Connect, and design-to-code operation.
+- Before every Figma MCP operation, run
+  `npm run figma:guard -- --file-key DP7ujNqthXzWwwu1mnFhfj`. Stop when any requested, discovered,
+  linked, or tool-returned file key differs. Do not inspect, modify, export from, or use another
+  Figma file as a project source, fallback, staging area, or handoff.
+- Do not call Figma `create_new_file` for this project while the manifest disables it. Replacing the
+  canonical file requires explicit user approval and an atomic update to the manifest, AGENTS.md,
+  catalog, generated Wiki, verified Notion mirror, and affected integrations.
 - Treat `docs/product/discovery-decisions.md` and `docs/product/quality-and-design.md` as product and
   design constraints. The anti-slop catalog cannot override safety, accessibility, signed discovery
   decisions, project tokens, or an explicit user-approved brand choice.
