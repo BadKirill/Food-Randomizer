@@ -92,6 +92,17 @@ syntax, missing fonts or text overflow. Ivory text on the Paprika brand backgrou
 contrast ratio of 4.67:1. Mobile still uses its current hard-coded theme until a separate
 implementation task migrates it to this reviewed source.
 
+### Decision flow concept 01
+
+The canonical file contains a first reversible decision-flow exploration on
+[`05 · Decision Flow · Concept 01`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=34-5).
+It covers minimal context capture, equal-fidelity D0-A single and D0-B shortlist arms, accepted
+cooking start and a safe empty state. It also introduces token-bound `Button`, `Choice chip` and
+`Decision option` component sets with the states required by those screens. The artifact inventory,
+node IDs, constraints and creation review are recorded in
+`docs/product/decision-flow-concept-01.md`. This remains Stage 0 exploration and does not approve a
+launch cardinality or replace the required moderated evidence gate.
+
 ## 2. QA strategy
 
 ```text

@@ -170,14 +170,15 @@
       "wikiSlug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "status": "target",
       "authority": "discovery-gate",
-      "summary": "The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy.",
+      "summary": "The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy. Concept 01 now provides equal-fidelity single and shortlist stimuli without resolving the gate.",
       "tags": ["single", "shortlist", "hybrid", "experiment", "H3", "одно блюдо", "2-3 варианта", "гипотеза"],
-      "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/delivery-plan.md"],
+      "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/delivery-plan.md"],
       "rules": [
         "Keep ranking cardinality server-owned and versioned.",
         "Never hard-code one recommendation as a proven product truth.",
         "Measure time to decision, acceptance, replacement, abandonment, trust, and safety separately by policy.",
-        "Do not build final launch navigation or recommendation UI before the Stage 0 gate is signed."
+        "Do not build final launch navigation or recommendation UI before the Stage 0 gate is signed.",
+        "Use Decision flow concept 01 only as equal-fidelity Stage 0 stimuli; its D0-A and D0-B screens do not resolve the gate."
       ],
       "dependsOn": ["product-strategy"],
       "related": ["recommendation-engine-target", "analytics-measurement", "design-system-quality"],
@@ -654,9 +655,9 @@
       "wikiSlug": "RandoMeal--Design--System-and-Quality",
       "status": "mixed",
       "authority": "product-design-source-of-truth",
-      "summary": "Foundation v1 is implemented and validated in the canonical Figma file and repository token source; component contracts, full interaction states and mobile adoption remain target work.",
+      "summary": "Foundation v1 and Decision flow concept 01 are implemented and creation-reviewed in the canonical Figma file; broader component coverage, full interaction states and mobile adoption remain target work.",
       "tags": ["design", "figma", "tokens", "components", "accessibility", "anti slop", "дизайн", "фигма"],
-      "sources": ["docs/product/quality-and-design.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
+      "sources": ["docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
       "rules": [
         "Use the design anti-slop skill for every Figma or user-facing UI task.",
         "Use the single canonical Figma file declared in design/figma-project.json for every project design operation.",
@@ -668,7 +669,9 @@
         "Fraunces and Source Sans 3 are the approved SIL Open Font License 1.1 families for display and interface text.",
         "Every token has Web, iOS and Android syntax, and the minimum touch target is 44 px.",
         "Ivory text on the Paprika brand background must remain at or above WCAG AA contrast; Foundation v1 validates at 4.67:1.",
-        "Only the Light color mode is approved; dark mode requires separate validation."
+        "Only the Light color mode is approved; dark mode requires separate validation.",
+        "Decision flow concept 01 uses equal-fidelity D0-A and D0-B screens plus context, accepted and safe-empty states; it is Stage 0 exploration rather than an approved launch interaction.",
+        "Concept 01 local Button, Choice chip and Decision option sets must remain bound to semantic variables and keep mobile controls at least 44 px high."
       ],
       "dependsOn": ["product-strategy", "choice-cardinality-gate", "agent-governance"],
       "related": ["figma-canonical-file", "qa-strategy", "mobile-theme-current"],

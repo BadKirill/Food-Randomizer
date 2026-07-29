@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `ca13dbaee3a436ffe817473bc60ac06394f0240c8732b0496d2e37ecd7ab76fd`
+Fingerprint: `5c0a570c59569eeadd697649002de1d3e6ce101a562e9f7409b2bfa9265f511d`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -116,10 +116,11 @@ Fingerprint: `ca13dbaee3a436ffe817473bc60ac06394f0240c8732b0496d2e37ecd7ab76fd`
 | `docs/product/architecture.md` | markdown | repository-inventory, target-architecture, recommendation-engine-target | 14 indexed sections: Target product architecture, 0. Product constraint on architecture, 1. Technology stack, 2. Runtime topology, 3. Backend boundaries, … |
 | `docs/product/audit-and-migration.md` | markdown | repository-inventory, delivery-roadmap, current-vs-target, seed-content | 13 indexed sections: Current-state audit and migration matrix, 0. Discovery correction (2026-07-14), 1. Verified baseline, 2. Reuse / refactor / replace, 3. Critical gaps against the PRD, … |
 | `docs/product/data-model.md` | markdown | repository-inventory, target-data-model | 37 indexed sections: Target database model, 1. Identity and profile, `users` (existing, retained), `product_identities`, `anonymous_identities`, … |
+| `docs/product/decision-flow-concept-01.md` | markdown | repository-inventory, choice-cardinality-gate, design-system-quality | 5 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review |
 | `docs/product/delivery-plan.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap | 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, … |
 | `docs/product/discovery-decisions.md` | markdown | repository-inventory, product-strategy, choice-cardinality-gate | 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, … |
 | `docs/product/figma-governance.md` | markdown | figma-canonical-file, repository-inventory, design-system-quality | 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff |
-| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 10 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, 2. QA strategy, 3. Critical invariant suite, … |
+| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 11 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, 2. QA strategy, … |
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |
