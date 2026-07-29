@@ -103,6 +103,20 @@ node IDs, constraints and creation review are recorded in
 `docs/product/decision-flow-concept-01.md`. This remains Stage 0 exploration and does not approve a
 launch cardinality or replace the required moderated evidence gate.
 
+### Client flow skeleton
+
+The canonical file also contains an editable low-fidelity product journey map on
+[`06 · Client Flows · Skeleton`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=58-3).
+It covers 12 client-facing lanes and 90 checkpoints across first value, recommendation, rejection,
+recipe and cooking, saved content, Pantry, account and privacy, Premium, re-entry, cross-cutting
+states, gated scope and analytics ownership. The complete inventory and node links are recorded in
+`docs/product/client-flow-skeleton.md`.
+
+The map is a coverage artifact rather than approved launch navigation or final UI. D0/H3
+cardinality, H7 Pantry value and H10 payment remain explicit branches or gates. All visible colors
+are bound to semantic variables, approved OFL typography is used, and the 2026-07-29 creation
+review found no clipping, overlap, unbound paint or unequal-fidelity D0 treatment.
+
 ## 2. QA strategy
 
 ```text

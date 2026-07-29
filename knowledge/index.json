@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "5c0a570c59569eeadd697649002de1d3e6ce101a562e9f7409b2bfa9265f511d",
+  "contentFingerprint": "e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d",
   "coverage": {
-    "repositoryFiles": 191,
-    "indexedFiles": 191,
+    "repositoryFiles": 192,
+    "indexedFiles": 192,
     "binaryFiles": 4,
-    "filesWithSections": 145,
+    "filesWithSections": 146,
     "generatedManaged": [
       "knowledge/index.json",
       "knowledge/wiki-manifest.json",
@@ -57,7 +57,7 @@
       "agent-rule": 3,
       "asset": 4,
       "configuration": 27,
-      "documentation": 22,
+      "documentation": 23,
       "generated": 42,
       "lockfile": 3,
       "migration": 7,
@@ -74,7 +74,7 @@
       "generated": 42,
       "javascript": 18,
       "json": 19,
-      "markdown": 28,
+      "markdown": 29,
       "prisma": 1,
       "shell": 6,
       "sql": 6,
@@ -88,7 +88,7 @@
       "knowledge-system": 16,
       "agent-governance": 9,
       "figma-canonical-file": 8,
-      "repository-inventory": 191,
+      "repository-inventory": 192,
       "product-strategy": 2,
       "choice-cardinality-gate": 4,
       "delivery-roadmap": 3,
@@ -113,7 +113,7 @@
       "mobile-manage-current": 5,
       "mobile-theme-current": 4,
       "analytics-measurement": 2,
-      "design-system-quality": 9,
+      "design-system-quality": 10,
       "qa-strategy": 17,
       "workspace-tooling": 18,
       "ci-quality": 5,
@@ -121,7 +121,7 @@
       "production-infrastructure": 8,
       "legacy-documentation-map": 7
     },
-    "sections": 1211,
+    "sections": 1219,
     "symbols": 370,
     "routes": 13,
     "localRelations": 93
@@ -11764,6 +11764,84 @@
       "symbols": []
     },
     {
+      "id": "file:docs/product/client-flow-skeleton.md",
+      "path": "docs/product/client-flow-skeleton.md",
+      "language": "markdown",
+      "kind": "documentation",
+      "binary": false,
+      "generated": false,
+      "bytes": 5315,
+      "lines": 74,
+      "sha256": "c54f90272e477665c99a2941a7c50b2cd3d38d181a1eb4b0ca28323933d5a12f",
+      "summary": "6 indexed sections: Client flow skeleton, Status, Product constraints represented, Flow inventory, Visual language and review, …",
+      "nodeIds": [
+        "repository-inventory",
+        "design-system-quality"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:docs/product/client-flow-skeleton.md#1",
+          "kind": "file",
+          "title": "docs/product/client-flow-skeleton.md",
+          "line": 1,
+          "depth": 0,
+          "endLine": 74
+        },
+        {
+          "id": "section:docs/product/client-flow-skeleton.md#2",
+          "kind": "heading",
+          "title": "Client flow skeleton",
+          "line": 1,
+          "depth": 1,
+          "endLine": 74
+        },
+        {
+          "id": "section:docs/product/client-flow-skeleton.md#3",
+          "kind": "heading",
+          "title": "Status",
+          "line": 3,
+          "depth": 2,
+          "endLine": 17
+        },
+        {
+          "id": "section:docs/product/client-flow-skeleton.md#4",
+          "kind": "heading",
+          "title": "Product constraints represented",
+          "line": 18,
+          "depth": 2,
+          "endLine": 34
+        },
+        {
+          "id": "section:docs/product/client-flow-skeleton.md#5",
+          "kind": "heading",
+          "title": "Flow inventory",
+          "line": 35,
+          "depth": 2,
+          "endLine": 51
+        },
+        {
+          "id": "section:docs/product/client-flow-skeleton.md#6",
+          "kind": "heading",
+          "title": "Visual language and review",
+          "line": 52,
+          "depth": 2,
+          "endLine": 68
+        },
+        {
+          "id": "section:docs/product/client-flow-skeleton.md#7",
+          "kind": "heading",
+          "title": "Next design pass",
+          "line": 69,
+          "depth": 2,
+          "endLine": 74
+        }
+      ],
+      "symbols": []
+    },
+    {
       "id": "file:docs/product/data-model.md",
       "path": "docs/product/data-model.md",
       "language": "markdown",
@@ -12564,10 +12642,10 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 13134,
-      "lines": 240,
-      "sha256": "d0c8b8b8ef6d3efd10611dc19e51c3e48f7462b531f3703380c976f9e799d693",
-      "summary": "11 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, 2. QA strategy, …",
+      "bytes": 14045,
+      "lines": 254,
+      "sha256": "a16d313049456319218f8f554e27d3da6bbf5cfc943abc9d133e2e57c2a79b58",
+      "summary": "12 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, Client flow skeleton, …",
       "nodeIds": [
         "repository-inventory",
         "choice-cardinality-gate",
@@ -12585,7 +12663,7 @@
           "title": "docs/product/quality-and-design.md",
           "line": 1,
           "depth": 0,
-          "endLine": 240
+          "endLine": 254
         },
         {
           "id": "section:docs/product/quality-and-design.md#2",
@@ -12593,7 +12671,7 @@
           "title": "Design and quality operating model",
           "line": 1,
           "depth": 1,
-          "endLine": 240
+          "endLine": 254
         },
         {
           "id": "section:docs/product/quality-and-design.md#3",
@@ -12601,7 +12679,7 @@
           "title": "1. Design workflow",
           "line": 3,
           "depth": 2,
-          "endLine": 105
+          "endLine": 119
         },
         {
           "id": "section:docs/product/quality-and-design.md#4",
@@ -12622,58 +12700,66 @@
         {
           "id": "section:docs/product/quality-and-design.md#6",
           "kind": "heading",
-          "title": "2. QA strategy",
+          "title": "Client flow skeleton",
           "line": 106,
-          "depth": 2,
-          "endLine": 127
+          "depth": 3,
+          "endLine": 119
         },
         {
           "id": "section:docs/product/quality-and-design.md#7",
           "kind": "heading",
-          "title": "3. Critical invariant suite",
-          "line": 128,
+          "title": "2. QA strategy",
+          "line": 120,
           "depth": 2,
-          "endLine": 162
+          "endLine": 141
         },
         {
           "id": "section:docs/product/quality-and-design.md#8",
           "kind": "heading",
-          "title": "4. AI evaluation",
-          "line": 163,
+          "title": "3. Critical invariant suite",
+          "line": 142,
           "depth": 2,
-          "endLine": 178
+          "endLine": 176
         },
         {
           "id": "section:docs/product/quality-and-design.md#9",
           "kind": "heading",
-          "title": "5. Accessibility and localization gates",
-          "line": 179,
+          "title": "4. AI evaluation",
+          "line": 177,
           "depth": 2,
-          "endLine": 187
+          "endLine": 192
         },
         {
           "id": "section:docs/product/quality-and-design.md#10",
           "kind": "heading",
-          "title": "6. CI and release gates",
-          "line": 188,
+          "title": "5. Accessibility and localization gates",
+          "line": 193,
           "depth": 2,
-          "endLine": 218
+          "endLine": 201
         },
         {
           "id": "section:docs/product/quality-and-design.md#11",
           "kind": "heading",
-          "title": "7. Definition of Done",
-          "line": 219,
+          "title": "6. CI and release gates",
+          "line": 202,
           "depth": 2,
-          "endLine": 224
+          "endLine": 232
         },
         {
           "id": "section:docs/product/quality-and-design.md#12",
           "kind": "heading",
-          "title": "8. Discovery quality gate",
-          "line": 225,
+          "title": "7. Definition of Done",
+          "line": 233,
           "depth": 2,
-          "endLine": 240
+          "endLine": 238
+        },
+        {
+          "id": "section:docs/product/quality-and-design.md#13",
+          "kind": "heading",
+          "title": "8. Discovery quality gate",
+          "line": 239,
+          "depth": 2,
+          "endLine": 254
         }
       ],
       "symbols": []
@@ -12834,9 +12920,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 54429,
-      "lines": 874,
-      "sha256": "0216403312dcbb7a069229ac3b26ea2812dd7764571634fac7160fcdff16bd86",
+      "bytes": 54811,
+      "lines": 876,
+      "sha256": "6a6cddf8c5f24c32f612074dca6029b201df36dec0b6f2a5b90a6d56348ffcbd",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -12852,7 +12938,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 874
+          "endLine": 876
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -12892,15 +12978,15 @@
           "title": "nodes",
           "line": 48,
           "depth": 1,
-          "endLine": 807
+          "endLine": 809
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 808,
+          "line": 810,
           "depth": 1,
-          "endLine": 874
+          "endLine": 876
         }
       ],
       "symbols": []
