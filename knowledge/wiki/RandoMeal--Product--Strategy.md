@@ -14,7 +14,7 @@ Authority: **product-source-of-truth**
 
 ## Source coverage
 
-- `docs/product/discovery-decisions.md` — 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, …. Sections: docs/product/discovery-decisions.md (L1–128); Discovery decisions and implementation gates (L1–128); 1. Accepted direction (L13–27); 2. Open hypotheses (L28–44); 3. Stage 0 protocol and locked thresholds (L45–69); 4. H3 concept-test contract (L70–98); 5. Content gate (L99–115); 6. Implementation consequences (L116–128)
+- `docs/product/discovery-decisions.md` — 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, …. Sections: docs/product/discovery-decisions.md (L1–134); Discovery decisions and implementation gates (L1–134); 1. Accepted direction (L13–27); 2. Open hypotheses (L28–44); 3. Stage 0 protocol and locked thresholds (L45–69); 4. H3 concept-test contract (L70–104); 5. Content gate (L105–121); 6. Implementation consequences (L122–134)
 - `docs/product/README.md` — 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol. Sections: docs/product/README.md (L1–47); RandoMeal product engineering blueprint (L1–47); Product invariant (L24–31); Decision status (L32–37); Change protocol (L38–47)
 
 ## Graph relations

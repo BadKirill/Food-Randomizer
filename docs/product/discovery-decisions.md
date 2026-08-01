@@ -96,6 +96,12 @@ If qualitative evidence cannot select A/B, run a server-assigned beta experiment
 metric is a successful meal decision; guardrails are time-to-decision, abandonment, rejection,
 hard-constraint incidents and D7. Never select a variant on clicks or recipes viewed alone.
 
+The first equal-fidelity A/B implementation reference is the canonical Figma
+[`Decision flow concept 01`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=34-5),
+documented in `docs/product/decision-flow-concept-01.md`. Its D0-A and D0-B screens are experiment
+stimuli only. They do not satisfy this gate until the protocol above is run and the evidence is
+signed.
+
 ## 5. Content gate
 
 Export the current database into the workbook before enabling the new engine. No coverage status

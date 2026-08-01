@@ -8,11 +8,11 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 ## Coverage
 
-- Repository files discovered: 190
-- Files indexed semantically or by metadata: 190
+- Repository files discovered: 192
+- Files indexed semantically or by metadata: 192
 - Binary assets indexed by metadata: 4
-- Files with extracted sections: 144
-- Content fingerprint: `ca13dbaee3a436ffe817473bc60ac06394f0240c8732b0496d2e37ecd7ab76fd`
+- Files with extracted sections: 146
+- Content fingerprint: `e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d`
 
 ## Knowledge tree
 
@@ -26,7 +26,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 ### Product
 
 - [Product strategy and discovery gates](RandoMeal--Product--Strategy) — RandoMeal is a decision engine rather than a recipe generator or catalog; discovery evidence gates implementation assumptions.
-- [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy.
+- [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy. Concept 01 now provides equal-fidelity single and shortlist stimuli without resolving the gate.
 - [Product delivery roadmap](RandoMeal--Product--Delivery-Roadmap) — Dependency-ordered product delivery from discovery gates through foundations, recommendation beta, measurement, hardening, and later expansion.
 
 ### Architecture
@@ -67,7 +67,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 ### Analytics and Quality
 
 - [Analytics and measurement plan](RandoMeal--Analytics--Measurement) — Actor identity, event ownership, recommendation funnel, experiment dimensions, decision metrics, dashboards, privacy controls, outbox delivery, and observability boundaries.
-- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1 is implemented and validated in the canonical Figma file and repository token source; component contracts, full interaction states and mobile adoption remain target work.
+- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1, Decision flow concept 01 and a 12-lane, 90-checkpoint client flow skeleton are implemented and creation-reviewed in the canonical Figma file; production wireframes, broader component coverage, full interaction states and mobile adoption remain target work.
 - [QA, security, and release gates](RandoMeal--Quality--QA-Strategy) — Current Jest and E2E suites plus target contract, Testcontainers, Maestro, accessibility, load, security, migration, analytics, and release acceptance gates.
 
 ### Delivery and Operations

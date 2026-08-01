@@ -1,6 +1,6 @@
 # Design system and product quality
 
-Foundation v1 is implemented and validated in the canonical Figma file and repository token source; component contracts, full interaction states and mobile adoption remain target work.
+Foundation v1, Decision flow concept 01 and a 12-lane, 90-checkpoint client flow skeleton are implemented and creation-reviewed in the canonical Figma file; production wireframes, broader component coverage, full interaction states and mobile adoption remain target work.
 
 Status: **mixed**
 Authority: **product-design-source-of-truth**
@@ -18,6 +18,10 @@ Authority: **product-design-source-of-truth**
 - Every token has Web, iOS and Android syntax, and the minimum touch target is 44 px.
 - Ivory text on the Paprika brand background must remain at or above WCAG AA contrast; Foundation v1 validates at 4.67:1.
 - Only the Light color mode is approved; dark mode requires separate validation.
+- Decision flow concept 01 uses equal-fidelity D0-A and D0-B screens plus context, accepted and safe-empty states; it is Stage 0 exploration rather than an approved launch interaction.
+- Concept 01 local Button, Choice chip and Decision option sets must remain bound to semantic variables and keep mobile controls at least 44 px high.
+- The canonical Client flows skeleton at node 58:3 covers 12 lanes and 90 checkpoints but is not approved launch navigation or final UI.
+- D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.
 
 ## Source coverage
 
@@ -27,8 +31,10 @@ Authority: **product-design-source-of-truth**
 - `DESIGN.md` — 20 indexed sections: Food Randomizer Design System (Starbucks-Inspired), 1. Design Direction, 2. Brand Tokens, Color Tokens, Radius Tokens, …. Sections: DESIGN.md (L1–218); Food Randomizer Design System (Starbucks-Inspired) (L1–218); 1. Design Direction (L3–19); 2. Brand Tokens (L20–82); Color Tokens (L22–46); Radius Tokens (L47–58); Spacing Tokens (L59–70); Shadow Tokens (L71–82)
 - `design/figma-project.json` — 6 indexed sections: schemaVersion, project, policy, file, allowedFileKeys, …. Sections: design/figma-project.json (L1–19); schemaVersion (L2–2); project (L3–3); policy (L4–4); file (L5–9); allowedFileKeys (L10–12); operations (L13–19)
 - `design/foundations.tokens.json` — 8 indexed sections: schemaVersion, system, version, figmaFileKey, colorMode, …. Sections: design/foundations.tokens.json (L1–1020); schemaVersion (L2–2); system (L3–3); version (L4–4); figmaFileKey (L5–5); colorMode (L6–6); typography (L7–100); effectStyles (L101–128)
+- `docs/product/client-flow-skeleton.md` — 6 indexed sections: Client flow skeleton, Status, Product constraints represented, Flow inventory, Visual language and review, …. Sections: docs/product/client-flow-skeleton.md (L1–74); Client flow skeleton (L1–74); Status (L3–17); Product constraints represented (L18–34); Flow inventory (L35–51); Visual language and review (L52–68); Next design pass (L69–74)
+- `docs/product/decision-flow-concept-01.md` — 5 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review. Sections: docs/product/decision-flow-concept-01.md (L1–66); Decision flow concept 01 (L1–66); Product intent (L10–25); Component contracts (L26–37); Design constraints (L38–50); Creation review (L51–66)
 - `docs/product/figma-governance.md` — 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff. Sections: docs/product/figma-governance.md (L1–42); Canonical Figma file governance (L1–42); Canonical project file (L3–15); Deny-by-default rules (L16–36); Ownership and handoff (L37–42)
-- `docs/product/quality-and-design.md` — 10 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, 2. QA strategy, 3. Critical invariant suite, …. Sections: docs/product/quality-and-design.md (L1–229); Design and quality operating model (L1–229); 1. Design workflow (L3–94); Foundation v1 (L54–94); 2. QA strategy (L95–116); 3. Critical invariant suite (L117–151); 4. AI evaluation (L152–167); 5. Accessibility and localization gates (L168–176)
+- `docs/product/quality-and-design.md` — 12 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, Client flow skeleton, …. Sections: docs/product/quality-and-design.md (L1–254); Design and quality operating model (L1–254); 1. Design workflow (L3–119); Foundation v1 (L54–94); Decision flow concept 01 (L95–105); Client flow skeleton (L106–119); 2. QA strategy (L120–141); 3. Critical invariant suite (L142–176)
 
 ## Graph relations
 
