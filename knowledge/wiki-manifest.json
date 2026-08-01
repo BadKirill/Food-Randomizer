@@ -1,12 +1,26 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "owner": "randomeal-knowledge",
   "repository": "BadKirill/Food-Randomizer",
-  "contentFingerprint": "e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d",
+  "contentFingerprint": "e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32",
   "externalSync": {
     "provider": "notion",
-    "mode": "fail-closed-at-handoff",
-    "requiredCapability": "Connected Notion MCP identity, fetch, search, create-pages, update-page, and post-write fetch verification",
+    "mode": "explicit-only-with-read-back",
+    "requiredCapability": "For an explicitly invoked external workflow: connected Notion MCP identity, fetch, search, create-pages, update-page, and post-write fetch verification",
+    "baseline": {
+      "pageId": "3a57e183-0c32-803e-a86c-ef426f85f9f1",
+      "pageTitle": "General AI Wiki",
+      "pageUrl": "https://app.notion.com/p/3a57e1830c32803ea86cef426f85f9f1",
+      "snapshotFile": "knowledge/general-ai-baseline.md",
+      "authority": "verified-local-snapshot",
+      "externalAuthority": "cross-project-upstream",
+      "ownership": "shared-external",
+      "contentStartHeading": "# General Rules for AI Coding Agents",
+      "contentEndHeading": "# Local Wikis",
+      "updateMode": "explicit-targeted-policy-section-write-with-stale-fetch-guard-and-read-back",
+      "snapshotSha256": "556063e663832e56177182cb4b2f995f8c8d1b1326f8ee71e75c6ef97b194a8e",
+      "bodySha256": "e52cc78b98b8ea7461932f7d14d8a0c7b26754de46c4590efaa6f39a8341e60c"
+    },
     "target": {
       "workspaceId": "0e583eb3-1385-4f9f-b553-1405b74be641",
       "workspaceName": "Кирилл Плохой's Notion",
@@ -21,7 +35,7 @@
       "slug": "Home",
       "title": "RandoMeal Knowledge Graph",
       "group": "System",
-      "sha256": "9b62574f5df6fcb8a8fea400d84d22d6a5a8ea97a509744c4670ceade9d0f7c9",
+      "sha256": "84e224d75dcde46f7b566f312976df3fc7514bc090bc2bca9e2873bb439e583f",
       "nodeId": null
     },
     {
@@ -37,7 +51,7 @@
       "slug": "Knowledge-Protocol",
       "title": "Knowledge Protocol",
       "group": "System",
-      "sha256": "fb95a8d175b838ad307544a2592cf58aa9ebc4720c08134f3414bf37f7a27c69",
+      "sha256": "fce804e09dc2e3183956eca63515e07a25f4e9a64973b3512d53327b0c2e5668",
       "nodeId": null
     },
     {
@@ -45,7 +59,7 @@
       "slug": "File-Index",
       "title": "Complete File Index",
       "group": "System",
-      "sha256": "b589ae2027b0b75ece57e42ef8cc3375867c02ca28623ac54ad3b166ce00b5cb",
+      "sha256": "79d3600a7039d27dc397e73ac6a2e0bddc41e9a76d12b0e6725a13b53abecd4a",
       "nodeId": null
     },
     {
@@ -53,7 +67,7 @@
       "slug": "RandoMeal--Governance--Knowledge-System",
       "title": "Knowledge system",
       "group": "Governance",
-      "sha256": "b98d223fb19def2e721869c167746b7c4a7c4f11d881d2962b447cf534d500b5",
+      "sha256": "6b8489a14ea1a81a28ef66bad252b5ffa6390b6c11a3343325a2cb6ba78bc38d",
       "nodeId": "knowledge-system"
     },
     {
@@ -61,7 +75,7 @@
       "slug": "RandoMeal--Governance--Agents",
       "title": "Agent governance",
       "group": "Governance",
-      "sha256": "b98fc34b3d26d3931c4b2cb801c33e825ce4b1151dcb45ea0e2d844dcb1813ff",
+      "sha256": "b5822baf67f56ec0239f7574021949655fb4f6122ac6aa97dce6643a7e83afa1",
       "nodeId": "agent-governance"
     },
     {
@@ -69,7 +83,7 @@
       "slug": "RandoMeal--Governance--Canonical-Figma",
       "title": "Canonical Figma file governance",
       "group": "Governance",
-      "sha256": "891efe2854f6c55850c5154f593157490c2fc40535cc0d9155020689f683065d",
+      "sha256": "a082b3d6f9970a435ecb32f6a4fda103be221dab817f1a2867d4b01e143ae15d",
       "nodeId": "figma-canonical-file"
     },
     {
@@ -77,7 +91,7 @@
       "slug": "RandoMeal--Governance--Repository-Inventory",
       "title": "Complete repository inventory",
       "group": "Governance",
-      "sha256": "7474bd0fcac1a83dd64a04d97f6b80f6acce38c2bae733db3fbc6a1fdabc29be",
+      "sha256": "b3d633c95b5612d660e45146d9349ad7a055076ec85ab9f89cd03456d510c031",
       "nodeId": "repository-inventory"
     },
     {
@@ -293,7 +307,7 @@
       "slug": "RandoMeal--Tooling--Workspace",
       "title": "Workspace runtime and tooling",
       "group": "Delivery and Operations",
-      "sha256": "7072d7dd87ca7145a83f1fffc9cfc503f4881bbb4d8747fe647f4bccb81d9ed7",
+      "sha256": "2d00a41fc0b7c183fdd364c7edcb991e1cd7f9fd3f332f695736706c1259768d",
       "nodeId": "workspace-tooling"
     },
     {
@@ -301,7 +315,7 @@
       "slug": "RandoMeal--Delivery--CI",
       "title": "Continuous integration and test runners",
       "group": "Delivery and Operations",
-      "sha256": "39f990b8c394be6ec83df725707f82c88b3c54f0ad0ef63593b5aaa89c1547bb",
+      "sha256": "7033a479de49e214a70c49ff48c9b29606fde9f954d5ca10746bd412689a66e6",
       "nodeId": "ci-quality"
     },
     {

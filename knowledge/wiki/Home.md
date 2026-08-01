@@ -8,18 +8,18 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 ## Coverage
 
-- Repository files discovered: 192
-- Files indexed semantically or by metadata: 192
+- Repository files discovered: 194
+- Files indexed semantically or by metadata: 194
 - Binary assets indexed by metadata: 4
-- Files with extracted sections: 146
-- Content fingerprint: `e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d`
+- Files with extracted sections: 148
+- Content fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
 
 ## Knowledge tree
 
 ### Governance
 
-- [Knowledge system](RandoMeal--Governance--Knowledge-System) — Deterministic catalog, repository index, selective query, local Wiki renderer, verified Notion mirror, validation gates, repo skill, and read-only retrieval agent.
-- [Agent governance](RandoMeal--Governance--Agents) — Mandatory project instructions, design workflow, repository safety, selective knowledge retrieval, and the source-code comment prohibition.
+- [Knowledge system](RandoMeal--Governance--Knowledge-System) — Verified local General AI snapshot, deterministic project catalog and index, selective query, local Wiki renderer, explicit read-back-verified Notion synchronization, validation gates, repo skill, and read-only retrieval agent.
+- [Agent governance](RandoMeal--Governance--Agents) — Shared-baseline precedence, mandatory project instructions, design workflow, repository safety, selective knowledge retrieval, and the source-code comment prohibition.
 - [Canonical Figma file governance](RandoMeal--Governance--Canonical-Figma) — Deny-by-default project governance allowing all RandoMeal design operations only in one canonical Figma file.
 - [Complete repository inventory](RandoMeal--Governance--Repository-Inventory) — Catch-all coverage node ensuring every tracked or non-ignored untracked repository file is represented even when no specialist node exists yet.
 

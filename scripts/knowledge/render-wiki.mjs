@@ -1,7 +1,8 @@
 import { mkdirSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { catalogPath, filesForNode, indexPath, readJson, sha256, stableJson, wikiDir, wikiManifestPath } from './lib.mjs';
+import { catalogPath, filesForNode, indexPath, readJson, rootDir, sha256, stableJson, wikiDir, wikiManifestPath } from './lib.mjs';
+import { canonicalNotionBody } from './notion-sync.mjs';
 
 function pageLink(title, slug) {
   return `[${title}](${slug})`;
@@ -162,8 +163,15 @@ export function buildWikiPages(catalog, index) {
 }
 
 export function buildWikiManifest(catalog, index, pages) {
+  const snapshotPath = join(rootDir, catalog.syncPolicy.baseline.snapshotFile);
+  const snapshot = readFileSync(snapshotPath, 'utf8');
+  const baseline = {
+    ...catalog.syncPolicy.baseline,
+    snapshotSha256: sha256(snapshot),
+    bodySha256: sha256(canonicalNotionBody(snapshot)),
+  };
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     owner: 'randomeal-knowledge',
     repository: catalog.project.repository,
     contentFingerprint: index.contentFingerprint,
@@ -171,6 +179,7 @@ export function buildWikiManifest(catalog, index, pages) {
       provider: catalog.syncPolicy.provider,
       mode: catalog.syncPolicy.mode,
       requiredCapability: catalog.syncPolicy.requiredCapability,
+      baseline,
       target: catalog.syncPolicy.target,
     },
     pages: [...pages].map(([file, content]) => {

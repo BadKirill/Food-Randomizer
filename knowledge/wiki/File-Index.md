@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d`
+Fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -8,11 +8,11 @@ Fingerprint: `e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d`
 | `.agents/skills/design-anti-slop/references/catalog.md` | markdown | agent-governance, repository-inventory, design-system-quality | 36 indexed sections: Project interpretation, Каталог слоп-теллов (правила детекции и фиксы), Баны (чинить всегда), T6 · Indigo/violet акцент и градиент без брифа — ban · вес 6/6, Reddit 2.3% (самый цитируемый), T16 · Нетронутый shadcn/Tailwind-кит — ban · вес 4/6, Reddit 2.5% (№1 в жалобах), … |
 | `.agents/skills/design-anti-slop/SKILL.md` | markdown | agent-governance, figma-canonical-file, repository-inventory, design-system-quality | 7 indexed sections: Design anti-slop for RandoMeal, Приоритет источников, Режимы, Обязательный workflow, Интерпретация каталога в мобильном продукте, … |
 | `.agents/skills/randomeal-knowledge/agents/openai.yaml` | yaml | knowledge-system, agent-governance, repository-inventory | 10 indexed sections: interface, display_name, short_description, default_prompt, policy, … |
-| `.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md` | markdown | knowledge-system, agent-governance, repository-inventory | 7 indexed sections: Verified Notion Wiki MCP sync protocol, Fixed target, Pre-change retrieval, Local preparation, Bootstrap and upsert, … |
+| `.agents/skills/randomeal-knowledge/references/notion-sync-protocol.md` | markdown | knowledge-system, agent-governance, repository-inventory | 8 indexed sections: Explicit Notion Wiki MCP synchronization protocol, Fixed target, Explicit General Wiki pull, Local preparation, Explicit General Wiki push, … |
 | `.agents/skills/randomeal-knowledge/SKILL.md` | markdown | knowledge-system, agent-governance, repository-inventory | 6 indexed sections: RandoMeal Knowledge, Retrieval workflow, Retrieval agent, Change lifecycle, External Notion Wiki synchronization, … |
 | `.codex/agents/knowledge-retriever.toml` | toml | knowledge-system, agent-governance, repository-inventory | toml file knowledge-retriever.toml |
 | `.env.example` | environment | repository-inventory, local-infrastructure | 6 indexed sections: NODE_ENV, PORT, CORS_ORIGINS, DISHES_WRITE_TOKEN, SESSION_SECRET, … |
-| `.github/workflows/ci.yml` | yaml | figma-canonical-file, repository-inventory, ci-quality | 114 indexed sections: name, on, pull_request, branches, push, … |
+| `.github/workflows/ci.yml` | yaml | figma-canonical-file, repository-inventory, ci-quality | 112 indexed sections: name, on, pull_request, branches, push, … |
 | `.github/workflows/deploy.yml` | yaml | repository-inventory, production-infrastructure | 72 indexed sections: name, on, workflow_run, workflows, types, … |
 | `.gitignore` | configuration | repository-inventory, local-infrastructure | configuration file .gitignore |
 | `.npmrc` | configuration | repository-inventory, workspace-tooling | configuration file .npmrc |
@@ -125,8 +125,9 @@ Fingerprint: `e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d`
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |
+| `knowledge/general-ai-baseline.md` | markdown | knowledge-system, repository-inventory | 10 indexed sections: General Rules for AI Coding Agents, Cross-Project Source Hierarchy, Shared-Baseline Change Synchronization, Evidence Before Action, Minimal and Focused Code, … |
 | `knowledge/index.json` | generated | repository-inventory | Managed output validated by deterministic re-render |
-| `knowledge/README.md` | markdown | knowledge-system, repository-inventory | 5 indexed sections: RandoMeal repository knowledge graph, Canonical and generated files, Selective retrieval, Update lifecycle, External Notion Wiki |
+| `knowledge/README.md` | markdown | knowledge-system, repository-inventory | 5 indexed sections: RandoMeal repository knowledge graph, Canonical and generated files, Selective retrieval, Ordinary local lifecycle, Explicit external Notion workflow |
 | `knowledge/wiki-manifest.json` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki-sync-state.json` | generated | repository-inventory | Managed output validated by deterministic re-render |
 | `knowledge/wiki/_Sidebar.md` | generated | repository-inventory | Managed output validated by deterministic re-render |
@@ -182,13 +183,14 @@ Fingerprint: `e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d`
 | `scripts/deploy-api.sh` | shell | repository-inventory, production-infrastructure | shell file deploy-api.sh |
 | `scripts/knowledge/index-repository.mjs` | javascript | knowledge-system, repository-inventory | javascript file index-repository.mjs |
 | `scripts/knowledge/lib.mjs` | javascript | knowledge-system, repository-inventory | 35 indexed sections: rootDir, catalogPath, indexPath, wikiDir, wikiManifestPath, … |
-| `scripts/knowledge/notion-sync.mjs` | javascript | knowledge-system, repository-inventory | 14 indexed sections: managedOwner, normalizeLineEndings, canonicalNotionBody, stripPageTitle, tableCells, … |
-| `scripts/knowledge/notion-sync.spec.mjs` | javascript | knowledge-system, repository-inventory | 6 indexed sections: rewrites managed links and preserves external links, converts markdown tables to Notion table blocks, builds and verifies a managed Notion payload, rejects a body that changed while keeping the declared hash, plans create, update, and skip without deleting unmanaged pages, … |
+| `scripts/knowledge/notion-sync.mjs` | javascript | knowledge-system, repository-inventory | 17 indexed sections: managedOwner, normalizeLineEndings, canonicalNotionBody, stripPageTitle, tableCells, … |
+| `scripts/knowledge/notion-sync.spec.mjs` | javascript | knowledge-system, repository-inventory | 9 indexed sections: rewrites managed links and preserves external links, converts markdown tables to Notion table blocks, builds and verifies a managed Notion payload, rejects a body that changed while keeping the declared hash, verifies a bounded shared baseline without owning child Wikis, … |
 | `scripts/knowledge/plan-notion-sync.mjs` | javascript | knowledge-system, repository-inventory | javascript file plan-notion-sync.mjs |
 | `scripts/knowledge/query-knowledge.mjs` | javascript | knowledge-system, repository-inventory | 7 indexed sections: argument, tokens, includesToken, scoreNode, matchedRouteIds, … |
 | `scripts/knowledge/render-wiki.mjs` | javascript | knowledge-system, repository-inventory | 11 indexed sections: pageLink, wikiPageTitle, sourceList, renderHome, renderSidebar, … |
 | `scripts/knowledge/validate-knowledge.mjs` | javascript | knowledge-system, repository-inventory | 1 indexed section: findDependencyCycle |
 | `scripts/knowledge/validate-notion-sync.mjs` | javascript | knowledge-system, repository-inventory | javascript file validate-notion-sync.mjs |
+| `scripts/knowledge/verify-baseline-notion-fetch.mjs` | javascript | knowledge-system, repository-inventory | 1 indexed section: argument |
 | `scripts/knowledge/verify-notion-fetch.mjs` | javascript | knowledge-system, repository-inventory | 1 indexed section: argument |
 | `scripts/oracle-vm-bootstrap.sh` | shell | repository-inventory, production-infrastructure | shell file oracle-vm-bootstrap.sh |
 | `scripts/run-mobile-headful.sh` | shell | repository-inventory, ci-quality | shell file run-mobile-headful.sh |

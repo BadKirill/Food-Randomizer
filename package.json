@@ -32,6 +32,7 @@
     "knowledge:check": "node scripts/knowledge/validate-knowledge.mjs",
     "knowledge:notion:plan": "node scripts/knowledge/plan-notion-sync.mjs",
     "knowledge:notion:verify": "node scripts/knowledge/verify-notion-fetch.mjs",
+    "knowledge:notion:verify:baseline": "node scripts/knowledge/verify-baseline-notion-fetch.mjs",
     "knowledge:notion:check": "node scripts/knowledge/validate-notion-sync.mjs",
     "test:knowledge": "node --test scripts/knowledge/*.spec.mjs",
     "test:headless": "bash scripts/run-tests-headless.sh",

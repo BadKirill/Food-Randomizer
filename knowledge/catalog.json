@@ -14,18 +14,31 @@
       "agent-governance"
     ],
     "steps": [
+      "Read knowledge/general-ai-baseline.md and verify its local raw and canonical body hashes before planning or writing code.",
       "Run the knowledge query with the task text and every known changed path.",
       "Read the selected catalog nodes and their listed source ranges before opening broader files.",
       "Read direct dependencies, contracts, and narrow tests when the first packet is insufficient.",
       "Use repository-wide search only after the packet is empty, stale, or contradictory.",
       "Classify evidence as current, target, legacy, mixed, or generated before making a decision.",
-      "Fetch and verify the Notion pages mapped to selected nodes before a material change.",
-      "After a material change, update affected catalog rules, regenerate the index and Wiki bundle, validate both, and complete verified Notion synchronization."
+      "Use repository sources and the generated local project Wiki for RandoMeal facts, refinements, contradictions, and technical contracts.",
+      "After a material change, update affected catalog rules, regenerate the index and local Wiki bundle, and validate both without contacting Notion."
     ]
   },
   "syncPolicy": {
-    "mode": "fail-closed-at-handoff",
+    "mode": "explicit-only-with-read-back",
     "provider": "notion",
+    "baseline": {
+      "pageId": "3a57e183-0c32-803e-a86c-ef426f85f9f1",
+      "pageTitle": "General AI Wiki",
+      "pageUrl": "https://app.notion.com/p/3a57e1830c32803ea86cef426f85f9f1",
+      "snapshotFile": "knowledge/general-ai-baseline.md",
+      "authority": "verified-local-snapshot",
+      "externalAuthority": "cross-project-upstream",
+      "ownership": "shared-external",
+      "contentStartHeading": "# General Rules for AI Coding Agents",
+      "contentEndHeading": "# Local Wikis",
+      "updateMode": "explicit-targeted-policy-section-write-with-stale-fetch-guard-and-read-back"
+    },
     "target": {
       "workspaceId": "0e583eb3-1385-4f9f-b553-1405b74be641",
       "workspaceName": "Кирилл Плохой's Notion",
@@ -33,15 +46,17 @@
       "rootPageTitle": "Food-Randomizer Wiki",
       "rootPageUrl": "https://app.notion.com/p/3a57e1830c3280cc8237deed329685d5"
     },
-    "requiredCapability": "Connected Notion MCP identity, fetch, search, create-pages, update-page, and post-write fetch verification",
+    "requiredCapability": "For an explicitly invoked external workflow: connected Notion MCP identity, fetch, search, create-pages, update-page, and post-write fetch verification",
     "steps": [
-      "Treat knowledge/catalog.json as canonical and knowledge/wiki as a generated human-readable mirror.",
-      "Before implementation, fetch the configured Notion identity, root, and managed pages mapped to the selected graph nodes.",
-      "Regenerate knowledge/wiki-manifest.json and plan changed managed pages against knowledge/wiki-sync-state.json.",
-      "Upsert only changed managed child pages under the configured root and preserve every unmanaged page.",
-      "Fetch immediately before every update and stop if remote content diverged from the last verified state.",
-      "Read every written page back and verify its managed key, local source hash, canonical body hash, and internal page links.",
-      "Record synchronization only after every attempted page verifies, then run knowledge:notion:check.",
+      "Use knowledge/general-ai-baseline.md as the verified local working baseline and knowledge/catalog.json as canonical for RandoMeal facts.",
+      "Keep ordinary indexing, rendering, querying, validation, coding, commit, and pull-request workflows local-only.",
+      "Read or change external Wiki content only after an explicit user request or a separately invoked dedicated synchronization workflow.",
+      "For an explicit General Wiki pull or push, verify the fixed identity and bounded policy, preserve Local Wikis and unrelated content, and update the local snapshot only after read-back verification.",
+      "For an explicit project Wiki sync, regenerate knowledge/wiki-manifest.json and plan managed pages against knowledge/wiki-sync-state.json.",
+      "Fetch immediately before every write, stop on remote divergence, preserve every unmanaged page, and upsert only intended managed content.",
+      "Read every written page back and verify the shared policy hash or project managed key, local source hash, canonical body hash, and internal page links as applicable.",
+      "Record external synchronization proof only after every attempted page verifies, then run knowledge:notion:check.",
+      "Do not automatically read, write, or gate on external Wiki freshness during commits or pull requests.",
       "Never substitute browser automation, direct API scripts, GitHub Wiki, Git operations, or an unverified claim for Notion MCP synchronization."
     ]
   },
@@ -53,14 +68,16 @@
       "wikiSlug": "RandoMeal--Governance--Knowledge-System",
       "status": "current",
       "authority": "canonical",
-      "summary": "Deterministic catalog, repository index, selective query, local Wiki renderer, verified Notion mirror, validation gates, repo skill, and read-only retrieval agent.",
+      "summary": "Verified local General AI snapshot, deterministic project catalog and index, selective query, local Wiki renderer, explicit read-back-verified Notion synchronization, validation gates, repo skill, and read-only retrieval agent.",
       "tags": ["knowledge", "graph", "catalog", "index", "wiki", "notion", "mcp", "контекст", "дерево знаний", "поиск"],
-      "sources": ["knowledge/catalog.json", "knowledge/README.md", "scripts/knowledge/**", ".agents/skills/randomeal-knowledge/**", ".codex/agents/knowledge-retriever.toml"],
+      "sources": ["knowledge/general-ai-baseline.md", "knowledge/catalog.json", "knowledge/README.md", "scripts/knowledge/**", ".agents/skills/randomeal-knowledge/**", ".codex/agents/knowledge-retriever.toml"],
       "rules": [
-        "The catalog is the canonical semantic graph; the index and Wiki bundle are deterministic derivatives.",
+        "The verified knowledge/general-ai-baseline.md snapshot is the normal working source for cross-project planning and coding principles; the external General AI Wiki is shared upstream and the catalog is canonical for RandoMeal facts, contracts, and approved specializations.",
         "Every repository file receives an index record; generated outputs use managed records without recursive self-hashes.",
-        "Retrieval must return evidence paths and line ranges and verify the relevant managed Notion pages before implementation.",
-        "External Notion synchronization fails closed at handoff unless every changed managed page is written, read back, body-hash verified, and recorded in the sync state."
+        "Ordinary retrieval verifies the local General snapshot first, returns project evidence paths and line ranges, and never contacts Notion.",
+        "External General or project Wiki access requires an explicit user request or separately invoked dedicated synchronization workflow.",
+        "An invoked external synchronization fails closed until every intended write is read back, body-hash verified, and recorded in the sync state; external mirror freshness is not an ordinary local completion gate.",
+        "No automatic Notion read, write, or freshness gate runs on commit or pull request."
       ],
       "dependsOn": [],
       "related": ["repository-inventory", "ci-quality"],
@@ -74,15 +91,20 @@
       "wikiSlug": "RandoMeal--Governance--Agents",
       "status": "current",
       "authority": "canonical",
-      "summary": "Mandatory project instructions, design workflow, repository safety, selective knowledge retrieval, and the source-code comment prohibition.",
+      "summary": "Shared-baseline precedence, mandatory project instructions, design workflow, repository safety, selective knowledge retrieval, and the source-code comment prohibition.",
       "tags": ["agents", "skill", "rules", "comments", "design anti slop", "агент", "правила", "комментарии"],
       "sources": ["AGENTS.md", ".agents/**", ".codex/**", "AI_CONTEXT.md"],
       "rules": [
+        "Read and locally verify knowledge/general-ai-baseline.md before planning or coding, then use repository sources and the generated local project Wiki for project facts, nuances, contradictions, and technical contracts.",
+        "Project guidance may strengthen or specialize the shared baseline but must not silently weaken a shared guarantee.",
+        "Do not contact external Wiki content during ordinary work; require an explicit request or dedicated synchronization command and mandatory read-back for every external write.",
+        "Do not automate external Wiki access or freshness gates on commit or pull request without a separate explicit policy decision.",
         "Use the RandoMeal knowledge skill before code changes, reviews, architecture, data, API, QA, or design work.",
         "Use the design anti-slop skill before creating, reviewing, or changing user-facing design or UI.",
         "Use only the canonical Figma file key declared in design/figma-project.json and run the deny-by-default guard before every Figma MCP operation.",
         "Do not add source-code comments, TODO or FIXME notes, commented-out code, or explanatory blocks.",
-        "Preserve unrelated dirty work and use additive database migrations."
+        "Preserve unrelated dirty work and use additive database migrations.",
+        "General AI Wiki requires English agent-facing documentation; the existing Russian design-anti-slop skill is a recorded project contradiction that requires a separate translation task rather than silent propagation."
       ],
       "dependsOn": ["knowledge-system"],
       "related": ["design-system-quality", "figma-canonical-file", "qa-strategy"],
@@ -734,6 +756,7 @@
       "sources": [".github/workflows/ci.yml", "scripts/run-tests*.sh", "scripts/run-mobile-headful.sh", "scripts/test-mobile-api-contract.mjs"],
       "rules": [
         "Knowledge validation must run before expensive build and test jobs.",
+        "CI validates local knowledge freshness and contracts without contacting Notion or gating pull requests on external Wiki freshness.",
         "API CI uses PostgreSQL 16 and applies current Prisma migrations before real E2E tests.",
         "Mobile CI runs Jest and TypeScript no-emit checks.",
         "The headless runner does not itself start the live API required by the contract smoke."

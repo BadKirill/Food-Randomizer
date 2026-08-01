@@ -29,6 +29,7 @@ if (requestedSlug && selected.length === 0) {
 
 if (process.argv.includes('--summary-json')) {
   process.stdout.write(`${JSON.stringify({
+    baseline: manifest.externalSync.baseline,
     target: manifest.externalSync.target,
     contentFingerprint: manifest.contentFingerprint,
     pages: selected.map(({ slug, title, action }) => ({ slug, title, action })),
@@ -36,6 +37,7 @@ if (process.argv.includes('--summary-json')) {
 } else if (process.argv.includes('--json')) {
   process.stdout.write(`${JSON.stringify({
     schemaVersion: 1,
+    baseline: manifest.externalSync.baseline,
     target: manifest.externalSync.target,
     contentFingerprint: manifest.contentFingerprint,
     pages: selected,

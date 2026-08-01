@@ -105,8 +105,9 @@ export function buildManagedNotionPayload(page, source, pageUrlBySlug = {}) {
   return { managedKey, body, bodySha256, content };
 }
 
-export function parseNotionFetchText(value) {
+export function parseNotionPageFetch(value) {
   const text = normalizeLineEndings(value).trimEnd();
+  const pageUrl = /<page url="([^"]+)"/.exec(text)?.[1] ?? null;
   const propertiesMatch = /<properties>\n([\s\S]*?)\n<\/properties>/.exec(text);
   let title = null;
   if (propertiesMatch) {
@@ -123,18 +124,59 @@ export function parseNotionFetchText(value) {
     : '';
   const contentMatch = /^<content>\n([\s\S]*)\n<\/content>$/.exec(outerContent);
   const content = contentMatch?.[1] ?? outerContent;
+  return {
+    title,
+    pageUrl,
+    content,
+    bodySha256: sha256(canonicalNotionBody(content)),
+    fetchSha256: sha256(text),
+  };
+}
+
+export function extractBaselinePolicy(content, baseline) {
+  const start = content.indexOf(baseline.contentStartHeading);
+  const end = content.indexOf(`\n${baseline.contentEndHeading}`, start);
+  if (start < 0 || end < 0 || end <= start) return null;
+  return content.slice(start, end).trim();
+}
+
+export function verifyBaselineNotionFetch(value, baseline) {
+  const page = parseNotionPageFetch(value);
+  const policy = extractBaselinePolicy(page.content, baseline);
+  const bodySha256 = policy ? sha256(canonicalNotionBody(policy)) : null;
+  const checks = {
+    title: page.title === baseline.pageTitle,
+    pageUrl: page.pageUrl === baseline.pageUrl,
+    policyBounds: policy !== null,
+    bodySha256: bodySha256 === baseline.bodySha256,
+  };
+  return {
+    ok: Object.values(checks).every(Boolean),
+    checks,
+    parsed: {
+      ...page,
+      policy,
+      bodySha256,
+    },
+  };
+}
+
+export function parseNotionFetchText(value) {
+  const page = parseNotionPageFetch(value);
+  const content = page.content;
   const marker = /Managed key: `([^`]+)`<br>Source SHA-256: `([a-f0-9]{64})`<br>Body SHA-256: `([a-f0-9]{64})`/.exec(content);
   const calloutEnd = content.indexOf('</callout>');
   const divider = calloutEnd >= 0 ? content.indexOf('---', calloutEnd) : -1;
   const body = divider >= 0 ? content.slice(divider + 3).replace(/^\n/, '').trim() : '';
   return {
-    title,
+    title: page.title,
+    pageUrl: page.pageUrl,
     managedKey: marker?.[1] ?? null,
     sourceSha256: marker?.[2] ?? null,
     declaredBodySha256: marker?.[3] ?? null,
     body,
     bodySha256: sha256(canonicalNotionBody(body)),
-    fetchSha256: sha256(text),
+    fetchSha256: page.fetchSha256,
   };
 }
 
@@ -165,12 +207,22 @@ export function planNotionSync(manifest, payloads, state = null) {
 export function validateSyncState(manifest, state, payloads) {
   const errors = [];
   if (!state) return ['Missing knowledge/wiki-sync-state.json'];
-  if (state.schemaVersion !== 2) errors.push('Sync state schemaVersion must be 2');
+  if (state.schemaVersion !== 3) errors.push('Sync state schemaVersion must be 3');
   if (state.provider !== manifest.externalSync.provider) errors.push('Sync state provider does not match manifest');
   if (state.repository !== manifest.repository) errors.push('Sync state repository does not match manifest');
   if (state.contentFingerprint !== manifest.contentFingerprint) errors.push('Sync state content fingerprint is stale');
   if (state.workspace?.id !== manifest.externalSync.target.workspaceId) errors.push('Sync state workspace does not match manifest');
+  if (state.baselinePage?.id !== manifest.externalSync.baseline.pageId) errors.push('Sync state General AI Wiki page does not match manifest');
+  if (state.baselinePage?.title !== manifest.externalSync.baseline.pageTitle) errors.push('Sync state General AI Wiki title does not match manifest');
+  if (state.baselinePage?.url !== manifest.externalSync.baseline.pageUrl) errors.push('Sync state General AI Wiki URL does not match manifest');
+  if (state.baselinePage?.snapshotSha256 !== manifest.externalSync.baseline.snapshotSha256) errors.push('Sync state General AI Wiki snapshot hash does not match manifest');
+  if (state.baselinePage?.bodySha256 !== manifest.externalSync.baseline.bodySha256) errors.push('Sync state General AI Wiki body hash does not match manifest');
+  if (!/^[a-f0-9]{64}$/.test(state.baselinePage?.fetchSha256 ?? '')) errors.push('Invalid General AI Wiki fetch hash');
+  if (state.baselinePage?.verified !== true) errors.push('Unverified General AI Wiki baseline');
   if (state.rootPage?.id !== manifest.externalSync.target.rootPageId) errors.push('Sync state root page does not match manifest');
+  if (state.rootPage?.title !== manifest.externalSync.target.rootPageTitle) errors.push('Sync state root page title does not match manifest');
+  if (state.rootPage?.url !== manifest.externalSync.target.rootPageUrl) errors.push('Sync state root page URL does not match manifest');
+  if (!/^[a-f0-9]{64}$/.test(state.rootPage?.fetchSha256 ?? '')) errors.push('Invalid root page fetch hash');
   const statePages = new Map();
   for (const page of state.pages ?? []) {
     if (statePages.has(page.slug)) errors.push(`Duplicate sync state slug: ${page.slug}`);

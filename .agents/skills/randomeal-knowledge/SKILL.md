@@ -1,40 +1,54 @@
 ---
 name: randomeal-knowledge
-description: Build a selective, source-backed RandoMeal context packet and keep the repository knowledge graph plus its verified Notion mirror current. Use before every code change, code review, architecture, database, API, mobile, analytics, QA, infrastructure, agent-rule, product-document, or design task in this repository; also use when asked about project structure, patterns, reuse, contradictions, implementation status, catalog updates, indexing, or Notion Wiki synchronization. Do not use as a substitute for the mandatory design-anti-slop workflow on user-facing design tasks.
+description: Build a selective, source-backed RandoMeal context packet from the verified local General snapshot and repository knowledge graph. Use before every code change, code review, architecture, database, API, mobile, analytics, QA, infrastructure, agent-rule, product-document, or design task in this repository; also use when asked about project structure, patterns, reuse, contradictions, implementation status, catalog updates, indexing, or explicitly requested Notion Wiki synchronization. Do not use as a substitute for the mandatory design-anti-slop workflow on user-facing design tasks.
 ---
 
 # RandoMeal Knowledge
 
-Use the repository catalog and deterministic index to retrieve the smallest trustworthy context for
-the task. Keep current implementation, accepted target architecture, discovery gates, and legacy
-references explicitly separated.
+Use the verified local General AI snapshot first, then the repository catalog and deterministic
+index to retrieve the smallest trustworthy project context for the task. Keep shared principles,
+project facts, current implementation, accepted target architecture, discovery gates, and legacy
+references explicitly separated. Ordinary retrieval is local-only.
 
 ## Retrieval workflow
 
-1. State that this skill is selecting repository context for the task.
-2. Collect the task text and known paths. For an existing change, include paths from
+1. State that this skill is selecting local shared and repository context for the task.
+2. Read `knowledge/general-ai-baseline.md` before planning or coding. Verify its raw and canonical
+   body hashes against `knowledge/wiki-manifest.json` and the last verified proof in
+   `knowledge/wiki-sync-state.json` without contacting Notion.
+3. Collect the task text and known paths. For an existing change, include paths from
    `git diff --name-only` and `git diff --name-only --cached` without modifying the worktree.
-3. Ensure `knowledge/index.json` exists. If it is absent, run `npm run knowledge:update` before
+4. Ensure `knowledge/index.json` exists. If it is absent, run `npm run knowledge:update` before
    retrieval and report that the skill caused generated knowledge files to change.
-4. Run:
+5. Run:
 
    ```sh
    npm run knowledge:query -- --query "<task text>" --paths <comma-separated-paths>
    ```
 
-5. Read only the selected catalog nodes and the source ranges in the context packet first.
-6. Expand to direct dependencies, contracts, and narrow tests only when the first packet lacks
+6. Read only the selected catalog nodes and the source ranges in the context packet first.
+7. Expand to direct dependencies, contracts, and narrow tests only when the first packet lacks
    enough evidence.
-7. Use repository-wide search only when the packet is empty, stale, or contradictory. State why
+8. Use repository-wide search only when the packet is empty, stale, or contradictory. State why
    the fallback was necessary.
-8. Read `knowledge/wiki-manifest.json` and `knowledge/wiki-sync-state.json`. Fetch Notion identity,
-   the configured root, and only the managed Notion pages mapped to the selected nodes. Compare the
-   remote managed key, source hash, body hash, and last verified fetch hash before implementation.
-9. Treat an empty configured root as a valid bootstrap state only when no sync state exists. Treat
-   missing mapped pages, stale fingerprints, hash mismatches, unexpected moves, or manual edits as
-   divergence that must be reconciled before a material change.
+9. Do not call Notion during ordinary retrieval, indexing, rendering, querying, validation, code,
+   commit, or pull-request work. Read external Wiki state only when the user explicitly requests it
+   or an operator invokes the dedicated synchronization workflow in
+   `references/notion-sync-protocol.md`.
 
-Never treat a generated summary as stronger evidence than its source. Apply this precedence:
+Apply this source hierarchy:
+
+1. `knowledge/general-ai-baseline.md` is the verified local working baseline for planning, coding
+   quality, verification, knowledge maintenance, safety, change control, and definition of done.
+2. Canonical repository sources and the project catalog govern RandoMeal facts, implementation,
+   contracts, product decisions, and accepted project-specific specializations.
+3. The external `General AI Wiki` is the shared upstream source and `Food-Randomizer Wiki` is the
+   external project mirror, but neither is read during ordinary work.
+4. A project rule may strengthen or specialize the shared baseline. If it weakens or contradicts a
+   shared guarantee, stop and reconcile both sources instead of choosing silently.
+
+Within the project layer, never treat a generated summary as stronger evidence than its source.
+Apply this precedence:
 
 1. `canonical`, `product-source-of-truth`, `discovery-gate`, and accepted product architecture.
 2. `current-code` for claims about behavior that exists now.
@@ -54,9 +68,10 @@ available. Give it the task text and known paths. Require a read-only context pa
 - direct contracts, database effects, and narrow tests;
 - unanswered questions that genuinely block a safe implementation.
 
-The retrieval agent must also return the Notion workspace/root identity, the managed pages checked,
-their verification results, and any local-versus-remote divergence. Notion is a human-readable
-mirror; canonical repository sources keep the precedence defined above.
+The retrieval agent must return the local baseline snapshot verification and must not contact
+Notion unless the assigned task explicitly requests external Wiki work or names a dedicated sync
+command. For an explicit external task it also returns the workspace/root identity, managed pages
+checked, read-back results, and any local-versus-remote divergence.
 
 The retrieval agent must not edit files, run mutating commands, or make implementation decisions
 beyond the evidence it returns. If the custom agent is unavailable, follow the same workflow in the
@@ -74,29 +89,33 @@ After any material repository change:
 4. Run `npm run knowledge:check` and resolve stale coverage, broken relations, unassigned files,
    dependency cycles, or Wiki drift.
 5. Query the changed paths once more and verify the updated packet points to the new sources.
-6. Run `npm run knowledge:notion:plan -- --json` and synchronize every planned page through the
-   configured Notion MCP workflow.
-7. Read every created or updated page back, verify its managed body, update
-   `knowledge/wiki-sync-state.json` only after all writes verify, and run
-   `npm run knowledge:notion:check`.
+6. Stop after the local lifecycle unless external Wiki work was explicitly requested or a dedicated
+   synchronization workflow was separately invoked.
+7. For an explicit external workflow, follow `references/notion-sync-protocol.md`, require
+   immediate pre-write fetch and post-write read-back, update `knowledge/wiki-sync-state.json` only
+   after verification, and run `npm run knowledge:notion:check`.
 
 Do not hand off a material change with a stale index or Wiki bundle.
 
 ## External Notion Wiki synchronization
 
-Read `references/notion-sync-protocol.md` whenever catalog or Wiki pages changed, before reading the
-external mirror for implementation context, or whenever external Wiki state is requested.
+Read `references/notion-sync-protocol.md` only when external Wiki state is explicitly requested or a
+dedicated synchronization workflow is invoked. Catalog, index, local Wiki, commit, and pull-request
+work alone do not authorize Notion access.
 
-Synchronization is fail-closed at handoff. It is successful only after the configured Notion MCP
-matches the workspace and root in `knowledge/wiki-manifest.json`, writes changed managed child
-pages, reads them back, verifies the metadata envelope and canonical body hash, and records the
-proof in `knowledge/wiki-sync-state.json`.
+An invoked external synchronization is fail-closed. It is successful only after the configured
+Notion MCP matches the workspace and targets, every write is read back, canonical body hashes are
+verified, and the proof is recorded in `knowledge/wiki-sync-state.json`. External mirror freshness
+is not a completion condition for ordinary local work when no external workflow was requested.
 
-If the connector is unavailable, its identity is wrong, the root moved, a managed page changed
-outside the repository, a write only partially succeeds, or a read-back hash differs, report the
-exact blocker and do not complete the task. Preserve unmanaged Notion pages and never delete or
-overwrite divergent content without explicit user authorization. Never substitute browser
-automation, direct API scripts, GitHub Wiki, or an unverified statement of success.
+If an invoked external workflow encounters unavailable access, wrong identity, moved pages,
+divergence, partial writes, or a read-back mismatch, report the exact blocker and do not claim the
+external synchronization completed. Preserve unmanaged Notion pages and never delete or overwrite
+divergent content without explicit user authorization. Never substitute browser automation, direct
+API scripts, GitHub Wiki, or an unverified statement of success.
+
+No automatic Notion read, write, or mirror-freshness gate is enabled for commits or pull requests.
+Adding one requires a separate explicit policy decision.
 
 ## Handoff
 
@@ -106,7 +125,7 @@ Report:
 - catalog facts added or changed;
 - index coverage and fingerprint;
 - local Wiki page count and manifest status;
-- Notion workspace/root identity, pages consulted before the change, and divergence status;
-- external Notion MCP status, including created, updated, skipped, and verified page counts or the
-  exact blocker;
+- local General AI snapshot verification and whether external Wiki work was invoked;
+- when invoked, Notion workspace and target identity, created, updated, skipped, and verified page
+  counts or the exact blocker;
 - validation and affected product tests.

@@ -5,6 +5,12 @@
 - For every code change, code review, architecture, database, API, mobile, analytics, QA,
   infrastructure, agent-rule, product-document, or design task, use the repo skill
   `$randomeal-knowledge` from `.agents/skills/randomeal-knowledge/SKILL.md` before taking action.
+- Before planning or writing code, read the verified local General Wiki snapshot at
+  `knowledge/general-ai-baseline.md`. It governs cross-project planning, coding quality,
+  verification, knowledge maintenance, safety, and completion standards. Then use the repository
+  catalog and generated local project Wiki for RandoMeal facts, refinements, documented
+  contradictions, approved specializations, and technical contracts. Project guidance may
+  strengthen or specialize the shared baseline but must not silently weaken it.
 - For code-change requests, use the read-only project custom agent `knowledge-retriever` when custom
   agents are available. It must query the catalog and return the relevant rules, source ranges,
   contracts, database effects, and narrow tests before implementation. If custom agents are not
@@ -12,20 +18,24 @@
 - Read `knowledge/catalog.json` and the generated context packet first. Select no more than seven
   relevant nodes; broad repository reading is allowed only when the packet is empty, stale, or
   contradictory.
-- Before a material change, verify the connected Notion workspace and the `Food-Randomizer Wiki`
-  root from `knowledge/wiki-manifest.json`. Read the managed Notion pages mapped to the selected
-  nodes in `knowledge/wiki-sync-state.json`, compare their source and body hashes, and report any
-  divergence before implementation. A missing initial mirror is valid only during bootstrap.
+- Ordinary `knowledge:index`, `knowledge:render`, `knowledge:update`, `knowledge:query`, and
+  `knowledge:check` workflows are local-only and must not read or write Notion.
+- Read or change the external `General AI Wiki` or `Food-Randomizer Wiki` only when the user
+  explicitly requests external Wiki work or an operator invokes a dedicated synchronization
+  workflow. Never infer external access from an ordinary code, documentation, commit, or pull
+  request task.
 - After every material repository change, update affected catalog facts, run
-  `npm run knowledge:update`, then run `npm run knowledge:check` before external synchronization.
-- Mirror changed managed pages only through the Notion MCP configured in
-  `knowledge/wiki-manifest.json`. Fetch every page immediately before writing, preserve unmanaged
-  pages and manual content, read each write back, verify its managed body hash, update
-  `knowledge/wiki-sync-state.json`, then run `npm run knowledge:notion:check` before handoff.
-- Do not mark a material change complete while the Notion mirror is stale or unverified. If the
-  connector is unavailable or remote content diverged, report the exact blocker and leave the task
-  incomplete. Never substitute browser automation, direct Notion API scripts, GitHub Wiki, `git`
-  operations, or an unverified success claim for native Notion MCP synchronization.
+  `npm run knowledge:update`, then run `npm run knowledge:check`. External synchronization is not
+  part of the ordinary local completion path.
+- When external Wiki synchronization is explicitly requested or separately invoked, use only the
+  Notion MCP targets in `knowledge/wiki-manifest.json`. Fetch immediately before every write,
+  preserve unmanaged pages and manual content, read every write back, verify the bounded General
+  policy or managed project body hashes, update `knowledge/wiki-sync-state.json`, and run
+  `npm run knowledge:notion:check` before reporting external synchronization success.
+- No automatic external Wiki read, write, or freshness gate is enabled for commits or pull
+  requests. Any future commit/PR automation requires a separate, explicit policy decision.
+- Never substitute browser automation, direct Notion API scripts, GitHub Wiki, `git` operations, or
+  an unverified success claim for native Notion MCP synchronization.
 
 ## Mandatory design workflow
 
@@ -42,7 +52,8 @@
   Figma file as a project source, fallback, staging area, or handoff.
 - Do not call Figma `create_new_file` for this project while the manifest disables it. Replacing the
   canonical file requires explicit user approval and an atomic update to the manifest, AGENTS.md,
-  catalog, generated Wiki, verified Notion mirror, and affected integrations.
+  catalog, generated local Wiki, and affected integrations. Update the external Notion mirror only
+  through an explicitly invoked synchronization workflow.
 - Treat `docs/product/discovery-decisions.md` and `docs/product/quality-and-design.md` as product and
   design constraints. The anti-slop catalog cannot override safety, accessibility, signed discovery
   decisions, project tokens, or an explicit user-approved brand choice.

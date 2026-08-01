@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import test from 'node:test';
-import { sha256 } from './lib.mjs';
+import { rootDir, sha256 } from './lib.mjs';
 import {
   buildManagedNotionPayload,
   canonicalNotionBody,
   convertMarkdownTables,
+  extractBaselinePolicy,
   planNotionSync,
   rewriteManagedLinks,
   validateSyncState,
+  verifyBaselineNotionFetch,
   verifyNotionFetch,
 } from './notion-sync.mjs';
 
@@ -76,6 +80,59 @@ test('rejects a body that changed while keeping the declared hash', () => {
   assert.equal(verification.checks.bodySha256, false);
 });
 
+test('verifies a bounded shared baseline without owning child Wikis', () => {
+  const policy = '# General Rules\nShared rule.';
+  const baseline = {
+    pageId: 'general',
+    pageTitle: 'General AI Wiki',
+    pageUrl: 'https://app.notion.com/p/general',
+    contentStartHeading: '# General Rules',
+    contentEndHeading: '# Local Wikis',
+    bodySha256: sha256(canonicalNotionBody(policy)),
+  };
+  const fetchText = [
+    '<page url="https://app.notion.com/p/general">',
+    '<properties>',
+    '{"title":"General AI Wiki"}',
+    '</properties>',
+    '<content>',
+    policy,
+    '# Local Wikis',
+    '<page url="https://app.notion.com/p/project">Project Wiki</page>',
+    '</content>',
+    '</page>',
+  ].join('\n');
+  const verification = verifyBaselineNotionFetch(fetchText, baseline);
+  assert.equal(verification.ok, true);
+  assert.equal(extractBaselinePolicy(verification.parsed.content, baseline), policy);
+  assert.doesNotMatch(verification.parsed.policy, /Project Wiki/);
+});
+
+test('rejects a stale or unbounded shared baseline', () => {
+  const baseline = {
+    pageTitle: 'General AI Wiki',
+    pageUrl: 'https://app.notion.com/p/general',
+    contentStartHeading: '# General Rules',
+    contentEndHeading: '# Local Wikis',
+    bodySha256: '0'.repeat(64),
+  };
+  const fetchText = [
+    '<page url="https://app.notion.com/p/general">',
+    '<properties>',
+    '{"title":"General AI Wiki"}',
+    '</properties>',
+    '<content>',
+    '# General Rules',
+    'Changed rule.',
+    '</content>',
+    '</page>',
+  ].join('\n');
+  const verification = verifyBaselineNotionFetch(fetchText, baseline);
+  assert.equal(verification.ok, false);
+  assert.equal(verification.checks.policyBounds, false);
+  assert.equal(verification.checks.bodySha256, false);
+});
+
 test('plans create, update, and skip without deleting unmanaged pages', () => {
   const payload = buildManagedNotionPayload(page, source);
   const manifest = { pages: [page] };
@@ -98,17 +155,43 @@ test('requires a complete current verified sync state', () => {
     contentFingerprint: '1'.repeat(64),
     externalSync: {
       provider: 'notion',
-      target: { workspaceId: 'workspace', rootPageId: 'root' },
+      baseline: {
+        pageId: 'general',
+        pageTitle: 'General AI Wiki',
+        pageUrl: 'https://app.notion.com/p/general',
+        snapshotSha256: '6'.repeat(64),
+        bodySha256: '3'.repeat(64),
+      },
+      target: {
+        workspaceId: 'workspace',
+        rootPageId: 'root',
+        rootPageTitle: 'Project Wiki',
+        rootPageUrl: 'https://app.notion.com/p/root',
+      },
     },
     pages: [page],
   };
   const state = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     provider: 'notion',
     repository: manifest.repository,
     contentFingerprint: manifest.contentFingerprint,
     workspace: { id: 'workspace' },
-    rootPage: { id: 'root' },
+    baselinePage: {
+      id: 'general',
+      title: 'General AI Wiki',
+      url: 'https://app.notion.com/p/general',
+      snapshotSha256: '6'.repeat(64),
+      bodySha256: '3'.repeat(64),
+      fetchSha256: '4'.repeat(64),
+      verified: true,
+    },
+    rootPage: {
+      id: 'root',
+      title: 'Project Wiki',
+      url: 'https://app.notion.com/p/root',
+      fetchSha256: '5'.repeat(64),
+    },
     pages: [{
       slug: page.slug,
       nodeId: page.nodeId,
@@ -124,4 +207,12 @@ test('requires a complete current verified sync state', () => {
   assert.deepEqual(validateSyncState(manifest, state, new Map([[page.slug, payload]])), []);
   state.pages[0].verified = false;
   assert.match(validateSyncState(manifest, state, new Map([[page.slug, payload]])).join('\n'), /Unverified/);
+});
+
+test('keeps ordinary knowledge commands and CI local-only', () => {
+  const packageJson = JSON.parse(readFileSync(join(rootDir, 'package.json'), 'utf8'));
+  const ordinaryCommands = ['knowledge:index', 'knowledge:render', 'knowledge:update', 'knowledge:query', 'knowledge:check'];
+  for (const command of ordinaryCommands) assert.doesNotMatch(packageJson.scripts[command], /notion/i);
+  const workflow = readFileSync(join(rootDir, '.github/workflows/ci.yml'), 'utf8');
+  assert.doesNotMatch(workflow, /knowledge:notion/);
 });

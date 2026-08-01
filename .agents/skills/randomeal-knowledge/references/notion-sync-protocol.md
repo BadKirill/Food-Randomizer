@@ -1,80 +1,100 @@
-# Verified Notion Wiki MCP sync protocol
+# Explicit Notion Wiki MCP synchronization protocol
 
-Use this protocol only with the connected Notion MCP. The repository catalog is canonical; the
-configured `Food-Randomizer Wiki` page is a human-readable external mirror.
+Use this protocol only when the user explicitly requests external Wiki work or an operator invokes
+a dedicated `knowledge:notion:*` workflow. Ordinary planning, coding, review, indexing, rendering,
+validation, commits, and pull requests use `knowledge/general-ai-baseline.md` and do not contact
+Notion.
+
+The verified local snapshot is the working baseline for cross-project principles. The external
+`General AI Wiki` is its shared upstream source. The repository catalog is canonical for RandoMeal
+facts and contracts; the external `Food-Randomizer Wiki` is their human-readable mirror.
 
 ## Fixed target
 
-Read the target from `knowledge/wiki-manifest.json`. Verify all of these values before reading or
-writing managed pages:
+Read the target from `knowledge/wiki-manifest.json`. Before an external read or write, verify:
 
 - provider is `notion`;
 - connected workspace ID equals the manifest workspace ID;
-- root page ID and title equal the manifest root page;
+- General Wiki page ID, URL, and title equal the manifest baseline page;
+- the bounded General policy begins and ends at the configured headings;
+- project root page ID and title equal the manifest target and its parent is the General Wiki;
 - every managed child stays beneath that root;
-- the connector exposes identity, fetch, search, create-pages, and update-page operations.
+- the connector exposes the operations required by the requested workflow.
 
-An empty root with no sync state is a valid bootstrap condition. Any later missing or moved managed
-page is divergence.
+Missing, moved, unreadable, or hash-divergent external content is divergence for the invoked sync.
+It does not invalidate ordinary local work when no external workflow was requested.
 
-## Pre-change retrieval
+## Explicit General Wiki pull
 
-1. Run the repository knowledge query and select no more than seven catalog nodes.
-2. Read `knowledge/wiki-manifest.json` and `knowledge/wiki-sync-state.json`.
-3. Fetch Notion identity and the configured root.
-4. Map selected node IDs to managed pages through the manifest and sync state.
-5. Fetch only those mapped pages and verify title, managed key, local source SHA-256, canonical body
-   SHA-256, and the stored full fetch SHA-256.
-6. Report the checked pages and every mismatch in the context packet.
-
-Do not begin a material change when a mapped page is stale, manually edited, moved, missing, or
-unreadable. Reconcile remote-only content into canonical repository sources or obtain explicit user
-authorization before overwriting it.
+1. Read `knowledge/wiki-manifest.json` and `knowledge/wiki-sync-state.json`.
+2. Fetch the configured Notion identity and General Wiki page.
+3. Verify page identity, policy bounds, project-root child relationship, and the complete fetch
+   hash used as concurrency evidence.
+4. Copy only the bounded policy section into `knowledge/general-ai-baseline.md`.
+5. Regenerate the manifest so its raw snapshot and canonical body hashes are derived locally.
+6. Verify the fetched bounded policy against the regenerated manifest.
+7. Record raw snapshot, canonical body, and complete fetch hashes in
+   `knowledge/wiki-sync-state.json` only after verification succeeds.
+8. Run `npm run knowledge:check` and read the external page back once more if the workflow also
+   changed it.
 
 ## Local preparation
 
 1. Update semantic facts in `knowledge/catalog.json`.
 2. Run `npm run knowledge:update` and `npm run knowledge:check`.
-3. Run `npm run knowledge:notion:plan -- --json`.
+3. Run `npm run knowledge:notion:plan -- --json` only for an explicitly invoked project Wiki sync.
 4. Read the local files and hashes named by the plan.
-5. Preserve every Notion page that is not owned by the manifest.
+5. Preserve every Notion page not owned by the manifest.
+6. Classify the change as shared-principle or project-specific. Shared-principle scope is limited
+   to evidence, planning, coding quality, verification, knowledge maintenance, safety, change
+   control, and definition-of-done rules.
 
-The generated Notion payload contains a managed metadata envelope and a deterministic body. Internal
-Wiki links are rewritten to absolute Notion page mentions once all page URLs are known. The expected
-remote hash is calculated from canonicalized body content, not from the raw local Markdown or a
-self-asserted marker.
+The generated project payload contains a managed metadata envelope and deterministic body. Internal
+Wiki links are rewritten to absolute Notion page mentions once page URLs are known. Expected remote
+hashes are calculated from canonicalized body content.
 
-## Bootstrap and upsert
+## Explicit General Wiki push
+
+1. Do not publish RandoMeal-only facts, contracts, architecture, dependencies, migrations,
+   operations, or exceptions into the General Wiki.
+2. Fetch the General Wiki immediately before writing and compare the bounded policy and complete
+   fetch hashes with the last verified state.
+3. Reconcile the requested principle into the bounded policy section only. Preserve the page title,
+   `Local Wikis` section, child pages, and unrelated content.
+4. Use a targeted Notion MCP content update. Never replace the complete General Wiki page.
+5. Fetch the page immediately after writing and verify identity, policy bounds, intended canonical
+   body hash, complete fetch hash, and project-root child link.
+6. Update `knowledge/general-ai-baseline.md` from the verified bounded policy, regenerate its hashes,
+   and record proof in `knowledge/wiki-sync-state.json`.
+
+## Explicit project Wiki upsert
 
 1. Search beneath the configured root for an exact managed key before creating a page.
-2. Create missing pages as children of the configured root. Initial bootstrap creates every managed
-   page without deleting or moving existing user pages.
-3. Record every created page ID and URL before rendering internal Notion page mentions.
-4. Fetch each existing managed page immediately before an update and compare its full fetch hash
-   with the last verified state.
-5. Stop on any remote divergence. Do not silently replace manual changes.
+2. Create missing pages only as children of the configured root.
+3. Record each created page ID and URL before rendering internal page mentions.
+4. Fetch every existing managed page immediately before an update and compare its complete fetch
+   hash with the last verified state.
+5. Stop on remote divergence. Do not silently replace manual changes.
 6. Update only pages whose expected local or remote payload hash changed.
 7. Never delete, archive, move, or rename a remote page without explicit user authorization.
 
-## Verification and state
+## Read-back and state
 
 1. Fetch every created or updated page through the same Notion MCP.
-2. Verify its title, managed key, source SHA-256, and canonical managed body SHA-256.
-3. Verify every internal managed link resolves to the page URL recorded for its target slug.
-4. Compute SHA-256 for the complete normalized fetch text to detect later manual changes.
-5. Build `knowledge/wiki-sync-state.json` only after all attempted writes verify successfully.
-6. Record provider, workspace, root, repository, index fingerprint, verification timestamp, and for
-   every page: slug, node ID, page ID, URL, title, local source hash, expected body hash, complete
-   fetch hash, and verification result.
-7. Run `npm run knowledge:notion:check`, `npm run knowledge:check`, and the changed-path knowledge
-   query after the state file is written.
+2. Verify title, managed key, source SHA-256, canonical managed body SHA-256, and managed links.
+3. Compute SHA-256 for the complete normalized fetch text to detect later manual changes.
+4. Update `knowledge/wiki-sync-state.json` only after every attempted write verifies.
+5. Run `npm run knowledge:notion:check`, `npm run knowledge:check`, and the changed-path query.
 
 ## Failure behavior
 
 - Wrong identity, missing capability, permission failure, conflicting managed key, unexpected child
-  content, partial write, async failure, or hash mismatch is a failed external sync.
-- Do not update the sync state after a partial or unverified operation.
-- Preserve the valid local catalog, index, Wiki bundle, manifest, and the last verified sync state.
+  content, partial write, async failure, or hash mismatch fails the invoked external sync.
+- Do not update sync proof for a partial or unverified operation.
+- Preserve the valid local catalog, index, Wiki bundle, manifest, snapshot, and last verified state.
 - Report which pages were created, updated, skipped, verified, failed, or not attempted.
 - Never substitute browser automation, direct API scripts, GitHub Wiki, Git operations, or an
   unverified statement of success.
+
+No Notion read, write, or mirror-freshness gate is automatic on commit or pull request. Adding one
+requires a separate explicit policy decision.
