@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { buildIndex, catalogPath, indexPath, matchesGlob, readJson, stableJson, wikiDir, wikiManifestPath } from './lib.mjs';
+import { buildIndex, catalogPath, indexPath, matchesGlob, readJson, stableJson, wikiDir, wikiManifestPath, wikiSyncStatePath } from './lib.mjs';
 import { buildWikiManifest, buildWikiPages } from './render-wiki.mjs';
 
 const errors = [];
@@ -10,6 +10,12 @@ const nodeIds = new Set();
 const slugs = new Set();
 
 if (catalog.syncPolicy.provider !== 'notion') errors.push('Knowledge sync provider must be notion');
+if (!catalog.syncPolicy.baseline?.pageId) errors.push('Missing General AI Wiki page ID');
+if (!catalog.syncPolicy.baseline?.pageUrl) errors.push('Missing General AI Wiki page URL');
+if (!catalog.syncPolicy.baseline?.pageTitle) errors.push('Missing General AI Wiki page title');
+if (!catalog.syncPolicy.baseline?.snapshotFile) errors.push('Missing local General AI Wiki snapshot path');
+if (!catalog.syncPolicy.baseline?.contentStartHeading) errors.push('Missing General AI Wiki policy start heading');
+if (!catalog.syncPolicy.baseline?.contentEndHeading) errors.push('Missing General AI Wiki policy end heading');
 if (!catalog.syncPolicy.target?.workspaceId) errors.push('Missing Notion workspace ID');
 if (!catalog.syncPolicy.target?.rootPageId) errors.push('Missing Notion root page ID');
 if (!catalog.syncPolicy.target?.rootPageUrl) errors.push('Missing Notion root page URL');
@@ -88,6 +94,17 @@ for (const [file, expected] of expectedPages) {
 const expectedManifest = buildWikiManifest(catalog, index, expectedPages);
 if (!existsSync(wikiManifestPath)) errors.push('Missing knowledge/wiki-manifest.json');
 else if (readFileSync(wikiManifestPath, 'utf8') !== stableJson(expectedManifest)) errors.push('knowledge/wiki-manifest.json is stale');
+
+if (!existsSync(wikiSyncStatePath)) errors.push('Missing knowledge/wiki-sync-state.json');
+else {
+  const state = readJson(wikiSyncStatePath);
+  const baseline = expectedManifest.externalSync.baseline;
+  if (state.baselinePage?.id !== baseline.pageId) errors.push('Local General AI snapshot proof has the wrong page ID');
+  if (state.baselinePage?.url !== baseline.pageUrl) errors.push('Local General AI snapshot proof has the wrong page URL');
+  if (state.baselinePage?.snapshotSha256 !== baseline.snapshotSha256) errors.push('Local General AI snapshot raw hash is unverified');
+  if (state.baselinePage?.bodySha256 !== baseline.bodySha256) errors.push('Local General AI snapshot canonical body hash is unverified');
+  if (state.baselinePage?.verified !== true) errors.push('Local General AI snapshot proof is unverified');
+}
 
 const manifestTitles = expectedManifest.pages.map((page) => page.title);
 if (new Set(manifestTitles).size !== manifestTitles.length) errors.push('Duplicate managed Notion page title');

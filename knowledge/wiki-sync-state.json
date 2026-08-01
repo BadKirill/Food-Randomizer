@@ -1,19 +1,29 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "provider": "notion",
   "owner": "randomeal-knowledge",
   "repository": "BadKirill/Food-Randomizer",
-  "contentFingerprint": "e6c139b0fd0bca811458b29d5371f65abe6838f4eabc4c0cae8c2d5f495ce65d",
-  "verifiedAt": "2026-07-29T20:33:53.000Z",
+  "contentFingerprint": "f2db21adde6ec7a4fd93659796f0812ff7db83fd5af0d772078bda6de6bccbe2",
+  "verifiedAt": "2026-08-01T20:22:56.000Z",
   "workspace": {
     "id": "0e583eb3-1385-4f9f-b553-1405b74be641",
     "name": "Кирилл Плохой's Notion"
+  },
+  "baselinePage": {
+    "id": "3a57e183-0c32-803e-a86c-ef426f85f9f1",
+    "title": "General AI Wiki",
+    "url": "https://app.notion.com/p/3a57e1830c32803ea86cef426f85f9f1",
+    "snapshotSha256": "556063e663832e56177182cb4b2f995f8c8d1b1326f8ee71e75c6ef97b194a8e",
+    "bodySha256": "e52cc78b98b8ea7461932f7d14d8a0c7b26754de46c4590efaa6f39a8341e60c",
+    "fetchSha256": "554c9895896766eb6454943d97e71568a5d8585b5c5d9be5ccbba520211de7ef",
+    "verified": true,
+    "verifiedAt": "2026-08-01T20:08:03.695Z"
   },
   "rootPage": {
     "id": "3a57e183-0c32-80cc-8237-deed329685d5",
     "title": "Food-Randomizer Wiki",
     "url": "https://app.notion.com/p/3a57e1830c3280cc8237deed329685d5",
-    "fetchSha256": "0ff9afc1269046d6163455f65eeb44564d3a4830fe8145348367e2dc83962b73"
+    "fetchSha256": "d7afcf51e2db47b63a630331ef0ebc5f0e749c215a83d3a3cfb4ffaf3a3fc241"
   },
   "pages": [
     {
@@ -22,11 +32,11 @@
       "pageId": "3a57e1830c32813e919cdfd947b99f42",
       "url": "https://app.notion.com/p/3a57e1830c32813e919cdfd947b99f42",
       "title": "RandoMeal Knowledge Graph",
-      "sourceSha256": "9b62574f5df6fcb8a8fea400d84d22d6a5a8ea97a509744c4670ceade9d0f7c9",
-      "bodySha256": "e984c07d18c3daf5953a47fbca65be2c5cba2fce8341fb877c90a6138ee58088",
-      "fetchSha256": "efbdd299b0fda682d76fc2f7f808b2be3fe592007ea45fa81ceed6fba7e49f88",
+      "sourceSha256": "6e549da781996f992dce5b87f2c09b9eee8f4a98d5e43fae714db07cf0ae526f",
+      "bodySha256": "2163481d7cc71f5927e62c85ff4bc99ccfd804bbb286054d53267d9fa31ad08d",
+      "fetchSha256": "5d48416f60baedad7215d70e7e3718c3a8bab8e77ea2a4d4431ba832b86cfb46",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-01T20:22:56.000Z"
     },
     {
       "slug": "_Sidebar",
@@ -46,11 +56,11 @@
       "pageId": "3a57e1830c328137af77e73492339620",
       "url": "https://app.notion.com/p/3a57e1830c328137af77e73492339620",
       "title": "Knowledge Protocol",
-      "sourceSha256": "fb95a8d175b838ad307544a2592cf58aa9ebc4720c08134f3414bf37f7a27c69",
-      "bodySha256": "d1ecd53b8bba488654154dd4360ea61a13bd0ec4c73b19ac4cda280f79397ca6",
-      "fetchSha256": "c0c738af16e28817b0596807728731a81d3ac20e8229693f48f3ff4d19869fe1",
+      "sourceSha256": "fce804e09dc2e3183956eca63515e07a25f4e9a64973b3512d53327b0c2e5668",
+      "bodySha256": "eac74f8c2d24a558720691e7029d31f620267e3f588c7befd7982a986a778569",
+      "fetchSha256": "4240bd78fae26fd29b3a0ec7e12c456d7ff0001b6a4430ea2213c91ae95407ab",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-01T20:08:03.695Z"
     },
     {
       "slug": "File-Index",
@@ -58,11 +68,11 @@
       "pageId": "3a57e1830c3281f9a385f7134f74a454",
       "url": "https://app.notion.com/p/3a57e1830c3281f9a385f7134f74a454",
       "title": "Complete File Index",
-      "sourceSha256": "b589ae2027b0b75ece57e42ef8cc3375867c02ca28623ac54ad3b166ce00b5cb",
-      "bodySha256": "53f65ff4e243ee423950c22469cdb26693ec79dad40044c918b5fd83cea06f7d",
-      "fetchSha256": "336ffb45eb8e3abe42c86ba1403ec3d02f3bada1f9b49beb1252e77029169170",
+      "sourceSha256": "6ee4c745ef72357e2115954cff65dcddd78f75caec7fbad3d97a0fad834d52ae",
+      "bodySha256": "b71bd18573ac3175991c9e5953272c6dee6be50b0ff198e868699c27c780a75a",
+      "fetchSha256": "f746c622061e7dfdb37a3d4b5fde2a4d2fc76869216061e43aa147ef3da0f418",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-01T20:22:56.000Z"
     },
     {
       "slug": "RandoMeal--Governance--Knowledge-System",
@@ -70,11 +80,11 @@
       "pageId": "3a57e1830c32817cab34c62d2a265cfc",
       "url": "https://app.notion.com/p/3a57e1830c32817cab34c62d2a265cfc",
       "title": "Knowledge system",
-      "sourceSha256": "b98d223fb19def2e721869c167746b7c4a7c4f11d881d2962b447cf534d500b5",
-      "bodySha256": "e7ccacb0138bb3aa39e834b63fcdcbb0d49bb0869a3480c988ae8b1c91382c71",
-      "fetchSha256": "d118b55b6d95168ec1b9279539c18405e73af91582f630c5900d9c4c636151e9",
+      "sourceSha256": "e3fd7ce995de110046e57fb2bc29b0fb3d59f6c85cb6f3821d3266766fb921a3",
+      "bodySha256": "cd0966533590eda4bbbd0b18055ceaf3666d0809815a5e233e8988db4bb5f05a",
+      "fetchSha256": "a474402080bedf026b67c4bfadb162099d0901cc522ed271a8777ed71adaa5cc",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-01T20:08:03.695Z"
     },
     {
       "slug": "RandoMeal--Governance--Agents",
@@ -82,11 +92,11 @@
       "pageId": "3a57e1830c3281518061e754eb31e5e4",
       "url": "https://app.notion.com/p/3a57e1830c3281518061e754eb31e5e4",
       "title": "Agent governance",
-      "sourceSha256": "b98fc34b3d26d3931c4b2cb801c33e825ce4b1151dcb45ea0e2d844dcb1813ff",
-      "bodySha256": "8a631a393aa13033c37453793d92287a35ee5ad6546f2df0712fdae941cc295a",
-      "fetchSha256": "bb8ffe41e0cd91e9671052c1adb74fb5c8c785ab71e74ad881929857719c6054",
+      "sourceSha256": "b5822baf67f56ec0239f7574021949655fb4f6122ac6aa97dce6643a7e83afa1",
+      "bodySha256": "09f968b4f0e2ca7c106637d229c80b42e2910b3363beb43af142c9fa62872f33",
+      "fetchSha256": "374725b12c02586876419eac685cc645f8a14667bf80f414323140ab7e63d941",
       "verified": true,
-      "verifiedAt": "2026-07-28T12:22:00.195Z"
+      "verifiedAt": "2026-08-01T20:22:56.000Z"
     },
     {
       "slug": "RandoMeal--Governance--Canonical-Figma",
@@ -94,11 +104,11 @@
       "pageId": "3ab7e1830c3281e4a76fd3d4505a6048",
       "url": "https://app.notion.com/p/3ab7e1830c3281e4a76fd3d4505a6048",
       "title": "Canonical Figma file governance",
-      "sourceSha256": "891efe2854f6c55850c5154f593157490c2fc40535cc0d9155020689f683065d",
-      "bodySha256": "37dcfd2780f717ee2378e753dbaa8e3eff6b1bcd284d3eb22aa4769604a0cc3d",
-      "fetchSha256": "7d7313d81cf46c089e6a0becae9196b95024111a7351642c3a28642f8187145b",
+      "sourceSha256": "a082b3d6f9970a435ecb32f6a4fda103be221dab817f1a2867d4b01e143ae15d",
+      "bodySha256": "ccf03cba942922728a5665f259e58b664e66bb9cec45303c9b3c260a5c33c222",
+      "fetchSha256": "04411e2d98745c8b7fa62d6d7d273ddcca563697037b2ffbe3fd7fcc38c697c2",
       "verified": true,
-      "verifiedAt": "2026-07-28T13:55:08.000Z"
+      "verifiedAt": "2026-08-01T20:22:56.000Z"
     },
     {
       "slug": "RandoMeal--Governance--Repository-Inventory",
@@ -106,11 +116,11 @@
       "pageId": "3a57e1830c3281b8a0b4d6898b7d1f4b",
       "url": "https://app.notion.com/p/3a57e1830c3281b8a0b4d6898b7d1f4b",
       "title": "Complete repository inventory",
-      "sourceSha256": "7474bd0fcac1a83dd64a04d97f6b80f6acce38c2bae733db3fbc6a1fdabc29be",
-      "bodySha256": "b9bcaf26c7677d7dfa929e5735d931f7ab96e6084efb82654c8b0d763865068a",
-      "fetchSha256": "0833ea4f95c62aa42af101bfa561aed01c78b7566c84d1553276523565ab7656",
+      "sourceSha256": "bacb26d544406fc047841427653843e8247f82fb8ae17d41b925fd252d10c1da",
+      "bodySha256": "d8e29a730a7fac539806e26efcb3d7d319067518ba5d0bff9be31e81f1fa2af7",
+      "fetchSha256": "09ded0d2d2617d35b005b5cf934b40c1f68ab9fba0ecf448fb4a773ec2a2f183",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-01T20:22:56.000Z"
     },
     {
       "slug": "RandoMeal--Product--Strategy",
@@ -430,11 +440,11 @@
       "pageId": "3a57e1830c3281049958e460e06a4145",
       "url": "https://app.notion.com/p/3a57e1830c3281049958e460e06a4145",
       "title": "Workspace runtime and tooling",
-      "sourceSha256": "7072d7dd87ca7145a83f1fffc9cfc503f4881bbb4d8747fe647f4bccb81d9ed7",
-      "bodySha256": "6c88a73340a22d53726a5cf50f78eb02699a48183f712fea0afcd68babc8b944",
-      "fetchSha256": "32ffa584433b97f84d75c7640e7d8420545ccf6595d628c11aa8079173a9f240",
+      "sourceSha256": "2d00a41fc0b7c183fdd364c7edcb991e1cd7f9fd3f332f695736706c1259768d",
+      "bodySha256": "927885db456a6f0148e19796153b983560515acebabefa352b588a4d1dc61675",
+      "fetchSha256": "56ecef5763450edc6cd947226210372457df67a8901c4add7ea879d751df75f6",
       "verified": true,
-      "verifiedAt": "2026-07-28T12:28:51.731Z"
+      "verifiedAt": "2026-08-01T17:54:55.316Z"
     },
     {
       "slug": "RandoMeal--Delivery--CI",
@@ -442,11 +452,11 @@
       "pageId": "3a57e1830c3281438353c4132607ea7a",
       "url": "https://app.notion.com/p/3a57e1830c3281438353c4132607ea7a",
       "title": "Continuous integration and test runners",
-      "sourceSha256": "39f990b8c394be6ec83df725707f82c88b3c54f0ad0ef63593b5aaa89c1547bb",
-      "bodySha256": "0fbc734624752c8a765a639192ddacfb30634266278bc5d3f1695c51fe513b07",
-      "fetchSha256": "629420c60fcf0ebd1f8c604ea2eb7445c188336cb98eb1546cb75821af17a7e4",
+      "sourceSha256": "7033a479de49e214a70c49ff48c9b29606fde9f954d5ca10746bd412689a66e6",
+      "bodySha256": "452f5bc350ea1522c2e0d5867710d0442a2ad791efca2fa3bdd46495cafaa49f",
+      "fetchSha256": "4f2a3594f449e04fb0f2c1e581d0338677051b61f8ad360334cbbc177dac65a0",
       "verified": true,
-      "verifiedAt": "2026-07-28T12:28:51.731Z"
+      "verifiedAt": "2026-08-01T20:08:03.695Z"
     },
     {
       "slug": "RandoMeal--Infrastructure--Local",

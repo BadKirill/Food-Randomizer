@@ -1,11 +1,11 @@
 interface:
   display_name: "RandoMeal Knowledge"
-  short_description: "Selective project knowledge and verified Notion Wiki sync"
-  default_prompt: "Use $randomeal-knowledge to build a concise source-backed context packet for this RandoMeal task."
+  short_description: "Local shared baseline and selective project knowledge"
+  default_prompt: "Use $randomeal-knowledge to verify the local General AI snapshot, then build a concise source-backed RandoMeal context packet without contacting Notion unless external Wiki work was explicitly requested."
 policy:
   allow_implicit_invocation: true
 dependencies:
   tools:
     - type: "mcp"
       value: "notion"
-      description: "Notion identity, fetch, search, create-pages, update-page, and verification tools"
+      description: "Notion tools available only for explicitly requested external Wiki synchronization"
