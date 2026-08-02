@@ -8,11 +8,11 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 ## Coverage
 
-- Repository files discovered: 194
-- Files indexed semantically or by metadata: 194
+- Repository files discovered: 195
+- Files indexed semantically or by metadata: 195
 - Binary assets indexed by metadata: 4
-- Files with extracted sections: 148
-- Content fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
+- Files with extracted sections: 149
+- Content fingerprint: `8c329541a24768bf74154a05d64836f4055c73534cb19f5f5db37ba323057f7f`
 
 ## Knowledge tree
 
@@ -67,7 +67,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 ### Analytics and Quality
 
 - [Analytics and measurement plan](RandoMeal--Analytics--Measurement) — Actor identity, event ownership, recommendation funnel, experiment dimensions, decision metrics, dashboards, privacy controls, outbox delivery, and observability boundaries.
-- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1, Decision flow concept 01 and a 12-lane, 90-checkpoint client flow skeleton are implemented and creation-reviewed in the canonical Figma file; production wireframes, broader component coverage, full interaction states and mobile adoption remain target work.
+- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1, Decision flow concept 01, a 12-lane client flow skeleton and a 16-screen P0 mobile wireframe pass for F01-F04 are implemented and creation-reviewed in the canonical Figma file; platform adaptations, clickable prototyping, broader component coverage and mobile adoption remain target work.
 - [QA, security, and release gates](RandoMeal--Quality--QA-Strategy) — Current Jest and E2E suites plus target contract, Testcontainers, Maestro, accessibility, load, security, migration, analytics, and release acceptance gates.
 
 ### Delivery and Operations

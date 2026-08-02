@@ -117,6 +117,20 @@ cardinality, H7 Pantry value and H10 payment remain explicit branches or gates. 
 are bound to semantic variables, approved OFL typography is used, and the 2026-07-29 creation
 review found no clipping, overlap, unbound paint or unequal-fidelity D0 treatment.
 
+### P0 mobile wireframes pass 01
+
+The first screen-level P0 pass is implemented on
+[`07 · P0 Mobile Wireframes · Pass 01`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=75-3).
+It contains 16 editable 393 by 852 screens for F01-F04: guest-first entry, safety and situational
+context; loading plus equal-status single, shortlist and hybrid D0 variants; rejection,
+replacement, safe-empty and offline recovery; and recipe, safe adaptation, cooking and completion.
+
+The pass reuses the local `Button`, `Choice chip` and `Decision option` component sets and binds all
+visible manual paint to Foundation v1 semantic variables. Its creation review found no placeholder,
+direct-child overflow, unbound paint or sub-44 px component instance. The artifact is documented in
+`docs/product/p0-mobile-wireframes-pass-01.md` and remains a reversible interaction specification,
+not a signed launch policy or final visual brand.
+
 ## 2. QA strategy
 
 ```text

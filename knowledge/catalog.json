@@ -677,9 +677,9 @@
       "wikiSlug": "RandoMeal--Design--System-and-Quality",
       "status": "mixed",
       "authority": "product-design-source-of-truth",
-      "summary": "Foundation v1, Decision flow concept 01 and a 12-lane, 90-checkpoint client flow skeleton are implemented and creation-reviewed in the canonical Figma file; production wireframes, broader component coverage, full interaction states and mobile adoption remain target work.",
+      "summary": "Foundation v1, Decision flow concept 01, a 12-lane client flow skeleton and a 16-screen P0 mobile wireframe pass for F01-F04 are implemented and creation-reviewed in the canonical Figma file; platform adaptations, clickable prototyping, broader component coverage and mobile adoption remain target work.",
       "tags": ["design", "figma", "tokens", "components", "accessibility", "anti slop", "дизайн", "фигма"],
-      "sources": ["docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/client-flow-skeleton.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
+      "sources": ["docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/client-flow-skeleton.md", "docs/product/p0-mobile-wireframes-pass-01.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
       "rules": [
         "Use the design anti-slop skill for every Figma or user-facing UI task.",
         "Use the single canonical Figma file declared in design/figma-project.json for every project design operation.",
@@ -695,7 +695,9 @@
         "Decision flow concept 01 uses equal-fidelity D0-A and D0-B screens plus context, accepted and safe-empty states; it is Stage 0 exploration rather than an approved launch interaction.",
         "Concept 01 local Button, Choice chip and Decision option sets must remain bound to semantic variables and keep mobile controls at least 44 px high.",
         "The canonical Client flows skeleton at node 58:3 covers 12 lanes and 90 checkpoints but is not approved launch navigation or final UI.",
-        "D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton."
+        "D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.",
+        "P0 mobile wireframes pass 01 at node 75:3 contains 16 creation-reviewed 393 by 852 screens for F01-F04 and keeps D0-A single, D0-B shortlist and D0-C hybrid reversible.",
+        "P0 pass 01 is not complete platform handoff: small-iPhone, representative Android, large-text, localization-expansion, analytics annotations and clickable moderated-prototype work remain required."
       ],
       "dependsOn": ["product-strategy", "choice-cardinality-gate", "agent-governance"],
       "related": ["figma-canonical-file", "qa-strategy", "mobile-theme-current"],

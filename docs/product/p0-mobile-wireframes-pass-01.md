@@ -1,0 +1,78 @@
+# P0 mobile wireframes pass 01
+
+Status: creation-reviewed product wireframes, not approved launch navigation or final visual design
+
+Canonical artifact:
+[P0 mobile wireframes pass 01](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=75-3)
+
+Created: 2026-08-03
+
+## Scope
+
+The canonical Figma file contains a first screen-level pass for the P0 portions of F01-F04 on the
+`07 · P0 Mobile Wireframes · Pass 01` page (`75:2`). The root board is
+`P0 Mobile wireframes · Pass 01` (`75:3`). It contains 16 editable 393 by 852 portrait screens:
+
+| Flow | Screen nodes | Covered states |
+| --- | --- | --- |
+| F01 · Entry & first value | `76:4`, `76:5`, `76:6` | Guest-first welcome, hard-safety setup and current situation |
+| F02 · Core decision & D0 | `76:9`-`76:13` | Loading, single, shortlist, hybrid and accepted decision |
+| F03 · Reject, replace & recover | `76:16`-`76:19` | Rejection reason, replacement, safe empty and offline recovery |
+| F04 · Recipe, adaptation & cooking | `76:22`-`76:25` | Recipe detail, safe adaptation, cooking step and completion |
+
+This pass turns the journey map into concrete screen hierarchy and copy. It deliberately omits
+production food imagery, final navigation, motion and decorative brand exploration so that the
+product interaction can still change after discovery evidence.
+
+## Product decisions represented
+
+- The first-value path is guest-first and does not require account creation before a useful
+  recommendation.
+- Hard restrictions fail closed. Safe-empty and adaptation states explain recovery without
+  relaxing allergens or permanent exclusions.
+- D0-A single, D0-B shortlist and D0-C hybrid use the same 393 by 852 viewport, recipe quality,
+  component language and bottom-action pattern. The artifact does not select a launch policy.
+- Rejection is quick and optional. A reason improves the next replacement but is not required.
+- Acceptance leads directly toward the first cooking step instead of opening another browsing
+  decision.
+- Offline recovery exposes only already-saved recipe content and preserves progress for later
+  synchronization.
+
+## Design-system use
+
+The screens reuse the local `Button`, `Choice chip` and `Decision option` component sets from
+`03 · Components`. Manual frames are unique layout or content containers rather than parallel
+copies of an existing component.
+
+All visible manual paints use semantic variables from Foundation v1. Structural auto-layout frames
+are transparent. Interface and label text use Source Sans 3; the welcome display statement uses
+Fraunces. Both families are licensed under SIL Open Font License 1.1. Interactive component
+instances are at least 44 px high.
+
+## Creation review
+
+The board, every flow row and representative detail views were rendered after construction. The
+final structural audit verified:
+
+- exactly 16 mobile screens, each 393 by 852;
+- no remaining placeholder shimmer, direct-child overflow or clipping;
+- no unbound visible fill or stroke outside component instances;
+- no component instance smaller than 44 by 44;
+- only Source Sans 3 and Fraunces in free-standing text;
+- equal viewport dimensions and reversible treatment for D0-A, D0-B and D0-C;
+- one primary action per screen action group;
+- explicit success, warning, danger, disabled, safe-empty and offline semantics without relying on
+  color alone.
+
+## Remaining design work
+
+This pass does not complete the P0 design specification. The next passes must add:
+
+1. small-iPhone and representative Android adaptations;
+2. large-text, localization-expansion, keyboard, safe-area and reduced-motion checks;
+3. missing-image and long-content variants where recipe media and content are introduced;
+4. clickable prototype links and the hidden moderator annotation layer for Stage 0;
+5. analytics annotations for request, exposure, acceptance, rejection, replacement, cooking start
+   and completion;
+6. component contracts for any repeated pattern that survives interaction testing;
+7. signed D0 evidence before launch navigation or recommendation cardinality becomes final.

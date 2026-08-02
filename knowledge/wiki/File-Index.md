@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
+Fingerprint: `8c329541a24768bf74154a05d64836f4055c73534cb19f5f5db37ba323057f7f`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -121,7 +121,8 @@ Fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
 | `docs/product/delivery-plan.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap | 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, … |
 | `docs/product/discovery-decisions.md` | markdown | repository-inventory, product-strategy, choice-cardinality-gate | 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, … |
 | `docs/product/figma-governance.md` | markdown | figma-canonical-file, repository-inventory, design-system-quality | 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff |
-| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 12 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, Client flow skeleton, … |
+| `docs/product/p0-mobile-wireframes-pass-01.md` | markdown | repository-inventory, design-system-quality | 6 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, … |
+| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 13 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, Client flow skeleton, … |
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |
