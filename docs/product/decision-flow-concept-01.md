@@ -56,7 +56,7 @@ The board and every mobile frame were rendered from Figma after creation. Review
 - stable bottom action placement and 24 px screen padding;
 - semantic variable bindings on component fills, borders, radii, spacing and control height;
 - complete required component states for the concept;
-- readable Russian copy, explicit explanations and no hidden safety relaxation;
+- readable English copy, explicit explanations and no hidden safety relaxation;
 - equal visual fidelity for the D0-A and D0-B experiment arms;
 - restrained accent use after reducing secondary-button and experiment-label emphasis.
 

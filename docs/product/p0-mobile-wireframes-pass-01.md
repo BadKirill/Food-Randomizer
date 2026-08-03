@@ -24,6 +24,9 @@ This pass turns the journey map into concrete screen hierarchy and copy. It deli
 production food imagery, final navigation, motion and decorative brand exploration so that the
 product interaction can still change after discovery evidence.
 
+All user-facing strings, annotations and component overrides in this pass are English. Localized
+languages belong in dedicated expansion-test frames rather than in the canonical default screens.
+
 ## Product decisions represented
 
 - The first-value path is guest-first and does not require account creation before a useful
@@ -59,6 +62,7 @@ final structural audit verified:
 - no unbound visible fill or stroke outside component instances;
 - no component instance smaller than 44 by 44;
 - only Source Sans 3 and Fraunces in free-standing text;
+- no Cyrillic text in visible copy, layer names, component defaults or instance overrides;
 - equal viewport dimensions and reversible treatment for D0-A, D0-B and D0-C;
 - one primary action per screen action group;
 - explicit success, warning, danger, disabled, safe-empty and offline semantics without relying on

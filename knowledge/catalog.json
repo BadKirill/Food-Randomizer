@@ -697,6 +697,7 @@
         "The canonical Client flows skeleton at node 58:3 covers 12 lanes and 90 checkpoints but is not approved launch navigation or final UI.",
         "D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.",
         "P0 mobile wireframes pass 01 at node 75:3 contains 16 creation-reviewed 393 by 852 screens for F01-F04 and keeps D0-A single, D0-B shortlist and D0-C hybrid reversible.",
+        "All current visible copy, layer names, reusable component defaults and instance overrides in the canonical Figma file are English; other languages belong only in explicit localization-expansion test artifacts.",
         "P0 pass 01 is not complete platform handoff: small-iPhone, representative Android, large-text, localization-expansion, analytics annotations and clickable moderated-prototype work remain required."
       ],
       "dependsOn": ["product-strategy", "choice-cardinality-gate", "agent-governance"],

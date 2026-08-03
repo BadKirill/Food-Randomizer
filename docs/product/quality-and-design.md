@@ -8,6 +8,10 @@ JSON in the repository is the implementation source for mobile and future admin 
 All project design work uses only the canonical file and deny-by-default policy defined in
 `docs/product/figma-governance.md` and `design/figma-project.json`.
 
+All current agent-facing, research-facing and product-facing copy in the canonical Figma file is
+English. Other languages appear only in explicit localization-expansion test artifacts; they must
+not be introduced into reusable component defaults or ordinary product frames.
+
 Required Figma pages:
 
 1. Foundations and accessibility.
@@ -101,7 +105,8 @@ cooking start and a safe empty state. It also introduces token-bound `Button`, `
 `Decision option` component sets with the states required by those screens. The artifact inventory,
 node IDs, constraints and creation review are recorded in
 `docs/product/decision-flow-concept-01.md`. This remains Stage 0 exploration and does not approve a
-launch cardinality or replace the required moderated evidence gate.
+launch cardinality or replace the required moderated evidence gate. The concept, component
+defaults and instance overrides use English copy throughout.
 
 ### Client flow skeleton
 
@@ -116,6 +121,7 @@ The map is a coverage artifact rather than approved launch navigation or final U
 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates. All visible colors
 are bound to semantic variables, approved OFL typography is used, and the 2026-07-29 creation
 review found no clipping, overlap, unbound paint or unequal-fidelity D0 treatment.
+The complete map uses English copy throughout.
 
 ### P0 mobile wireframes pass 01
 
@@ -129,7 +135,8 @@ The pass reuses the local `Button`, `Choice chip` and `Decision option` componen
 visible manual paint to Foundation v1 semantic variables. Its creation review found no placeholder,
 direct-child overflow, unbound paint or sub-44 px component instance. The artifact is documented in
 `docs/product/p0-mobile-wireframes-pass-01.md` and remains a reversible interaction specification,
-not a signed launch policy or final visual brand.
+not a signed launch policy or final visual brand. All 16 screens and their component overrides use
+English copy.
 
 ## 2. QA strategy
 

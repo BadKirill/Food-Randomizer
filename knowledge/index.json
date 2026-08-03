@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "8c329541a24768bf74154a05d64836f4055c73534cb19f5f5db37ba323057f7f",
+  "contentFingerprint": "239ad86761e5b8e42af464db328e28deaccc12ecfb28242f44fe21286388292e",
   "coverage": {
     "repositoryFiles": 195,
     "indexedFiles": 195,
@@ -11762,9 +11762,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 5614,
-      "lines": 78,
-      "sha256": "33d875446f75d3d2971ba7a94e6155f55a02da61e40c67399b96712f1273abd5",
+      "bytes": 5661,
+      "lines": 79,
+      "sha256": "2ac77596e4f129598cd272652649d5c34d6ede25945f110c055bf2b6b8998043",
       "summary": "6 indexed sections: Client flow skeleton, Status, Product constraints represented, Flow inventory, Visual language and review, …",
       "nodeIds": [
         "repository-inventory",
@@ -11780,7 +11780,7 @@
           "title": "docs/product/client-flow-skeleton.md",
           "line": 1,
           "depth": 0,
-          "endLine": 78
+          "endLine": 79
         },
         {
           "id": "section:docs/product/client-flow-skeleton.md#2",
@@ -11788,7 +11788,7 @@
           "title": "Client flow skeleton",
           "line": 1,
           "depth": 1,
-          "endLine": 78
+          "endLine": 79
         },
         {
           "id": "section:docs/product/client-flow-skeleton.md#3",
@@ -11820,15 +11820,15 @@
           "title": "Visual language and review",
           "line": 52,
           "depth": 2,
-          "endLine": 68
+          "endLine": 69
         },
         {
           "id": "section:docs/product/client-flow-skeleton.md#7",
           "kind": "heading",
           "title": "Next design pass",
-          "line": 69,
+          "line": 70,
           "depth": 2,
-          "endLine": 78
+          "endLine": 79
         }
       ],
       "symbols": []
@@ -12168,7 +12168,7 @@
       "generated": false,
       "bytes": 3296,
       "lines": 66,
-      "sha256": "0fe2ddea4f792ea7caa83a5a4c485630656730e1e6b360fc8c9598730befb344",
+      "sha256": "963bf4e0a70b077315478f2b45c0a88c5153bd0421cdd898451883c3b313c75d",
       "summary": "5 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review",
       "nodeIds": [
         "repository-inventory",
@@ -12634,9 +12634,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 4079,
-      "lines": 79,
-      "sha256": "9588795cc65a1104a914573e1bab9c64747c252c80be5e97b8ebf0d28c44222c",
+      "bytes": 4366,
+      "lines": 83,
+      "sha256": "39465ff0be4b9ef69d6dbe6fcc10aa0188bf9c3f05ef9c6e2d1c0beaec5e94d4",
       "summary": "6 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, …",
       "nodeIds": [
         "repository-inventory",
@@ -12652,7 +12652,7 @@
           "title": "docs/product/p0-mobile-wireframes-pass-01.md",
           "line": 1,
           "depth": 0,
-          "endLine": 79
+          "endLine": 83
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#2",
@@ -12660,7 +12660,7 @@
           "title": "P0 mobile wireframes pass 01",
           "line": 1,
           "depth": 1,
-          "endLine": 79
+          "endLine": 83
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#3",
@@ -12668,39 +12668,39 @@
           "title": "Scope",
           "line": 10,
           "depth": 2,
-          "endLine": 26
+          "endLine": 29
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#4",
           "kind": "heading",
           "title": "Product decisions represented",
-          "line": 27,
+          "line": 30,
           "depth": 2,
-          "endLine": 40
+          "endLine": 43
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#5",
           "kind": "heading",
           "title": "Design-system use",
-          "line": 41,
+          "line": 44,
           "depth": 2,
-          "endLine": 51
+          "endLine": 54
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#6",
           "kind": "heading",
           "title": "Creation review",
-          "line": 52,
+          "line": 55,
           "depth": 2,
-          "endLine": 66
+          "endLine": 70
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#7",
           "kind": "heading",
           "title": "Remaining design work",
-          "line": 67,
+          "line": 71,
           "depth": 2,
-          "endLine": 79
+          "endLine": 83
         }
       ],
       "symbols": []
@@ -12712,9 +12712,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 14974,
-      "lines": 268,
-      "sha256": "2e11d739c0199db1c79e33a84ef38b67830b3d399adbacbb6136944b429f7d3a",
+      "bytes": 15443,
+      "lines": 275,
+      "sha256": "bcab1bff39ed36fa1ca14f8bbf41582b9bf9975699c0666eacc07db8a2cb6918",
       "summary": "13 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, Client flow skeleton, …",
       "nodeIds": [
         "repository-inventory",
@@ -12733,7 +12733,7 @@
           "title": "docs/product/quality-and-design.md",
           "line": 1,
           "depth": 0,
-          "endLine": 268
+          "endLine": 275
         },
         {
           "id": "section:docs/product/quality-and-design.md#2",
@@ -12741,7 +12741,7 @@
           "title": "Design and quality operating model",
           "line": 1,
           "depth": 1,
-          "endLine": 268
+          "endLine": 275
         },
         {
           "id": "section:docs/product/quality-and-design.md#3",
@@ -12749,95 +12749,95 @@
           "title": "1. Design workflow",
           "line": 3,
           "depth": 2,
-          "endLine": 133
+          "endLine": 140
         },
         {
           "id": "section:docs/product/quality-and-design.md#4",
           "kind": "heading",
           "title": "Foundation v1",
-          "line": 54,
+          "line": 58,
           "depth": 3,
-          "endLine": 94
+          "endLine": 98
         },
         {
           "id": "section:docs/product/quality-and-design.md#5",
           "kind": "heading",
           "title": "Decision flow concept 01",
-          "line": 95,
+          "line": 99,
           "depth": 3,
-          "endLine": 105
+          "endLine": 110
         },
         {
           "id": "section:docs/product/quality-and-design.md#6",
           "kind": "heading",
           "title": "Client flow skeleton",
-          "line": 106,
+          "line": 111,
           "depth": 3,
-          "endLine": 119
+          "endLine": 125
         },
         {
           "id": "section:docs/product/quality-and-design.md#7",
           "kind": "heading",
           "title": "P0 mobile wireframes pass 01",
-          "line": 120,
+          "line": 126,
           "depth": 3,
-          "endLine": 133
+          "endLine": 140
         },
         {
           "id": "section:docs/product/quality-and-design.md#8",
           "kind": "heading",
           "title": "2. QA strategy",
-          "line": 134,
+          "line": 141,
           "depth": 2,
-          "endLine": 155
+          "endLine": 162
         },
         {
           "id": "section:docs/product/quality-and-design.md#9",
           "kind": "heading",
           "title": "3. Critical invariant suite",
-          "line": 156,
+          "line": 163,
           "depth": 2,
-          "endLine": 190
+          "endLine": 197
         },
         {
           "id": "section:docs/product/quality-and-design.md#10",
           "kind": "heading",
           "title": "4. AI evaluation",
-          "line": 191,
+          "line": 198,
           "depth": 2,
-          "endLine": 206
+          "endLine": 213
         },
         {
           "id": "section:docs/product/quality-and-design.md#11",
           "kind": "heading",
           "title": "5. Accessibility and localization gates",
-          "line": 207,
+          "line": 214,
           "depth": 2,
-          "endLine": 215
+          "endLine": 222
         },
         {
           "id": "section:docs/product/quality-and-design.md#12",
           "kind": "heading",
           "title": "6. CI and release gates",
-          "line": 216,
+          "line": 223,
           "depth": 2,
-          "endLine": 246
+          "endLine": 253
         },
         {
           "id": "section:docs/product/quality-and-design.md#13",
           "kind": "heading",
           "title": "7. Definition of Done",
-          "line": 247,
+          "line": 254,
           "depth": 2,
-          "endLine": 252
+          "endLine": 259
         },
         {
           "id": "section:docs/product/quality-and-design.md#14",
           "kind": "heading",
           "title": "8. Discovery quality gate",
-          "line": 253,
+          "line": 260,
           "depth": 2,
-          "endLine": 268
+          "endLine": 275
         }
       ],
       "symbols": []
@@ -12998,9 +12998,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 58246,
-      "lines": 901,
-      "sha256": "385ca04bd2c3f068ca3a5d64c3f2375bbc1d8124b0060c182148f0f02cbdc5ae",
+      "bytes": 58467,
+      "lines": 902,
+      "sha256": "1ef201b0928aa3542922aa9f53d6e2ea202125470a84c9cf7abc9815ef49f75c",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -13016,7 +13016,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 901
+          "endLine": 902
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -13056,15 +13056,15 @@
           "title": "nodes",
           "line": 63,
           "depth": 1,
-          "endLine": 834
+          "endLine": 835
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 835,
+          "line": 836,
           "depth": 1,
-          "endLine": 901
+          "endLine": 902
         }
       ],
       "symbols": []

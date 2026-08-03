@@ -63,6 +63,7 @@ The creation review verified:
 - D0 single, shortlist and hybrid branches have equal visual fidelity;
 - H7 and H10 remain visibly gated;
 - concrete product copy replaces placeholder text;
+- all visible map copy and labels are English;
 - no gradients, decorative UI chrome, raw colors or unlicensed typefaces are present;
 - the artifact uses status color only as a secondary signal and keeps labels explicit.
 
