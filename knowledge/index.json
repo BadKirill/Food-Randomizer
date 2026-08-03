@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "239ad86761e5b8e42af464db328e28deaccc12ecfb28242f44fe21286388292e",
+  "contentFingerprint": "695e6cce0b06ae28e46d4b733ab7f670458386cc6c116f628ceed93ad4426786",
   "coverage": {
     "repositoryFiles": 195,
     "indexedFiles": 195,
@@ -12998,9 +12998,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 58467,
-      "lines": 902,
-      "sha256": "1ef201b0928aa3542922aa9f53d6e2ea202125470a84c9cf7abc9815ef49f75c",
+      "bytes": 58636,
+      "lines": 903,
+      "sha256": "f155ca9c9eab4258368b1258fc6baf89c1dd67a7da46b2e241d5075efbe2e595",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -13016,7 +13016,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 902
+          "endLine": 903
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -13056,15 +13056,15 @@
           "title": "nodes",
           "line": 63,
           "depth": 1,
-          "endLine": 835
+          "endLine": 836
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 836,
+          "line": 837,
           "depth": 1,
-          "endLine": 902
+          "endLine": 903
         }
       ],
       "symbols": []
@@ -13076,9 +13076,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 8265,
-      "lines": 66,
-      "sha256": "556063e663832e56177182cb4b2f995f8c8d1b1326f8ee71e75c6ef97b194a8e",
+      "bytes": 8488,
+      "lines": 67,
+      "sha256": "686d268be0a86b867f2cda5030fd959f595cc5f149a5529fac4c728283b7d34f",
       "summary": "10 indexed sections: General Rules for AI Coding Agents, Cross-Project Source Hierarchy, Shared-Baseline Change Synchronization, Evidence Before Action, Minimal and Focused Code, …",
       "nodeIds": [
         "knowledge-system",
@@ -13094,7 +13094,7 @@
           "title": "knowledge/general-ai-baseline.md",
           "line": 1,
           "depth": 0,
-          "endLine": 66
+          "endLine": 67
         },
         {
           "id": "section:knowledge/general-ai-baseline.md#2",
@@ -13102,7 +13102,7 @@
           "title": "General Rules for AI Coding Agents",
           "line": 1,
           "depth": 1,
-          "endLine": 66
+          "endLine": 67
         },
         {
           "id": "section:knowledge/general-ai-baseline.md#3",
@@ -13158,23 +13158,23 @@
           "title": "Wiki and Knowledge Graph",
           "line": 44,
           "depth": 2,
-          "endLine": 50
+          "endLine": 51
         },
         {
           "id": "section:knowledge/general-ai-baseline.md#10",
           "kind": "heading",
           "title": "Safety and Change Control",
-          "line": 51,
+          "line": 52,
           "depth": 2,
-          "endLine": 56
+          "endLine": 57
         },
         {
           "id": "section:knowledge/general-ai-baseline.md#11",
           "kind": "heading",
           "title": "Definition of Done",
-          "line": 57,
+          "line": 58,
           "depth": 2,
-          "endLine": 66
+          "endLine": 67
         }
       ],
       "symbols": []

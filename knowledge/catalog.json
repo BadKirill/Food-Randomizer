@@ -104,6 +104,7 @@
         "Use only the canonical Figma file key declared in design/figma-project.json and run the deny-by-default guard before every Figma MCP operation.",
         "Do not add source-code comments, TODO or FIXME notes, commented-out code, or explanatory blocks.",
         "Preserve unrelated dirty work and use additive database migrations.",
+        "English is the default language for every project and all project artifacts; use another language within a project only when the user explicitly requests it.",
         "General AI Wiki requires English agent-facing documentation; the existing Russian design-anti-slop skill is a recorded project contradiction that requires a separate translation task rather than silent propagation."
       ],
       "dependsOn": ["knowledge-system"],
