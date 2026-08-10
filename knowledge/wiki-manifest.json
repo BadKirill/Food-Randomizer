@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "owner": "randomeal-knowledge",
   "repository": "BadKirill/Food-Randomizer",
-  "contentFingerprint": "e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32",
+  "contentFingerprint": "e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a",
   "externalSync": {
     "provider": "notion",
     "mode": "explicit-only-with-read-back",
@@ -18,8 +18,8 @@
       "contentStartHeading": "# General Rules for AI Coding Agents",
       "contentEndHeading": "# Local Wikis",
       "updateMode": "explicit-targeted-policy-section-write-with-stale-fetch-guard-and-read-back",
-      "snapshotSha256": "556063e663832e56177182cb4b2f995f8c8d1b1326f8ee71e75c6ef97b194a8e",
-      "bodySha256": "e52cc78b98b8ea7461932f7d14d8a0c7b26754de46c4590efaa6f39a8341e60c"
+      "snapshotSha256": "686d268be0a86b867f2cda5030fd959f595cc5f149a5529fac4c728283b7d34f",
+      "bodySha256": "08a594142b5bab27b17f9f4c1918f30187943990cea383b23374642f3a95da70"
     },
     "target": {
       "workspaceId": "0e583eb3-1385-4f9f-b553-1405b74be641",
@@ -35,7 +35,7 @@
       "slug": "Home",
       "title": "RandoMeal Knowledge Graph",
       "group": "System",
-      "sha256": "84e224d75dcde46f7b566f312976df3fc7514bc090bc2bca9e2873bb439e583f",
+      "sha256": "e20e3b970ac6fc96217fec2bfb02e00a426f2f27c44e1a44b9d6f789d6dc28eb",
       "nodeId": null
     },
     {
@@ -59,7 +59,7 @@
       "slug": "File-Index",
       "title": "Complete File Index",
       "group": "System",
-      "sha256": "79d3600a7039d27dc397e73ac6a2e0bddc41e9a76d12b0e6725a13b53abecd4a",
+      "sha256": "33a256f66ae91856c0c69a0462bcb1438589e439bc933d698df294eceaa536c2",
       "nodeId": null
     },
     {
@@ -67,7 +67,7 @@
       "slug": "RandoMeal--Governance--Knowledge-System",
       "title": "Knowledge system",
       "group": "Governance",
-      "sha256": "6b8489a14ea1a81a28ef66bad252b5ffa6390b6c11a3343325a2cb6ba78bc38d",
+      "sha256": "b7d4245b62ef426f592632c2c5746d5ca2baff8b15b91d1095e3a96e0368e15e",
       "nodeId": "knowledge-system"
     },
     {
@@ -75,7 +75,7 @@
       "slug": "RandoMeal--Governance--Agents",
       "title": "Agent governance",
       "group": "Governance",
-      "sha256": "b5822baf67f56ec0239f7574021949655fb4f6122ac6aa97dce6643a7e83afa1",
+      "sha256": "07651bede1c0eeb6cb16352f11623b780333dd55a30c67c2a7e7dec0e1d76590",
       "nodeId": "agent-governance"
     },
     {
@@ -91,7 +91,7 @@
       "slug": "RandoMeal--Governance--Repository-Inventory",
       "title": "Complete repository inventory",
       "group": "Governance",
-      "sha256": "b3d633c95b5612d660e45146d9349ad7a055076ec85ab9f89cd03456d510c031",
+      "sha256": "a0385b54b0aab70047912f79c010c5809f580b2b5878b175d04ab2d083611418",
       "nodeId": "repository-inventory"
     },
     {
@@ -107,7 +107,7 @@
       "slug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "title": "Single versus shortlist evidence gate",
       "group": "Product",
-      "sha256": "d0cc2767072c8d2d45c5e3fdede84ab15d039fcb31c26b51a8173c4c2fab43ce",
+      "sha256": "8cc25ca60035b6a330a3daafe04f149f600176e062ed208c8459ac83c41d2f6f",
       "nodeId": "choice-cardinality-gate"
     },
     {
@@ -275,7 +275,7 @@
       "slug": "RandoMeal--Mobile--Theme-Debt",
       "title": "Current mobile theme and visual debt",
       "group": "Mobile",
-      "sha256": "8fafa745a3259da498fdac50f852caed315d3dd4248533280063ed2049adbdf3",
+      "sha256": "158099630bdeaafac72fa650ae33d387593b00e65773a90bb73135d1f958a486",
       "nodeId": "mobile-theme-current"
     },
     {
@@ -291,7 +291,7 @@
       "slug": "RandoMeal--Design--System-and-Quality",
       "title": "Design system and product quality",
       "group": "Analytics and Quality",
-      "sha256": "520a375f26da38e9566a262bcd5455ad6e6fd111f877abf3aec5f71df07d9aa6",
+      "sha256": "a085321f8ecc71fad5b6cd157aff85eb05dddce307560fd38f046d2a23e81519",
       "nodeId": "design-system-quality"
     },
     {
@@ -299,7 +299,7 @@
       "slug": "RandoMeal--Quality--QA-Strategy",
       "title": "QA, security, and release gates",
       "group": "Analytics and Quality",
-      "sha256": "bfb2e04068d6a334b19ae7df3b810b4c1d4858ed216b06c740e96810b689af73",
+      "sha256": "6be2517c3e734351dc775e9b7b6fdb9dbb286fa4b48687f2fc74be4ba760589a",
       "nodeId": "qa-strategy"
     },
     {

@@ -42,7 +42,8 @@ This page defines the mandatory baseline for every current and future project in
 - Do not disable rules, weaken gates, suppress errors, or update snapshots only to obtain a green result. Fix the underlying cause.
 - Never claim a check passed without an actual successful result. If a check cannot run, state exactly what was not verified and why.
 ## Wiki and Knowledge Graph
-- All Wiki pages and agent-facing documentation must be written in English.
+- English is the default language for every project and all project artifacts. Use another language within a project only when the user explicitly requests it.
+- All Wiki pages and agent-facing documentation must therefore be written in English unless the user explicitly requests another language.
 - Treat the repository-local knowledge system as the source of truth and external Wikis as verified mirrors unless a project explicitly defines another canonical source.
 - After changes to structure, public contracts, data, user flows, CI, or documented behavior, update the local Wiki, catalog, routing index, file inventory, and knowledge graph as applicable.
 - Synchronize every required external Wiki mirror and verify the written content by reading it back before reporting success.

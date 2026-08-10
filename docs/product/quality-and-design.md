@@ -8,6 +8,10 @@ JSON in the repository is the implementation source for mobile and future admin 
 All project design work uses only the canonical file and deny-by-default policy defined in
 `docs/product/figma-governance.md` and `design/figma-project.json`.
 
+All current agent-facing, research-facing and product-facing copy in the canonical Figma file is
+English. Other languages appear only in explicit localization-expansion test artifacts; they must
+not be introduced into reusable component defaults or ordinary product frames.
+
 Required Figma pages:
 
 1. Foundations and accessibility.
@@ -29,9 +33,9 @@ Before the recommendation page becomes an approved product spec, add a `Stage 0 
 - a moderator annotation layer that is hidden from participants;
 - no visual treatment that makes the team's preferred concept look more complete.
 
-The component library still prepares `RecommendationCard`, `RecommendationSingle`,
-`RecommendationShortlist` and optional `RecommendationHybrid` from shared primitives. This keeps
-implementation reversible; it does not pre-decide the launch mode.
+The component library implements `Decision Option` and `Recommendation` from shared primitives,
+including equal-status Single, Shortlist and Hybrid variants. This keeps implementation reversible;
+it does not pre-decide the launch mode.
 
 Every screen is delivered in default, loading/skeleton, empty, error, offline, long text, large
 font, missing image, disabled, Premium locked and limit-reached states where applicable. Include
@@ -92,6 +96,17 @@ syntax, missing fonts or text overflow. Ivory text on the Paprika brand backgrou
 contrast ratio of 4.67:1. Mobile still uses its current hard-coded theme until a separate
 implementation task migrates it to this reviewed source.
 
+### Core Design System v1
+
+The canonical file now contains a creation-reviewed component library with 20 component sets and
+128 variants across actions, inputs and selection, feedback and status, navigation and surfaces,
+and product components. Three private icon components support repeated arrow, close and menu
+geometry. Every interactive variant respects the 44 px minimum target.
+
+The full inventory, node IDs, migration references and engineering handoff boundary are recorded in
+`docs/product/design-system-v1.md` and `design/figma-design-system-v1.json`. Matching source
+components do not yet exist, so Figma Code Connect remains intentionally deferred.
+
 ### Decision flow concept 01
 
 The canonical file contains a first reversible decision-flow exploration on
@@ -101,7 +116,13 @@ cooking start and a safe empty state. It also introduces token-bound `Button`, `
 `Decision option` component sets with the states required by those screens. The artifact inventory,
 node IDs, constraints and creation review are recorded in
 `docs/product/decision-flow-concept-01.md`. This remains Stage 0 exploration and does not approve a
-launch cardinality or replace the required moderated evidence gate.
+launch cardinality or replace the required moderated evidence gate. The concept, component
+defaults and instance overrides use English copy throughout.
+
+The implementation-oriented
+[`Concept 01 · DS v1 migration`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=167-26)
+adds an equal-fidelity Hybrid arm and rebuilds all six states from Core Design System v1 instances.
+The original board remains preserved as discovery evidence.
 
 ### Client flow skeleton
 
@@ -116,6 +137,33 @@ The map is a coverage artifact rather than approved launch navigation or final U
 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates. All visible colors
 are bound to semantic variables, approved OFL typography is used, and the 2026-07-29 creation
 review found no clipping, overlap, unbound paint or unequal-fidelity D0 treatment.
+The complete map uses English copy throughout.
+
+The companion
+[`Client flows · DS v1 mapping`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=170-2)
+maps 20 flow responsibilities to reusable component contracts without changing the original map's
+sequencing, gates or analytics ownership.
+
+### P0 mobile wireframes pass 01
+
+The first screen-level P0 pass is implemented on
+[`07 · P0 Mobile Wireframes · Pass 01`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=75-3).
+It contains 16 editable 393 by 852 screens for F01-F04: guest-first entry, safety and situational
+context; loading plus equal-status single, shortlist and hybrid D0 variants; rejection,
+replacement, safe-empty and offline recovery; and recipe, safe adaptation, cooking and completion.
+
+The pass reuses the local `Button`, `Choice chip` and `Decision option` component sets and binds all
+visible manual paint to Foundation v1 semantic variables. Its creation review found no placeholder,
+direct-child overflow, unbound paint or sub-44 px component instance. The artifact is documented in
+`docs/product/p0-mobile-wireframes-pass-01.md` and remains a reversible interaction specification,
+not a signed launch policy or final visual brand. All 16 screens and their component overrides use
+English copy.
+
+The implementation-oriented
+[`P0 Mobile · Pass 02 · DS v1`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=173-71)
+rebuilds the same 16 F01-F04 states at 390 by 844 using the complete component library. The review
+found only the approved OFL font families, no missing fonts and equal-fidelity Single, Shortlist and
+Hybrid recommendation modes.
 
 ## 2. QA strategy
 

@@ -12,6 +12,11 @@ the product specification:
 - coverage: 12 lanes and 90 mapped checkpoints;
 - review status: creation-reviewed on 2026-07-29.
 
+The component-contract companion is
+[`Client flows · DS v1 mapping`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=170-2)
+(`170:2`). It maps 20 flow responsibilities across four categories to reusable Core Design System
+v1 components while leaving this board authoritative for sequence, gates and analytics ownership.
+
 This is a coverage and sequencing artifact. It is not approved launch navigation, production UI,
 or evidence that an open discovery gate has been resolved.
 
@@ -63,11 +68,21 @@ The creation review verified:
 - D0 single, shortlist and hybrid branches have equal visual fidelity;
 - H7 and H10 remain visibly gated;
 - concrete product copy replaces placeholder text;
+- all visible map copy and labels are English;
 - no gradients, decorative UI chrome, raw colors or unlicensed typefaces are present;
 - the artifact uses status color only as a secondary signal and keeps labels explicit.
 
 ## Next design pass
 
-Convert the P0 portions of F01-F04 into small-iPhone, large-iPhone and representative Android
-wireframes. Keep the D0 variants reversible and build a clickable moderated prototype before any
-launch navigation or recommendation cardinality is approved.
+The first 393 by 852 screen-level conversion of the P0 portions of F01-F04 exists at
+[`P0 Mobile wireframes · Pass 01`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=75-3)
+and is documented in `docs/product/p0-mobile-wireframes-pass-01.md`.
+
+The implementation-oriented 390 by 844 rebuild now exists at
+[`P0 Mobile · Pass 02 · DS v1`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=173-71).
+It covers the same 16 F01-F04 states with reusable components and preserves Single, Shortlist and
+Hybrid as reversible D0 modes.
+
+The next pass adapts the screens to a small iPhone and representative Android width, adds large-text
+and localization-expansion states, and builds a clickable moderated prototype. D0-A single, D0-B
+shortlist and D0-C hybrid remain reversible until signed Stage 0 evidence selects a policy.

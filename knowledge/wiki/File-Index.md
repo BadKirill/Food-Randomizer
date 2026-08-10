@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
+Fingerprint: `e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -102,6 +102,7 @@ Fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
 | `apps/mobile/src/utils/forms.ts` | typescript | repository-inventory, mobile-shell-current | 1 indexed section: parseLines |
 | `apps/mobile/tsconfig.json` | json | repository-inventory, workspace-tooling | 2 indexed sections: extends, compilerOptions |
 | `DESIGN.md` | markdown | repository-inventory, mobile-theme-current, design-system-quality, legacy-documentation-map | 20 indexed sections: Food Randomizer Design System (Starbucks-Inspired), 1. Design Direction, 2. Brand Tokens, Color Tokens, Radius Tokens, … |
+| `design/figma-design-system-v1.json` | json | repository-inventory, design-system-quality | 10 indexed sections: version, status, reviewedAt, fileKey, fileUrl, … |
 | `design/figma-project.json` | json | figma-canonical-file, repository-inventory, design-system-quality | 6 indexed sections: schemaVersion, project, policy, file, allowedFileKeys, … |
 | `design/foundations.tokens.json` | json | figma-canonical-file, repository-inventory, mobile-theme-current, design-system-quality | 8 indexed sections: schemaVersion, system, version, figmaFileKey, colorMode, … |
 | `docker-compose.prod.yml` | yaml | repository-inventory, production-infrastructure | 14 indexed sections: services, api, image, env_file, command, … |
@@ -117,11 +118,13 @@ Fingerprint: `e549e6b26e208257ccd8852490a49646528b08e92a0ae891f8d453912e805a32`
 | `docs/product/audit-and-migration.md` | markdown | repository-inventory, delivery-roadmap, current-vs-target, seed-content | 13 indexed sections: Current-state audit and migration matrix, 0. Discovery correction (2026-07-14), 1. Verified baseline, 2. Reuse / refactor / replace, 3. Critical gaps against the PRD, … |
 | `docs/product/client-flow-skeleton.md` | markdown | repository-inventory, design-system-quality | 6 indexed sections: Client flow skeleton, Status, Product constraints represented, Flow inventory, Visual language and review, … |
 | `docs/product/data-model.md` | markdown | repository-inventory, target-data-model | 37 indexed sections: Target database model, 1. Identity and profile, `users` (existing, retained), `product_identities`, `anonymous_identities`, … |
-| `docs/product/decision-flow-concept-01.md` | markdown | repository-inventory, choice-cardinality-gate, design-system-quality | 5 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review |
+| `docs/product/decision-flow-concept-01.md` | markdown | repository-inventory, choice-cardinality-gate, design-system-quality | 6 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review, … |
 | `docs/product/delivery-plan.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap | 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, … |
+| `docs/product/design-system-v1.md` | markdown | repository-inventory, design-system-quality | 10 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, … |
 | `docs/product/discovery-decisions.md` | markdown | repository-inventory, product-strategy, choice-cardinality-gate | 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, … |
 | `docs/product/figma-governance.md` | markdown | figma-canonical-file, repository-inventory, design-system-quality | 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff |
-| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 12 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Decision flow concept 01, Client flow skeleton, … |
+| `docs/product/p0-mobile-wireframes-pass-01.md` | markdown | repository-inventory, design-system-quality | 7 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, … |
+| `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, … |
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |
