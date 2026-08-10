@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "6e51e1eccf7d9b2d875554b0e8d223b2c7c617502f48998b0161bbd165801bc2",
+  "contentFingerprint": "e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a",
   "coverage": {
     "repositoryFiles": 197,
     "indexedFiles": 197,
@@ -12602,9 +12602,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 6634,
-      "lines": 135,
-      "sha256": "4bec8559415323173ec65e9a557f350938de33048bbc315f1e6306123b96da91",
+      "bytes": 6633,
+      "lines": 134,
+      "sha256": "2d4fad6c8dc184e89d246d7a173e4a4831f50ee406b355f5556d30be4490b14d",
       "summary": "10 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, …",
       "nodeIds": [
         "repository-inventory",
@@ -12620,7 +12620,7 @@
           "title": "docs/product/design-system-v1.md",
           "line": 1,
           "depth": 0,
-          "endLine": 135
+          "endLine": 134
         },
         {
           "id": "section:docs/product/design-system-v1.md#2",
@@ -12628,7 +12628,7 @@
           "title": "Core Design System v1",
           "line": 1,
           "depth": 1,
-          "endLine": 135
+          "endLine": 134
         },
         {
           "id": "section:docs/product/design-system-v1.md#3",
@@ -12700,7 +12700,7 @@
           "title": "Engineering handoff boundary",
           "line": 127,
           "depth": 2,
-          "endLine": 135
+          "endLine": 134
         }
       ],
       "symbols": []

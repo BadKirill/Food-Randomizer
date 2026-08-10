@@ -12,7 +12,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 - Files indexed semantically or by metadata: 197
 - Binary assets indexed by metadata: 4
 - Files with extracted sections: 151
-- Content fingerprint: `6e51e1eccf7d9b2d875554b0e8d223b2c7c617502f48998b0161bbd165801bc2`
+- Content fingerprint: `e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a`
 
 ## Knowledge tree
 
