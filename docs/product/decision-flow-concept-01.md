@@ -5,6 +5,9 @@ Status: design exploration for Stage 0, not an approved launch interaction
 Canonical artifact:
 [RandoMeal decision flow concept 01](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=34-5)
 
+DS v1 migration:
+[Concept 01 · DS v1 migration](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=167-26)
+
 Created: 2026-07-28
 
 ## Product intent
@@ -63,3 +66,21 @@ The board and every mobile frame were rendered from Figma after creation. Review
 The concept still requires moderated Stage 0 testing, participant-order randomization, large-text
 and localization-expansion variants, representative Android adaptation, loading/offline/error
 states, and implementation analytics before it can become a product specification.
+
+## Core Design System v1 migration
+
+The original board remains unchanged as discovery evidence. The DS v1 migration at `167:26`
+contains six 390 by 844 frames built from the reviewed component library:
+
+| Flow state | Figma node |
+| --- | --- |
+| Context | `168:5` |
+| Single, D0-A | `168:37` |
+| Shortlist, D0-B | `168:78` |
+| Hybrid, D0-H | `168:145` |
+| Accepted | `168:213` |
+| Safe empty | `168:244` |
+
+The migration adds the Hybrid arm at the same fidelity as Single and Shortlist, replaces repeated
+local UI with Core Design System v1 instances, and keeps safety recovery explicit. The 2026-08-10
+review found only Fraunces and Source Sans 3, no missing fonts and no viewport mismatch.

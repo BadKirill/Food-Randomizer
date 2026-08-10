@@ -33,9 +33,9 @@ Before the recommendation page becomes an approved product spec, add a `Stage 0 
 - a moderator annotation layer that is hidden from participants;
 - no visual treatment that makes the team's preferred concept look more complete.
 
-The component library still prepares `RecommendationCard`, `RecommendationSingle`,
-`RecommendationShortlist` and optional `RecommendationHybrid` from shared primitives. This keeps
-implementation reversible; it does not pre-decide the launch mode.
+The component library implements `Decision Option` and `Recommendation` from shared primitives,
+including equal-status Single, Shortlist and Hybrid variants. This keeps implementation reversible;
+it does not pre-decide the launch mode.
 
 Every screen is delivered in default, loading/skeleton, empty, error, offline, long text, large
 font, missing image, disabled, Premium locked and limit-reached states where applicable. Include
@@ -96,6 +96,17 @@ syntax, missing fonts or text overflow. Ivory text on the Paprika brand backgrou
 contrast ratio of 4.67:1. Mobile still uses its current hard-coded theme until a separate
 implementation task migrates it to this reviewed source.
 
+### Core Design System v1
+
+The canonical file now contains a creation-reviewed component library with 20 component sets and
+128 variants across actions, inputs and selection, feedback and status, navigation and surfaces,
+and product components. Three private icon components support repeated arrow, close and menu
+geometry. Every interactive variant respects the 44 px minimum target.
+
+The full inventory, node IDs, migration references and engineering handoff boundary are recorded in
+`docs/product/design-system-v1.md` and `design/figma-design-system-v1.json`. Matching source
+components do not yet exist, so Figma Code Connect remains intentionally deferred.
+
 ### Decision flow concept 01
 
 The canonical file contains a first reversible decision-flow exploration on
@@ -107,6 +118,11 @@ node IDs, constraints and creation review are recorded in
 `docs/product/decision-flow-concept-01.md`. This remains Stage 0 exploration and does not approve a
 launch cardinality or replace the required moderated evidence gate. The concept, component
 defaults and instance overrides use English copy throughout.
+
+The implementation-oriented
+[`Concept 01 · DS v1 migration`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=167-26)
+adds an equal-fidelity Hybrid arm and rebuilds all six states from Core Design System v1 instances.
+The original board remains preserved as discovery evidence.
 
 ### Client flow skeleton
 
@@ -123,6 +139,11 @@ are bound to semantic variables, approved OFL typography is used, and the 2026-0
 review found no clipping, overlap, unbound paint or unequal-fidelity D0 treatment.
 The complete map uses English copy throughout.
 
+The companion
+[`Client flows · DS v1 mapping`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=170-2)
+maps 20 flow responsibilities to reusable component contracts without changing the original map's
+sequencing, gates or analytics ownership.
+
 ### P0 mobile wireframes pass 01
 
 The first screen-level P0 pass is implemented on
@@ -137,6 +158,12 @@ direct-child overflow, unbound paint or sub-44 px component instance. The artifa
 `docs/product/p0-mobile-wireframes-pass-01.md` and remains a reversible interaction specification,
 not a signed launch policy or final visual brand. All 16 screens and their component overrides use
 English copy.
+
+The implementation-oriented
+[`P0 Mobile · Pass 02 · DS v1`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=173-71)
+rebuilds the same 16 F01-F04 states at 390 by 844 using the complete component library. The review
+found only the approved OFL font families, no missing fonts and equal-fidelity Single, Shortlist and
+Hybrid recommendation modes.
 
 ## 2. QA strategy
 

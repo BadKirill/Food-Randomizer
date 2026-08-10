@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "status": "creation-reviewed",
+  "reviewedAt": "2026-08-10",
+  "fileKey": "DP7ujNqthXzWwwu1mnFhfj",
+  "fileUrl": "https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj",
+  "fonts": [
+    { "family": "Fraunces", "role": "display", "license": "SIL Open Font License 1.1" },
+    { "family": "Source Sans 3", "role": "interface", "license": "SIL Open Font License 1.1" }
+  ],
+  "foundation": {
+    "collectionCount": 5,
+    "variableCount": 78,
+    "minimumTouchTarget": 44,
+    "colorMode": "Light",
+    "basePalette": ["Ivory", "Graphite", "Paprika"]
+  },
+  "components": {
+    "componentSetCount": 20,
+    "variantCount": 128,
+    "privateIconCount": 3,
+    "sets": {
+      "Button": { "nodeId": "39:15", "variants": 30 },
+      "Icon Button": { "nodeId": "128:18", "variants": 16 },
+      "Choice Chip": { "nodeId": "40:8", "variants": 5 },
+      "Text Field": { "nodeId": "133:2", "variants": 10 },
+      "Checkbox": { "nodeId": "136:32", "variants": 6 },
+      "Switch": { "nodeId": "137:34", "variants": 8 },
+      "Inline Notice": { "nodeId": "138:26", "variants": 4 },
+      "Skeleton": { "nodeId": "141:15", "variants": 3 },
+      "Media": { "nodeId": "142:24", "variants": 6 },
+      "Status Panel": { "nodeId": "145:30", "variants": 4 },
+      "List Row": { "nodeId": "147:68", "variants": 9 },
+      "Top App Bar": { "nodeId": "149:26", "variants": 3 },
+      "Bottom Navigation": { "nodeId": "151:38", "variants": 3 },
+      "Bottom Sheet": { "nodeId": "152:44", "variants": 2 },
+      "Dialog": { "nodeId": "154:30", "variants": 2 },
+      "Decision Option": { "nodeId": "155:35", "variants": 4 },
+      "Recommendation": { "nodeId": "157:87", "variants": 3 },
+      "Recipe Card": { "nodeId": "160:93", "variants": 4 },
+      "Ingredient Row": { "nodeId": "161:75", "variants": 3 },
+      "Cooking Step": { "nodeId": "162:78", "variants": 3 }
+    },
+    "privateIcons": { "Arrow Right": "124:4", "Close": "124:7", "Menu": "124:10" }
+  },
+  "migrations": {
+    "decisionConcept": {
+      "wrapperNodeId": "167:26",
+      "screenNodeIds": ["168:5", "168:37", "168:78", "168:145", "168:213", "168:244"]
+    },
+    "clientFlowMapping": { "wrapperNodeId": "170:2", "gridNodeId": "171:2", "mappingCount": 20 },
+    "p0MobilePass02": {
+      "wrapperNodeId": "173:71",
+      "viewport": { "width": 390, "height": 844 },
+      "screenNodeIds": [
+        "174:13", "174:36", "174:66", "176:5", "176:34", "176:73", "176:138", "176:204",
+        "177:5", "177:34", "177:64", "177:91", "178:12", "178:52", "178:88", "178:128"
+      ]
+    }
+  },
+  "validation": {
+    "missingFonts": 0,
+    "unexpectedFontFamilies": 0,
+    "undersizedInteractiveVariants": 0,
+    "recommendationModes": ["Single", "Shortlist", "Hybrid"]
+  }
+}

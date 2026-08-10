@@ -7,6 +7,9 @@ Canonical artifact:
 
 Created: 2026-08-03
 
+Core Design System v1 migration:
+[P0 Mobile · Pass 02 · DS v1](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=173-71)
+
 ## Scope
 
 The canonical Figma file contains a first screen-level pass for the P0 portions of F01-F04 on the
@@ -80,3 +83,26 @@ This pass does not complete the P0 design specification. The next passes must ad
    and completion;
 6. component contracts for any repeated pattern that survives interaction testing;
 7. signed D0 evidence before launch navigation or recommendation cardinality becomes final.
+
+## Pass 02 · Core Design System v1
+
+Pass 01 remains preserved as low-fidelity evidence. The Pass 02 wrapper at `173:71` rebuilds all 16
+F01-F04 screens at 390 by 844 using the reviewed Core Design System v1:
+
+| Flow | Screen nodes |
+| --- | --- |
+| F01 · Entry and first value | `174:13`, `174:36`, `174:66` |
+| F02 · Core decision and D0 | `176:5`, `176:34`, `176:73`, `176:138`, `176:204` |
+| F03 · Reject, replace and recover | `177:5`, `177:34`, `177:64`, `177:91` |
+| F04 · Recipe, adaptation and cooking | `178:12`, `178:52`, `178:88`, `178:128` |
+
+The rebuilt screens use `Top App Bar`, `Inline Notice`, `Button`, `Choice Chip`, `Skeleton`,
+`Recommendation`, `Decision Option`, `Status Panel`, `Cooking Step`, `Recipe Card`, `Ingredient
+Row` and `Bottom Sheet` instances. The 2026-08-10 creation review verified equal-size viewports,
+equal-fidelity D0 modes, no missing or unexpected fonts, explicit safety and recovery copy, and no
+interactive component variant below 44 px.
+
+Pass 02 is an implementation-oriented visual contract, not approval of final navigation,
+recommendation cardinality, Pantry value or payments. Platform widths, large text, localization
+expansion, clickable prototype links, analytics annotations and production imagery remain future
+work.
