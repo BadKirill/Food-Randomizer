@@ -78,7 +78,13 @@ a typed bounded response with elimination counts and only safe soft-filter relax
 recommendation never invokes AI.
 
 `single` returns one result. `shortlist` returns two or three simultaneously. `hybrid` returns one
-primary result and optional alternatives in the same exposure. A sequential `Another` call returns
+primary result and two lower-emphasis alternatives in the same exposure. Before Hybrid is
+implemented, the shared target contract must add the fields below; the current
+`packages/contracts/src/product-v2.ts` schema does not contain them yet. Hybrid position 1 has
+`selectionRole=primary`; positions 2-3 have `selectionRole=alternative` and a typed tradeoff
+comparison against position 1. The comparison contains a stable code, direction, numeric delta and
+unit derived from verified recipe facts; the API never sends an unsupported `healthier` claim.
+A sequential `Another` call returns
 a new exposure and advances the session-wide offer index; it never mutates an earlier exposure.
 Repeated requests with the same idempotency key return the identical exposure and ordering.
 

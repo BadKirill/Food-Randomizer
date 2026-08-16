@@ -14,11 +14,11 @@ Authority: **accepted-architecture**
 
 ## Source coverage
 
-- `docs/product/architecture.md` — 14 indexed sections: Target product architecture, 0. Product constraint on architecture, 1. Technology stack, 2. Runtime topology, 3. Backend boundaries, …. Sections: docs/product/architecture.md (L1–294); Target product architecture (L1–294); 0. Product constraint on architecture (L7–17); 1. Technology stack (L18–49); 2. Runtime topology (L50–70); 3. Backend boundaries (L71–108); 4. Recommendation architecture (L109–151); 5. Mobile architecture (L152–177)
+- `docs/product/architecture.md` — 14 indexed sections: Target product architecture, 0. Product constraint on architecture, 1. Technology stack, 2. Runtime topology, 3. Backend boundaries, …. Sections: docs/product/architecture.md (L1–301); Target product architecture (L1–301); 0. Product constraint on architecture (L7–20); 1. Technology stack (L21–52); 2. Runtime topology (L53–73); 3. Backend boundaries (L74–111); 4. Recommendation architecture (L112–158); 5. Mobile architecture (L159–184)
 
 ## Graph relations
 
-- Depends on: [Product strategy and discovery gates](RandoMeal--Product--Strategy), [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate)
+- Depends on: [Product strategy and discovery gates](RandoMeal--Product--Strategy), [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate)
 - Related: [Target product data model](RandoMeal--Data--Target-Model), [Target API v2 contract](RandoMeal--API--Target-v2), [Analytics and measurement plan](RandoMeal--Analytics--Measurement)
 - Supersedes: [Legacy and contradictory documentation map](RandoMeal--Legacy--Documentation-Map)
 - Superseded by: none

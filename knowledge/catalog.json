@@ -3,7 +3,7 @@
   "project": {
     "name": "RandoMeal",
     "repository": "BadKirill/Food-Randomizer",
-    "summary": "RandoMeal is a fast, trusted meal-decision engine. The product must move a person from uncertainty to starting to cook without a browsing feed, while preserving hard dietary safety and keeping the single-versus-shortlist interaction as an evidence gate."
+    "summary": "RandoMeal is a fast, trusted meal-decision engine. The founder-selected working direction is one dominant recommendation plus two quieter factual tradeoff options; Stage 0 validates it against bounded Single and Shortlist modes without weakening hard dietary safety."
   },
   "readingPolicy": {
     "maxNodes": 7,
@@ -172,11 +172,12 @@
       "wikiSlug": "RandoMeal--Product--Strategy",
       "status": "target",
       "authority": "product-source-of-truth",
-      "summary": "RandoMeal is a decision engine rather than a recipe generator or catalog; discovery evidence gates implementation assumptions.",
+      "summary": "RandoMeal is a decision engine rather than a recipe generator or catalog. The approved working direction is a Hybrid answer hierarchy, while discovery evidence still gates production rollout.",
       "tags": ["product", "discovery", "decision engine", "strategy", "продукт", "исследование", "решение"],
       "sources": ["docs/product/README.md", "docs/product/discovery-decisions.md"],
       "rules": [
         "Optimize for a trusted decision and start of cooking in less than 30 seconds, not content browsing.",
+        "Target one dominant recommendation plus two lower-emphasis alternatives with factual benefit/cost labels.",
         "AI can adapt canonical recipes but cannot be required for normal recommendations.",
         "Hard safety and discovery gates override feature breadth and legacy UI assumptions.",
         "Do not treat Stage 0 hypotheses or beta targets as validated facts."
@@ -188,20 +189,25 @@
     },
     {
       "id": "choice-cardinality-gate",
-      "title": "Single versus shortlist evidence gate",
+      "title": "Hybrid choice-cardinality evidence gate",
       "group": "Product",
       "wikiSlug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "status": "target",
       "authority": "discovery-gate",
-      "summary": "The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy. Concept 01 now provides equal-fidelity single and shortlist stimuli without resolving the gate.",
+      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live, dry-run-verified Maze study compares it against equal-fidelity Single and Shortlist bounds; the canonical research prototype also retains separate C and D controls.",
       "tags": ["single", "shortlist", "hybrid", "experiment", "H3", "одно блюдо", "2-3 варианта", "гипотеза"],
-      "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/delivery-plan.md"],
+      "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/stage-0-research-prototype.md", "docs/product/stage-0-maze-study.md", "docs/product/delivery-plan.md"],
       "rules": [
         "Keep ranking cardinality server-owned and versioned.",
-        "Never hard-code one recommendation as a proven product truth.",
+        "Treat Hybrid as the approved working direction, not as participant-validated evidence; retain Single and Shortlist as bounded comparisons and rollback policies until D0 is signed.",
+        "Hybrid position 1 is the dominant primary; positions 2-3 are quieter alternatives with typed factual benefit/cost comparisons against position 1.",
+        "Derive tradeoff labels from verified structured facts and never emit unsupported subjective health claims.",
         "Measure time to decision, acceptance, replacement, abandonment, trust, and safety separately by policy.",
-        "Do not build final launch navigation or recommendation UI before the Stage 0 gate is signed.",
-        "Use Decision flow concept 01 only as equal-fidelity Stage 0 stimuli; its D0-A and D0-B screens do not resolve the gate."
+        "Do not irreversibly activate final launch navigation or rollout before the Stage 0 gate is signed.",
+        "Use A and B as equal-fidelity cardinality bounds and H as the intentionally hierarchical founder-selected candidate; the Figma screens do not replace participant evidence.",
+        "The runnable research prototype starts A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319.",
+        "Live Maze study 574247931 uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.",
+        "Freeze the published A/B/H Figma runner frames during collection; a material prototype fix requires a stopped and versioned study with incomparable responses separated."
       ],
       "dependsOn": ["product-strategy"],
       "related": ["recommendation-engine-target", "analytics-measurement", "design-system-quality"],
@@ -217,12 +223,15 @@
       "authority": "accepted-plan",
       "summary": "Dependency-ordered product delivery from discovery gates through foundations, recommendation beta, measurement, hardening, and later expansion.",
       "tags": ["delivery", "roadmap", "milestone", "implementation plan", "план", "этап", "разработка"],
-      "sources": ["docs/product/delivery-plan.md", "docs/product/audit-and-migration.md", "docs/releases/**"],
+      "sources": ["docs/product/delivery-plan.md", "docs/product/executable-implementation-plan.md", "docs/product/stage-0-maze-study.md", "docs/product/audit-and-migration.md", "docs/releases/**"],
       "rules": [
         "Complete discovery exit criteria before irreversible product UI decisions.",
         "Prefer vertical slices with contracts, persistence, analytics, tests, and operability in the same increment.",
         "Migrate additively and keep legacy behavior available until replacement acceptance gates pass.",
-        "Release claims must be backed by current tests rather than historical test-count snapshots."
+        "Release claims must be backed by current tests rather than historical test-count snapshots.",
+        "Execution Stage 0 branch baseline and Stage 1 research prototype are complete; the founder-selected Hybrid direction is documented, while product discovery Stage 0 remains open until participant evidence signs D0.",
+        "Use the executable Stage 0-19 plan for operational status, dependency order, handoff, exit criteria and rollback.",
+        "Stage 2 participant collection uses the live Maze A/B/H study in batches of three; publication and a successful preview do not complete D0."
       ],
       "dependsOn": ["product-strategy", "current-vs-target"],
       "related": ["qa-strategy", "production-infrastructure"],
@@ -284,6 +293,7 @@
       "rules": [
         "Allergy, diet, explicit bans, permanent exclusions, and critical equipment are fail-closed hard constraints.",
         "Persist component scores, seed, algorithm and configuration versions, candidate pool, reasons, and ordered exposure membership.",
+        "For Hybrid, compute and persist typed factual alternative tradeoffs against position 1; the client localizes the copy.",
         "The client cannot choose arbitrary result cardinality.",
         "An empty safe result explains the constraint and relaxes only soft filters after confirmation."
       ],
@@ -327,7 +337,8 @@
         "Identity, safety constraints, recommendation reproducibility, and event delivery have explicit durable models.",
         "Use database constraints and indexes for invariants that cannot rely on application timing.",
         "Recipe content is versioned and canonical ingredient taxonomy is separate from display text.",
-        "Profile, interaction, and analytics retention follows documented privacy rules."
+        "Profile, interaction, and analytics retention follows documented privacy rules.",
+        "Hybrid recommendations store selection role and a nullable typed tradeoff comparison to the primary result."
       ],
       "dependsOn": ["target-architecture", "product-strategy"],
       "related": ["current-data-model", "api-v2-contract", "analytics-measurement"],
@@ -390,6 +401,8 @@
         "Transport contracts are shared and runtime-validated with Zod.",
         "Mutation endpoints define idempotency, authorization, error, and analytics semantics.",
         "Recommendation cardinality remains server policy rather than client input.",
+        "Hybrid position 1 is primary; positions 2-3 include typed tradeoff code, direction, numeric delta, unit, and primary reference derived from verified recipe facts.",
+        "The current product-v2 Zod schemas do not yet implement Hybrid selection-role or tradeoff fields; add them with fixtures in the product-contract stage before runtime implementation.",
         "Add target endpoints without breaking the current mobile client until migration gates pass."
       ],
       "dependsOn": ["target-architecture", "target-data-model"],
@@ -659,12 +672,15 @@
       "authority": "accepted-analytics-design",
       "summary": "Actor identity, event ownership, recommendation funnel, experiment dimensions, decision metrics, dashboards, privacy controls, outbox delivery, and observability boundaries.",
       "tags": ["analytics", "posthog", "events", "metrics", "funnel", "experiment", "аналитика", "метрики"],
-      "sources": ["docs/product/analytics.md", "packages/contracts/src/product-v2.ts"],
+      "sources": ["docs/product/analytics.md", "docs/product/stage-0-research-prototype.md", "docs/product/stage-0-maze-study.md", "packages/contracts/src/product-v2.ts"],
       "rules": [
         "Measure decision success and time to start cooking rather than catalog engagement.",
+        "For Hybrid, report primary acceptance and alternative rescue separately by typed tradeoff code, with time-to-decision and abandonment guardrails.",
         "Server owns durable recommendation, exposure, acceptance, rejection, cooking, entitlement, and delivery events.",
         "Client owns presentation and interaction UX events with stable actor and session correlation.",
-        "Do not send allergy details, sensitive free text, credentials, prompts, or raw model responses to analytics."
+        "Do not send allergy details, sensitive free text, credentials, prompts, or raw model responses to analytics.",
+        "Stage 0 Figma analytics annotations describe intended production instrumentation and do not claim that event delivery is implemented.",
+        "Maze Stage 0 evidence combines observed prototype goal success, direct and indirect paths, time, misclicks and abandonment with five-point confidence and stated cooking intent; stated format preference cannot decide the gate alone."
       ],
       "dependsOn": ["product-strategy", "choice-cardinality-gate", "target-data-model"],
       "related": ["product-v2-contracts", "qa-strategy"],
@@ -678,9 +694,9 @@
       "wikiSlug": "RandoMeal--Design--System-and-Quality",
       "status": "mixed",
       "authority": "product-design-source-of-truth",
-      "summary": "Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton and a 16-screen P0 mobile DS v1 pass for F01-F04 are implemented and creation-reviewed in the canonical Figma file; platform adaptations, clickable prototyping and mobile code adoption remain target work.",
+      "summary": "Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a six-flow clickable Stage 0 research prototype are implemented and creation-reviewed in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.",
       "tags": ["design", "figma", "tokens", "components", "accessibility", "anti slop", "дизайн", "фигма"],
-      "sources": ["docs/product/quality-and-design.md", "docs/product/design-system-v1.md", "docs/product/decision-flow-concept-01.md", "docs/product/client-flow-skeleton.md", "docs/product/p0-mobile-wireframes-pass-01.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/figma-design-system-v1.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
+      "sources": ["docs/product/quality-and-design.md", "docs/product/design-system-v1.md", "docs/product/decision-flow-concept-01.md", "docs/product/client-flow-skeleton.md", "docs/product/p0-mobile-wireframes-pass-01.md", "docs/product/stage-0-research-prototype.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/figma-design-system-v1.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
       "rules": [
         "Use the design anti-slop skill for every Figma or user-facing UI task.",
         "Use the single canonical Figma file declared in design/figma-project.json for every project design operation.",
@@ -694,7 +710,7 @@
         "Ivory text on the Paprika brand background must remain at or above WCAG AA contrast; Foundation v1 validates at 4.67:1.",
         "Only the Light color mode is approved; dark mode requires separate validation.",
         "Core Design System v1 contains 20 component sets and exactly 128 variants plus three private icon components; no interactive variant is below the 44 px target.",
-        "The DS v1 concept migration at node 167:26 contains six 390 by 844 screens and keeps Single, Shortlist and Hybrid at equal fidelity.",
+        "The DS v1 concept migration at node 167:26 contains six 390 by 844 screens; Hybrid is the founder-selected hierarchical candidate while Single and Shortlist remain reversible bounds.",
         "The client-flow mapping at node 170:2 maps 20 flow responsibilities to reusable component contracts without replacing the original sequencing and analytics map.",
         "P0 Mobile Pass 02 at node 173:71 rebuilds all 16 F01-F04 states at 390 by 844 from Core Design System v1 instances.",
         "Figma Code Connect remains deferred until matching source components exist; do not create fabricated mappings.",
@@ -704,7 +720,10 @@
         "D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.",
         "P0 mobile wireframes pass 01 at node 75:3 contains 16 creation-reviewed 393 by 852 screens for F01-F04 and keeps D0-A single, D0-B shortlist and D0-C hybrid reversible.",
         "All current visible copy, layer names, reusable component defaults and instance overrides in the canonical Figma file are English; other languages belong only in explicit localization-expansion test artifacts.",
-        "P0 pass 01 is not complete platform handoff: small-iPhone, representative Android, large-text, localization-expansion, analytics annotations and clickable moderated-prototype work remain required."
+        "The Stage 0 research prototype page 187:2 contains 27 top-level runner frames, six prototype starting points and 48 interactive sources with no invalid destination or target below 44 px.",
+        "The shared Hybrid component at node 157:54 and reference screens 168:145, 176:138, 192:1167 and 204:1149 show one dominant primary plus two quieter factual tradeoffs.",
+        "Focused small-iPhone node 198:744, Android node 198:748 and 125 percent large-text node 198:752 are creation-reviewed evidence, not complete launch-platform coverage.",
+        "P0 design still requires broader platform, localization, keyboard, safe-area, reduced-motion, imagery and production analytics implementation after D0."
       ],
       "dependsOn": ["product-strategy", "choice-cardinality-gate", "agent-governance"],
       "related": ["figma-canonical-file", "qa-strategy", "mobile-theme-current"],

@@ -27,15 +27,17 @@ Required Figma pages:
 
 Before the recommendation page becomes an approved product spec, add a `Stage 0 concepts` page:
 
-- equal-fidelity A/B cards for one recommendation and a shortlist of two or three;
+- equal-fidelity A/B bounds for one recommendation and an equally weighted shortlist;
+- an H candidate with one dominant recommendation plus two quieter, factual tradeoff options;
 - a feed/search control for H3, clearly separate from a Pantry-first concept for H7;
 - randomized presentation order and identical recipe quality, explanations and CTA semantics;
 - a moderator annotation layer that is hidden from participants;
-- no visual treatment that makes the team's preferred concept look more complete.
+- do not reveal the founder preference to participants or add decorative polish that confounds the
+  interaction comparison.
 
-The component library implements `Decision Option` and `Recommendation` from shared primitives,
-including equal-status Single, Shortlist and Hybrid variants. This keeps implementation reversible;
-it does not pre-decide the launch mode.
+The component library implements `Decision Option` and `Recommendation` from shared primitives.
+Single, Shortlist and Hybrid remain reversible presentation modes; Hybrid intentionally contains
+one dominant primary and two quieter alternatives.
 
 Every screen is delivered in default, loading/skeleton, empty, error, offline, long text, large
 font, missing image, disabled, Premium locked and limit-reached states where applicable. Include
@@ -121,8 +123,9 @@ defaults and instance overrides use English copy throughout.
 
 The implementation-oriented
 [`Concept 01 · DS v1 migration`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=167-26)
-adds an equal-fidelity Hybrid arm and rebuilds all six states from Core Design System v1 instances.
-The original board remains preserved as discovery evidence.
+adds a Hybrid arm and rebuilds all six states from Core Design System v1 instances. The 2026-08-14
+founder direction makes Hybrid the working target while Single and Shortlist remain comparison and
+rollback modes. The original board remains preserved as discovery evidence.
 
 ### Client flow skeleton
 
@@ -149,7 +152,7 @@ sequencing, gates or analytics ownership.
 The first screen-level P0 pass is implemented on
 [`07 · P0 Mobile Wireframes · Pass 01`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=75-3).
 It contains 16 editable 393 by 852 screens for F01-F04: guest-first entry, safety and situational
-context; loading plus equal-status single, shortlist and hybrid D0 variants; rejection,
+context; loading plus single, shortlist and hybrid D0 variants; rejection,
 replacement, safe-empty and offline recovery; and recipe, safe adaptation, cooking and completion.
 
 The pass reuses the local `Button`, `Choice chip` and `Decision option` component sets and binds all
@@ -162,7 +165,7 @@ English copy.
 The implementation-oriented
 [`P0 Mobile · Pass 02 · DS v1`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=173-71)
 rebuilds the same 16 F01-F04 states at 390 by 844 using the complete component library. The review
-found only the approved OFL font families, no missing fonts and equal-fidelity Single, Shortlist and
+found only the approved OFL font families, no missing fonts and reversible Single, Shortlist and
 Hybrid recommendation modes.
 
 ## 2. QA strategy

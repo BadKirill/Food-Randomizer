@@ -13,7 +13,10 @@ fit, explainability and verified content.
 
 The decision engine and the presentation policy are separate. Ranking always produces an ordered
 candidate set; a versioned server policy exposes one recommendation, a shortlist of two or three,
-or a hybrid. Stage 0 chooses the launch policy. Feed/search is not the default core architecture.
+or a hybrid. The founder-selected working policy is Hybrid: position 1 is the dominant answer and
+positions 2-3 are quieter alternatives with factual benefit/cost comparisons. Stage 0 validates
+that direction and preserves Single/Shortlist rollback modes. Feed/search is not the default core
+architecture.
 
 ## 1. Technology stack
 
@@ -145,6 +148,10 @@ version, algorithm version, presentation mode and ordered exposure membership. T
 decision reproducible and makes simultaneous shortlist views distinguishable from sequential
 `Another` requests.
 
+For Hybrid exposures, compute alternative tradeoffs against position 1 from normalized structured
+facts. Persist a typed comparison code, direction, numeric delta, unit and reference result. The
+client localizes the label; the server never invents subjective health claims.
+
 The client cannot request an arbitrary result count. Stable experiment assignment and server
 configuration select the presentation policy so that metrics and rollback remain trustworthy.
 Safety filters and candidate scores are identical across presentation variants.
@@ -171,8 +178,8 @@ Rules:
 - Every user-facing string is an i18n key from the first migrated screen.
 - Every network screen implements loading, empty, error, offline, retry, and stale-data states.
 - `testID`, accessibility label, role, state, and hint are part of component contracts.
-- Single, shortlist and hybrid recommendation views consume the same exposure contract and shared
-  card primitives; launch configuration is server-owned.
+- The preferred Hybrid view and Single/Shortlist rollback modes consume the same exposure contract
+  and shared card primitives; launch configuration is server-owned.
 - The old Random/Manage shell remains behind `legacy_mvp` until the new flow reaches parity.
 
 ## 6. Identity and account merge

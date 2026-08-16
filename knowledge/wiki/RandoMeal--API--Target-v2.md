@@ -10,11 +10,13 @@ Authority: **accepted-api-design**
 - Transport contracts are shared and runtime-validated with Zod.
 - Mutation endpoints define idempotency, authorization, error, and analytics semantics.
 - Recommendation cardinality remains server policy rather than client input.
+- Hybrid position 1 is primary; positions 2-3 include typed tradeoff code, direction, numeric delta, unit, and primary reference derived from verified recipe facts.
+- The current product-v2 Zod schemas do not yet implement Hybrid selection-role or tradeoff fields; add them with fixtures in the product-contract stage before runtime implementation.
 - Add target endpoints without breaking the current mobile client until migration gates pass.
 
 ## Source coverage
 
-- `docs/product/api-v2.md` — 12 indexed sections: REST API v2 surface, Common protocol, Identity and auth, Profile and configuration, Catalog and saved, …. Sections: docs/product/api-v2.md (L1–131); REST API v2 surface (L1–131); Common protocol (L6–31); Identity and auth (L32–42); Profile and configuration (L43–54); Catalog and saved (L55–64); Recommendations and interactions (L65–90); `POST /recommendations` (L67–90)
+- `docs/product/api-v2.md` — 12 indexed sections: REST API v2 surface, Common protocol, Identity and auth, Profile and configuration, Catalog and saved, …. Sections: docs/product/api-v2.md (L1–137); REST API v2 surface (L1–137); Common protocol (L6–31); Identity and auth (L32–42); Profile and configuration (L43–54); Catalog and saved (L55–64); Recommendations and interactions (L65–96); `POST /recommendations` (L67–96)
 - `packages/contracts/src/product-v2.ts` — 31 indexed sections: ProductIdentityHeadersSchema, DietTypeSchema, MealTypeSchema, RecommendationGoalSchema, PantryModeSchema, …. Sections: packages/contracts/src/product-v2.ts (L1–288); ProductIdentityHeadersSchema (L8–15); DietTypeSchema (L16–16); MealTypeSchema (L17–17); RecommendationGoalSchema (L18–26); PantryModeSchema (L27–27); RecommendationPresentationModeSchema (L28–33); RecommendationContextSchema (L34–54)
 
 ## Graph relations

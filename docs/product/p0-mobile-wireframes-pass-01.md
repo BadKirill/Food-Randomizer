@@ -37,7 +37,8 @@ languages belong in dedicated expansion-test frames rather than in the canonical
 - Hard restrictions fail closed. Safe-empty and adaptation states explain recovery without
   relaxing allergens or permanent exclusions.
 - D0-A single, D0-B shortlist and D0-C hybrid use the same 393 by 852 viewport, recipe quality,
-  component language and bottom-action pattern. The artifact does not select a launch policy.
+  component language and bottom-action pattern. The 2026-08-14 founder direction selects Hybrid
+  as the working target while keeping Single and Shortlist as research bounds and rollback modes.
 - Rejection is quick and optional. A reason improves the next replacement but is not required.
 - Acceptance leads directly toward the first cooking step instead of opening another browsing
   decision.
@@ -75,14 +76,14 @@ final structural audit verified:
 
 This pass does not complete the P0 design specification. The next passes must add:
 
-1. small-iPhone and representative Android adaptations;
-2. large-text, localization-expansion, keyboard, safe-area and reduced-motion checks;
+1. broader small-iPhone and representative Android coverage beyond the Stage 0 decision paths;
+2. localization-expansion, keyboard, safe-area and reduced-motion checks;
 3. missing-image and long-content variants where recipe media and content are introduced;
-4. clickable prototype links and the hidden moderator annotation layer for Stage 0;
-5. analytics annotations for request, exposure, acceptance, rejection, replacement, cooking start
-   and completion;
+4. signed D0 evidence before the selected interaction becomes final launch navigation;
+5. production analytics implementation for request, exposure, acceptance, rejection, replacement,
+   cooking start and completion;
 6. component contracts for any repeated pattern that survives interaction testing;
-7. signed D0 evidence before launch navigation or recommendation cardinality becomes final.
+7. complete platform and accessibility matrices for every launch screen.
 
 ## Pass 02 · Core Design System v1
 
@@ -102,7 +103,10 @@ Row` and `Bottom Sheet` instances. The 2026-08-10 creation review verified equal
 equal-fidelity D0 modes, no missing or unexpected fonts, explicit safety and recovery copy, and no
 interactive component variant below 44 px.
 
-Pass 02 is an implementation-oriented visual contract, not approval of final navigation,
-recommendation cardinality, Pantry value or payments. Platform widths, large text, localization
-expansion, clickable prototype links, analytics annotations and production imagery remain future
+Pass 02 is an implementation-oriented visual contract. Its Hybrid screen at `176:138` now shows
+one dominant best match and two quieter factual tradeoffs; final rollout still depends on D0
+validation. It is not approval of final navigation, Pantry value or payments. The Stage 0 research prototype at page
+`187:2`, documented in `stage-0-research-prototype.md`, now supplies focused platform adaptations,
+large-text evidence, six clickable flows, moderator guidance and analytics annotations. Broader
+launch-platform coverage, localization expansion, production analytics and imagery remain future
 work.

@@ -28,8 +28,8 @@ or evidence that an open discovery gate has been resolved.
   already-created value.
 - Hard dietary safety fails closed. An unsafe or uncertain result is never shown as a normal
   recommendation.
-- D0/H3 remains open: single recommendation, shortlist and hybrid presentation retain equal status
-  until Stage 0 evidence selects a policy.
+- D0/H3 validates the founder-selected Hybrid candidate against Single and Shortlist bounds;
+  presentation remains server-owned and reversible until evidence signs the policy.
 - Pantry and photo input remain behind the H7 value gate and require explicit recognition
   confirmation before ingredients affect a recommendation.
 - Real payment remains behind the H10 gate; the map covers preview, limits, restore and entitlement
@@ -65,7 +65,8 @@ The creation review verified:
 
 - all 12 lanes are present in F01-F12 order;
 - all 90 checkpoints are visible without clipping or overlap;
-- D0 single, shortlist and hybrid branches have equal visual fidelity;
+- D0 retains Single, Shortlist and Hybrid branches; Hybrid is the working target and the other two
+  are comparison/rollback modes;
 - H7 and H10 remain visibly gated;
 - concrete product copy replaces placeholder text;
 - all visible map copy and labels are English;
@@ -85,4 +86,5 @@ Hybrid as reversible D0 modes.
 
 The next pass adapts the screens to a small iPhone and representative Android width, adds large-text
 and localization-expansion states, and builds a clickable moderated prototype. D0-A single, D0-B
-shortlist and D0-C hybrid remain reversible until signed Stage 0 evidence selects a policy.
+shortlist and D0-C hybrid remain reversible until signed Stage 0 evidence confirms the preferred
+Hybrid policy or replaces it with an evidence-backed bound.

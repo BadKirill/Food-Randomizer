@@ -1,6 +1,6 @@
 # RandoMeal Knowledge Graph
 
-RandoMeal is a fast, trusted meal-decision engine. The product must move a person from uncertainty to starting to cook without a browsing feed, while preserving hard dietary safety and keeping the single-versus-shortlist interaction as an evidence gate.
+RandoMeal is a fast, trusted meal-decision engine. The founder-selected working direction is one dominant recommendation plus two quieter factual tradeoff options; Stage 0 validates it against bounded Single and Shortlist modes without weakening hard dietary safety.
 
 ## Selective reading protocol
 
@@ -8,11 +8,11 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 ## Coverage
 
-- Repository files discovered: 197
-- Files indexed semantically or by metadata: 197
+- Repository files discovered: 200
+- Files indexed semantically or by metadata: 200
 - Binary assets indexed by metadata: 4
-- Files with extracted sections: 151
-- Content fingerprint: `e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a`
+- Files with extracted sections: 154
+- Content fingerprint: `7756907849598ecf033e6631a16ca34f80a084d711179314e5cee94ef4fd046e`
 
 ## Knowledge tree
 
@@ -25,8 +25,8 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 
 ### Product
 
-- [Product strategy and discovery gates](RandoMeal--Product--Strategy) — RandoMeal is a decision engine rather than a recipe generator or catalog; discovery evidence gates implementation assumptions.
-- [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy. Concept 01 now provides equal-fidelity single and shortlist stimuli without resolving the gate.
+- [Product strategy and discovery gates](RandoMeal--Product--Strategy) — RandoMeal is a decision engine rather than a recipe generator or catalog. The approved working direction is a Hybrid answer hierarchy, while discovery evidence still gates production rollout.
+- [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live, dry-run-verified Maze study compares it against equal-fidelity Single and Shortlist bounds; the canonical research prototype also retains separate C and D controls.
 - [Product delivery roadmap](RandoMeal--Product--Delivery-Roadmap) — Dependency-ordered product delivery from discovery gates through foundations, recommendation beta, measurement, hardening, and later expansion.
 
 ### Architecture
@@ -67,7 +67,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 ### Analytics and Quality
 
 - [Analytics and measurement plan](RandoMeal--Analytics--Measurement) — Actor identity, event ownership, recommendation funnel, experiment dimensions, decision metrics, dashboards, privacy controls, outbox delivery, and observability boundaries.
-- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton and a 16-screen P0 mobile DS v1 pass for F01-F04 are implemented and creation-reviewed in the canonical Figma file; platform adaptations, clickable prototyping and mobile code adoption remain target work.
+- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a six-flow clickable Stage 0 research prototype are implemented and creation-reviewed in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.
 - [QA, security, and release gates](RandoMeal--Quality--QA-Strategy) — Current Jest and E2E suites plus target contract, Testcontainers, Maestro, accessibility, load, security, migration, analytics, and release acceptance gates.
 
 ### Delivery and Operations

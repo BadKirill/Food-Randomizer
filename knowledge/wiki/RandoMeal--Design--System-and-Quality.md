@@ -1,6 +1,6 @@
 # Design system and product quality
 
-Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton and a 16-screen P0 mobile DS v1 pass for F01-F04 are implemented and creation-reviewed in the canonical Figma file; platform adaptations, clickable prototyping and mobile code adoption remain target work.
+Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a six-flow clickable Stage 0 research prototype are implemented and creation-reviewed in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.
 
 Status: **mixed**
 Authority: **product-design-source-of-truth**
@@ -19,7 +19,7 @@ Authority: **product-design-source-of-truth**
 - Ivory text on the Paprika brand background must remain at or above WCAG AA contrast; Foundation v1 validates at 4.67:1.
 - Only the Light color mode is approved; dark mode requires separate validation.
 - Core Design System v1 contains 20 component sets and exactly 128 variants plus three private icon components; no interactive variant is below the 44 px target.
-- The DS v1 concept migration at node 167:26 contains six 390 by 844 screens and keeps Single, Shortlist and Hybrid at equal fidelity.
+- The DS v1 concept migration at node 167:26 contains six 390 by 844 screens; Hybrid is the founder-selected hierarchical candidate while Single and Shortlist remain reversible bounds.
 - The client-flow mapping at node 170:2 maps 20 flow responsibilities to reusable component contracts without replacing the original sequencing and analytics map.
 - P0 Mobile Pass 02 at node 173:71 rebuilds all 16 F01-F04 states at 390 by 844 from Core Design System v1 instances.
 - Figma Code Connect remains deferred until matching source components exist; do not create fabricated mappings.
@@ -29,7 +29,10 @@ Authority: **product-design-source-of-truth**
 - D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.
 - P0 mobile wireframes pass 01 at node 75:3 contains 16 creation-reviewed 393 by 852 screens for F01-F04 and keeps D0-A single, D0-B shortlist and D0-C hybrid reversible.
 - All current visible copy, layer names, reusable component defaults and instance overrides in the canonical Figma file are English; other languages belong only in explicit localization-expansion test artifacts.
-- P0 pass 01 is not complete platform handoff: small-iPhone, representative Android, large-text, localization-expansion, analytics annotations and clickable moderated-prototype work remain required.
+- The Stage 0 research prototype page 187:2 contains 27 top-level runner frames, six prototype starting points and 48 interactive sources with no invalid destination or target below 44 px.
+- The shared Hybrid component at node 157:54 and reference screens 168:145, 176:138, 192:1167 and 204:1149 show one dominant primary plus two quieter factual tradeoffs.
+- Focused small-iPhone node 198:744, Android node 198:748 and 125 percent large-text node 198:752 are creation-reviewed evidence, not complete launch-platform coverage.
+- P0 design still requires broader platform, localization, keyboard, safe-area, reduced-motion, imagery and production analytics implementation after D0.
 
 ## Source coverage
 
@@ -40,16 +43,17 @@ Authority: **product-design-source-of-truth**
 - `design/figma-design-system-v1.json` — 10 indexed sections: version, status, reviewedAt, fileKey, fileUrl, …. Sections: design/figma-design-system-v1.json (L1–68); version (L2–2); status (L3–3); reviewedAt (L4–4); fileKey (L5–5); fileUrl (L6–6); fonts (L7–10); foundation (L11–17)
 - `design/figma-project.json` — 6 indexed sections: schemaVersion, project, policy, file, allowedFileKeys, …. Sections: design/figma-project.json (L1–19); schemaVersion (L2–2); project (L3–3); policy (L4–4); file (L5–9); allowedFileKeys (L10–12); operations (L13–19)
 - `design/foundations.tokens.json` — 8 indexed sections: schemaVersion, system, version, figmaFileKey, colorMode, …. Sections: design/foundations.tokens.json (L1–1020); schemaVersion (L2–2); system (L3–3); version (L4–4); figmaFileKey (L5–5); colorMode (L6–6); typography (L7–100); effectStyles (L101–128)
-- `docs/product/client-flow-skeleton.md` — 6 indexed sections: Client flow skeleton, Status, Product constraints represented, Flow inventory, Visual language and review, …. Sections: docs/product/client-flow-skeleton.md (L1–89); Client flow skeleton (L1–89); Status (L3–22); Product constraints represented (L23–39); Flow inventory (L40–56); Visual language and review (L57–74); Next design pass (L75–89)
-- `docs/product/decision-flow-concept-01.md` — 6 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review, …. Sections: docs/product/decision-flow-concept-01.md (L1–87); Decision flow concept 01 (L1–87); Product intent (L13–28); Component contracts (L29–40); Design constraints (L41–53); Creation review (L54–69); Core Design System v1 migration (L70–87)
-- `docs/product/design-system-v1.md` — 10 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, …. Sections: docs/product/design-system-v1.md (L1–134); Core Design System v1 (L1–134); Purpose (L10–20); Foundations (L21–39); Component inventory (L40–77); Migrated product artifacts (L78–107); Decision concept (L80–86); Client-flow mapping (L87–93)
+- `docs/product/client-flow-skeleton.md` — 6 indexed sections: Client flow skeleton, Status, Product constraints represented, Flow inventory, Visual language and review, …. Sections: docs/product/client-flow-skeleton.md (L1–91); Client flow skeleton (L1–91); Status (L3–22); Product constraints represented (L23–39); Flow inventory (L40–56); Visual language and review (L57–75); Next design pass (L76–91)
+- `docs/product/decision-flow-concept-01.md` — 6 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review, …. Sections: docs/product/decision-flow-concept-01.md (L1–90); Decision flow concept 01 (L1–90); Product intent (L13–28); Component contracts (L29–40); Design constraints (L41–53); Creation review (L54–69); Core Design System v1 migration (L70–90)
+- `docs/product/design-system-v1.md` — 11 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, …. Sections: docs/product/design-system-v1.md (L1–156); Core Design System v1 (L1–156); Purpose (L10–20); Foundations (L21–39); Component inventory (L40–77); Migrated product artifacts (L78–117); Decision concept (L80–86); Client-flow mapping (L87–93)
 - `docs/product/figma-governance.md` — 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff. Sections: docs/product/figma-governance.md (L1–42); Canonical Figma file governance (L1–42); Canonical project file (L3–15); Deny-by-default rules (L16–36); Ownership and handoff (L37–42)
-- `docs/product/p0-mobile-wireframes-pass-01.md` — 7 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, …. Sections: docs/product/p0-mobile-wireframes-pass-01.md (L1–109); P0 mobile wireframes pass 01 (L1–109); Scope (L13–32); Product decisions represented (L33–46); Design-system use (L47–57); Creation review (L58–73); Remaining design work (L74–86); Pass 02 · Core Design System v1 (L87–109)
-- `docs/product/quality-and-design.md` — 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, …. Sections: docs/product/quality-and-design.md (L1–302); Design and quality operating model (L1–302); 1. Design workflow (L3–167); Foundation v1 (L58–98); Core Design System v1 (L99–109); Decision flow concept 01 (L110–126); Client flow skeleton (L127–146); P0 mobile wireframes pass 01 (L147–167)
+- `docs/product/p0-mobile-wireframes-pass-01.md` — 7 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, …. Sections: docs/product/p0-mobile-wireframes-pass-01.md (L1–113); P0 mobile wireframes pass 01 (L1–113); Scope (L13–32); Product decisions represented (L33–47); Design-system use (L48–58); Creation review (L59–74); Remaining design work (L75–87); Pass 02 · Core Design System v1 (L88–113)
+- `docs/product/quality-and-design.md` — 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, …. Sections: docs/product/quality-and-design.md (L1–305); Design and quality operating model (L1–305); 1. Design workflow (L3–170); Foundation v1 (L60–100); Core Design System v1 (L101–111); Decision flow concept 01 (L112–129); Client flow skeleton (L130–149); P0 mobile wireframes pass 01 (L150–170)
+- `docs/product/stage-0-research-prototype.md` — 9 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Clickable prototype starting points, Moderator protocol, …. Sections: docs/product/stage-0-research-prototype.md (L1–167); Stage 0 research prototype handoff (L1–167); Purpose (L17–27); Canonical structure (L28–44); Clickable prototype starting points (L45–60); Moderator protocol (L61–85); Analytics annotation contract (L86–115); Responsive and accessibility evidence (L116–126)
 
 ## Graph relations
 
-- Depends on: [Product strategy and discovery gates](RandoMeal--Product--Strategy), [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate), [Agent governance](RandoMeal--Governance--Agents)
+- Depends on: [Product strategy and discovery gates](RandoMeal--Product--Strategy), [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate), [Agent governance](RandoMeal--Governance--Agents)
 - Related: [Canonical Figma file governance](RandoMeal--Governance--Canonical-Figma), [QA, security, and release gates](RandoMeal--Quality--QA-Strategy), [Current mobile theme and visual debt](RandoMeal--Mobile--Theme-Debt)
 - Supersedes: [Legacy and contradictory documentation map](RandoMeal--Legacy--Documentation-Map), [Current mobile theme and visual debt](RandoMeal--Mobile--Theme-Debt)
 - Superseded by: none

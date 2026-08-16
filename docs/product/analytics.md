@@ -144,6 +144,12 @@ A recommendation session counts at most one successful decision. Strength order:
   sessions with the first exposure shown.
 - Shortlist selection distribution = selected position 1/2/3 within shortlist decisions; this is
   not an acceptance-rate denominator.
+- Hybrid primary acceptance = hybrid sessions selecting `selection_role=primary` / hybrid sessions
+  with the first exposure shown.
+- Hybrid alternative rescue = hybrid sessions selecting `selection_role=alternative` / hybrid
+  sessions with the first exposure shown. Break down by typed `tradeoff_code`, never raw label.
+- Compare hybrid time-to-decision and abandonment by selected role. A higher alternative rescue
+  rate is useful only when the full decision outcome and guardrails remain healthy.
 - Regeneration rate = sessions requesting a later exposure / sessions with a first exposure shown.
 - Exposure depth = exposures shown per session, median and P75.
 - Empty rate = sessions ending empty / recommendation sessions.
@@ -193,12 +199,13 @@ Alerts:
 
 ### Choice-model gate (H3)
 
-Run the equal-fidelity qualitative concept test before an in-product experiment. If evidence is
-still ambiguous, compare only bounded decision surfaces:
+Validate the founder-selected Hybrid candidate before an in-product rollout. Use balanced-order
+qualitative testing first; if evidence is still ambiguous, compare only bounded decision surfaces:
 
 - A: one recommendation plus `Another`;
 - B: two or three ranked recommendations shown together;
-- optional hybrid only if interviews explicitly support one default plus visible alternatives.
+- H: one dominant recommendation plus two lower-emphasis alternatives with typed, factual
+  benefit/cost labels.
 
 Do not include a feed in the beta experiment unless Stage 0 produces a formal pivot. Stable server
 assignment is stored on the recommendation session and every exposure. Primary metric is decision

@@ -4,6 +4,11 @@ This backlog is intended to be executable by the current team or another coding 
 order. Do not start a later phase until its entry dependencies are satisfied. Each change uses a
 short-lived branch, focused migration and rollback-safe feature flag.
 
+Operational status, branch boundaries and task-level handoff are maintained in
+[`executable-implementation-plan.md`](executable-implementation-plan.md). Execution Stage 0 and
+Stage 1 there are complete. Product discovery Phase 0 remains open until participant evidence is
+collected and Decision Gate D0 is signed.
+
 ## Operating rules for implementers
 
 Before every task:
@@ -30,7 +35,8 @@ they do not encode a choice-model outcome.
 - Complete 12 interviews in batches of three; add up to three only if evidence is unstable.
 - Include two contrast users and at least six who recently used a recipe/AI alternative.
 - Log exact evidence and one participant-level result per H1-H10 in the supplied workbook.
-- Compare equal-fidelity, randomized A (one + Another) and B (shortlist 2-3) concepts.
+- Compare the founder-selected H candidate (one dominant answer plus two factual tradeoffs) with
+  equal-fidelity A (one + Another) and B (equally weighted shortlist) bounds in balanced order.
 - Test feed/search as the H3 control and Pantry-first separately as H7; do not combine them.
 - Run the current MVP task protocol and record completion, time, misclicks and severity.
 - Produce Product Brief, chosen ICP/JTBD, value proposition, trust requirements and provisional
@@ -152,8 +158,8 @@ Acceptance: signed development builds work on iOS/Android; legacy behavior and t
 - Implement tokens, Button, Chip, Card, Input, Sheet, Modal, Skeleton, Empty/Error/Offline states,
   image fallback and accessible navigation.
 - Build onboarding and Home from approved Figma specs.
-- Build single, shortlist and optional hybrid recommendation compositions from the same card
-  primitives; activate only the D0-approved mode.
+- Build the preferred Hybrid composition plus Single and Shortlist rollback/research modes from
+  the same card primitives; activate rollout only through the D0-approved server policy.
 
 Acceptance: component/state/accessibility checklist passes at supported sizes and font scales.
 
@@ -175,6 +181,8 @@ met; AI is not called.
 - Add Cook this, Another option, Save and basic Not for me.
 - Render the D0-approved single/shortlist/hybrid surface from one exposure contract; use server
   assignment and kill switch, never a client-selected result count.
+- In Hybrid, keep position 1 visually dominant and label positions 2-3 with typed, factual
+  benefit/cost comparisons against the primary.
 - Move Manage to Saved -> My recipes; keep common catalog editing out of primary navigation.
 
 Acceptance: guest reaches a committed meal decision in <30 seconds in usability test; exposure
