@@ -81,6 +81,9 @@ contains six 390 by 844 frames built from the reviewed component library:
 | Accepted | `168:213` |
 | Safe empty | `168:244` |
 
-The migration adds the Hybrid arm at the same fidelity as Single and Shortlist, replaces repeated
-local UI with Core Design System v1 instances, and keeps safety recovery explicit. The 2026-08-10
-review found only Fraunces and Source Sans 3, no missing fonts and no viewport mismatch.
+The migration adds the Hybrid arm, replaces repeated local UI with Core Design System v1 instances,
+and keeps safety recovery explicit. On 2026-08-14, the Hybrid arm became the founder-selected
+working direction: one dominant best match plus two lower-emphasis alternatives with factual
+benefit/cost labels. Single and Shortlist remain bounded comparisons and rollback policies until
+D0 validation. The review found only Fraunces and Source Sans 3, no missing fonts and no viewport
+mismatch.

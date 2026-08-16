@@ -8,7 +8,7 @@
   - [Complete repository inventory](RandoMeal--Governance--Repository-Inventory)
 - **Product**
   - [Product strategy and discovery gates](RandoMeal--Product--Strategy)
-  - [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate)
+  - [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate)
   - [Product delivery roadmap](RandoMeal--Product--Delivery-Roadmap)
 - **Architecture**
   - [Target product architecture](RandoMeal--Architecture--Target)

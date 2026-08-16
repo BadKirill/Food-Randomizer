@@ -22,7 +22,7 @@ Authority: **current-code**
 ## Graph relations
 
 - Depends on: [Current mobile shell](RandoMeal--Mobile--Current-Shell), [Current randomizer and history](RandoMeal--Backend--Randomizer-History)
-- Related: [Single versus shortlist evidence gate](RandoMeal--Product--Choice-Cardinality-Gate), [Design system and product quality](RandoMeal--Design--System-and-Quality)
+- Related: [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate), [Design system and product quality](RandoMeal--Design--System-and-Quality)
 - Supersedes: none
 - Superseded by: none
 

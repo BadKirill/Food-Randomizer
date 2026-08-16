@@ -124,7 +124,9 @@ policy/experiment version, shown time and client acknowledgement time. Unique
 ### `recommendations`
 
 Exposure/session/dish FKs, position within exposure, global offer index, component scores, final
-score, candidate pool size, reason code array, random seed and accepted time. Unique
+score, candidate pool size, reason code array, selection role, nullable tradeoff code/direction,
+numeric delta/unit, reference recommendation FK, random seed and accepted time. In Hybrid,
+position 1 is `primary`; positions 2-3 are `alternative` and compare against position 1. Unique
 `(exposure_id, position)`, `(session_id, offer_index)` and `(session_id, dish_id)`. Keep both
 `position` and `offer_index`: the former measures simultaneous shortlist choice; the latter
 measures the total sequence of offers. Index `(product_identity_id denormalized only if profiling

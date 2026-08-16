@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a",
+  "contentFingerprint": "7756907849598ecf033e6631a16ca34f80a084d711179314e5cee94ef4fd046e",
   "coverage": {
-    "repositoryFiles": 197,
-    "indexedFiles": 197,
+    "repositoryFiles": 200,
+    "indexedFiles": 200,
     "binaryFiles": 4,
-    "filesWithSections": 151,
+    "filesWithSections": 154,
     "generatedManaged": [
       "knowledge/index.json",
       "knowledge/wiki-manifest.json",
@@ -57,7 +57,7 @@
       "agent-rule": 3,
       "asset": 4,
       "configuration": 28,
-      "documentation": 26,
+      "documentation": 29,
       "generated": 42,
       "lockfile": 3,
       "migration": 7,
@@ -74,7 +74,7 @@
       "generated": 42,
       "javascript": 19,
       "json": 20,
-      "markdown": 32,
+      "markdown": 35,
       "prisma": 1,
       "shell": 6,
       "sql": 6,
@@ -88,10 +88,10 @@
       "knowledge-system": 18,
       "agent-governance": 9,
       "figma-canonical-file": 8,
-      "repository-inventory": 197,
+      "repository-inventory": 200,
       "product-strategy": 2,
-      "choice-cardinality-gate": 4,
-      "delivery-roadmap": 3,
+      "choice-cardinality-gate": 6,
+      "delivery-roadmap": 5,
       "target-architecture": 1,
       "current-vs-target": 4,
       "recommendation-engine-target": 3,
@@ -112,8 +112,8 @@
       "mobile-random-current": 4,
       "mobile-manage-current": 5,
       "mobile-theme-current": 4,
-      "analytics-measurement": 2,
-      "design-system-quality": 13,
+      "analytics-measurement": 4,
+      "design-system-quality": 14,
       "qa-strategy": 17,
       "workspace-tooling": 18,
       "ci-quality": 5,
@@ -121,7 +121,7 @@
       "production-infrastructure": 8,
       "legacy-documentation-map": 7
     },
-    "sections": 1270,
+    "sections": 1325,
     "symbols": 377,
     "routes": 13,
     "localRelations": 96
@@ -11300,9 +11300,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 13786,
-      "lines": 210,
-      "sha256": "21587ca2e8fdf8bd1bbb9c7245502224d2528dadd1c06bffe58349f3fc14b52b",
+      "bytes": 14348,
+      "lines": 217,
+      "sha256": "f17fa73c376268aa0bab43a23ad184cdf5458103e0daa5b1640d8361ac6d004c",
       "summary": "17 indexed sections: Analytics and measurement plan, 1. Tooling decision, 2. Identity, 3. Event ownership, 4. Naming and schema rules, …",
       "nodeIds": [
         "repository-inventory",
@@ -11318,7 +11318,7 @@
           "title": "docs/product/analytics.md",
           "line": 1,
           "depth": 0,
-          "endLine": 210
+          "endLine": 217
         },
         {
           "id": "section:docs/product/analytics.md#2",
@@ -11326,7 +11326,7 @@
           "title": "Analytics and measurement plan",
           "line": 1,
           "depth": 1,
-          "endLine": 210
+          "endLine": 217
         },
         {
           "id": "section:docs/product/analytics.md#3",
@@ -11406,7 +11406,7 @@
           "title": "6. Metric definitions",
           "line": 122,
           "depth": 2,
-          "endLine": 160
+          "endLine": 166
         },
         {
           "id": "section:docs/product/analytics.md#13",
@@ -11422,39 +11422,39 @@
           "title": "Recommendation quality",
           "line": 138,
           "depth": 3,
-          "endLine": 154
+          "endLine": 160
         },
         {
           "id": "section:docs/product/analytics.md#15",
           "kind": "heading",
           "title": "Retention and monetization",
-          "line": 155,
+          "line": 161,
           "depth": 3,
-          "endLine": 160
+          "endLine": 166
         },
         {
           "id": "section:docs/product/analytics.md#16",
           "kind": "heading",
           "title": "7. Initial dashboards",
-          "line": 161,
+          "line": 167,
           "depth": 2,
-          "endLine": 183
+          "endLine": 189
         },
         {
           "id": "section:docs/product/analytics.md#17",
           "kind": "heading",
           "title": "8. Experiment rules",
-          "line": 184,
+          "line": 190,
           "depth": 2,
-          "endLine": 210
+          "endLine": 217
         },
         {
           "id": "section:docs/product/analytics.md#18",
           "kind": "heading",
           "title": "Choice-model gate (H3)",
-          "line": 194,
+          "line": 200,
           "depth": 3,
-          "endLine": 210
+          "endLine": 217
         }
       ],
       "symbols": []
@@ -11466,9 +11466,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 6941,
-      "lines": 131,
-      "sha256": "864e4a3ed6e0145c259e62f776b4b4888d2d048349ecca79572e3f73956e0bee",
+      "bytes": 7429,
+      "lines": 137,
+      "sha256": "4912f2df016755ec9978faba53bbcde876bd18d056fd9a776e09170bd2cc42b5",
       "summary": "12 indexed sections: REST API v2 surface, Common protocol, Identity and auth, Profile and configuration, Catalog and saved, …",
       "nodeIds": [
         "repository-inventory",
@@ -11485,7 +11485,7 @@
           "title": "docs/product/api-v2.md",
           "line": 1,
           "depth": 0,
-          "endLine": 131
+          "endLine": 137
         },
         {
           "id": "section:docs/product/api-v2.md#2",
@@ -11493,7 +11493,7 @@
           "title": "REST API v2 surface",
           "line": 1,
           "depth": 1,
-          "endLine": 131
+          "endLine": 137
         },
         {
           "id": "section:docs/product/api-v2.md#3",
@@ -11533,7 +11533,7 @@
           "title": "Recommendations and interactions",
           "line": 65,
           "depth": 2,
-          "endLine": 90
+          "endLine": 96
         },
         {
           "id": "section:docs/product/api-v2.md#8",
@@ -11541,47 +11541,47 @@
           "title": "`POST /recommendations`",
           "line": 67,
           "depth": 3,
-          "endLine": 90
+          "endLine": 96
         },
         {
           "id": "section:docs/product/api-v2.md#9",
           "kind": "heading",
           "title": "Cooking",
-          "line": 91,
+          "line": 97,
           "depth": 2,
-          "endLine": 97
+          "endLine": 103
         },
         {
           "id": "section:docs/product/api-v2.md#10",
           "kind": "heading",
           "title": "AI adaptation",
-          "line": 98,
+          "line": 104,
           "depth": 2,
-          "endLine": 108
+          "endLine": 114
         },
         {
           "id": "section:docs/product/api-v2.md#11",
           "kind": "heading",
           "title": "Pantry and photo",
-          "line": 109,
+          "line": 115,
           "depth": 2,
-          "endLine": 118
+          "endLine": 124
         },
         {
           "id": "section:docs/product/api-v2.md#12",
           "kind": "heading",
           "title": "Subscription lifecycle",
-          "line": 119,
+          "line": 125,
           "depth": 2,
-          "endLine": 125
+          "endLine": 131
         },
         {
           "id": "section:docs/product/api-v2.md#13",
           "kind": "heading",
           "title": "Compatibility and deprecation",
-          "line": 126,
+          "line": 132,
           "depth": 2,
-          "endLine": 131
+          "endLine": 137
         }
       ],
       "symbols": []
@@ -11593,9 +11593,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 16720,
-      "lines": 294,
-      "sha256": "d51d56e3810979031507bc6ffafead184c60f9ca9745eccfe1a68f1158dc2890",
+      "bytes": 17215,
+      "lines": 301,
+      "sha256": "0a523fc3200985f0f49507f22f847bd215b04e0d34ebb3f7b0bc7f8a90a75c87",
       "summary": "14 indexed sections: Target product architecture, 0. Product constraint on architecture, 1. Technology stack, 2. Runtime topology, 3. Backend boundaries, …",
       "nodeIds": [
         "repository-inventory",
@@ -11612,7 +11612,7 @@
           "title": "docs/product/architecture.md",
           "line": 1,
           "depth": 0,
-          "endLine": 294
+          "endLine": 301
         },
         {
           "id": "section:docs/product/architecture.md#2",
@@ -11620,7 +11620,7 @@
           "title": "Target product architecture",
           "line": 1,
           "depth": 1,
-          "endLine": 294
+          "endLine": 301
         },
         {
           "id": "section:docs/product/architecture.md#3",
@@ -11628,103 +11628,103 @@
           "title": "0. Product constraint on architecture",
           "line": 7,
           "depth": 2,
-          "endLine": 17
+          "endLine": 20
         },
         {
           "id": "section:docs/product/architecture.md#4",
           "kind": "heading",
           "title": "1. Technology stack",
-          "line": 18,
+          "line": 21,
           "depth": 2,
-          "endLine": 49
+          "endLine": 52
         },
         {
           "id": "section:docs/product/architecture.md#5",
           "kind": "heading",
           "title": "2. Runtime topology",
-          "line": 50,
+          "line": 53,
           "depth": 2,
-          "endLine": 70
+          "endLine": 73
         },
         {
           "id": "section:docs/product/architecture.md#6",
           "kind": "heading",
           "title": "3. Backend boundaries",
-          "line": 71,
+          "line": 74,
           "depth": 2,
-          "endLine": 108
+          "endLine": 111
         },
         {
           "id": "section:docs/product/architecture.md#7",
           "kind": "heading",
           "title": "4. Recommendation architecture",
-          "line": 109,
+          "line": 112,
           "depth": 2,
-          "endLine": 151
+          "endLine": 158
         },
         {
           "id": "section:docs/product/architecture.md#8",
           "kind": "heading",
           "title": "5. Mobile architecture",
-          "line": 152,
+          "line": 159,
           "depth": 2,
-          "endLine": 177
+          "endLine": 184
         },
         {
           "id": "section:docs/product/architecture.md#9",
           "kind": "heading",
           "title": "6. Identity and account merge",
-          "line": 178,
+          "line": 185,
           "depth": 2,
-          "endLine": 192
+          "endLine": 199
         },
         {
           "id": "section:docs/product/architecture.md#10",
           "kind": "heading",
           "title": "7. Target data model",
-          "line": 193,
+          "line": 200,
           "depth": 2,
-          "endLine": 258
+          "endLine": 265
         },
         {
           "id": "section:docs/product/architecture.md#11",
           "kind": "heading",
           "title": "Catalog fields",
-          "line": 234,
+          "line": 241,
           "depth": 3,
-          "endLine": 244
+          "endLine": 251
         },
         {
           "id": "section:docs/product/architecture.md#12",
           "kind": "heading",
           "title": "Operational entities",
-          "line": 245,
+          "line": 252,
           "depth": 3,
-          "endLine": 258
+          "endLine": 265
         },
         {
           "id": "section:docs/product/architecture.md#13",
           "kind": "heading",
           "title": "8. Migration rules",
-          "line": 259,
+          "line": 266,
           "depth": 2,
-          "endLine": 272
+          "endLine": 279
         },
         {
           "id": "section:docs/product/architecture.md#14",
           "kind": "heading",
           "title": "9. API conventions",
-          "line": 273,
+          "line": 280,
           "depth": 2,
-          "endLine": 282
+          "endLine": 289
         },
         {
           "id": "section:docs/product/architecture.md#15",
           "kind": "heading",
           "title": "10. Security and privacy baseline",
-          "line": 283,
+          "line": 290,
           "depth": 2,
-          "endLine": 294
+          "endLine": 301
         }
       ],
       "symbols": []
@@ -11872,9 +11872,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 6285,
-      "lines": 89,
-      "sha256": "670d0e8b1349313d8ba0292f4f8a1c2dfe63adee04abdd0fd0bb40a77e5ecaef",
+      "bytes": 6446,
+      "lines": 91,
+      "sha256": "e5f10ccf384aaba95ba33b9ed11f489c080892f44195502702eebac7945d56f5",
       "summary": "6 indexed sections: Client flow skeleton, Status, Product constraints represented, Flow inventory, Visual language and review, …",
       "nodeIds": [
         "repository-inventory",
@@ -11890,7 +11890,7 @@
           "title": "docs/product/client-flow-skeleton.md",
           "line": 1,
           "depth": 0,
-          "endLine": 89
+          "endLine": 91
         },
         {
           "id": "section:docs/product/client-flow-skeleton.md#2",
@@ -11898,7 +11898,7 @@
           "title": "Client flow skeleton",
           "line": 1,
           "depth": 1,
-          "endLine": 89
+          "endLine": 91
         },
         {
           "id": "section:docs/product/client-flow-skeleton.md#3",
@@ -11930,15 +11930,15 @@
           "title": "Visual language and review",
           "line": 57,
           "depth": 2,
-          "endLine": 74
+          "endLine": 75
         },
         {
           "id": "section:docs/product/client-flow-skeleton.md#7",
           "kind": "heading",
           "title": "Next design pass",
-          "line": 75,
+          "line": 76,
           "depth": 2,
-          "endLine": 89
+          "endLine": 91
         }
       ],
       "symbols": []
@@ -11950,9 +11950,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 12965,
-      "lines": 246,
-      "sha256": "5e7e95569fb20b2fc16f00e31e2a709fbcc9162b5c1d6637cb5674cafe906655",
+      "bytes": 13164,
+      "lines": 248,
+      "sha256": "2baab296f8df5171bfa4f0c17205c3af4d84d04c8fa0a4a7943332a46dcb7ee1",
       "summary": "37 indexed sections: Target database model, 1. Identity and profile, `users` (existing, retained), `product_identities`, `anonymous_identities`, …",
       "nodeIds": [
         "repository-inventory",
@@ -11968,7 +11968,7 @@
           "title": "docs/product/data-model.md",
           "line": 1,
           "depth": 0,
-          "endLine": 246
+          "endLine": 248
         },
         {
           "id": "section:docs/product/data-model.md#2",
@@ -11976,7 +11976,7 @@
           "title": "Target database model",
           "line": 1,
           "depth": 1,
-          "endLine": 246
+          "endLine": 248
         },
         {
           "id": "section:docs/product/data-model.md#3",
@@ -12080,7 +12080,7 @@
           "title": "3. Recommendation and learning",
           "line": 101,
           "depth": 2,
-          "endLine": 159
+          "endLine": 161
         },
         {
           "id": "section:docs/product/data-model.md#16",
@@ -12104,167 +12104,167 @@
           "title": "`recommendations`",
           "line": 124,
           "depth": 3,
-          "endLine": 132
+          "endLine": 134
         },
         {
           "id": "section:docs/product/data-model.md#19",
           "kind": "heading",
           "title": "`recommendation_candidate_audits`",
-          "line": 133,
+          "line": 135,
           "depth": 3,
-          "endLine": 137
+          "endLine": 139
         },
         {
           "id": "section:docs/product/data-model.md#20",
           "kind": "heading",
           "title": "`interactions`",
-          "line": 138,
+          "line": 140,
           "depth": 3,
-          "endLine": 143
+          "endLine": 145
         },
         {
           "id": "section:docs/product/data-model.md#21",
           "kind": "heading",
           "title": "`preference_signals`",
-          "line": 144,
+          "line": 146,
           "depth": 3,
-          "endLine": 149
+          "endLine": 151
         },
         {
           "id": "section:docs/product/data-model.md#22",
           "kind": "heading",
           "title": "`saved_dishes`",
-          "line": 150,
+          "line": 152,
           "depth": 3,
-          "endLine": 154
+          "endLine": 156
         },
         {
           "id": "section:docs/product/data-model.md#23",
           "kind": "heading",
           "title": "`cooking_sessions`",
-          "line": 155,
+          "line": 157,
           "depth": 3,
-          "endLine": 159
+          "endLine": 161
         },
         {
           "id": "section:docs/product/data-model.md#24",
           "kind": "heading",
           "title": "4. Pantry and AI",
-          "line": 160,
+          "line": 162,
           "depth": 2,
-          "endLine": 185
+          "endLine": 187
         },
         {
           "id": "section:docs/product/data-model.md#25",
           "kind": "heading",
           "title": "`pantry_items`",
-          "line": 162,
+          "line": 164,
           "depth": 3,
-          "endLine": 167
+          "endLine": 169
         },
         {
           "id": "section:docs/product/data-model.md#26",
           "kind": "heading",
           "title": "`media_uploads` and `recognition_jobs`",
-          "line": 168,
+          "line": 170,
           "depth": 3,
-          "endLine": 173
+          "endLine": 175
         },
         {
           "id": "section:docs/product/data-model.md#27",
           "kind": "heading",
           "title": "`recipe_variants`",
-          "line": 174,
+          "line": 176,
           "depth": 3,
-          "endLine": 179
+          "endLine": 181
         },
         {
           "id": "section:docs/product/data-model.md#28",
           "kind": "heading",
           "title": "`ai_jobs`",
-          "line": 180,
+          "line": 182,
           "depth": 3,
-          "endLine": 185
+          "endLine": 187
         },
         {
           "id": "section:docs/product/data-model.md#29",
           "kind": "heading",
           "title": "5. Entitlements and configuration",
-          "line": 186,
+          "line": 188,
           "depth": 2,
-          "endLine": 211
+          "endLine": 213
         },
         {
           "id": "section:docs/product/data-model.md#30",
           "kind": "heading",
           "title": "`plans`, `entitlements`, `plan_entitlements`",
-          "line": 188,
+          "line": 190,
           "depth": 3,
-          "endLine": 193
+          "endLine": 195
         },
         {
           "id": "section:docs/product/data-model.md#31",
           "kind": "heading",
           "title": "`plan_assignments` and `subscription_events`",
-          "line": 194,
+          "line": 196,
           "depth": 3,
-          "endLine": 199
+          "endLine": 201
         },
         {
           "id": "section:docs/product/data-model.md#32",
           "kind": "heading",
           "title": "`usage_counters` and `usage_reservations`",
-          "line": 200,
+          "line": 202,
           "depth": 3,
-          "endLine": 205
+          "endLine": 207
         },
         {
           "id": "section:docs/product/data-model.md#33",
           "kind": "heading",
           "title": "`feature_configs` and `config_revisions`",
-          "line": 206,
+          "line": 208,
           "depth": 3,
-          "endLine": 211
+          "endLine": 213
         },
         {
           "id": "section:docs/product/data-model.md#34",
           "kind": "heading",
           "title": "6. Events and operations",
-          "line": 212,
+          "line": 214,
           "depth": 2,
-          "endLine": 231
+          "endLine": 233
         },
         {
           "id": "section:docs/product/data-model.md#35",
           "kind": "heading",
           "title": "`product_events`",
-          "line": 214,
+          "line": 216,
           "depth": 3,
-          "endLine": 219
+          "endLine": 221
         },
         {
           "id": "section:docs/product/data-model.md#36",
           "kind": "heading",
           "title": "`outbox_messages`",
-          "line": 220,
+          "line": 222,
           "depth": 3,
-          "endLine": 225
+          "endLine": 227
         },
         {
           "id": "section:docs/product/data-model.md#37",
           "kind": "heading",
           "title": "Audit and deletion",
-          "line": 226,
+          "line": 228,
           "depth": 3,
-          "endLine": 231
+          "endLine": 233
         },
         {
           "id": "section:docs/product/data-model.md#38",
           "kind": "heading",
           "title": "7. Legacy mapping",
-          "line": 232,
+          "line": 234,
           "depth": 2,
-          "endLine": 246
+          "endLine": 248
         }
       ],
       "symbols": []
@@ -12276,9 +12276,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 4108,
-      "lines": 87,
-      "sha256": "d7cdd838b63332d9e0c11702f40e2cccc270404c5548bc893b096d03bc88a906",
+      "bytes": 4315,
+      "lines": 90,
+      "sha256": "31805648968c8340618e1dace9a7a2b72ac0b85da65c6962225189a2c841ffd5",
       "summary": "6 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review, …",
       "nodeIds": [
         "repository-inventory",
@@ -12295,7 +12295,7 @@
           "title": "docs/product/decision-flow-concept-01.md",
           "line": 1,
           "depth": 0,
-          "endLine": 87
+          "endLine": 90
         },
         {
           "id": "section:docs/product/decision-flow-concept-01.md#2",
@@ -12303,7 +12303,7 @@
           "title": "Decision flow concept 01",
           "line": 1,
           "depth": 1,
-          "endLine": 87
+          "endLine": 90
         },
         {
           "id": "section:docs/product/decision-flow-concept-01.md#3",
@@ -12343,7 +12343,7 @@
           "title": "Core Design System v1 migration",
           "line": 70,
           "depth": 2,
-          "endLine": 87
+          "endLine": 90
         }
       ],
       "symbols": []
@@ -12355,9 +12355,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 14509,
-      "lines": 288,
-      "sha256": "5b620a815b8e65dbefc548f87ee14ab3c6d40757c6cd54540547207930f78c2a",
+      "bytes": 15111,
+      "lines": 296,
+      "sha256": "1d32f6f51ea117b08f8e3ab0c4dac52923197aa68e9391b79472ebc753f77b56",
       "summary": "27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, …",
       "nodeIds": [
         "repository-inventory",
@@ -12374,7 +12374,7 @@
           "title": "docs/product/delivery-plan.md",
           "line": 1,
           "depth": 0,
-          "endLine": 288
+          "endLine": 296
         },
         {
           "id": "section:docs/product/delivery-plan.md#2",
@@ -12382,215 +12382,215 @@
           "title": "Dependency-ordered delivery plan",
           "line": 1,
           "depth": 1,
-          "endLine": 288
+          "endLine": 296
         },
         {
           "id": "section:docs/product/delivery-plan.md#3",
           "kind": "heading",
           "title": "Operating rules for implementers",
-          "line": 7,
+          "line": 12,
           "depth": 2,
-          "endLine": 21
+          "endLine": 26
         },
         {
           "id": "section:docs/product/delivery-plan.md#4",
           "kind": "heading",
           "title": "Phase 0 - decisions, discovery and baseline (2-3 weeks)",
-          "line": 22,
+          "line": 27,
           "depth": 2,
-          "endLine": 82
+          "endLine": 88
         },
         {
           "id": "section:docs/product/delivery-plan.md#5",
           "kind": "heading",
           "title": "P0-01 Product discovery and choice-model gate",
-          "line": 28,
+          "line": 33,
           "depth": 3,
-          "endLine": 42
+          "endLine": 48
         },
         {
           "id": "section:docs/product/delivery-plan.md#6",
           "kind": "heading",
           "title": "P0-02 Engineering baseline",
-          "line": 43,
+          "line": 49,
           "depth": 3,
-          "endLine": 51
+          "endLine": 57
         },
         {
           "id": "section:docs/product/delivery-plan.md#7",
           "kind": "heading",
           "title": "P0-03 Content audit",
-          "line": 52,
+          "line": 58,
           "depth": 3,
-          "endLine": 61
+          "endLine": 67
         },
         {
           "id": "section:docs/product/delivery-plan.md#8",
           "kind": "heading",
           "title": "P0-04 Analytics baseline",
-          "line": 62,
+          "line": 68,
           "depth": 3,
-          "endLine": 73
+          "endLine": 79
         },
         {
           "id": "section:docs/product/delivery-plan.md#9",
           "kind": "heading",
           "title": "Decision Gate D0",
-          "line": 74,
+          "line": 80,
           "depth": 3,
-          "endLine": 82
+          "endLine": 88
         },
         {
           "id": "section:docs/product/delivery-plan.md#10",
           "kind": "heading",
           "title": "Phase 1 - data, analytics and monetization foundation (2-3 weeks)",
-          "line": 83,
+          "line": 89,
           "depth": 2,
-          "endLine": 139
+          "endLine": 145
         },
         {
           "id": "section:docs/product/delivery-plan.md#11",
           "kind": "heading",
           "title": "P1-01 V2 contracts and API conventions",
-          "line": 85,
+          "line": 91,
           "depth": 3,
-          "endLine": 95
+          "endLine": 101
         },
         {
           "id": "section:docs/product/delivery-plan.md#12",
           "kind": "heading",
           "title": "P1-02 Identity and guest migration",
-          "line": 96,
+          "line": 102,
           "depth": 3,
-          "endLine": 104
+          "endLine": 110
         },
         {
           "id": "section:docs/product/delivery-plan.md#13",
           "kind": "heading",
           "title": "P1-03 Product schema expansion",
-          "line": 105,
+          "line": 111,
           "depth": 3,
-          "endLine": 114
+          "endLine": 120
         },
         {
           "id": "section:docs/product/delivery-plan.md#14",
           "kind": "heading",
           "title": "P1-04 Analytics and observability",
-          "line": 115,
+          "line": 121,
           "depth": 3,
-          "endLine": 127
+          "endLine": 133
         },
         {
           "id": "section:docs/product/delivery-plan.md#15",
           "kind": "heading",
           "title": "P1-05 Feature config and entitlement skeleton",
-          "line": 128,
+          "line": 134,
           "depth": 3,
-          "endLine": 139
+          "endLine": 145
         },
         {
           "id": "section:docs/product/delivery-plan.md#16",
           "kind": "heading",
           "title": "Phase 2 - new core UX and recommendation engine v1 (3-5 weeks)",
-          "line": 140,
+          "line": 146,
           "depth": 2,
-          "endLine": 192
+          "endLine": 200
         },
         {
           "id": "section:docs/product/delivery-plan.md#17",
           "kind": "heading",
           "title": "P2-01 Mobile platform migration",
-          "line": 142,
+          "line": 148,
           "depth": 3,
-          "endLine": 149
+          "endLine": 155
         },
         {
           "id": "section:docs/product/delivery-plan.md#18",
           "kind": "heading",
           "title": "P2-02 Design system and shell",
-          "line": 150,
+          "line": 156,
           "depth": 3,
-          "endLine": 159
+          "endLine": 165
         },
         {
           "id": "section:docs/product/delivery-plan.md#19",
           "kind": "heading",
           "title": "P2-03 Recommendation engine v1",
-          "line": 160,
+          "line": 166,
           "depth": 3,
-          "endLine": 171
+          "endLine": 177
         },
         {
           "id": "section:docs/product/delivery-plan.md#20",
           "kind": "heading",
           "title": "P2-04 Recommendation experience",
-          "line": 172,
+          "line": 178,
           "depth": 3,
-          "endLine": 182
+          "endLine": 190
         },
         {
           "id": "section:docs/product/delivery-plan.md#21",
           "kind": "heading",
           "title": "P2-05 Favorites and beta readiness",
-          "line": 183,
+          "line": 191,
           "depth": 3,
-          "endLine": 192
+          "endLine": 200
         },
         {
           "id": "section:docs/product/delivery-plan.md#22",
           "kind": "heading",
           "title": "Phase 3 - feedback and personalization v2 (3-4 weeks)",
-          "line": 193,
+          "line": 201,
           "depth": 2,
-          "endLine": 207
+          "endLine": 215
         },
         {
           "id": "section:docs/product/delivery-plan.md#23",
           "kind": "heading",
           "title": "Phase 4 - AI adaptation (3-5 weeks)",
-          "line": 208,
+          "line": 216,
           "depth": 2,
-          "endLine": 223
+          "endLine": 231
         },
         {
           "id": "section:docs/product/delivery-plan.md#24",
           "kind": "heading",
           "title": "Phase 5 - manual Pantry (2-3 weeks)",
-          "line": 224,
+          "line": 232,
           "depth": 2,
-          "endLine": 237
+          "endLine": 245
         },
         {
           "id": "section:docs/product/delivery-plan.md#25",
           "kind": "heading",
           "title": "Phase 6 - photo recognition (4-6 weeks)",
-          "line": 238,
+          "line": 246,
           "depth": 2,
-          "endLine": 247
+          "endLine": 255
         },
         {
           "id": "section:docs/product/delivery-plan.md#26",
           "kind": "heading",
           "title": "Phase 7 - real subscriptions (only after product gates)",
-          "line": 248,
+          "line": 256,
           "depth": 2,
-          "endLine": 260
+          "endLine": 268
         },
         {
           "id": "section:docs/product/delivery-plan.md#27",
           "kind": "heading",
           "title": "Phase 8 - post-monetization options",
-          "line": 261,
+          "line": 269,
           "depth": 2,
-          "endLine": 266
+          "endLine": 274
         },
         {
           "id": "section:docs/product/delivery-plan.md#28",
           "kind": "heading",
           "title": "Release task template",
-          "line": 267,
+          "line": 275,
           "depth": 2,
-          "endLine": 288
+          "endLine": 296
         }
       ],
       "symbols": []
@@ -12602,10 +12602,10 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 6633,
-      "lines": 134,
-      "sha256": "2d4fad6c8dc184e89d246d7a173e4a4831f50ee406b355f5556d30be4490b14d",
-      "summary": "10 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, …",
+      "bytes": 8158,
+      "lines": 156,
+      "sha256": "c82fe79ed85a5909ceebf75d962c7332199c60c071094cdcf95ed418bba1bec1",
+      "summary": "11 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, …",
       "nodeIds": [
         "repository-inventory",
         "design-system-quality"
@@ -12620,7 +12620,7 @@
           "title": "docs/product/design-system-v1.md",
           "line": 1,
           "depth": 0,
-          "endLine": 134
+          "endLine": 156
         },
         {
           "id": "section:docs/product/design-system-v1.md#2",
@@ -12628,7 +12628,7 @@
           "title": "Core Design System v1",
           "line": 1,
           "depth": 1,
-          "endLine": 134
+          "endLine": 156
         },
         {
           "id": "section:docs/product/design-system-v1.md#3",
@@ -12660,7 +12660,7 @@
           "title": "Migrated product artifacts",
           "line": 78,
           "depth": 2,
-          "endLine": 107
+          "endLine": 117
         },
         {
           "id": "section:docs/product/design-system-v1.md#7",
@@ -12689,18 +12689,26 @@
         {
           "id": "section:docs/product/design-system-v1.md#10",
           "kind": "heading",
-          "title": "Creation review",
+          "title": "Stage 0 research prototype",
           "line": 108,
-          "depth": 2,
-          "endLine": 126
+          "depth": 3,
+          "endLine": 117
         },
         {
           "id": "section:docs/product/design-system-v1.md#11",
           "kind": "heading",
-          "title": "Engineering handoff boundary",
-          "line": 127,
+          "title": "Creation review",
+          "line": 118,
           "depth": 2,
-          "endLine": 134
+          "endLine": 148
+        },
+        {
+          "id": "section:docs/product/design-system-v1.md#12",
+          "kind": "heading",
+          "title": "Engineering handoff boundary",
+          "line": 149,
+          "depth": 2,
+          "endLine": 156
         }
       ],
       "symbols": []
@@ -12712,10 +12720,10 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 8645,
-      "lines": 134,
-      "sha256": "56455abd02d73d641c2e1af83218b481a44977798b025f99f90689c5cbd1a966",
-      "summary": "7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, …",
+      "bytes": 10966,
+      "lines": 168,
+      "sha256": "508391aa055df9e144b1c6ea92c7974477b79a5f0c604f2651e18fcf7668e5a6",
+      "summary": "8 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Founder-selected working direction, 3. Open hypotheses, 4. Stage 0 protocol and locked thresholds, …",
       "nodeIds": [
         "repository-inventory",
         "product-strategy",
@@ -12731,7 +12739,7 @@
           "title": "docs/product/discovery-decisions.md",
           "line": 1,
           "depth": 0,
-          "endLine": 134
+          "endLine": 168
         },
         {
           "id": "section:docs/product/discovery-decisions.md#2",
@@ -12739,7 +12747,7 @@
           "title": "Discovery decisions and implementation gates",
           "line": 1,
           "depth": 1,
-          "endLine": 134
+          "endLine": 168
         },
         {
           "id": "section:docs/product/discovery-decisions.md#3",
@@ -12752,42 +12760,312 @@
         {
           "id": "section:docs/product/discovery-decisions.md#4",
           "kind": "heading",
-          "title": "2. Open hypotheses",
+          "title": "2. Founder-selected working direction",
           "line": 28,
           "depth": 2,
-          "endLine": 44
+          "endLine": 46
         },
         {
           "id": "section:docs/product/discovery-decisions.md#5",
           "kind": "heading",
-          "title": "3. Stage 0 protocol and locked thresholds",
-          "line": 45,
+          "title": "3. Open hypotheses",
+          "line": 47,
           "depth": 2,
-          "endLine": 69
+          "endLine": 63
         },
         {
           "id": "section:docs/product/discovery-decisions.md#6",
           "kind": "heading",
-          "title": "4. H3 concept-test contract",
-          "line": 70,
+          "title": "4. Stage 0 protocol and locked thresholds",
+          "line": 64,
           "depth": 2,
-          "endLine": 104
+          "endLine": 88
         },
         {
           "id": "section:docs/product/discovery-decisions.md#7",
           "kind": "heading",
-          "title": "5. Content gate",
-          "line": 105,
+          "title": "5. H3 concept-test contract",
+          "line": 89,
           "depth": 2,
-          "endLine": 121
+          "endLine": 133
         },
         {
           "id": "section:docs/product/discovery-decisions.md#8",
           "kind": "heading",
-          "title": "6. Implementation consequences",
-          "line": 122,
+          "title": "6. Content gate",
+          "line": 134,
           "depth": 2,
-          "endLine": 134
+          "endLine": 150
+        },
+        {
+          "id": "section:docs/product/discovery-decisions.md#9",
+          "kind": "heading",
+          "title": "7. Implementation consequences",
+          "line": 151,
+          "depth": 2,
+          "endLine": 168
+        }
+      ],
+      "symbols": []
+    },
+    {
+      "id": "file:docs/product/executable-implementation-plan.md",
+      "path": "docs/product/executable-implementation-plan.md",
+      "language": "markdown",
+      "kind": "documentation",
+      "binary": false,
+      "generated": false,
+      "bytes": 24273,
+      "lines": 561,
+      "sha256": "3c456e8759bd1a450077c444e569c50f45fb5b4a465472b9d0a4864240f89466",
+      "summary": "29 indexed sections: Executable product implementation plan, Naming boundary, Status vocabulary, Current status, Dependency path, …",
+      "nodeIds": [
+        "repository-inventory",
+        "delivery-roadmap"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#1",
+          "kind": "file",
+          "title": "docs/product/executable-implementation-plan.md",
+          "line": 1,
+          "depth": 0,
+          "endLine": 561
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#2",
+          "kind": "heading",
+          "title": "Executable product implementation plan",
+          "line": 1,
+          "depth": 1,
+          "endLine": 561
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#3",
+          "kind": "heading",
+          "title": "Naming boundary",
+          "line": 12,
+          "depth": 2,
+          "endLine": 17
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#4",
+          "kind": "heading",
+          "title": "Status vocabulary",
+          "line": 18,
+          "depth": 2,
+          "endLine": 26
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#5",
+          "kind": "heading",
+          "title": "Current status",
+          "line": 27,
+          "depth": 2,
+          "endLine": 37
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#6",
+          "kind": "heading",
+          "title": "Dependency path",
+          "line": 38,
+          "depth": 2,
+          "endLine": 45
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#7",
+          "kind": "heading",
+          "title": "Mandatory execution contract",
+          "line": 46,
+          "depth": 2,
+          "endLine": 60
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#8",
+          "kind": "heading",
+          "title": "Cross-stage definition of done",
+          "line": 61,
+          "depth": 2,
+          "endLine": 67
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#9",
+          "kind": "heading",
+          "title": "Stage 0 — Delivery baseline and branch hygiene",
+          "line": 68,
+          "depth": 2,
+          "endLine": 87
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#10",
+          "kind": "heading",
+          "title": "Stage 1 — Research prototype readiness",
+          "line": 88,
+          "depth": 2,
+          "endLine": 114
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#11",
+          "kind": "heading",
+          "title": "Stage 2 — Participant research and Decision Gate D0",
+          "line": 115,
+          "depth": 2,
+          "endLine": 158
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#12",
+          "kind": "heading",
+          "title": "Stage 3 — Engineering, content and analytics baseline",
+          "line": 159,
+          "depth": 2,
+          "endLine": 183
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#13",
+          "kind": "heading",
+          "title": "Stage 4 — Product v2 contracts and database foundation",
+          "line": 184,
+          "depth": 2,
+          "endLine": 207
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#14",
+          "kind": "heading",
+          "title": "Stage 5 — Product identity and guest migration",
+          "line": 208,
+          "depth": 2,
+          "endLine": 227
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#15",
+          "kind": "heading",
+          "title": "Stage 6 — Analytics and observability foundation",
+          "line": 228,
+          "depth": 2,
+          "endLine": 251
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#16",
+          "kind": "heading",
+          "title": "Stage 7 — Feature configuration and entitlement skeleton",
+          "line": 252,
+          "depth": 2,
+          "endLine": 271
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#17",
+          "kind": "heading",
+          "title": "Stage 8 — Mobile platform migration",
+          "line": 272,
+          "depth": 2,
+          "endLine": 292
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#18",
+          "kind": "heading",
+          "title": "Stage 9 — Mobile design system and application shell",
+          "line": 293,
+          "depth": 2,
+          "endLine": 314
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#19",
+          "kind": "heading",
+          "title": "Stage 10 — Recommendation engine v1",
+          "line": 315,
+          "depth": 2,
+          "endLine": 335
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#20",
+          "kind": "heading",
+          "title": "Stage 11 — Core decision experience and Closed Beta 1",
+          "line": 336,
+          "depth": 2,
+          "endLine": 361
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#21",
+          "kind": "heading",
+          "title": "Stage 12 — Rejection, cooking and personalization v2",
+          "line": 362,
+          "depth": 2,
+          "endLine": 381
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#22",
+          "kind": "heading",
+          "title": "Stage 13 — Open Beta measurement gate",
+          "line": 382,
+          "depth": 2,
+          "endLine": 400
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#23",
+          "kind": "heading",
+          "title": "Stage 14 — AI recipe adaptation",
+          "line": 401,
+          "depth": 2,
+          "endLine": 420
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#24",
+          "kind": "heading",
+          "title": "Stage 15 — Manual Pantry",
+          "line": 421,
+          "depth": 2,
+          "endLine": 440
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#25",
+          "kind": "heading",
+          "title": "Stage 16 — Photo recognition",
+          "line": 441,
+          "depth": 2,
+          "endLine": 460
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#26",
+          "kind": "heading",
+          "title": "Stage 17 — Subscription validation and implementation",
+          "line": 461,
+          "depth": 2,
+          "endLine": 480
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#27",
+          "kind": "heading",
+          "title": "Stage 18 — Production hardening and store release",
+          "line": 481,
+          "depth": 2,
+          "endLine": 500
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#28",
+          "kind": "heading",
+          "title": "Stage 19 — Product operating loop",
+          "line": 501,
+          "depth": 2,
+          "endLine": 517
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#29",
+          "kind": "heading",
+          "title": "Reuse, refactor and rewrite boundary",
+          "line": 518,
+          "depth": 2,
+          "endLine": 546
+        },
+        {
+          "id": "section:docs/product/executable-implementation-plan.md#30",
+          "kind": "heading",
+          "title": "Standard task handoff template",
+          "line": 547,
+          "depth": 2,
+          "endLine": 561
         }
       ],
       "symbols": []
@@ -12862,9 +13140,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 5778,
-      "lines": 109,
-      "sha256": "1c13925e8c8712728ed10f3d6335b1a9ff80c85f0deac2a3a392f7f8a69826ed",
+      "bytes": 6219,
+      "lines": 113,
+      "sha256": "22b377dbbd006ad11323c68e25681dd72c86f3104bf82717a62302d43e8d6164",
       "summary": "7 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, …",
       "nodeIds": [
         "repository-inventory",
@@ -12880,7 +13158,7 @@
           "title": "docs/product/p0-mobile-wireframes-pass-01.md",
           "line": 1,
           "depth": 0,
-          "endLine": 109
+          "endLine": 113
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#2",
@@ -12888,7 +13166,7 @@
           "title": "P0 mobile wireframes pass 01",
           "line": 1,
           "depth": 1,
-          "endLine": 109
+          "endLine": 113
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#3",
@@ -12904,39 +13182,39 @@
           "title": "Product decisions represented",
           "line": 33,
           "depth": 2,
-          "endLine": 46
+          "endLine": 47
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#5",
           "kind": "heading",
           "title": "Design-system use",
-          "line": 47,
+          "line": 48,
           "depth": 2,
-          "endLine": 57
+          "endLine": 58
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#6",
           "kind": "heading",
           "title": "Creation review",
-          "line": 58,
+          "line": 59,
           "depth": 2,
-          "endLine": 73
+          "endLine": 74
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#7",
           "kind": "heading",
           "title": "Remaining design work",
-          "line": 74,
+          "line": 75,
           "depth": 2,
-          "endLine": 86
+          "endLine": 87
         },
         {
           "id": "section:docs/product/p0-mobile-wireframes-pass-01.md#8",
           "kind": "heading",
           "title": "Pass 02 · Core Design System v1",
-          "line": 87,
+          "line": 88,
           "depth": 2,
-          "endLine": 109
+          "endLine": 113
         }
       ],
       "symbols": []
@@ -12948,9 +13226,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 17002,
-      "lines": 302,
-      "sha256": "4d5ab463501ebcdb2c624e5540853f7a774300ec2f6f15841809bb0e4730fcea",
+      "bytes": 17247,
+      "lines": 305,
+      "sha256": "980e5d8e678e23990c8adb6081c7b03cda1c7c8b8827719a7d29d46c020aedea",
       "summary": "14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, …",
       "nodeIds": [
         "repository-inventory",
@@ -12969,7 +13247,7 @@
           "title": "docs/product/quality-and-design.md",
           "line": 1,
           "depth": 0,
-          "endLine": 302
+          "endLine": 305
         },
         {
           "id": "section:docs/product/quality-and-design.md#2",
@@ -12977,7 +13255,7 @@
           "title": "Design and quality operating model",
           "line": 1,
           "depth": 1,
-          "endLine": 302
+          "endLine": 305
         },
         {
           "id": "section:docs/product/quality-and-design.md#3",
@@ -12985,103 +13263,103 @@
           "title": "1. Design workflow",
           "line": 3,
           "depth": 2,
-          "endLine": 167
+          "endLine": 170
         },
         {
           "id": "section:docs/product/quality-and-design.md#4",
           "kind": "heading",
           "title": "Foundation v1",
-          "line": 58,
+          "line": 60,
           "depth": 3,
-          "endLine": 98
+          "endLine": 100
         },
         {
           "id": "section:docs/product/quality-and-design.md#5",
           "kind": "heading",
           "title": "Core Design System v1",
-          "line": 99,
+          "line": 101,
           "depth": 3,
-          "endLine": 109
+          "endLine": 111
         },
         {
           "id": "section:docs/product/quality-and-design.md#6",
           "kind": "heading",
           "title": "Decision flow concept 01",
-          "line": 110,
+          "line": 112,
           "depth": 3,
-          "endLine": 126
+          "endLine": 129
         },
         {
           "id": "section:docs/product/quality-and-design.md#7",
           "kind": "heading",
           "title": "Client flow skeleton",
-          "line": 127,
+          "line": 130,
           "depth": 3,
-          "endLine": 146
+          "endLine": 149
         },
         {
           "id": "section:docs/product/quality-and-design.md#8",
           "kind": "heading",
           "title": "P0 mobile wireframes pass 01",
-          "line": 147,
+          "line": 150,
           "depth": 3,
-          "endLine": 167
+          "endLine": 170
         },
         {
           "id": "section:docs/product/quality-and-design.md#9",
           "kind": "heading",
           "title": "2. QA strategy",
-          "line": 168,
+          "line": 171,
           "depth": 2,
-          "endLine": 189
+          "endLine": 192
         },
         {
           "id": "section:docs/product/quality-and-design.md#10",
           "kind": "heading",
           "title": "3. Critical invariant suite",
-          "line": 190,
+          "line": 193,
           "depth": 2,
-          "endLine": 224
+          "endLine": 227
         },
         {
           "id": "section:docs/product/quality-and-design.md#11",
           "kind": "heading",
           "title": "4. AI evaluation",
-          "line": 225,
+          "line": 228,
           "depth": 2,
-          "endLine": 240
+          "endLine": 243
         },
         {
           "id": "section:docs/product/quality-and-design.md#12",
           "kind": "heading",
           "title": "5. Accessibility and localization gates",
-          "line": 241,
+          "line": 244,
           "depth": 2,
-          "endLine": 249
+          "endLine": 252
         },
         {
           "id": "section:docs/product/quality-and-design.md#13",
           "kind": "heading",
           "title": "6. CI and release gates",
-          "line": 250,
+          "line": 253,
           "depth": 2,
-          "endLine": 280
+          "endLine": 283
         },
         {
           "id": "section:docs/product/quality-and-design.md#14",
           "kind": "heading",
           "title": "7. Definition of Done",
-          "line": 281,
+          "line": 284,
           "depth": 2,
-          "endLine": 286
+          "endLine": 289
         },
         {
           "id": "section:docs/product/quality-and-design.md#15",
           "kind": "heading",
           "title": "8. Discovery quality gate",
-          "line": 287,
+          "line": 290,
           "depth": 2,
-          "endLine": 302
+          "endLine": 305
         }
       ],
       "symbols": []
@@ -13093,9 +13371,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 2397,
-      "lines": 47,
-      "sha256": "5e1824a021734469709e07054c274a85bbfb7cce6e15f62070da7616855a9295",
+      "bytes": 3136,
+      "lines": 55,
+      "sha256": "1573efcd116f3bd3615a2a1c9c587b3f2539c6fcfc6efc8434a7528ca41c0801",
       "summary": "4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol",
       "nodeIds": [
         "repository-inventory",
@@ -13111,7 +13389,7 @@
           "title": "docs/product/README.md",
           "line": 1,
           "depth": 0,
-          "endLine": 47
+          "endLine": 55
         },
         {
           "id": "section:docs/product/README.md#2",
@@ -13119,31 +13397,263 @@
           "title": "RandoMeal product engineering blueprint",
           "line": 1,
           "depth": 1,
-          "endLine": 47
+          "endLine": 55
         },
         {
           "id": "section:docs/product/README.md#3",
           "kind": "heading",
           "title": "Product invariant",
-          "line": 24,
+          "line": 30,
           "depth": 2,
-          "endLine": 31
+          "endLine": 38
         },
         {
           "id": "section:docs/product/README.md#4",
           "kind": "heading",
           "title": "Decision status",
-          "line": 32,
+          "line": 39,
           "depth": 2,
-          "endLine": 37
+          "endLine": 45
         },
         {
           "id": "section:docs/product/README.md#5",
           "kind": "heading",
           "title": "Change protocol",
-          "line": 38,
+          "line": 46,
           "depth": 2,
-          "endLine": 47
+          "endLine": 55
+        }
+      ],
+      "symbols": []
+    },
+    {
+      "id": "file:docs/product/stage-0-maze-study.md",
+      "path": "docs/product/stage-0-maze-study.md",
+      "language": "markdown",
+      "kind": "documentation",
+      "binary": false,
+      "generated": false,
+      "bytes": 9107,
+      "lines": 194,
+      "sha256": "52c716187f6d14701e88e1b447e4c65c46648b847b228e479adecd7ad258174e",
+      "summary": "12 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, …",
+      "nodeIds": [
+        "repository-inventory",
+        "choice-cardinality-gate",
+        "delivery-roadmap",
+        "analytics-measurement"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#1",
+          "kind": "file",
+          "title": "docs/product/stage-0-maze-study.md",
+          "line": 1,
+          "depth": 0,
+          "endLine": 194
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#2",
+          "kind": "heading",
+          "title": "Stage 0 Maze study",
+          "line": 1,
+          "depth": 1,
+          "endLine": 194
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#3",
+          "kind": "heading",
+          "title": "Links and ownership",
+          "line": 7,
+          "depth": 2,
+          "endLine": 24
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#4",
+          "kind": "heading",
+          "title": "Research decision",
+          "line": 25,
+          "depth": 2,
+          "endLine": 40
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#5",
+          "kind": "heading",
+          "title": "Participant flow",
+          "line": 41,
+          "depth": 2,
+          "endLine": 84
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#6",
+          "kind": "heading",
+          "title": "Screener",
+          "line": 53,
+          "depth": 3,
+          "endLine": 67
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#7",
+          "kind": "heading",
+          "title": "Context questions",
+          "line": 68,
+          "depth": 3,
+          "endLine": 84
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#8",
+          "kind": "heading",
+          "title": "Variant contract",
+          "line": 85,
+          "depth": 2,
+          "endLine": 126
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#9",
+          "kind": "heading",
+          "title": "Post-comparison questions",
+          "line": 109,
+          "depth": 3,
+          "endLine": 126
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#10",
+          "kind": "heading",
+          "title": "Privacy and collection settings",
+          "line": 127,
+          "depth": 2,
+          "endLine": 142
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#11",
+          "kind": "heading",
+          "title": "Operating protocol",
+          "line": 143,
+          "depth": 2,
+          "endLine": 170
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#12",
+          "kind": "heading",
+          "title": "Verification record",
+          "line": 171,
+          "depth": 2,
+          "endLine": 184
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#13",
+          "kind": "heading",
+          "title": "Change and stop rules",
+          "line": 185,
+          "depth": 2,
+          "endLine": 194
+        }
+      ],
+      "symbols": []
+    },
+    {
+      "id": "file:docs/product/stage-0-research-prototype.md",
+      "path": "docs/product/stage-0-research-prototype.md",
+      "language": "markdown",
+      "kind": "documentation",
+      "binary": false,
+      "generated": false,
+      "bytes": 7657,
+      "lines": 167,
+      "sha256": "e803004724f90991215edde68a9a1d505bd46bfcf0b7715b16e8ec9a53e28a9a",
+      "summary": "9 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Clickable prototype starting points, Moderator protocol, …",
+      "nodeIds": [
+        "repository-inventory",
+        "choice-cardinality-gate",
+        "analytics-measurement",
+        "design-system-quality"
+      ],
+      "imports": [],
+      "localDependencies": [],
+      "routes": [],
+      "sections": [
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#1",
+          "kind": "file",
+          "title": "docs/product/stage-0-research-prototype.md",
+          "line": 1,
+          "depth": 0,
+          "endLine": 167
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#2",
+          "kind": "heading",
+          "title": "Stage 0 research prototype handoff",
+          "line": 1,
+          "depth": 1,
+          "endLine": 167
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#3",
+          "kind": "heading",
+          "title": "Purpose",
+          "line": 17,
+          "depth": 2,
+          "endLine": 27
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#4",
+          "kind": "heading",
+          "title": "Canonical structure",
+          "line": 28,
+          "depth": 2,
+          "endLine": 44
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#5",
+          "kind": "heading",
+          "title": "Clickable prototype starting points",
+          "line": 45,
+          "depth": 2,
+          "endLine": 60
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#6",
+          "kind": "heading",
+          "title": "Moderator protocol",
+          "line": 61,
+          "depth": 2,
+          "endLine": 85
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#7",
+          "kind": "heading",
+          "title": "Analytics annotation contract",
+          "line": 86,
+          "depth": 2,
+          "endLine": 115
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#8",
+          "kind": "heading",
+          "title": "Responsive and accessibility evidence",
+          "line": 116,
+          "depth": 2,
+          "endLine": 126
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#9",
+          "kind": "heading",
+          "title": "Creation review evidence",
+          "line": 127,
+          "depth": 2,
+          "endLine": 151
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#10",
+          "kind": "heading",
+          "title": "Remaining research work",
+          "line": 152,
+          "depth": 2,
+          "endLine": 167
         }
       ],
       "symbols": []
@@ -13242,9 +13752,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 59467,
-      "lines": 908,
-      "sha256": "951fbac7b75c0beb82d3c960a63066fd10a6e259bc1ac43ed677fc5df64e687a",
+      "bytes": 63331,
+      "lines": 927,
+      "sha256": "00f08f2c96d9fb9fee2e5cc3ab5d6f8617614310a02176283df77f31f2773163",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -13260,7 +13770,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 908
+          "endLine": 927
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -13300,15 +13810,15 @@
           "title": "nodes",
           "line": 63,
           "depth": 1,
-          "endLine": 841
+          "endLine": 860
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 842,
+          "line": 861,
           "depth": 1,
-          "endLine": 908
+          "endLine": 927
         }
       ],
       "symbols": []

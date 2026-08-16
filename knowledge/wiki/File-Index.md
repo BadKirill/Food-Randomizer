@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a`
+Fingerprint: `7756907849598ecf033e6631a16ca34f80a084d711179314e5cee94ef4fd046e`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -120,12 +120,15 @@ Fingerprint: `e4c9c3669dfad41f30beff565915bd05ab6ca61352f426bec4c6d64e247c663a`
 | `docs/product/data-model.md` | markdown | repository-inventory, target-data-model | 37 indexed sections: Target database model, 1. Identity and profile, `users` (existing, retained), `product_identities`, `anonymous_identities`, … |
 | `docs/product/decision-flow-concept-01.md` | markdown | repository-inventory, choice-cardinality-gate, design-system-quality | 6 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review, … |
 | `docs/product/delivery-plan.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap | 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, … |
-| `docs/product/design-system-v1.md` | markdown | repository-inventory, design-system-quality | 10 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, … |
-| `docs/product/discovery-decisions.md` | markdown | repository-inventory, product-strategy, choice-cardinality-gate | 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, … |
+| `docs/product/design-system-v1.md` | markdown | repository-inventory, design-system-quality | 11 indexed sections: Core Design System v1, Purpose, Foundations, Component inventory, Migrated product artifacts, … |
+| `docs/product/discovery-decisions.md` | markdown | repository-inventory, product-strategy, choice-cardinality-gate | 8 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Founder-selected working direction, 3. Open hypotheses, 4. Stage 0 protocol and locked thresholds, … |
+| `docs/product/executable-implementation-plan.md` | markdown | repository-inventory, delivery-roadmap | 29 indexed sections: Executable product implementation plan, Naming boundary, Status vocabulary, Current status, Dependency path, … |
 | `docs/product/figma-governance.md` | markdown | figma-canonical-file, repository-inventory, design-system-quality | 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff |
 | `docs/product/p0-mobile-wireframes-pass-01.md` | markdown | repository-inventory, design-system-quality | 7 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, … |
 | `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, … |
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
+| `docs/product/stage-0-maze-study.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap, analytics-measurement | 12 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, … |
+| `docs/product/stage-0-research-prototype.md` | markdown | repository-inventory, choice-cardinality-gate, analytics-measurement, design-system-quality | 9 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Clickable prototype starting points, Moderator protocol, … |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |
 | `knowledge/general-ai-baseline.md` | markdown | knowledge-system, repository-inventory | 10 indexed sections: General Rules for AI Coding Agents, Cross-Project Source Hierarchy, Shared-Baseline Change Synchronization, Evidence Before Action, Minimal and Focused Code, … |

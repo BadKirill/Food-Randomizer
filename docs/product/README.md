@@ -20,20 +20,28 @@ Read in this order:
 7. [`quality-and-design.md`](quality-and-design.md) - design delivery, QA strategy, security,
    accessibility, and release gates.
 8. [`delivery-plan.md`](delivery-plan.md) - dependency-ordered, AI-ready execution plan.
+9. [`executable-implementation-plan.md`](executable-implementation-plan.md) - operational Stage
+   0-19 queue, status, branch boundaries, exit checks and rollback handoff.
+10. [`stage-0-research-prototype.md`](stage-0-research-prototype.md) - canonical Figma research
+    prototype nodes, moderator protocol, analytics annotations and creation-review evidence.
+11. [`stage-0-maze-study.md`](stage-0-maze-study.md) - live A/B/H Maze study, participant flow,
+    privacy settings, verified links, operating protocol and evidence handoff.
 
 ## Product invariant
 
 RandoMeal is a decision engine, not a recipe catalog. The primary flow must move a user from
 uncertainty to a safe, explainable meal decision in less than 30 seconds without a browsing feed.
-Whether the best decision surface contains one recommendation or a ranked shortlist of two or
-three is a Stage 0 hypothesis, not an architectural invariant. AI may adapt a canonical recipe,
-but it must not be required to produce a normal recommendation.
+The founder-selected working direction is one dominant recommendation plus two quieter alternatives
+with factual benefit/cost labels. Stage 0 still validates this hybrid candidate against the single
+and equally weighted shortlist bounds, so presentation remains server-owned and reversible. AI may
+adapt a canonical recipe, but it must not be required to produce a normal recommendation.
 
 ## Decision status
 
 Architecture decisions in these files are `Accepted` for implementation unless a later ADR
-explicitly supersedes them. Product assumptions, interaction cardinality and beta targets remain
-hypotheses until the gates in `discovery-decisions.md` are passed.
+explicitly supersedes them. Product assumptions and beta targets remain hypotheses until the gates
+in `discovery-decisions.md` are passed. The hybrid hierarchy is an approved working direction, not
+a claim of participant validation.
 
 ## Change protocol
 

@@ -1,11 +1,11 @@
 # Discovery decisions and implementation gates
 
-Status: Stage 0 evidence pending
+Status: founder direction selected; Stage 0 validation evidence pending
 
 Inputs: `RandoMeal_Product_Discovery_Stage_0.docx`,
 `RandoMeal_Discovery_Workbook.xlsx`, and the founder's competitor analysis
 
-Last synchronized: 2026-07-14
+Last updated: 2026-08-14
 
 This file separates accepted strategic direction from hypotheses. Implementation agents must not
 turn an untested hypothesis into an irreversible product or data-model decision.
@@ -25,12 +25,31 @@ turn an untested hypothesis into an irreversible product or data-model decision.
 - Search/feed, weekly planning, social import, photo recognition and real payments are not part of
   the initial decision loop without new evidence.
 
-## 2. Open hypotheses
+## 2. Founder-selected working direction
+
+The founder selected `hybrid` as the working launch candidate on 2026-08-14:
+
+- one primary recommendation is visually dominant and represents RandoMeal's best answer;
+- two alternatives remain visible but quieter, extending coverage without turning the decision
+  surface into a catalogue;
+- every alternative states one concrete benefit and one concrete cost relative to the primary,
+  such as `Easier · 120 kcal more` or `More protein · 15 min longer`;
+- tradeoff labels come only from verified structured recipe facts. Vague claims such as `healthier`
+  are not allowed unless the product defines and proves the underlying measure;
+- all three results pass the same hard-safety filters. An alternative never exists by weakening a
+  dietary restriction;
+- one meal is selected at a time and the screen retains one dominant cooking CTA.
+
+This is an approved product direction and the default target for design and implementation
+planning. It is not participant evidence. Decision Gate D0 now validates or overturns this working
+direction by comparing it with the single and shortlist bounds.
+
+## 3. Open hypotheses
 
 | ID    | Hypothesis                                                                                         | Decision affected                 | Evidence required                                                            |
 | ----- | -------------------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------------------------------------------------------- |
 | H1/H2 | The problem is frequent and current workarounds have meaningful cost.                              | Proceed, narrow ICP or stop.      | Recent incidents from the target segment, not stated intent.                 |
-| H3    | One recommendation plus `Another` is acceptable; alternatively a shortlist of 2-3 performs better. | Core recommendation presentation. | Balanced concept test and, if still ambiguous, instrumented beta experiment. |
+| H3    | One dominant recommendation plus two quieter, tradeoff-labelled alternatives produces a faster trusted decision than either bound. | Core recommendation presentation. | Balanced A/B/H concept test and, if still ambiguous, instrumented beta experiment. |
 | H4    | Users need no more than three situational inputs.                                                  | Home/context interaction.         | Observed selections and time-to-value.                                       |
 | H5    | Verified recipes are trusted more than AI-from-scratch.                                            | Content/AI boundary.              | Trust requirements and behavior in concept/MVP tests.                        |
 | H6    | AI adaptation rescues a near-miss.                                                                 | Whether AI enters P1.             | Concrete recent use cases and fake-door/usage evidence.                      |
@@ -42,7 +61,7 @@ The third research contrast must not combine two questions. `Feed/search` is a n
 interaction model for H3. `Pantry-first` is a separate value/input hypothesis for H7. Run and log
 them as separate exercises.
 
-## 3. Stage 0 protocol and locked thresholds
+## 4. Stage 0 protocol and locked thresholds
 
 Recruit 12 completed interviews in batches of three, adding up to three only if evidence remains
 unstable. Include two contrast users and at least six participants who recently used a recipe or
@@ -67,12 +86,14 @@ Overall workbook rule: `GO` when at least five of six criteria pass, `STOP / maj
 least three fail, otherwise `PIVOT`. This arithmetic is a decision aid, not a substitute for
 reviewing evidence quality and segment concentration.
 
-## 4. H3 concept-test contract
+## 5. H3 concept-test contract
 
 Use equal-fidelity, randomized concept cards with the same dish quality, explanation and CTA:
 
-- A — one ranked recommendation plus `Another`;
-- B — two or three ranked recommendations visible together;
+- A — one ranked recommendation plus `Another`, the narrow bound;
+- B — two or three equally weighted recommendations visible together, the broad bound;
+- H — one dominant recommendation plus two quieter alternatives with explicit benefit/cost labels,
+  the founder-selected candidate;
 - C — feed/search control, tested only to learn whether browsing is actually desired;
 - D — Pantry-first input, tested separately for H7 and never treated as an H3 alternative.
 
@@ -81,10 +102,10 @@ participant would start cooking. Do not ask only which screen they "like".
 
 Decision outcomes:
 
-- `GO_SINGLE`: clear preference/acceptance for A; launch single while retaining server support for
+- `GO_SINGLE`: clear evidence for A; launch single while retaining server support for
   a shortlist.
-- `GO_HYBRID`: A/B split or explicit demand for one strong default plus two optional alternatives;
-  launch hybrid.
+- `GO_HYBRID`: H reaches the locked acceptance threshold without worsening time-to-decision,
+  abandonment, trust or safety; launch the founder-selected hierarchy.
 - `PIVOT_SHORTLIST`: users consistently need visible comparison; launch two or three, never an
   unbounded feed.
 - `PIVOT_PANTRY`, `PIVOT_NUTRITION`, `PIVOT_HOUSEHOLD`: a different job dominates; return to scope
@@ -92,7 +113,8 @@ Decision outcomes:
 - `STOP`: problem is rare, alternatives are satisfactory or the target segment prefers browsing
   as the job itself.
 
-If qualitative evidence cannot select A/B, run a server-assigned beta experiment. The primary
+If qualitative evidence cannot confirm H or select a bound, run a server-assigned beta experiment.
+The primary
 metric is a successful meal decision; guardrails are time-to-decision, abandonment, rejection,
 hard-constraint incidents and D7. Never select a variant on clicks or recipes viewed alone.
 
@@ -102,7 +124,14 @@ documented in `docs/product/decision-flow-concept-01.md`. Its D0-A and D0-B scre
 stimuli only. They do not satisfy this gate until the protocol above is run and the evidence is
 signed.
 
-## 5. Content gate
+The runnable research artifact is the canonical Figma
+[`Stage 0 Research Prototype`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2),
+documented in `docs/product/stage-0-research-prototype.md`. It includes randomized A/B-ready flows,
+the H diagnostic, separate C and D controls, recovery, moderator guidance and analytics
+annotations. Creating the prototype does not satisfy D0; participant evidence and a signed outcome
+remain mandatory.
+
+## 6. Content gate
 
 Export the current database into the workbook before enabling the new engine. No coverage status
 is currently proven because the Recipe Audit is empty.
@@ -119,14 +148,19 @@ target minimum (8 or 10 in the current workbook), and every included recipe must
 completeness, ingredient/allergen and trust review. Unsupported combinations are hidden or
 explained; the product must not pretend coverage exists.
 
-## 6. Implementation consequences
+## 7. Implementation consequences
 
-- Ranking produces an ordered candidate set. Presentation policy chooses one, two or three without
+- Ranking produces an ordered candidate set. The working `hybrid` policy exposes positions 1-3,
+  with position 1 as the primary and positions 2-3 as lower-emphasis alternatives, without
   changing safety, scoring or candidate generation.
+- Alternative tradeoffs are deterministic comparisons against position 1 using normalized recipe
+  facts such as total time, active effort, calories per serving, protein per serving, Pantry gaps
+  and complexity. Store typed codes and numeric deltas; format human copy in the client.
 - API, persistence and analytics model an exposure containing 1-3 recommendations. Sequential
   `Another` and simultaneous shortlist exposure remain distinguishable.
-- The mobile client implements single and shortlist components from shared primitives, but the
-  launch variant is selected only at the D0 discovery gate.
+- The mobile client targets the founder-selected hybrid hierarchy from shared primitives while
+  retaining single and shortlist renderers as bounded research and rollback policies until D0 is
+  signed.
 - `Random` may remain a legacy mechanism/event name, but launch copy should promise a decision,
   not randomness.
 - P0 builds reversible foundations. AI, Pantry and monetization implementation retain their later

@@ -1,6 +1,6 @@
-# Single versus shortlist evidence gate
+# Hybrid choice-cardinality evidence gate
 
-The launch interaction may show one recommendation, two or three ranked options, or a hybrid; Stage 0 evidence must choose the policy. Concept 01 now provides equal-fidelity single and shortlist stimuli without resolving the gate.
+The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live, dry-run-verified Maze study compares it against equal-fidelity Single and Shortlist bounds; the canonical research prototype also retains separate C and D controls.
 
 Status: **target**
 Authority: **discovery-gate**
@@ -8,17 +8,24 @@ Authority: **discovery-gate**
 ## Rules and patterns
 
 - Keep ranking cardinality server-owned and versioned.
-- Never hard-code one recommendation as a proven product truth.
+- Treat Hybrid as the approved working direction, not as participant-validated evidence; retain Single and Shortlist as bounded comparisons and rollback policies until D0 is signed.
+- Hybrid position 1 is the dominant primary; positions 2-3 are quieter alternatives with typed factual benefit/cost comparisons against position 1.
+- Derive tradeoff labels from verified structured facts and never emit unsupported subjective health claims.
 - Measure time to decision, acceptance, replacement, abandonment, trust, and safety separately by policy.
-- Do not build final launch navigation or recommendation UI before the Stage 0 gate is signed.
-- Use Decision flow concept 01 only as equal-fidelity Stage 0 stimuli; its D0-A and D0-B screens do not resolve the gate.
+- Do not irreversibly activate final launch navigation or rollout before the Stage 0 gate is signed.
+- Use A and B as equal-fidelity cardinality bounds and H as the intentionally hierarchical founder-selected candidate; the Figma screens do not replace participant evidence.
+- The runnable research prototype starts A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319.
+- Live Maze study 574247931 uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.
+- Freeze the published A/B/H Figma runner frames during collection; a material prototype fix requires a stopped and versioned study with incomparable responses separated.
 
 ## Source coverage
 
-- `docs/product/decision-flow-concept-01.md` — 6 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review, …. Sections: docs/product/decision-flow-concept-01.md (L1–87); Decision flow concept 01 (L1–87); Product intent (L13–28); Component contracts (L29–40); Design constraints (L41–53); Creation review (L54–69); Core Design System v1 migration (L70–87)
-- `docs/product/delivery-plan.md` — 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, …. Sections: docs/product/delivery-plan.md (L1–288); Dependency-ordered delivery plan (L1–288); Operating rules for implementers (L7–21); Phase 0 - decisions, discovery and baseline (2-3 weeks) (L22–82); P0-01 Product discovery and choice-model gate (L28–42); P0-02 Engineering baseline (L43–51); P0-03 Content audit (L52–61); P0-04 Analytics baseline (L62–73)
-- `docs/product/discovery-decisions.md` — 7 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Open hypotheses, 3. Stage 0 protocol and locked thresholds, 4. H3 concept-test contract, …. Sections: docs/product/discovery-decisions.md (L1–134); Discovery decisions and implementation gates (L1–134); 1. Accepted direction (L13–27); 2. Open hypotheses (L28–44); 3. Stage 0 protocol and locked thresholds (L45–69); 4. H3 concept-test contract (L70–104); 5. Content gate (L105–121); 6. Implementation consequences (L122–134)
-- `docs/product/quality-and-design.md` — 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, …. Sections: docs/product/quality-and-design.md (L1–302); Design and quality operating model (L1–302); 1. Design workflow (L3–167); Foundation v1 (L58–98); Core Design System v1 (L99–109); Decision flow concept 01 (L110–126); Client flow skeleton (L127–146); P0 mobile wireframes pass 01 (L147–167)
+- `docs/product/decision-flow-concept-01.md` — 6 indexed sections: Decision flow concept 01, Product intent, Component contracts, Design constraints, Creation review, …. Sections: docs/product/decision-flow-concept-01.md (L1–90); Decision flow concept 01 (L1–90); Product intent (L13–28); Component contracts (L29–40); Design constraints (L41–53); Creation review (L54–69); Core Design System v1 migration (L70–90)
+- `docs/product/delivery-plan.md` — 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, …. Sections: docs/product/delivery-plan.md (L1–296); Dependency-ordered delivery plan (L1–296); Operating rules for implementers (L12–26); Phase 0 - decisions, discovery and baseline (2-3 weeks) (L27–88); P0-01 Product discovery and choice-model gate (L33–48); P0-02 Engineering baseline (L49–57); P0-03 Content audit (L58–67); P0-04 Analytics baseline (L68–79)
+- `docs/product/discovery-decisions.md` — 8 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Founder-selected working direction, 3. Open hypotheses, 4. Stage 0 protocol and locked thresholds, …. Sections: docs/product/discovery-decisions.md (L1–168); Discovery decisions and implementation gates (L1–168); 1. Accepted direction (L13–27); 2. Founder-selected working direction (L28–46); 3. Open hypotheses (L47–63); 4. Stage 0 protocol and locked thresholds (L64–88); 5. H3 concept-test contract (L89–133); 6. Content gate (L134–150)
+- `docs/product/quality-and-design.md` — 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, …. Sections: docs/product/quality-and-design.md (L1–305); Design and quality operating model (L1–305); 1. Design workflow (L3–170); Foundation v1 (L60–100); Core Design System v1 (L101–111); Decision flow concept 01 (L112–129); Client flow skeleton (L130–149); P0 mobile wireframes pass 01 (L150–170)
+- `docs/product/stage-0-maze-study.md` — 12 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, …. Sections: docs/product/stage-0-maze-study.md (L1–194); Stage 0 Maze study (L1–194); Links and ownership (L7–24); Research decision (L25–40); Participant flow (L41–84); Screener (L53–67); Context questions (L68–84); Variant contract (L85–126)
+- `docs/product/stage-0-research-prototype.md` — 9 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Clickable prototype starting points, Moderator protocol, …. Sections: docs/product/stage-0-research-prototype.md (L1–167); Stage 0 research prototype handoff (L1–167); Purpose (L17–27); Canonical structure (L28–44); Clickable prototype starting points (L45–60); Moderator protocol (L61–85); Analytics annotation contract (L86–115); Responsive and accessibility evidence (L116–126)
 
 ## Graph relations
 

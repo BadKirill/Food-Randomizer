@@ -105,6 +105,16 @@ Safe-empty copy states that restrictions remain active. Adaptation warns that su
 preserve allergies and hard dietary rules. Offline recovery exposes only saved content. Completion
 keeps the next action explicit.
 
+### Stage 0 research prototype
+
+[`Stage 0 Research Prototype`](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
+(`187:2`) reuses Core Design System v1 for A single, B shortlist and H hybrid
+stimuli, a bounded C browse/search control, a separate D Pantry-first exercise and recovery paths.
+Six top-level prototype starting points make the flows runnable without turning any option into
+launch policy. Focused small-iPhone, Android and 125% large-text frames provide adaptation evidence.
+The exact nodes, moderator protocol, analytics ownership and creation review are documented in
+`stage-0-research-prototype.md`.
+
 ## Creation review
 
 The foundations, component category pages, migrated concept, flow mapping and P0 Pass 02 were
@@ -115,10 +125,22 @@ rendered after construction. The 2026-08-10 audit confirmed:
 - 16 P0 Pass 02 screens and six concept screens at 390 by 844;
 - only Fraunces and Source Sans 3, with no missing fonts;
 - component instances for all repeated product patterns in the migrated screens;
-- equal-fidelity single, shortlist and hybrid recommendation modes;
+- equal-fidelity A single and B shortlist bounds plus an intentionally hierarchical H candidate;
+- the shared Hybrid component at `157:54` uses `Best match for tonight` and `Other good fits`;
+- current Hybrid product/reference screens `168:145`, `176:138`, `192:1167` and `204:1149`
+  show one dominant primary and two quieter alternatives with factual benefit/cost labels;
 - explicit success, warning, danger, disabled, safe-empty and offline semantics;
 - no gradients, decorative glass, feed-like browsing, gratuitous cards or color-only status;
 - English copy and layer naming throughout the new implementation reference.
+
+The 2026-08-11 research-prototype review additionally confirmed 27 runner frames, 48 interactive
+sources, six starting points, zero invalid destinations, zero interactive targets below 44 px,
+zero remaining placeholders and only the two approved font families.
+
+The 2026-08-14 Hybrid alignment review covered the shared component and all four current reference
+instances. It found the expected copy in every subtree, only Fraunces and Source Sans 3, no missing
+fonts, gradients, placeholders or reaction sources below 44 px, and no truncation in the 117 px and
+152 px tradeoff labels.
 
 Food imagery remains deliberately represented by the `Media` and recipe component contracts until
 the product has an approved imagery source and usage policy. Bottom-navigation labels remain gated
