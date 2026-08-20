@@ -1,12 +1,14 @@
 # Stage 0 research prototype handoff
 
-Status: creation-reviewed research artifact; live Maze A/B/H study is dry-run verified; product
-discovery evidence remains pending
+Status: creation-reviewed v2 research artifact; the published Maze study still uses the v1 A/B/H
+entry until its separately confirmed migration; product discovery evidence remains pending
 
 Canonical artifact:
 [Stage 0 Research Prototype](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
 
 Created: 2026-08-11
+
+Revised: 2026-08-20
 
 Live study:
 [Stage 0 · Weeknight Meal Decision · A/B/H](https://t.maze.co/574247931)
@@ -16,9 +18,15 @@ Operational contract:
 
 ## Purpose
 
-The prototype makes the H3 choice-cardinality test runnable while keeping the launch policy
-reversible. It tests the founder-selected hybrid candidate—one dominant answer plus two quieter,
-tradeoff-labelled alternatives—against a single-result narrow bound and an equally weighted
+The prototype now contains two deliberately separate layers:
+
+1. an end-to-end product journey that starts before any meal is chosen, collects a small amount of
+   situational context and ends at the first cooking step;
+2. focused A/B/H comparison stimuli for the H3 choice-cardinality gate.
+
+The full journey uses the founder-selected hybrid candidate—one dominant answer plus two quieter,
+tradeoff-labelled alternatives—without presenting a preselected meal on entry. The focused
+comparison still tests that hierarchy against a single-result narrow bound and an equally weighted
 shortlist broad bound. Feed/search is a bounded H3 control and Pantry-first remains a separate H7
 exercise.
 
@@ -42,9 +50,32 @@ The page is `08 · Stage 0 Research Prototype` (`187:2`). The reviewed documenta
 The original concept boards and P0 mobile wireframes remain preserved as evidence. This page is a
 new research layer, not a destructive redraw.
 
-## Clickable prototype starting points
+## End-to-end participant journey
 
-Figma exposes six prototype starting points. Select a start frame and press Present:
+The corrected study entry is `Runner E1 · Welcome` (`270:1517`). It starts from the user job rather
+than from a recommendation that appears already selected. The Maze goal is `Runner E8 · Cooking`
+(`270:1524`).
+
+| Step | Figma node | Participant decision |
+| --- | --- | --- |
+| E1 · Welcome | `270:1517` | Understand the promise, hard limits and guest-session boundary |
+| E2 · Priority | `270:1518` | Choose Quick & easy, Comforting or Lighter |
+| E3 · Time | `270:1519` | Choose 15 min, 25 min or 40+ min |
+| E4 · Ingredients | `270:1520` | See an empty ingredient state and choose a pantry item or skip |
+| E5 · Ingredients selected | `270:1521` | Confirm a bounded placeholder selection before matching |
+| E6 · Recommendation | `270:1522` | Evaluate one dominant meal plus two quieter factual alternatives |
+| E7 · Recipe | `270:1523` | Review ingredients and begin cooking or adjust ingredients |
+| E8 · Cooking | `270:1524` | Reach the observable start-cooking outcome |
+
+The intake is intentionally short. It exposes three situational decisions—priority, time and
+optional ingredients—while hard dietary restrictions remain persistent and non-relaxable.
+Ingredient chips are prototype fixtures rather than Pantry or recommendation-engine claims.
+
+## Focused comparison starting points
+
+The original A/B/H and control runners remain available for focused follow-up tasks. They are no
+longer suitable as the first exposure to the product because they begin at the recommendation
+decision. Select a start frame and press Present:
 
 | Flow | Start node | Research role |
 | --- | --- | --- |
@@ -55,8 +86,24 @@ Figma exposes six prototype starting points. Select a start frame and press Pres
 | D | `204:2161` | Separate Pantry-first H7 exercise |
 | Recovery | `204:2319` | No-safe-match and offline recovery |
 
-The runner contains 27 top-level frames. Its transitions cover acceptance, alternative selection,
-rejection reason, replacement, recipe open, cooking start, Pantry change/skip and recovery.
+The page now contains 35 top-level runner frames: the original 27 focused frames and eight end-to-end
+journey frames. Its transitions cover context selection, optional ingredient selection and skip,
+acceptance, alternative selection, adjustment, replacement, recipe open, cooking start, Pantry
+change/skip and recovery.
+
+## Corrective design pass
+
+The 2026-08-20 pass corrected the defects observed in the published study preview:
+
+- the participant no longer enters on a meal that looks preselected;
+- the journey begins with an explicit job and an unselected priority state;
+- the disabled ingredient CTA becomes enabled only after a visible selection, while skipping
+  ingredients remains possible;
+- all direct 350 px actions are centered at 20 px side margins inside 390 px mobile frames;
+- the H runner no longer exposes an internal research annotation to participants;
+- the recommendation keeps the approved hybrid hierarchy and labels alternatives with factual
+  benefit/cost tradeoffs;
+- recipe and cooking states are included so Maze can measure behavior through the actual outcome.
 
 ## Moderator protocol
 
@@ -128,11 +175,13 @@ localization or keyboard coverage.
 
 The final structural audit verified:
 
-- 27 top-level runner frames;
-- six Figma prototype starting points;
-- 48 interactive reaction sources;
+- 35 top-level runner frames, including eight frames in the end-to-end journey;
+- seven intended research entry points: one end-to-end entry and six focused comparison/control
+  entries;
+- 61 interactive reaction sources;
 - zero invalid prototype destinations;
 - zero interactive sources below 44 px in either dimension;
+- zero misaligned direct 350 px actions in 390 px runner frames;
 - zero placeholder nodes;
 - zero gradient fills;
 - only Fraunces and Source Sans 3;
@@ -149,18 +198,26 @@ concept reference at `168:145`, the P0 reference at `176:138`, the H board stimu
 and the clickable H start at `204:1149`. The follow-up audit found no missing fonts, gradients,
 placeholders, undersized reaction sources or clipped tradeoff copy.
 
+The 2026-08-20 creation review inspected Welcome, Priority, Time, both ingredient states,
+Recommendation, Recipe and Cooking screenshots. It found no overlapping copy, clipped action,
+participant-facing research note or premature selection. The only visible font families are the
+SIL Open Font License 1.1 families Fraunces and Source Sans 3.
+
 ## Remaining research work
 
-The A/B/H Maze study is published and the full no-tracking preview passed on 2026-08-16. Its
+The A/B/H Maze study is published and the full no-tracking v1 preview passed on 2026-08-16. Its
 configuration, privacy boundary, verified links and operating protocol are recorded in
-`stage-0-maze-study.md`.
+`stage-0-maze-study.md`. The v2 end-to-end entry must not be described as live until the Maze block
+has been versioned, previewed and published through the study builder.
 
-1. recruit and run the live participant protocol in batches of three;
-2. enter participant-level evidence in the discovery workbook;
-3. run bounded browse/search control C after the direct-decision exercises and Pantry-first D as a
+1. version the Maze prototype task so the first product exposure starts at E1 and succeeds at E8;
+2. preview the entire v2 path and verify task completion before recruiting participants;
+3. recruit and run the live participant protocol in batches of three;
+4. enter participant-level evidence in the discovery workbook;
+5. run bounded browse/search control C after the direct-decision exercises and Pantry-first D as a
    separate H7 exercise rather than as cardinality variants;
-4. review the six locked thresholds and segment concentration;
-5. sign D0 with dissent and rejected alternatives;
-6. confirm the founder-selected hybrid policy or define the evidence-backed bound/pivot that
+6. review the six locked thresholds and segment concentration;
+7. sign D0 with dissent and rejected alternatives;
+8. confirm the founder-selected hybrid policy or define the evidence-backed bound/pivot that
    replaces it;
-7. only then convert the selected interaction into final launch navigation and production UI.
+9. only then convert the selected interaction into final launch navigation and production UI.

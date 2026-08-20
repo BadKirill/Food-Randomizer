@@ -194,7 +194,7 @@
       "wikiSlug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "status": "target",
       "authority": "discovery-gate",
-      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live, dry-run-verified Maze study compares it against equal-fidelity Single and Shortlist bounds; the canonical research prototype also retains separate C and D controls.",
+      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The canonical v2 research prototype now starts with a short unselected context flow before the Hybrid decision and retains focused Single, Shortlist, C and D comparisons; the published Maze study remains on its v1 entry until separately migrated.",
       "tags": ["single", "shortlist", "hybrid", "experiment", "H3", "одно блюдо", "2-3 варианта", "гипотеза"],
       "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/stage-0-research-prototype.md", "docs/product/stage-0-maze-study.md", "docs/product/delivery-plan.md"],
       "rules": [
@@ -205,6 +205,7 @@
         "Measure time to decision, acceptance, replacement, abandonment, trust, and safety separately by policy.",
         "Do not irreversibly activate final launch navigation or rollout before the Stage 0 gate is signed.",
         "Use A and B as equal-fidelity cardinality bounds and H as the intentionally hierarchical founder-selected candidate; the Figma screens do not replace participant evidence.",
+        "Use the corrected end-to-end participant journey from Welcome node 270:1517 through Cooking node 270:1524 as the first product exposure; priority, time and optional ingredient selection precede any meal recommendation.",
         "The runnable research prototype starts A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319.",
         "Live Maze study 574247931 uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.",
         "Freeze the published A/B/H Figma runner frames during collection; a material prototype fix requires a stopped and versioned study with incomparable responses separated."
@@ -694,7 +695,7 @@
       "wikiSlug": "RandoMeal--Design--System-and-Quality",
       "status": "mixed",
       "authority": "product-design-source-of-truth",
-      "summary": "Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a six-flow clickable Stage 0 research prototype are implemented and creation-reviewed in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.",
+      "summary": "Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a creation-reviewed Stage 0 prototype with an eight-screen end-to-end journey plus six focused research entries are implemented in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.",
       "tags": ["design", "figma", "tokens", "components", "accessibility", "anti slop", "дизайн", "фигма"],
       "sources": ["docs/product/quality-and-design.md", "docs/product/design-system-v1.md", "docs/product/decision-flow-concept-01.md", "docs/product/client-flow-skeleton.md", "docs/product/p0-mobile-wireframes-pass-01.md", "docs/product/stage-0-research-prototype.md", "docs/product/figma-governance.md", "design/figma-project.json", "design/figma-design-system-v1.json", "design/foundations.tokens.json", ".agents/skills/design-anti-slop/**", "DESIGN.md"],
       "rules": [
@@ -720,7 +721,7 @@
         "D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.",
         "P0 mobile wireframes pass 01 at node 75:3 contains 16 creation-reviewed 393 by 852 screens for F01-F04 and keeps D0-A single, D0-B shortlist and D0-C hybrid reversible.",
         "All current visible copy, layer names, reusable component defaults and instance overrides in the canonical Figma file are English; other languages belong only in explicit localization-expansion test artifacts.",
-        "The Stage 0 research prototype page 187:2 contains 27 top-level runner frames, six prototype starting points and 48 interactive sources with no invalid destination or target below 44 px.",
+        "The Stage 0 research prototype page 187:2 contains 35 top-level runner frames and 61 interactive sources with no invalid destination, target below 44 px, gradient, placeholder or misaligned direct full-width action; the corrected end-to-end flow starts at 270:1517 and reaches Cooking at 270:1524.",
         "The shared Hybrid component at node 157:54 and reference screens 168:145, 176:138, 192:1167 and 204:1149 show one dominant primary plus two quieter factual tradeoffs.",
         "Focused small-iPhone node 198:744, Android node 198:748 and 125 percent large-text node 198:752 are creation-reviewed evidence, not complete launch-platform coverage.",
         "P0 design still requires broader platform, localization, keyboard, safe-area, reduced-motion, imagery and production analytics implementation after D0."

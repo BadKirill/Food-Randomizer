@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "7756907849598ecf033e6631a16ca34f80a084d711179314e5cee94ef4fd046e",
+  "contentFingerprint": "02f28953bfad1c6788ca00fb7d1d45cd9c8fda20ef28c7b434a22e6b2e0f01ac",
   "coverage": {
     "repositoryFiles": 200,
     "indexedFiles": 200,
@@ -121,7 +121,7 @@
       "production-infrastructure": 8,
       "legacy-documentation-map": 7
     },
-    "sections": 1325,
+    "sections": 1327,
     "symbols": 377,
     "routes": 13,
     "localRelations": 96
@@ -13561,10 +13561,10 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 7657,
-      "lines": 167,
-      "sha256": "e803004724f90991215edde68a9a1d505bd46bfcf0b7715b16e8ec9a53e28a9a",
-      "summary": "9 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Clickable prototype starting points, Moderator protocol, …",
+      "bytes": 11262,
+      "lines": 224,
+      "sha256": "d32cbb7fde80e32bed10fd773170f82d8a95df7da47597c9facc7c6ee6f09eb1",
+      "summary": "11 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, End-to-end participant journey, Focused comparison starting points, …",
       "nodeIds": [
         "repository-inventory",
         "choice-cardinality-gate",
@@ -13581,7 +13581,7 @@
           "title": "docs/product/stage-0-research-prototype.md",
           "line": 1,
           "depth": 0,
-          "endLine": 167
+          "endLine": 224
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#2",
@@ -13589,71 +13589,87 @@
           "title": "Stage 0 research prototype handoff",
           "line": 1,
           "depth": 1,
-          "endLine": 167
+          "endLine": 224
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#3",
           "kind": "heading",
           "title": "Purpose",
-          "line": 17,
+          "line": 19,
           "depth": 2,
-          "endLine": 27
+          "endLine": 35
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#4",
           "kind": "heading",
           "title": "Canonical structure",
-          "line": 28,
+          "line": 36,
           "depth": 2,
-          "endLine": 44
+          "endLine": 52
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#5",
           "kind": "heading",
-          "title": "Clickable prototype starting points",
-          "line": 45,
+          "title": "End-to-end participant journey",
+          "line": 53,
           "depth": 2,
-          "endLine": 60
+          "endLine": 73
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#6",
           "kind": "heading",
-          "title": "Moderator protocol",
-          "line": 61,
+          "title": "Focused comparison starting points",
+          "line": 74,
           "depth": 2,
-          "endLine": 85
+          "endLine": 93
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#7",
           "kind": "heading",
-          "title": "Analytics annotation contract",
-          "line": 86,
+          "title": "Corrective design pass",
+          "line": 94,
           "depth": 2,
-          "endLine": 115
+          "endLine": 107
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#8",
           "kind": "heading",
-          "title": "Responsive and accessibility evidence",
-          "line": 116,
+          "title": "Moderator protocol",
+          "line": 108,
           "depth": 2,
-          "endLine": 126
+          "endLine": 132
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#9",
           "kind": "heading",
-          "title": "Creation review evidence",
-          "line": 127,
+          "title": "Analytics annotation contract",
+          "line": 133,
           "depth": 2,
-          "endLine": 151
+          "endLine": 162
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#10",
           "kind": "heading",
-          "title": "Remaining research work",
-          "line": 152,
+          "title": "Responsive and accessibility evidence",
+          "line": 163,
           "depth": 2,
-          "endLine": 167
+          "endLine": 173
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#11",
+          "kind": "heading",
+          "title": "Creation review evidence",
+          "line": 174,
+          "depth": 2,
+          "endLine": 205
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#12",
+          "kind": "heading",
+          "title": "Remaining research work",
+          "line": 206,
+          "depth": 2,
+          "endLine": 224
         }
       ],
       "symbols": []
@@ -13752,9 +13768,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 63331,
-      "lines": 927,
-      "sha256": "00f08f2c96d9fb9fee2e5cc3ab5d6f8617614310a02176283df77f31f2773163",
+      "bytes": 63786,
+      "lines": 928,
+      "sha256": "9094ac7c3a521f5a5d1305042be2dbca155d176bde8d1a80f754821b55628588",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -13770,7 +13786,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 927
+          "endLine": 928
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -13810,15 +13826,15 @@
           "title": "nodes",
           "line": 63,
           "depth": 1,
-          "endLine": 860
+          "endLine": 861
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 861,
+          "line": 862,
           "depth": 1,
-          "endLine": 927
+          "endLine": 928
         }
       ],
       "symbols": []
