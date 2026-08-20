@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "7db5941da382b8571c3850264ab7c42a2e418a887b93573b672cfa6038ea583b",
+  "contentFingerprint": "13ea21c358fb8b7015b21400cbde1bb41e3ba88a0a21ffe74abd440de43e96a8",
   "coverage": {
     "repositoryFiles": 200,
     "indexedFiles": 200,
@@ -121,7 +121,7 @@
       "production-infrastructure": 8,
       "legacy-documentation-map": 7
     },
-    "sections": 1328,
+    "sections": 1329,
     "symbols": 377,
     "routes": 13,
     "localRelations": 96
@@ -13433,9 +13433,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 11611,
-      "lines": 235,
-      "sha256": "5cbaae3b43e1aa4179deb28755e51a499e13e6e0fb0296f0de28ef16cedc607a",
+      "bytes": 14258,
+      "lines": 271,
+      "sha256": "6a81b38c0988c86cde8f6dfc3d7d5a0856c03166fead6593bcc0a9f7fd780e3d",
       "summary": "13 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, …",
       "nodeIds": [
         "repository-inventory",
@@ -13453,7 +13453,7 @@
           "title": "docs/product/stage-0-maze-study.md",
           "line": 1,
           "depth": 0,
-          "endLine": 235
+          "endLine": 271
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#2",
@@ -13461,7 +13461,7 @@
           "title": "Stage 0 Maze study",
           "line": 1,
           "depth": 1,
-          "endLine": 235
+          "endLine": 271
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#3",
@@ -13509,55 +13509,55 @@
           "title": "Full journey contract",
           "line": 90,
           "depth": 2,
-          "endLine": 106
+          "endLine": 119
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#9",
           "kind": "heading",
           "title": "Variant contract",
-          "line": 107,
+          "line": 120,
           "depth": 2,
-          "endLine": 149
+          "endLine": 162
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#10",
           "kind": "heading",
           "title": "Post-comparison questions",
-          "line": 132,
+          "line": 145,
           "depth": 3,
-          "endLine": 149
+          "endLine": 162
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#11",
           "kind": "heading",
           "title": "Privacy and collection settings",
-          "line": 150,
+          "line": 163,
           "depth": 2,
-          "endLine": 165
+          "endLine": 178
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#12",
           "kind": "heading",
           "title": "Operating protocol",
-          "line": 166,
+          "line": 179,
           "depth": 2,
-          "endLine": 194
+          "endLine": 207
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#13",
           "kind": "heading",
           "title": "Verification record",
-          "line": 195,
+          "line": 208,
           "depth": 2,
-          "endLine": 224
+          "endLine": 260
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#14",
           "kind": "heading",
           "title": "Change and stop rules",
-          "line": 225,
+          "line": 261,
           "depth": 2,
-          "endLine": 235
+          "endLine": 271
         }
       ],
       "symbols": []
@@ -13569,10 +13569,10 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 10915,
-      "lines": 221,
-      "sha256": "353153f8e6517c6c89665533c2598d87b881d1f55342beee50ae6bc7516e001b",
-      "summary": "11 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, End-to-end participant journey, Focused comparison starting points, …",
+      "bytes": 14697,
+      "lines": 278,
+      "sha256": "9d19fa3281f4b223e00340d6873392e49cb92aebe2681935753a536f87ee7c2b",
+      "summary": "12 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Preserved v2 participant journey, Adaptive v3 participant journey, …",
       "nodeIds": [
         "repository-inventory",
         "choice-cardinality-gate",
@@ -13589,7 +13589,7 @@
           "title": "docs/product/stage-0-research-prototype.md",
           "line": 1,
           "depth": 0,
-          "endLine": 221
+          "endLine": 278
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#2",
@@ -13597,7 +13597,7 @@
           "title": "Stage 0 research prototype handoff",
           "line": 1,
           "depth": 1,
-          "endLine": 221
+          "endLine": 278
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#3",
@@ -13605,79 +13605,87 @@
           "title": "Purpose",
           "line": 19,
           "depth": 2,
-          "endLine": 35
+          "endLine": 36
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#4",
           "kind": "heading",
           "title": "Canonical structure",
-          "line": 36,
+          "line": 37,
           "depth": 2,
-          "endLine": 52
+          "endLine": 53
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#5",
           "kind": "heading",
-          "title": "End-to-end participant journey",
-          "line": 53,
+          "title": "Preserved v2 participant journey",
+          "line": 54,
           "depth": 2,
-          "endLine": 73
+          "endLine": 74
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#6",
           "kind": "heading",
-          "title": "Focused comparison starting points",
-          "line": 74,
+          "title": "Adaptive v3 participant journey",
+          "line": 75,
           "depth": 2,
-          "endLine": 93
+          "endLine": 102
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#7",
           "kind": "heading",
-          "title": "Corrective design pass",
-          "line": 94,
+          "title": "Focused comparison starting points",
+          "line": 103,
           "depth": 2,
-          "endLine": 107
+          "endLine": 126
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#8",
           "kind": "heading",
-          "title": "Moderator protocol",
-          "line": 108,
+          "title": "Corrective design pass",
+          "line": 127,
           "depth": 2,
-          "endLine": 132
+          "endLine": 150
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#9",
           "kind": "heading",
-          "title": "Analytics annotation contract",
-          "line": 133,
+          "title": "Moderator protocol",
+          "line": 151,
           "depth": 2,
-          "endLine": 162
+          "endLine": 175
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#10",
           "kind": "heading",
-          "title": "Responsive and accessibility evidence",
-          "line": 163,
-          "depth": 2,
-          "endLine": 173
-        },
-        {
-          "id": "section:docs/product/stage-0-research-prototype.md#11",
-          "kind": "heading",
-          "title": "Creation review evidence",
-          "line": 174,
+          "title": "Analytics annotation contract",
+          "line": 176,
           "depth": 2,
           "endLine": 205
         },
         {
-          "id": "section:docs/product/stage-0-research-prototype.md#12",
+          "id": "section:docs/product/stage-0-research-prototype.md#11",
           "kind": "heading",
-          "title": "Remaining research work",
+          "title": "Responsive and accessibility evidence",
           "line": 206,
           "depth": 2,
-          "endLine": 221
+          "endLine": 216
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#12",
+          "kind": "heading",
+          "title": "Creation review evidence",
+          "line": 217,
+          "depth": 2,
+          "endLine": 262
+        },
+        {
+          "id": "section:docs/product/stage-0-research-prototype.md#13",
+          "kind": "heading",
+          "title": "Remaining research work",
+          "line": 263,
+          "depth": 2,
+          "endLine": 278
         }
       ],
       "symbols": []
@@ -13776,9 +13784,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 63830,
-      "lines": 928,
-      "sha256": "cfbaf222577a16f96268dc8451b06ed20bbdbd339a660513300d38cb17f3c56f",
+      "bytes": 64608,
+      "lines": 931,
+      "sha256": "d9640bfce6ba6736bf85cb23b65109141d3830140e3882e6d9fb67da24177fcf",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
@@ -13794,7 +13802,7 @@
           "title": "knowledge/catalog.json",
           "line": 1,
           "depth": 0,
-          "endLine": 928
+          "endLine": 931
         },
         {
           "id": "section:knowledge/catalog.json#2",
@@ -13834,15 +13842,15 @@
           "title": "nodes",
           "line": 63,
           "depth": 1,
-          "endLine": 861
+          "endLine": 864
         },
         {
           "id": "section:knowledge/catalog.json#7",
           "kind": "key",
           "title": "routes",
-          "line": 862,
+          "line": 865,
           "depth": 1,
-          "endLine": 928
+          "endLine": 931
         }
       ],
       "symbols": []

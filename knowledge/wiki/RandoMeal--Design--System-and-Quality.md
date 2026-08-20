@@ -1,6 +1,6 @@
 # Design system and product quality
 
-Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a creation-reviewed Stage 0 prototype with an eight-screen end-to-end journey plus six focused research entries are implemented in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.
+Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a creation-reviewed Stage 0 prototype with an adaptive eight-screen journey, preserved v2 journey and six focused research entries are implemented in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.
 
 Status: **mixed**
 Authority: **product-design-source-of-truth**
@@ -29,7 +29,8 @@ Authority: **product-design-source-of-truth**
 - D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.
 - P0 mobile wireframes pass 01 at node 75:3 contains 16 creation-reviewed 393 by 852 screens for F01-F04 and keeps D0-A single, D0-B shortlist and D0-C hybrid reversible.
 - All current visible copy, layer names, reusable component defaults and instance overrides in the canonical Figma file are English; other languages belong only in explicit localization-expansion test artifacts.
-- The Stage 0 research prototype page 187:2 contains 35 top-level runner frames and 61 interactive sources with no invalid destination, target below 44 px, gradient, placeholder or misaligned direct full-width action; the corrected end-to-end flow starts at 270:1517 and reaches Cooking at 270:1524.
+- The Stage 0 research prototype page 187:2 contains 43 top-level runner frames, including the preserved v2 journey and adaptive v3; Flow 8 starts at node 293:1692 and reaches the adaptive cooking plan at node 293:1917.
+- The adaptive v3 subtree has 253 nodes, 25 interactive sources, 53 actions, 104 variable-bound texts, no invalid or cross-version destination, no target below 44 px and no gradient; its private 33-variable collection is hidden from publishing.
 - The shared Hybrid component at node 157:54 and reference screens 168:145, 176:138, 192:1167 and 204:1149 show one dominant primary plus two quieter factual tradeoffs.
 - Focused small-iPhone node 198:744, Android node 198:748 and 125 percent large-text node 198:752 are creation-reviewed evidence, not complete launch-platform coverage.
 - P0 design still requires broader platform, localization, keyboard, safe-area, reduced-motion, imagery and production analytics implementation after D0.
@@ -49,7 +50,7 @@ Authority: **product-design-source-of-truth**
 - `docs/product/figma-governance.md` — 4 indexed sections: Canonical Figma file governance, Canonical project file, Deny-by-default rules, Ownership and handoff. Sections: docs/product/figma-governance.md (L1–42); Canonical Figma file governance (L1–42); Canonical project file (L3–15); Deny-by-default rules (L16–36); Ownership and handoff (L37–42)
 - `docs/product/p0-mobile-wireframes-pass-01.md` — 7 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, …. Sections: docs/product/p0-mobile-wireframes-pass-01.md (L1–113); P0 mobile wireframes pass 01 (L1–113); Scope (L13–32); Product decisions represented (L33–47); Design-system use (L48–58); Creation review (L59–74); Remaining design work (L75–87); Pass 02 · Core Design System v1 (L88–113)
 - `docs/product/quality-and-design.md` — 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, …. Sections: docs/product/quality-and-design.md (L1–305); Design and quality operating model (L1–305); 1. Design workflow (L3–170); Foundation v1 (L60–100); Core Design System v1 (L101–111); Decision flow concept 01 (L112–129); Client flow skeleton (L130–149); P0 mobile wireframes pass 01 (L150–170)
-- `docs/product/stage-0-research-prototype.md` — 11 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, End-to-end participant journey, Focused comparison starting points, …. Sections: docs/product/stage-0-research-prototype.md (L1–221); Stage 0 research prototype handoff (L1–221); Purpose (L19–35); Canonical structure (L36–52); End-to-end participant journey (L53–73); Focused comparison starting points (L74–93); Corrective design pass (L94–107); Moderator protocol (L108–132)
+- `docs/product/stage-0-research-prototype.md` — 12 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Preserved v2 participant journey, Adaptive v3 participant journey, …. Sections: docs/product/stage-0-research-prototype.md (L1–278); Stage 0 research prototype handoff (L1–278); Purpose (L19–36); Canonical structure (L37–53); Preserved v2 participant journey (L54–74); Adaptive v3 participant journey (L75–102); Focused comparison starting points (L103–126); Corrective design pass (L127–150)
 
 ## Graph relations
 

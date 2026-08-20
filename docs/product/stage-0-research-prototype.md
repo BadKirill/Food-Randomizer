@@ -1,6 +1,6 @@
 # Stage 0 research prototype handoff
 
-Status: creation-reviewed v2 research artifact; the live Maze study uses the full E1–E8 journey
+Status: creation-reviewed adaptive v3 research artifact; the live Maze study uses V3-01–V3-08
 before its focused A/B/H comparison; product discovery evidence remains pending
 
 Canonical artifact:
@@ -18,13 +18,14 @@ Operational contract:
 
 ## Purpose
 
-The prototype now contains two deliberately separate layers:
+The prototype now contains three deliberately separate layers:
 
-1. an end-to-end product journey that starts before any meal is chosen, collects a small amount of
-   situational context and ends at the first cooking step;
-2. focused A/B/H comparison stimuli for the H3 choice-cardinality gate.
+1. an active adaptive journey that starts before any meal is chosen, collects three bounded pieces
+   of situational context and changes the recommendation, recipe and cooking plan;
+2. the preserved E1–E8 v2 journey as versioned research evidence;
+3. focused A/B/H comparison stimuli for the H3 choice-cardinality gate.
 
-The full journey uses the founder-selected hybrid candidate—one dominant answer plus two quieter,
+The active journey uses the founder-selected hybrid candidate—one dominant answer plus two quieter,
 tradeoff-labelled alternatives—without presenting a preselected meal on entry. The focused
 comparison still tests that hierarchy against a single-result narrow bound and an equally weighted
 shortlist broad bound. Feed/search is a bounded H3 control and Pantry-first remains a separate H7
@@ -50,7 +51,7 @@ The page is `08 · Stage 0 Research Prototype` (`187:2`). The reviewed documenta
 The original concept boards and P0 mobile wireframes remain preserved as evidence. This page is a
 new research layer, not a destructive redraw.
 
-## End-to-end participant journey
+## Preserved v2 participant journey
 
 The corrected study entry is `Runner E1 · Welcome` (`270:1517`). It starts from the user job rather
 than from a recommendation that appears already selected. The Maze goal is `Runner E8 · Cooking`
@@ -71,6 +72,34 @@ The intake is intentionally short. It exposes three situational decisions—prio
 optional ingredients—while hard dietary restrictions remain persistent and non-relaxable.
 Ingredient chips are prototype fixtures rather than Pantry or recommendation-engine claims.
 
+## Adaptive v3 participant journey
+
+The live research entry is now `Runner V3-01 · Welcome` (`293:1692`). It ends at
+`Runner V3-08 · Adaptive cooking plan` (`293:1917`). The preserved E1–E8 sequence remains in Figma
+for auditability but is hidden from live Maze participants.
+
+| Step | Figma node | Participant decision or adaptive outcome |
+| --- | --- | --- |
+| V3-01 · Welcome | `293:1692` | Understand the promise, hard limits and guest-session boundary |
+| V3-02 · Priority | `293:1713` | Choose Quick & easy, Comforting or Lighter |
+| V3-03 · Time | `293:1749` | Choose 15 min, 25 min or 40+ min |
+| V3-04 · Ingredients | `293:1773` | Choose one available fixture or skip without an inferred selection |
+| V3-05 · Ingredients selected | `293:1803` | Confirm or clear the selected fixture before matching |
+| V3-06 · Adaptive recommendation | `293:1833` | Evaluate one adapted primary and two factual alternatives |
+| V3-07 · Adaptive recipe | `293:1877` | Review the chosen meal, selected fixture and optional item |
+| V3-08 · Adaptive cooking plan | `293:1917` | Reach a three-, four- or five-step plan and begin step progression |
+
+Priority sets the recommendation heading independently. Time and the optional ingredient select one
+of 18 ingredient-and-time scenarios or three skip scenarios. Each scenario updates the primary,
+two alternatives, recipe metadata, selected or check-pantry state, missing item, first two
+instructions and the complete step map. Clicking either quiet alternative also updates the recipe
+and cooking family before navigation.
+
+The prototype uses a private hidden Figma collection named `__Prototype · Stage 0 v3` with 33
+unpublished variables. It is a deterministic Stage 0 simulation, not the server-owned ranking
+implementation, recipe truth source or analytics state. Production must continue to own ranking,
+hard-constraint enforcement and versioned recommendation policies on the server.
+
 ## Focused comparison starting points
 
 The original A/B/H and control runners remain available for focused follow-up tasks. They are no
@@ -86,10 +115,14 @@ decision. Select a start frame and press Present:
 | D | `204:2161` | Separate Pantry-first H7 exercise |
 | Recovery | `204:2319` | No-safe-match and offline recovery |
 
-The page now contains 35 top-level runner frames: the original 27 focused frames and eight end-to-end
-journey frames. Its transitions cover context selection, optional ingredient selection and skip,
-acceptance, alternative selection, adjustment, replacement, recipe open, cooking start, Pantry
-change/skip and recovery.
+The page now contains 43 top-level runner frames: the original 27 focused frames, eight preserved v2
+journey frames and eight adaptive v3 frames. Figma exposes eight flow start points; Flow 8 is the
+active adaptive entry while Flow 7 is the preserved v2 entry. The active research surface remains
+one adaptive entry plus the six focused comparison, control and recovery entries.
+
+Its transitions cover context selection, optional ingredient selection and skip, deterministic
+adaptation, acceptance, alternative selection, adjustment, replacement, recipe open, cooking start,
+step progression, Pantry change/skip and recovery.
 
 ## Corrective design pass
 
@@ -104,6 +137,16 @@ The 2026-08-20 pass corrected the defects observed in the published study previe
 - the recommendation keeps the approved hybrid hierarchy and labels alternatives with factual
   benefit/cost tradeoffs;
 - recipe and cooking states are included so Maze can measure behavior through the actual outcome.
+
+The adaptive v3 pass then made the choices consequential without widening the intake:
+
+- priority changes the decision framing;
+- time and ingredient state change the meal family, alternatives, recipe and cooking plan;
+- skipping ingredients never fabricates a pantry match;
+- only the explicitly chosen ingredient is marked Selected;
+- alternatives remain quieter and use bounded factual tradeoffs;
+- hard restrictions remain visible and never enter a fallback relaxation path;
+- the cooking view exposes the complete step-map length and supports an in-place next-step state.
 
 ## Moderator protocol
 
@@ -173,7 +216,7 @@ localization or keyboard coverage.
 
 ## Creation review evidence
 
-The final structural audit verified:
+The v2 structural audit verified:
 
 - 35 top-level runner frames, including eight frames in the end-to-end journey;
 - seven intended research entry points: one end-to-end entry and six focused comparison/control
@@ -203,9 +246,23 @@ Recommendation, Recipe and Cooking screenshots. It found no overlapping copy, cl
 participant-facing research note or premature selection. The only visible font families are the
 SIL Open Font License 1.1 families Fraunces and Source Sans 3.
 
+The adaptive v3 creation review verified:
+
+- eight root-level 390 by 844 frames and one named `Flow 8 · Adaptive v3` entry;
+- 253 nodes, 25 interactive sources and 53 actions inside the v3 subtree;
+- zero invalid destinations and zero destinations outside the v3 subtree;
+- zero interactive sources below the 44 px minimum target;
+- zero gradient fills and 104 variable-bound text nodes;
+- a private collection with 33 variables, hidden from publishing with no exposed variable;
+- only Fraunces SemiBold and Source Sans 3 Regular, SemiBold and Bold;
+- a successful Maze path from Lighter, 15 min and Mushrooms through `Mushroom fried rice`, its
+  adapted recipe and a three-step cooking plan;
+- correct visual alignment of all direct actions at 20 px mobile side margins;
+- English participant copy and layer naming throughout the adaptive artifact.
+
 ## Remaining research work
 
-The Maze study was updated to v2 and its full no-tracking preview passed on 2026-08-20. Its
+The Maze study was updated to adaptive v3 and its full no-tracking preview passed on 2026-08-20. Its
 configuration, privacy boundary, verified links and operating protocol are recorded in
 `stage-0-maze-study.md`.
 
