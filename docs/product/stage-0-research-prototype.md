@@ -1,7 +1,7 @@
 # Stage 0 research prototype handoff
 
-Status: creation-reviewed v2 research artifact; the published Maze study still uses the v1 A/B/H
-entry until its separately confirmed migration; product discovery evidence remains pending
+Status: creation-reviewed v2 research artifact; the live Maze study uses the full E1–E8 journey
+before its focused A/B/H comparison; product discovery evidence remains pending
 
 Canonical artifact:
 [Stage 0 Research Prototype](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
@@ -205,19 +205,16 @@ SIL Open Font License 1.1 families Fraunces and Source Sans 3.
 
 ## Remaining research work
 
-The A/B/H Maze study is published and the full no-tracking v1 preview passed on 2026-08-16. Its
+The Maze study was updated to v2 and its full no-tracking preview passed on 2026-08-20. Its
 configuration, privacy boundary, verified links and operating protocol are recorded in
-`stage-0-maze-study.md`. The v2 end-to-end entry must not be described as live until the Maze block
-has been versioned, previewed and published through the study builder.
+`stage-0-maze-study.md`.
 
-1. version the Maze prototype task so the first product exposure starts at E1 and succeeds at E8;
-2. preview the entire v2 path and verify task completion before recruiting participants;
-3. recruit and run the live participant protocol in batches of three;
-4. enter participant-level evidence in the discovery workbook;
-5. run bounded browse/search control C after the direct-decision exercises and Pantry-first D as a
+1. recruit and run the live participant protocol in batches of three;
+2. enter participant-level evidence in the discovery workbook;
+3. run bounded browse/search control C after the direct-decision exercises and Pantry-first D as a
    separate H7 exercise rather than as cardinality variants;
-6. review the six locked thresholds and segment concentration;
-7. sign D0 with dissent and rejected alternatives;
-8. confirm the founder-selected hybrid policy or define the evidence-backed bound/pivot that
+4. review the six locked thresholds and segment concentration;
+5. sign D0 with dissent and rejected alternatives;
+6. confirm the founder-selected hybrid policy or define the evidence-backed bound/pivot that
    replaces it;
-9. only then convert the selected interaction into final launch navigation and production UI.
+7. only then convert the selected interaction into final launch navigation and production UI.

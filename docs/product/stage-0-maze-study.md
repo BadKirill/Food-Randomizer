@@ -1,8 +1,10 @@
 # Stage 0 Maze study
 
-Status: live and dry-run verified; participant evidence pending
+Status: live v2 and full-flow preview verified; participant evidence pending
 
 Published: 2026-08-16
+
+Updated: 2026-08-20
 
 ## Links and ownership
 
@@ -24,7 +26,9 @@ not connect another Figma file or replace this link without the canonical-file c
 
 ## Research decision
 
-This study compares three bounded answers to the same weeknight meal-decision job:
+The study first observes the complete weeknight decision journey from an unselected product entry
+to the first cooking step. It then compares three bounded recommendation presentations for the
+same job:
 
 - A: one strong recommendation plus a replacement action;
 - B: two or three equally weighted options;
@@ -34,7 +38,7 @@ H remains the founder-selected working direction. The study does not present H a
 answer to participants, and publication does not sign Decision Gate D0. Maze uses `Alternating`
 variant distribution so every participant sees all three variants in randomized order.
 
-Feed/search control C and Pantry-first exercise D are intentionally outside this A/B/H study. C is
+Feed/search control C and Pantry-first exercise D are intentionally outside this live study. C is
 a separate H3 control and D is a separate H7 value/input test; neither may be interpreted as a
 fourth cardinality variant.
 
@@ -44,11 +48,12 @@ fourth cardinality variant.
 2. two-question screener;
 3. recent concrete incident question;
 4. recent workaround/tool usage question;
-5. randomized A/B/H variant comparison;
-6. format preference question;
-7. decision-friction tradeoff question;
-8. open trust-requirement question;
-9. default Maze thank-you screen.
+5. full E1–E8 product journey from empty entry to cooking;
+6. randomized A/B/H variant comparison;
+7. format preference question;
+8. decision-friction tradeoff question;
+9. open trust-requirement question;
+10. default Maze thank-you screen.
 
 ### Screener
 
@@ -82,6 +87,23 @@ Recent tools, multi-select:
 Do not treat self-reported preference as stronger evidence than the recent incident or observed
 prototype behavior.
 
+## Full journey contract
+
+The first Prototype Test is the participant's first product exposure.
+
+Task: `Decide what to cook tonight and begin cooking.`
+
+Description: `Imagine a typical weekday evening. You want to cook dinner but have no clear idea. Start from the app’s first screen, choose what matters today, optionally select ingredients, and continue until you would genuinely begin cooking or decide to leave.`
+
+| Maze block | Start screen | Goal screen | Goal rule |
+| --- | --- | --- | --- |
+| Full weeknight decision | `Runner E1 · Welcome` (`270:1517`) | `Runner E8 · Cooking` (`270:1524`) | Reach a specific screen |
+
+The path collects one priority, one time bound and optional prototype ingredient fixtures before
+showing the Hybrid recommendation. Hard dietary limits stay visible and cannot be relaxed. Exact
+path success, hotspot hints and interactive-component assistance remain disabled so alternative and
+adjustment behavior stays observable.
+
 ## Variant contract
 
 Every variant uses the same task and scenario:
@@ -98,7 +120,8 @@ Scenario: `Imagine a typical weekday evening. You want to cook dinner, have litt
 
 Exact-path success is disabled so legitimate alternative and recovery paths remain observable.
 Hotspot hints and interactive-component assistance are disabled. Maze records success, direct or
-indirect paths, time, misclicks and abandonment for each prototype task.
+indirect paths, time, misclicks and abandonment for each prototype task. The A/B/H tasks are focused
+comparison stimuli after the full journey; they are not the first exposure to the product.
 
 Each variant ends with the same required questions:
 
@@ -145,7 +168,8 @@ source attribution, use a bounded non-personal tag such as `source=friend`, `sou
 1. recruit 12 completed participants in batches of three;
 2. include two contrast users and at least six participants who recently used a recipe or AI
    alternative;
-3. keep the published study structure and locked thresholds unchanged after the first live response;
+3. keep the published v2 study structure and locked thresholds unchanged after the first live
+   response;
 4. use one participant link for all A/B/H participants so Maze preserves randomized order;
 5. inspect the first three completions for technical failure, unclear wording and segment mismatch;
 6. correct only a genuine study defect, document the change and exclude incomparable responses;
@@ -182,12 +206,29 @@ The 2026-08-16 dry run used Maze preview mode, which does not save responses. It
 - the published study has no builder errors;
 - the live link saves responses, limits one response per device and keeps Clips disabled.
 
+The 2026-08-20 v2 dry run also used Maze preview mode and therefore saved no response. It verified:
+
+- Maze refreshed the canonical Figma source on 2026-08-20 and discovered Flow 7 plus all E1–E8
+  screens;
+- the new full-journey Prototype Test appears before the editable A/B/H comparison;
+- the full task starts at `Runner E1 · Welcome` and uses `Runner E8 · Cooking` as its only goal;
+- Welcome, Priority, Time, empty Ingredients, selected Ingredients, Hybrid Recommendation, Recipe
+  and Cooking render without shifted actions, clipped copy or a preselected meal on entry;
+- selecting Quick & easy, 25 min, Red lentils, Show my matches, Choose this meal and Start cooking
+  reaches E8 and Maze reports `Task complete`;
+- the original published A/B/H block and its child questions were hidden for participants, while an
+  editable copy with the same three variants and Alternating distribution was created;
+- publication completed successfully and the Recruit view reported the study as Live with all
+  devices allowed, Clips disabled, zero starts and zero completions at the time of update;
+- the participant link remained `https://t.maze.co/574247931`.
+
 ## Change and stop rules
 
 Figma changes after publication can alter participant experience and invalidate comparisons. Freeze
-the A/B/H runner frames while collection is active. If a critical prototype defect is found, stop
-the study, duplicate or version the study, re-run preview verification and document which responses
-belong to each version. Never silently refresh the prototype during a live batch.
+the E1–E8 and editable A/B/H runner frames while collection is active. If a critical prototype
+defect is found, stop the study, duplicate or version the affected Maze block, re-run preview
+verification and document which responses belong to each version. Never silently refresh the
+prototype during a live batch.
 
 Stop the study immediately for a hard dietary-safety contradiction, a broken goal path, accidental
 sensitive-data collection, or a material mismatch between Maze and the canonical Figma file.

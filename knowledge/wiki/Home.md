@@ -12,7 +12,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 - Files indexed semantically or by metadata: 200
 - Binary assets indexed by metadata: 4
 - Files with extracted sections: 154
-- Content fingerprint: `02f28953bfad1c6788ca00fb7d1d45cd9c8fda20ef28c7b434a22e6b2e0f01ac`
+- Content fingerprint: `7db5941da382b8571c3850264ab7c42a2e418a887b93573b672cfa6038ea583b`
 
 ## Knowledge tree
 
@@ -26,7 +26,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 ### Product
 
 - [Product strategy and discovery gates](RandoMeal--Product--Strategy) — RandoMeal is a decision engine rather than a recipe generator or catalog. The approved working direction is a Hybrid answer hierarchy, while discovery evidence still gates production rollout.
-- [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The canonical v2 research prototype now starts with a short unselected context flow before the Hybrid decision and retains focused Single, Shortlist, C and D comparisons; the published Maze study remains on its v1 entry until separately migrated.
+- [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live v2 Maze study now starts with a short unselected E1–E8 journey before the focused A/B/H comparison; the canonical prototype also retains separate C and D controls.
 - [Product delivery roadmap](RandoMeal--Product--Delivery-Roadmap) — Dependency-ordered product delivery from discovery gates through foundations, recommendation beta, measurement, hardening, and later expansion.
 
 ### Architecture

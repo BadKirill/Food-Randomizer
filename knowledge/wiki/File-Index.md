@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `02f28953bfad1c6788ca00fb7d1d45cd9c8fda20ef28c7b434a22e6b2e0f01ac`
+Fingerprint: `7db5941da382b8571c3850264ab7c42a2e418a887b93573b672cfa6038ea583b`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -127,7 +127,7 @@ Fingerprint: `02f28953bfad1c6788ca00fb7d1d45cd9c8fda20ef28c7b434a22e6b2e0f01ac`
 | `docs/product/p0-mobile-wireframes-pass-01.md` | markdown | repository-inventory, design-system-quality | 7 indexed sections: P0 mobile wireframes pass 01, Scope, Product decisions represented, Design-system use, Creation review, … |
 | `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, … |
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
-| `docs/product/stage-0-maze-study.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap, analytics-measurement | 12 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, … |
+| `docs/product/stage-0-maze-study.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap, analytics-measurement | 13 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, … |
 | `docs/product/stage-0-research-prototype.md` | markdown | repository-inventory, choice-cardinality-gate, analytics-measurement, design-system-quality | 11 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, End-to-end participant journey, Focused comparison starting points, … |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |

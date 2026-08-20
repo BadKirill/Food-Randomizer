@@ -1,6 +1,6 @@
 # Hybrid choice-cardinality evidence gate
 
-The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The canonical v2 research prototype now starts with a short unselected context flow before the Hybrid decision and retains focused Single, Shortlist, C and D comparisons; the published Maze study remains on its v1 entry until separately migrated.
+The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live v2 Maze study now starts with a short unselected E1–E8 journey before the focused A/B/H comparison; the canonical prototype also retains separate C and D controls.
 
 Status: **target**
 Authority: **discovery-gate**
@@ -16,8 +16,8 @@ Authority: **discovery-gate**
 - Use A and B as equal-fidelity cardinality bounds and H as the intentionally hierarchical founder-selected candidate; the Figma screens do not replace participant evidence.
 - Use the corrected end-to-end participant journey from Welcome node 270:1517 through Cooking node 270:1524 as the first product exposure; priority, time and optional ingredient selection precede any meal recommendation.
 - The runnable research prototype starts A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319.
-- Live Maze study 574247931 uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.
-- Freeze the published A/B/H Figma runner frames during collection; a material prototype fix requires a stopped and versioned study with incomparable responses separated.
+- Live Maze study 574247931 first runs the E1-to-E8 full journey, then uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.
+- Freeze the published E1-E8 and editable A/B/H Figma runner frames during collection; a material prototype fix requires a stopped and versioned study with incomparable responses separated.
 
 ## Source coverage
 
@@ -25,8 +25,8 @@ Authority: **discovery-gate**
 - `docs/product/delivery-plan.md` — 27 indexed sections: Dependency-ordered delivery plan, Operating rules for implementers, Phase 0 - decisions, discovery and baseline (2-3 weeks), P0-01 Product discovery and choice-model gate, P0-02 Engineering baseline, …. Sections: docs/product/delivery-plan.md (L1–296); Dependency-ordered delivery plan (L1–296); Operating rules for implementers (L12–26); Phase 0 - decisions, discovery and baseline (2-3 weeks) (L27–88); P0-01 Product discovery and choice-model gate (L33–48); P0-02 Engineering baseline (L49–57); P0-03 Content audit (L58–67); P0-04 Analytics baseline (L68–79)
 - `docs/product/discovery-decisions.md` — 8 indexed sections: Discovery decisions and implementation gates, 1. Accepted direction, 2. Founder-selected working direction, 3. Open hypotheses, 4. Stage 0 protocol and locked thresholds, …. Sections: docs/product/discovery-decisions.md (L1–168); Discovery decisions and implementation gates (L1–168); 1. Accepted direction (L13–27); 2. Founder-selected working direction (L28–46); 3. Open hypotheses (L47–63); 4. Stage 0 protocol and locked thresholds (L64–88); 5. H3 concept-test contract (L89–133); 6. Content gate (L134–150)
 - `docs/product/quality-and-design.md` — 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, …. Sections: docs/product/quality-and-design.md (L1–305); Design and quality operating model (L1–305); 1. Design workflow (L3–170); Foundation v1 (L60–100); Core Design System v1 (L101–111); Decision flow concept 01 (L112–129); Client flow skeleton (L130–149); P0 mobile wireframes pass 01 (L150–170)
-- `docs/product/stage-0-maze-study.md` — 12 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, …. Sections: docs/product/stage-0-maze-study.md (L1–194); Stage 0 Maze study (L1–194); Links and ownership (L7–24); Research decision (L25–40); Participant flow (L41–84); Screener (L53–67); Context questions (L68–84); Variant contract (L85–126)
-- `docs/product/stage-0-research-prototype.md` — 11 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, End-to-end participant journey, Focused comparison starting points, …. Sections: docs/product/stage-0-research-prototype.md (L1–224); Stage 0 research prototype handoff (L1–224); Purpose (L19–35); Canonical structure (L36–52); End-to-end participant journey (L53–73); Focused comparison starting points (L74–93); Corrective design pass (L94–107); Moderator protocol (L108–132)
+- `docs/product/stage-0-maze-study.md` — 13 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, …. Sections: docs/product/stage-0-maze-study.md (L1–235); Stage 0 Maze study (L1–235); Links and ownership (L9–26); Research decision (L27–44); Participant flow (L45–89); Screener (L58–72); Context questions (L73–89); Full journey contract (L90–106)
+- `docs/product/stage-0-research-prototype.md` — 11 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, End-to-end participant journey, Focused comparison starting points, …. Sections: docs/product/stage-0-research-prototype.md (L1–221); Stage 0 research prototype handoff (L1–221); Purpose (L19–35); Canonical structure (L36–52); End-to-end participant journey (L53–73); Focused comparison starting points (L74–93); Corrective design pass (L94–107); Moderator protocol (L108–132)
 
 ## Graph relations
 

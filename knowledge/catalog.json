@@ -194,7 +194,7 @@
       "wikiSlug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "status": "target",
       "authority": "discovery-gate",
-      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The canonical v2 research prototype now starts with a short unselected context flow before the Hybrid decision and retains focused Single, Shortlist, C and D comparisons; the published Maze study remains on its v1 entry until separately migrated.",
+      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live v2 Maze study now starts with a short unselected E1–E8 journey before the focused A/B/H comparison; the canonical prototype also retains separate C and D controls.",
       "tags": ["single", "shortlist", "hybrid", "experiment", "H3", "одно блюдо", "2-3 варианта", "гипотеза"],
       "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/stage-0-research-prototype.md", "docs/product/stage-0-maze-study.md", "docs/product/delivery-plan.md"],
       "rules": [
@@ -207,8 +207,8 @@
         "Use A and B as equal-fidelity cardinality bounds and H as the intentionally hierarchical founder-selected candidate; the Figma screens do not replace participant evidence.",
         "Use the corrected end-to-end participant journey from Welcome node 270:1517 through Cooking node 270:1524 as the first product exposure; priority, time and optional ingredient selection precede any meal recommendation.",
         "The runnable research prototype starts A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319.",
-        "Live Maze study 574247931 uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.",
-        "Freeze the published A/B/H Figma runner frames during collection; a material prototype fix requires a stopped and versioned study with incomparable responses separated."
+        "Live Maze study 574247931 first runs the E1-to-E8 full journey, then uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.",
+        "Freeze the published E1-E8 and editable A/B/H Figma runner frames during collection; a material prototype fix requires a stopped and versioned study with incomparable responses separated."
       ],
       "dependsOn": ["product-strategy"],
       "related": ["recommendation-engine-target", "analytics-measurement", "design-system-quality"],
@@ -232,7 +232,7 @@
         "Release claims must be backed by current tests rather than historical test-count snapshots.",
         "Execution Stage 0 branch baseline and Stage 1 research prototype are complete; the founder-selected Hybrid direction is documented, while product discovery Stage 0 remains open until participant evidence signs D0.",
         "Use the executable Stage 0-19 plan for operational status, dependency order, handoff, exit criteria and rollback.",
-        "Stage 2 participant collection uses the live Maze A/B/H study in batches of three; publication and a successful preview do not complete D0."
+        "Stage 2 participant collection uses the live Maze v2 study with the full E1-E8 journey followed by A/B/H comparison in batches of three; publication and a successful preview do not complete D0."
       ],
       "dependsOn": ["product-strategy", "current-vs-target"],
       "related": ["qa-strategy", "production-infrastructure"],

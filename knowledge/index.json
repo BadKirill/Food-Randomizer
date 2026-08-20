@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "catalogSchemaVersion": 1,
-  "contentFingerprint": "02f28953bfad1c6788ca00fb7d1d45cd9c8fda20ef28c7b434a22e6b2e0f01ac",
+  "contentFingerprint": "7db5941da382b8571c3850264ab7c42a2e418a887b93573b672cfa6038ea583b",
   "coverage": {
     "repositoryFiles": 200,
     "indexedFiles": 200,
@@ -121,7 +121,7 @@
       "production-infrastructure": 8,
       "legacy-documentation-map": 7
     },
-    "sections": 1327,
+    "sections": 1328,
     "symbols": 377,
     "routes": 13,
     "localRelations": 96
@@ -13433,10 +13433,10 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 9107,
-      "lines": 194,
-      "sha256": "52c716187f6d14701e88e1b447e4c65c46648b847b228e479adecd7ad258174e",
-      "summary": "12 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, …",
+      "bytes": 11611,
+      "lines": 235,
+      "sha256": "5cbaae3b43e1aa4179deb28755e51a499e13e6e0fb0296f0de28ef16cedc607a",
+      "summary": "13 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, …",
       "nodeIds": [
         "repository-inventory",
         "choice-cardinality-gate",
@@ -13453,7 +13453,7 @@
           "title": "docs/product/stage-0-maze-study.md",
           "line": 1,
           "depth": 0,
-          "endLine": 194
+          "endLine": 235
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#2",
@@ -13461,95 +13461,103 @@
           "title": "Stage 0 Maze study",
           "line": 1,
           "depth": 1,
-          "endLine": 194
+          "endLine": 235
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#3",
           "kind": "heading",
           "title": "Links and ownership",
-          "line": 7,
+          "line": 9,
           "depth": 2,
-          "endLine": 24
+          "endLine": 26
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#4",
           "kind": "heading",
           "title": "Research decision",
-          "line": 25,
+          "line": 27,
           "depth": 2,
-          "endLine": 40
+          "endLine": 44
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#5",
           "kind": "heading",
           "title": "Participant flow",
-          "line": 41,
+          "line": 45,
           "depth": 2,
-          "endLine": 84
+          "endLine": 89
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#6",
           "kind": "heading",
           "title": "Screener",
-          "line": 53,
+          "line": 58,
           "depth": 3,
-          "endLine": 67
+          "endLine": 72
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#7",
           "kind": "heading",
           "title": "Context questions",
-          "line": 68,
+          "line": 73,
           "depth": 3,
-          "endLine": 84
+          "endLine": 89
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#8",
           "kind": "heading",
-          "title": "Variant contract",
-          "line": 85,
+          "title": "Full journey contract",
+          "line": 90,
           "depth": 2,
-          "endLine": 126
+          "endLine": 106
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#9",
           "kind": "heading",
-          "title": "Post-comparison questions",
-          "line": 109,
-          "depth": 3,
-          "endLine": 126
+          "title": "Variant contract",
+          "line": 107,
+          "depth": 2,
+          "endLine": 149
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#10",
           "kind": "heading",
-          "title": "Privacy and collection settings",
-          "line": 127,
-          "depth": 2,
-          "endLine": 142
+          "title": "Post-comparison questions",
+          "line": 132,
+          "depth": 3,
+          "endLine": 149
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#11",
           "kind": "heading",
-          "title": "Operating protocol",
-          "line": 143,
+          "title": "Privacy and collection settings",
+          "line": 150,
           "depth": 2,
-          "endLine": 170
+          "endLine": 165
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#12",
           "kind": "heading",
-          "title": "Verification record",
-          "line": 171,
+          "title": "Operating protocol",
+          "line": 166,
           "depth": 2,
-          "endLine": 184
+          "endLine": 194
         },
         {
           "id": "section:docs/product/stage-0-maze-study.md#13",
           "kind": "heading",
-          "title": "Change and stop rules",
-          "line": 185,
+          "title": "Verification record",
+          "line": 195,
           "depth": 2,
-          "endLine": 194
+          "endLine": 224
+        },
+        {
+          "id": "section:docs/product/stage-0-maze-study.md#14",
+          "kind": "heading",
+          "title": "Change and stop rules",
+          "line": 225,
+          "depth": 2,
+          "endLine": 235
         }
       ],
       "symbols": []
@@ -13561,9 +13569,9 @@
       "kind": "documentation",
       "binary": false,
       "generated": false,
-      "bytes": 11262,
-      "lines": 224,
-      "sha256": "d32cbb7fde80e32bed10fd773170f82d8a95df7da47597c9facc7c6ee6f09eb1",
+      "bytes": 10915,
+      "lines": 221,
+      "sha256": "353153f8e6517c6c89665533c2598d87b881d1f55342beee50ae6bc7516e001b",
       "summary": "11 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, End-to-end participant journey, Focused comparison starting points, …",
       "nodeIds": [
         "repository-inventory",
@@ -13581,7 +13589,7 @@
           "title": "docs/product/stage-0-research-prototype.md",
           "line": 1,
           "depth": 0,
-          "endLine": 224
+          "endLine": 221
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#2",
@@ -13589,7 +13597,7 @@
           "title": "Stage 0 research prototype handoff",
           "line": 1,
           "depth": 1,
-          "endLine": 224
+          "endLine": 221
         },
         {
           "id": "section:docs/product/stage-0-research-prototype.md#3",
@@ -13669,7 +13677,7 @@
           "title": "Remaining research work",
           "line": 206,
           "depth": 2,
-          "endLine": 224
+          "endLine": 221
         }
       ],
       "symbols": []
@@ -13768,9 +13776,9 @@
       "kind": "configuration",
       "binary": false,
       "generated": false,
-      "bytes": 63786,
+      "bytes": 63830,
       "lines": 928,
-      "sha256": "9094ac7c3a521f5a5d1305042be2dbca155d176bde8d1a80f754821b55628588",
+      "sha256": "cfbaf222577a16f96268dc8451b06ed20bbdbd339a660513300d38cb17f3c56f",
       "summary": "6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, …",
       "nodeIds": [
         "knowledge-system",
