@@ -1,6 +1,6 @@
 # Stage 0 Maze study
 
-Status: full-flow v5 A/B/H draft configured for publication; participant evidence pending
+Status: full-flow v5 A/B/H study live and end-to-end preview verified; participant evidence pending
 
 Published: 2026-08-16
 
@@ -183,7 +183,7 @@ source attribution, use a bounded non-personal tag such as `source=friend`, `sou
 1. recruit 12 completed participants in batches of three;
 2. include two contrast users and at least six participants who recently used a recipe or AI
    alternative;
-3. keep the published adaptive v4 study structure and locked thresholds unchanged after the first live
+3. keep the published full-flow v5 study structure and locked thresholds unchanged after the first live
    response;
 4. use one participant link for all A/B/H participants so Maze preserves randomized order;
 5. inspect the first three completions for technical failure, unclear wording and segment mismatch;
@@ -209,7 +209,8 @@ wrong segment can override the arithmetic and must be recorded.
 
 ## Verification record
 
-The 2026-08-21 full-flow v5 pre-publication check saved no participant response. It verified:
+The 2026-08-21 full-flow v5 publication and end-to-end preview saved no participant response. It
+verified:
 
 - Maze refreshed the canonical Figma source and discovered Flows 10–12 plus all 24 V5 root frames;
 - the active editable comparison assigns A to V5-A01→V5-A08, B to V5-B01→V5-B08 and H to
@@ -219,8 +220,21 @@ The 2026-08-21 full-flow v5 pre-publication check saved no participant response.
   version for auditability;
 - the canonical V5 subtrees contain no cross-version navigation, target below 44 px, unsupported
   visible font or visible node outside its mobile root frame;
-- publication and a no-save end-to-end Maze preview remain the final operator gates before sending
-  the participant link.
+- the redundant published v4 task was hidden, leaving exactly three participant-visible prototype
+  tests inside the alternating A/B/H comparison;
+- Maze published the corrected study successfully and retained participant link
+  `https://t.maze.co/574247931`;
+- the no-save authenticated preview completed all three journeys from the servings limit through
+  priority, time, first ingredient, additional ingredient selections, recommendation, recipe and
+  `Start cooking` to the Maze `Task complete` state;
+- Back returned to the previous screen, servings accepted 1, 2 and 4 across the three runs, and
+  multiple ingredients remained independently selected before matching;
+- Single changed its recommendation in place through `Show another`, while a quieter Hybrid
+  alternative and an equal Shortlist option each opened the corresponding recipe;
+- all post-task confidence and cooking-intent questions, the final comparison questions and the
+  thank-you screen completed successfully;
+- Recruit reported the study as Live for all devices with zero started and zero completed real
+  responses immediately after verification.
 
 The 2026-08-16 dry run used Maze preview mode, which does not save responses. It verified:
 

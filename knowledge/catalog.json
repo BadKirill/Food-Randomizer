@@ -194,7 +194,7 @@
       "wikiSlug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "status": "target",
       "authority": "discovery-gate",
-      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The full-flow v5 Maze draft compares Single, Shortlist and Hybrid through separate Welcome-to-Cooking journeys with identical intake, working Back and multi-select ingredients; v4, v3, v2 and separate C/D controls remain preserved evidence.",
+      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live full-flow v5 Maze study compares Single, Shortlist and Hybrid through separate Welcome-to-Cooking journeys with identical intake, working Back and multi-select ingredients; v4, v3, v2 and separate C/D controls remain preserved evidence.",
       "tags": ["single", "shortlist", "hybrid", "experiment", "H3", "одно блюдо", "2-3 варианта", "гипотеза"],
       "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/stage-0-research-prototype.md", "docs/product/stage-0-maze-study.md", "docs/product/delivery-plan.md"],
       "rules": [
@@ -208,7 +208,7 @@
         "Use the three full-flow v5 participant journeys as the H3 comparison: A runs 347:2021 to 347:2116, B runs 347:3022 to 347:3117 and H runs 347:3293 to 347:3388; each starts before a meal is shown and includes servings, priority, time, first ingredient anchor, additional ingredient selections, recipe and cooking plan.",
         "Treat the V4 Figma state as a bounded deterministic simulation with 12 unpublished variables, not as the production recommender, scaled-serving engine, recipe truth source or analytics store; serving changes and extra ingredient selections are explicitly recorded fixtures rather than claims of recipe adaptation.",
         "Legacy focused follow-up runners start A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319; they are not v5 participant starts.",
-        "Maze study 574247931 has a versioned editable v5 comparison draft with Alternating randomized A/B/H order, Welcome-to-Cooking goals, identical task wording, interactive-component compatibility enabled, hotspot hints disabled, no Clips or participant PII, and participant link https://t.maze.co/574247931; publication and no-save preview remain final gates.",
+        "Maze study 574247931 is live with exactly three participant-visible full-flow v5 tests in Alternating randomized A/B/H order, Welcome-to-Cooking goals, identical task wording, interactive-component compatibility enabled, hotspot hints disabled, no Clips or participant PII, and participant link https://t.maze.co/574247931; a no-save end-to-end preview completed all three branches through Task complete and the final thank-you screen before real collection began.",
         "Freeze V5-A01-to-V5-A08, V5-B01-to-V5-B08 and V5-H01-to-V5-H08 after publication; keep v4, v3, v2 and legacy focused A/B/H frames as preserved evidence and require a stopped, versioned study for any material prototype fix."
       ],
       "dependsOn": ["product-strategy"],

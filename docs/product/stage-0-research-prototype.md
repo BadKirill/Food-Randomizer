@@ -1,7 +1,8 @@
 # Stage 0 research prototype handoff
 
-Status: creation-reviewed full-flow v5 A/B/H research artifact; Maze publication is prepared;
-v4, v3 and v2 remain preserved evidence; product discovery evidence remains pending
+Status: creation-reviewed full-flow v5 A/B/H research artifact; Maze publication and no-save
+end-to-end preview are verified; v4, v3 and v2 remain preserved evidence; product discovery
+evidence remains pending
 
 Canonical artifact:
 [Stage 0 Research Prototype](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
@@ -237,6 +238,13 @@ The full-flow v5 pass then applied those corrections to every cardinality scenar
   the chosen recipe before navigation;
 - the three branches reuse the approved semantic variables, Source Sans 3 and Fraunces families,
   and Core Design System v1 components rather than detached local imitations.
+
+The published Maze study now exposes exactly these three full-flow journeys. A redundant v4 task
+was hidden before collection began. A no-save preview completed Single, Hybrid and Shortlist from
+the first servings-limit screen to `Start cooking`, including working Back navigation, different
+serving and time choices, multiple simultaneous ingredient selections, Single replacement, and
+alternative selection in Hybrid and Shortlist. Maze reached `Task complete` for every branch and
+continued through all post-task and final study questions to the thank-you screen.
 
 ## Moderator protocol
 
