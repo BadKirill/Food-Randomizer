@@ -1,8 +1,7 @@
 # Stage 0 research prototype handoff
 
-Status: creation-reviewed adaptive v4 research artifact; the live Maze study uses V4-01–V4-08
-before its focused A/B/H comparison; v3 and v2 remain preserved evidence; product discovery
-evidence remains pending
+Status: creation-reviewed full-flow v5 A/B/H research artifact; Maze publication is prepared;
+v4, v3 and v2 remain preserved evidence; product discovery evidence remains pending
 
 Canonical artifact:
 [Stage 0 Research Prototype](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
@@ -19,19 +18,20 @@ Operational contract:
 
 ## Purpose
 
-The prototype now contains four deliberately separate layers:
+The prototype now contains five deliberately separate layers:
 
-1. an active adaptive v4 journey that starts before any meal is chosen, allows an initial serving
-   limit and multi-select ingredients, and changes the recommendation, recipe and cooking plan;
-2. the preserved V3-01–V3-08 adaptive journey as versioned research evidence;
-3. the preserved E1–E8 v2 journey as earlier versioned evidence;
-4. focused A/B/H comparison stimuli for the H3 choice-cardinality gate.
+1. three active full-flow v5 A/B/H journeys that each begin before any meal is chosen and differ
+   only at recommendation cardinality;
+2. the preserved V4-01–V4-08 adaptive hybrid journey as versioned research evidence;
+3. the preserved V3-01–V3-08 adaptive journey as earlier versioned evidence;
+4. the preserved E1–E8 v2 journey as earlier versioned evidence;
+5. focused legacy A/B/H stimuli and C/D controls for bounded follow-up work.
 
-The active journey uses the founder-selected hybrid candidate—one dominant answer plus two quieter,
-tradeoff-labelled alternatives—without presenting a preselected meal on entry. The focused
-comparison still tests that hierarchy against a single-result narrow bound and an equally weighted
-shortlist broad bound. Feed/search is a bounded H3 control and Pantry-first remains a separate H7
-exercise.
+Each active journey starts with the same unselected product entry, serving limit, priority, time and
+multi-select ingredient flow. Only the recommendation presentation changes: Single shows one
+trusted answer with a live replacement action, Shortlist shows three equal candidates, and Hybrid
+shows one dominant answer plus two quieter tradeoff-labelled alternatives. Feed/search remains a
+bounded H3 control and Pantry-first remains a separate H7 exercise.
 
 This artifact completes execution Stage 1. It does not complete product discovery Stage 0 or sign
 Decision Gate D0.
@@ -76,9 +76,9 @@ Ingredient chips are prototype fixtures rather than Pantry or recommendation-eng
 
 ## Adaptive v4 participant journey
 
-The live research entry is `Runner V4-01 · Welcome` (`320:1855`). It ends at
-`Runner V4-08 · Adaptive cooking plan` (`320:1934`). The v3 and v2 journeys remain in Figma for
-auditability but are hidden from live Maze participants.
+The preserved v4 entry is `Runner V4-01 · Welcome` (`320:1855`). It ends at
+`Runner V4-08 · Adaptive cooking plan` (`320:1934`). It remains in Figma for auditability and is
+not the v5 comparison entry.
 
 | Step | Figma node | Participant decision or adaptive outcome |
 | --- | --- | --- |
@@ -106,6 +106,32 @@ default and selected states.
 The prototype uses a private hidden Figma collection named `__Prototype · Stage 0 v4` with 12
 unpublished variables. It is a bounded deterministic Stage 0 simulation, not the server-owned
 ranking implementation, recipe truth source, scaled-serving engine or analytics state.
+
+## Full-flow v5 comparison journeys
+
+The three v5 flows reuse the reviewed v4 intake, recipe and cooking structures. They isolate the H3
+choice-cardinality variable without forcing participants to begin on a meal that already appears
+chosen.
+
+| Variant | Figma flow | Start | Recommendation | Goal |
+| --- | --- | --- | --- | --- |
+| A · Single | `Flow 10 · Full Single v5` | `Runner V5-A01 · Welcome` (`347:2021`) | `Runner V5-A06 · Single recommendation` (`347:2100`) | `Runner V5-A08 · Adaptive cooking plan` (`347:2116`) |
+| B · Shortlist | `Flow 11 · Full Shortlist v5` | `Runner V5-B01 · Welcome` (`347:3022`) | `Runner V5-B06 · Shortlist recommendation` (`347:3101`) | `Runner V5-B08 · Adaptive cooking plan` (`347:3117`) |
+| H · Hybrid | `Flow 12 · Full Hybrid v5` | `Runner V5-H01 · Welcome` (`347:3293`) | `Runner V5-H06 · Hybrid recommendation` (`347:3372`) | `Runner V5-H08 · Adaptive cooking plan` (`347:3388`) |
+
+Every journey has eight root-level 390 by 844 frames and the same Welcome, Priority, Time,
+Ingredients, Ingredients selected, Recipe and Cooking responsibilities. Every applicable header
+navigates to the immediately preceding screen. The first ingredient chooses the deterministic
+fixture, while all six ingredient controls remain independently toggleable on the selected state.
+Participants may choose any available serving, priority and time limit before the recommendation.
+
+The Single replacement action updates the recommendation in place. Every Shortlist candidate and
+every Hybrid alternative updates the shared recipe state before navigation. Recommendation footer
+actions remain inside the mobile frame and reuse Core Design System v1 Button instances.
+
+The three v5 subtrees contain 24 root frames. Automated creation review found no cross-version
+navigation, no unsupported visible font, no interaction target below 44 px and no visible node
+outside its root frame.
 
 ## Preserved adaptive v3 participant journey
 
@@ -150,11 +176,10 @@ decision. Select a start frame and press Present:
 | D | `204:2161` | Separate Pantry-first H7 exercise |
 | Recovery | `204:2319` | No-safe-match and offline recovery |
 
-The page now contains 51 top-level runner frames: the original 27 focused frames, eight preserved v2
-journey frames, eight preserved adaptive v3 frames and eight active adaptive v4 frames. Figma
-exposes nine flow start points; `Flow 9 · Adaptive v4` is the active entry, Flow 8 preserves v3 and
-Flow 7 preserves v2. The active research surface remains one adaptive entry plus the six focused
-comparison, control and recovery entries.
+The page now contains 75 top-level runner frames: the original 27 focused frames, eight preserved v2
+frames, eight preserved v3 frames, eight preserved v4 frames and 24 active v5 comparison frames.
+Figma exposes 12 flow start points. Flows 10–12 are the active full-flow comparison entries; Flow 9
+preserves v4, Flow 8 preserves v3 and Flow 7 preserves v2.
 
 Its transitions cover context selection, optional ingredient selection and skip, deterministic
 adaptation, acceptance, alternative selection, adjustment, replacement, recipe open, cooking start,
@@ -199,6 +224,19 @@ The adaptive v4 pass addressed the live-preview interaction defects found on 202
   button geometry;
 - dynamic character bindings were removed from the Red lentils and Tomatoes grid labels after live
   testing exposed a disappearing Tomatoes label in the selected state.
+
+The full-flow v5 pass then applied those corrections to every cardinality scenario:
+
+- Single, Shortlist and Hybrid now start at their own Welcome screen and end at their own Cooking
+  goal;
+- all 123 cloned reaction sources were remapped so navigation and Back remain inside the current
+  scenario;
+- each branch accepts all three time limits and all three priority choices before recommending;
+- each branch supports six independent ingredient selections and a clear-selection action;
+- Single exposes a live in-place replacement action, while Shortlist and Hybrid alternatives update
+  the chosen recipe before navigation;
+- the three branches reuse the approved semantic variables, Source Sans 3 and Fraunces families,
+  and Core Design System v1 components rather than detached local imitations.
 
 ## Moderator protocol
 
