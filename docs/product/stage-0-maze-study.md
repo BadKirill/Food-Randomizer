@@ -1,10 +1,10 @@
 # Stage 0 Maze study
 
-Status: live adaptive v3 and full-flow preview verified; participant evidence pending
+Status: live adaptive v4 and full-flow preview verified; participant evidence pending
 
 Published: 2026-08-16
 
-Updated: 2026-08-20
+Updated: 2026-08-21
 
 ## Links and ownership
 
@@ -48,7 +48,7 @@ fourth cardinality variant.
 2. two-question screener;
 3. recent concrete incident question;
 4. recent workaround/tool usage question;
-5. adaptive V3-01–V3-08 product journey from empty entry to a situation-specific cooking plan;
+5. adaptive V4-01–V4-08 product journey from editable limits to a situation-specific cooking plan;
 6. randomized A/B/H variant comparison;
 7. format preference question;
 8. decision-friction tradeoff question;
@@ -93,23 +93,23 @@ The first Prototype Test is the participant's first product exposure.
 
 Task: `Decide what to cook tonight and begin cooking.`
 
-Description: `Imagine a typical weekday evening. You want to cook dinner but have no clear idea. Start from the app’s first screen, choose what matters today, choose a realistic time limit, optionally select one ingredient you have, and continue until you would genuinely begin cooking or decide to leave.`
+Description: `Imagine a typical weekday evening. You want to cook dinner but have no clear idea. Start on the first screen, set tonight’s limits, choose what matters and how much time you have, select one or more ingredients, then continue until you would genuinely start cooking or leave.`
 
 | Maze block | Start screen | Goal screen | Goal rule |
 | --- | --- | --- | --- |
-| Adaptive weeknight decision v3 | `Runner V3-01 · Welcome` (`293:1692`) | `Runner V3-08 · Adaptive cooking plan` (`293:1917`) | Reach a specific screen |
+| Adaptive weeknight decision v4 | `Runner V4-01 · Welcome` (`320:1855`) | `Runner V4-08 · Adaptive cooking plan` (`320:1934`) | Reach a specific screen |
 
-The path collects one priority, one time bound and one optional prototype ingredient before showing
-the Hybrid recommendation. Priority changes the recommendation framing. Time and ingredient state
-change the primary meal, two quieter alternatives, recipe detail, missing item, first two cooking
-instructions and the complete three-, four- or five-step plan. Hard dietary limits stay visible and
-cannot be relaxed.
+The path starts with an editable serving limit, then collects one priority, one time bound and one
+or more prototype ingredients before showing the Hybrid recommendation. The no-peanuts hard limit
+stays visible and cannot be relaxed. Priority changes the recommendation framing. Time and the
+first ingredient anchor the bounded fixture; additional ingredients are independently recorded and
+remain visibly selected. Back controls allow participants to revise each preceding decision.
 
-The prototype implements 18 ingredient-and-time scenarios plus three skip-ingredient scenarios,
-combined independently with Quick & easy, Comforting and Lighter framing. This is a bounded
-research simulation, not the production recommender or a claim that every generated combination is
-available in the recipe catalog. The private Figma variable collection contains 33 unpublished
-variables and cannot be used as a production analytics store.
+The recipe amounts remain fixed even when the participant changes the 1, 2 or 4 serving limit, and
+additional ingredients do not rewrite the scripted recipe. Both limitations are disclosed in the
+prototype. The private v4 Figma variable collection contains 12 unpublished variables and cannot
+be used as a production analytics store. The preserved v3 fixture still contains the broader
+18 ingredient-and-time plus three skip scenarios, but it is no longer the live Maze entry.
 
 Exact-path success and hotspot hints are disabled so legitimate alternatives, adjustment and
 abandonment remain observable. Interactive-component compatibility is enabled because Figma
@@ -181,7 +181,7 @@ source attribution, use a bounded non-personal tag such as `source=friend`, `sou
 1. recruit 12 completed participants in batches of three;
 2. include two contrast users and at least six participants who recently used a recipe or AI
    alternative;
-3. keep the published adaptive v3 study structure and locked thresholds unchanged after the first live
+3. keep the published adaptive v4 study structure and locked thresholds unchanged after the first live
    response;
 4. use one participant link for all A/B/H participants so Maze preserves randomized order;
 5. inspect the first three completions for technical failure, unclear wording and segment mismatch;
@@ -258,13 +258,43 @@ The 2026-08-20 adaptive v3 dry run and publication also saved no preview respons
   the time of the v3 update;
 - the participant link remained `https://t.maze.co/574247931`.
 
+The 2026-08-21 adaptive v4 dry run, correction and publication also saved no preview response. It
+verified:
+
+- Maze discovered `Flow 9 · Adaptive v4` and all V4-01–V4-08 root-level frames from the canonical
+  Figma file;
+- the live task starts at `Runner V4-01 · Welcome` and completes only at
+  `Runner V4-08 · Adaptive cooking plan`;
+- the participant task now explicitly starts with tonight's limits and permits one or more
+  ingredients;
+- interactive-component compatibility remains enabled and hotspot hints remain disabled;
+- a real preview path changed the serving limit from 2 to 4, returned with Back and confirmed that
+  the four-serving state persisted;
+- Back navigation worked from Priority to Welcome, Time to Priority, Ingredients selected to the
+  chooser, Recommendation to selected ingredients and Recipe to Recommendation;
+- Red lentils, Tomatoes and Spinach could be visibly selected together while Red lentils remained
+  the deterministic fixture anchor;
+- a disappearing Tomatoes label found during the live preview was corrected in the canonical Figma
+  source and the same multi-select path was rerun successfully;
+- Quick & easy, 25 min and the three selected ingredients produced `Tomato lentil pasta`, opened the
+  recipe and reached `Runner V4-08 · Adaptive cooking plan` after Start cooking;
+- Maze reported `Task complete` on the goal screen;
+- the v4 subtree contains eight 390 by 844 frames, 270 nodes, 41 reaction sources and 73 top-level
+  actions, with zero invalid or cross-version destinations and zero interaction targets below
+  44 px;
+- the hidden v4 collection contains 12 unpublished variables and the visible fonts are only
+  Fraunces and Source Sans 3 under the SIL Open Font License 1.1;
+- the published task description was updated, Recruit reported the study as Live, all devices were
+  allowed and Clips remained disabled;
+- the participant link remained `https://t.maze.co/574247931`.
+
 ## Change and stop rules
 
 Figma changes after publication can alter participant experience and invalidate comparisons. Freeze
-the V3-01–V3-08 and editable A/B/H runner frames while collection is active. Keep E1–E8 as preserved
-v2 evidence only. If a critical prototype defect is found, stop the study, duplicate or version the
-affected Maze block, re-run preview verification and document which responses belong to each
-version. Never silently refresh the prototype during a live batch.
+the V4-01–V4-08 and editable A/B/H runner frames while collection is active. Keep V3-01–V3-08 and
+E1–E8 as preserved evidence only. If a critical prototype defect is found, stop the study,
+duplicate or version the affected Maze block, re-run preview verification and document which
+responses belong to each version. Never silently refresh the prototype during a live batch.
 
 Stop the study immediately for a hard dietary-safety contradiction, a broken goal path, accidental
 sensitive-data collection, or a material mismatch between Maze and the canonical Figma file.

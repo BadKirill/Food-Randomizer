@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `13ea21c358fb8b7015b21400cbde1bb41e3ba88a0a21ffe74abd440de43e96a8`
+Fingerprint: `311392978b776da8e553f4061109161a428390d52ccf5ae2273afa559e1437a3`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -128,7 +128,7 @@ Fingerprint: `13ea21c358fb8b7015b21400cbde1bb41e3ba88a0a21ffe74abd440de43e96a8`
 | `docs/product/quality-and-design.md` | markdown | repository-inventory, choice-cardinality-gate, mobile-theme-current, design-system-quality, qa-strategy | 14 indexed sections: Design and quality operating model, 1. Design workflow, Foundation v1, Core Design System v1, Decision flow concept 01, … |
 | `docs/product/README.md` | markdown | repository-inventory, product-strategy | 4 indexed sections: RandoMeal product engineering blueprint, Product invariant, Decision status, Change protocol |
 | `docs/product/stage-0-maze-study.md` | markdown | repository-inventory, choice-cardinality-gate, delivery-roadmap, analytics-measurement | 13 indexed sections: Stage 0 Maze study, Links and ownership, Research decision, Participant flow, Screener, … |
-| `docs/product/stage-0-research-prototype.md` | markdown | repository-inventory, choice-cardinality-gate, analytics-measurement, design-system-quality | 12 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Preserved v2 participant journey, Adaptive v3 participant journey, … |
+| `docs/product/stage-0-research-prototype.md` | markdown | repository-inventory, choice-cardinality-gate, analytics-measurement, design-system-quality | 13 indexed sections: Stage 0 research prototype handoff, Purpose, Canonical structure, Preserved v2 participant journey, Adaptive v4 participant journey, … |
 | `docs/releases/v0.2.0.md` | markdown | repository-inventory, delivery-roadmap, production-infrastructure | 7 indexed sections: Release v0.2.0, Included scope, Runtime endpoints, Required secrets (names only), API_ENV_PROD required keys, … |
 | `knowledge/catalog.json` | json | knowledge-system, repository-inventory | 6 indexed sections: schemaVersion, project, readingPolicy, syncPolicy, nodes, … |
 | `knowledge/general-ai-baseline.md` | markdown | knowledge-system, repository-inventory | 10 indexed sections: General Rules for AI Coding Agents, Cross-Project Source Hierarchy, Shared-Baseline Change Synchronization, Evidence Before Action, Minimal and Focused Code, … |
