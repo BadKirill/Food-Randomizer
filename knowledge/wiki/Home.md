@@ -12,7 +12,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 - Files indexed semantically or by metadata: 200
 - Binary assets indexed by metadata: 4
 - Files with extracted sections: 154
-- Content fingerprint: `7756907849598ecf033e6631a16ca34f80a084d711179314e5cee94ef4fd046e`
+- Content fingerprint: `311392978b776da8e553f4061109161a428390d52ccf5ae2273afa559e1437a3`
 
 ## Knowledge tree
 
@@ -26,7 +26,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 ### Product
 
 - [Product strategy and discovery gates](RandoMeal--Product--Strategy) — RandoMeal is a decision engine rather than a recipe generator or catalog. The approved working direction is a Hybrid answer hierarchy, while discovery evidence still gates production rollout.
-- [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live, dry-run-verified Maze study compares it against equal-fidelity Single and Shortlist bounds; the canonical research prototype also retains separate C and D controls.
+- [Hybrid choice-cardinality evidence gate](RandoMeal--Product--Choice-Cardinality-Gate) — The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live adaptive v4 Maze study now starts with editable serving limits, revision through Back and multi-select ingredients across V4-01–V4-08 before the focused A/B/H comparison; the canonical prototype preserves v3, v2 and separate C and D controls.
 - [Product delivery roadmap](RandoMeal--Product--Delivery-Roadmap) — Dependency-ordered product delivery from discovery gates through foundations, recommendation beta, measurement, hardening, and later expansion.
 
 ### Architecture
@@ -67,7 +67,7 @@ Start with the catalog, select no more than 7 relevant nodes, then read only the
 ### Analytics and Quality
 
 - [Analytics and measurement plan](RandoMeal--Analytics--Measurement) — Actor identity, event ownership, recommendation funnel, experiment dimensions, decision metrics, dashboards, privacy controls, outbox delivery, and observability boundaries.
-- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a six-flow clickable Stage 0 research prototype are implemented and creation-reviewed in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.
+- [Design system and product quality](RandoMeal--Design--System-and-Quality) — Foundation v1, a 20-set and 128-variant Core Design System v1, Decision flow concept 01, a 12-lane client flow skeleton, a 16-screen P0 mobile DS v1 pass and a creation-reviewed Stage 0 prototype with an adaptive eight-screen journey, preserved v2 journey and six focused research entries are implemented in canonical Figma; broad launch-platform coverage and mobile code adoption remain target work.
 - [QA, security, and release gates](RandoMeal--Quality--QA-Strategy) — Current Jest and E2E suites plus target contract, Testcontainers, Maestro, accessibility, load, security, migration, analytics, and release acceptance gates.
 
 ### Delivery and Operations

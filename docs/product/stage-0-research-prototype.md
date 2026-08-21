@@ -1,12 +1,15 @@
 # Stage 0 research prototype handoff
 
-Status: creation-reviewed research artifact; live Maze A/B/H study is dry-run verified; product
-discovery evidence remains pending
+Status: creation-reviewed adaptive v4 research artifact; the live Maze study uses V4-01–V4-08
+before its focused A/B/H comparison; v3 and v2 remain preserved evidence; product discovery
+evidence remains pending
 
 Canonical artifact:
 [Stage 0 Research Prototype](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
 
 Created: 2026-08-11
+
+Revised: 2026-08-21
 
 Live study:
 [Stage 0 · Weeknight Meal Decision · A/B/H](https://t.maze.co/574247931)
@@ -16,9 +19,17 @@ Operational contract:
 
 ## Purpose
 
-The prototype makes the H3 choice-cardinality test runnable while keeping the launch policy
-reversible. It tests the founder-selected hybrid candidate—one dominant answer plus two quieter,
-tradeoff-labelled alternatives—against a single-result narrow bound and an equally weighted
+The prototype now contains four deliberately separate layers:
+
+1. an active adaptive v4 journey that starts before any meal is chosen, allows an initial serving
+   limit and multi-select ingredients, and changes the recommendation, recipe and cooking plan;
+2. the preserved V3-01–V3-08 adaptive journey as versioned research evidence;
+3. the preserved E1–E8 v2 journey as earlier versioned evidence;
+4. focused A/B/H comparison stimuli for the H3 choice-cardinality gate.
+
+The active journey uses the founder-selected hybrid candidate—one dominant answer plus two quieter,
+tradeoff-labelled alternatives—without presenting a preselected meal on entry. The focused
+comparison still tests that hierarchy against a single-result narrow bound and an equally weighted
 shortlist broad bound. Feed/search is a bounded H3 control and Pantry-first remains a separate H7
 exercise.
 
@@ -42,9 +53,93 @@ The page is `08 · Stage 0 Research Prototype` (`187:2`). The reviewed documenta
 The original concept boards and P0 mobile wireframes remain preserved as evidence. This page is a
 new research layer, not a destructive redraw.
 
-## Clickable prototype starting points
+## Preserved v2 participant journey
 
-Figma exposes six prototype starting points. Select a start frame and press Present:
+The corrected study entry is `Runner E1 · Welcome` (`270:1517`). It starts from the user job rather
+than from a recommendation that appears already selected. The Maze goal is `Runner E8 · Cooking`
+(`270:1524`).
+
+| Step | Figma node | Participant decision |
+| --- | --- | --- |
+| E1 · Welcome | `270:1517` | Understand the promise, hard limits and guest-session boundary |
+| E2 · Priority | `270:1518` | Choose Quick & easy, Comforting or Lighter |
+| E3 · Time | `270:1519` | Choose 15 min, 25 min or 40+ min |
+| E4 · Ingredients | `270:1520` | See an empty ingredient state and choose a pantry item or skip |
+| E5 · Ingredients selected | `270:1521` | Confirm a bounded placeholder selection before matching |
+| E6 · Recommendation | `270:1522` | Evaluate one dominant meal plus two quieter factual alternatives |
+| E7 · Recipe | `270:1523` | Review ingredients and begin cooking or adjust ingredients |
+| E8 · Cooking | `270:1524` | Reach the observable start-cooking outcome |
+
+The intake is intentionally short. It exposes three situational decisions—priority, time and
+optional ingredients—while hard dietary restrictions remain persistent and non-relaxable.
+Ingredient chips are prototype fixtures rather than Pantry or recommendation-engine claims.
+
+## Adaptive v4 participant journey
+
+The live research entry is `Runner V4-01 · Welcome` (`320:1855`). It ends at
+`Runner V4-08 · Adaptive cooking plan` (`320:1934`). The v3 and v2 journeys remain in Figma for
+auditability but are hidden from live Maze participants.
+
+| Step | Figma node | Participant decision or adaptive outcome |
+| --- | --- | --- |
+| V4-01 · Welcome | `320:1855` | Keep the required no-peanuts limit and choose 1, 2 or 4 servings |
+| V4-02 · Priority | `320:1864` | Choose Quick & easy, Comforting or Lighter, with Back available |
+| V4-03 · Time | `320:1874` | Choose 15 min, 25 min or 40+ min, with Back available |
+| V4-04 · Ingredients | `320:1885` | Choose the first fixture ingredient that anchors the scripted match or skip |
+| V4-05 · Ingredients selected | `320:1902` | Add or remove any of six independent ingredient selections before matching |
+| V4-06 · Adaptive recommendation | `320:1919` | Evaluate one adapted primary and two quieter factual alternatives |
+| V4-07 · Adaptive recipe | `320:1924` | Review the chosen meal and selected anchor before starting cooking |
+| V4-08 · Adaptive cooking plan | `320:1934` | Reach the observable cooking-start outcome and see the bounded step map |
+
+The no-peanuts hard limit is visible and non-relaxable. Servings are independently selectable at
+entry and survive Back navigation, but recipe amounts deliberately remain fixed in this Stage 0
+fixture. The first ingredient selects the deterministic recipe anchor; the participant can then
+select any number of additional ingredients. Those extra selections are recorded in prototype
+state but transparently do not alter the fixture recipe. This preserves participant agency without
+claiming production recommendation coverage that does not exist yet.
+
+All applicable mobile headers navigate one step back. Recommendation actions live in a fixed
+footer, preventing the primary and secondary actions from overlapping content or each other. The
+selected-ingredient grid uses six independent 44 px controls and keeps every label visible in both
+default and selected states.
+
+The prototype uses a private hidden Figma collection named `__Prototype · Stage 0 v4` with 12
+unpublished variables. It is a bounded deterministic Stage 0 simulation, not the server-owned
+ranking implementation, recipe truth source, scaled-serving engine or analytics state.
+
+## Preserved adaptive v3 participant journey
+
+The former live entry is `Runner V3-01 · Welcome` (`293:1692`). It ends at
+`Runner V3-08 · Adaptive cooking plan` (`293:1917`). It remains preserved in Figma for
+auditability and is hidden from live Maze participants.
+
+| Step | Figma node | Participant decision or adaptive outcome |
+| --- | --- | --- |
+| V3-01 · Welcome | `293:1692` | Understand the promise, hard limits and guest-session boundary |
+| V3-02 · Priority | `293:1713` | Choose Quick & easy, Comforting or Lighter |
+| V3-03 · Time | `293:1749` | Choose 15 min, 25 min or 40+ min |
+| V3-04 · Ingredients | `293:1773` | Choose one available fixture or skip without an inferred selection |
+| V3-05 · Ingredients selected | `293:1803` | Confirm or clear the selected fixture before matching |
+| V3-06 · Adaptive recommendation | `293:1833` | Evaluate one adapted primary and two factual alternatives |
+| V3-07 · Adaptive recipe | `293:1877` | Review the chosen meal, selected fixture and optional item |
+| V3-08 · Adaptive cooking plan | `293:1917` | Reach a three-, four- or five-step plan and begin step progression |
+
+Priority sets the recommendation heading independently. Time and the optional ingredient select one
+of 18 ingredient-and-time scenarios or three skip scenarios. Each scenario updates the primary,
+two alternatives, recipe metadata, selected or check-pantry state, missing item, first two
+instructions and the complete step map. Clicking either quiet alternative also updates the recipe
+and cooking family before navigation.
+
+The prototype uses a private hidden Figma collection named `__Prototype · Stage 0 v3` with 33
+unpublished variables. It is a deterministic Stage 0 simulation, not the server-owned ranking
+implementation, recipe truth source or analytics state. Production must continue to own ranking,
+hard-constraint enforcement and versioned recommendation policies on the server.
+
+## Focused comparison starting points
+
+The original A/B/H and control runners remain available for focused follow-up tasks. They are no
+longer suitable as the first exposure to the product because they begin at the recommendation
+decision. Select a start frame and press Present:
 
 | Flow | Start node | Research role |
 | --- | --- | --- |
@@ -55,8 +150,55 @@ Figma exposes six prototype starting points. Select a start frame and press Pres
 | D | `204:2161` | Separate Pantry-first H7 exercise |
 | Recovery | `204:2319` | No-safe-match and offline recovery |
 
-The runner contains 27 top-level frames. Its transitions cover acceptance, alternative selection,
-rejection reason, replacement, recipe open, cooking start, Pantry change/skip and recovery.
+The page now contains 51 top-level runner frames: the original 27 focused frames, eight preserved v2
+journey frames, eight preserved adaptive v3 frames and eight active adaptive v4 frames. Figma
+exposes nine flow start points; `Flow 9 · Adaptive v4` is the active entry, Flow 8 preserves v3 and
+Flow 7 preserves v2. The active research surface remains one adaptive entry plus the six focused
+comparison, control and recovery entries.
+
+Its transitions cover context selection, optional ingredient selection and skip, deterministic
+adaptation, acceptance, alternative selection, adjustment, replacement, recipe open, cooking start,
+step progression, Pantry change/skip and recovery.
+
+## Corrective design pass
+
+The 2026-08-20 pass corrected the defects observed in the published study preview:
+
+- the participant no longer enters on a meal that looks preselected;
+- the journey begins with an explicit job and an unselected priority state;
+- the disabled ingredient CTA becomes enabled only after a visible selection, while skipping
+  ingredients remains possible;
+- all direct 350 px actions are centered at 20 px side margins inside 390 px mobile frames;
+- the H runner no longer exposes an internal research annotation to participants;
+- the recommendation keeps the approved hybrid hierarchy and labels alternatives with factual
+  benefit/cost tradeoffs;
+- recipe and cooking states are included so Maze can measure behavior through the actual outcome.
+
+The adaptive v3 pass then made the choices consequential without widening the intake:
+
+- priority changes the decision framing;
+- time and ingredient state change the meal family, alternatives, recipe and cooking plan;
+- skipping ingredients never fabricates a pantry match;
+- only the explicitly chosen ingredient is marked Selected;
+- alternatives remain quieter and use bounded factual tradeoffs;
+- hard restrictions remain visible and never enter a fallback relaxation path;
+- the cooking view exposes the complete step-map length and supports an in-place next-step state.
+
+The adaptive v4 pass addressed the live-preview interaction defects found on 2026-08-21:
+
+- every applicable Back control now navigates to the preceding journey screen;
+- 1, 2 and 4 serving limits can be selected before the situational questions and persist through
+  Back navigation;
+- the ingredient confirmation screen was rebuilt as a balanced 3 by 2 grid with six independent
+  multi-select controls;
+- the first ingredient remains the scripted fixture anchor while extra selections remain visible
+  and independently toggleable;
+- the fixed fixture limitation is disclosed rather than hidden: extra ingredients and serving
+  changes do not rewrite recipe amounts in this research prototype;
+- recommendation actions were moved into a bounded footer, removing the previously overlapping
+  button geometry;
+- dynamic character bindings were removed from the Red lentils and Tomatoes grid labels after live
+  testing exposed a disappearing Tomatoes label in the selected state.
 
 ## Moderator protocol
 
@@ -126,13 +268,15 @@ localization or keyboard coverage.
 
 ## Creation review evidence
 
-The final structural audit verified:
+The v2 structural audit verified:
 
-- 27 top-level runner frames;
-- six Figma prototype starting points;
-- 48 interactive reaction sources;
+- 35 top-level runner frames, including eight frames in the end-to-end journey;
+- seven intended research entry points: one end-to-end entry and six focused comparison/control
+  entries;
+- 61 interactive reaction sources;
 - zero invalid prototype destinations;
 - zero interactive sources below 44 px in either dimension;
+- zero misaligned direct 350 px actions in 390 px runner frames;
 - zero placeholder nodes;
 - zero gradient fills;
 - only Fraunces and Source Sans 3;
@@ -149,9 +293,47 @@ concept reference at `168:145`, the P0 reference at `176:138`, the H board stimu
 and the clickable H start at `204:1149`. The follow-up audit found no missing fonts, gradients,
 placeholders, undersized reaction sources or clipped tradeoff copy.
 
+The 2026-08-20 creation review inspected Welcome, Priority, Time, both ingredient states,
+Recommendation, Recipe and Cooking screenshots. It found no overlapping copy, clipped action,
+participant-facing research note or premature selection. The only visible font families are the
+SIL Open Font License 1.1 families Fraunces and Source Sans 3.
+
+The adaptive v3 creation review verified:
+
+- eight root-level 390 by 844 frames and one named `Flow 8 · Adaptive v3` entry;
+- 253 nodes, 25 interactive sources and 53 actions inside the v3 subtree;
+- zero invalid destinations and zero destinations outside the v3 subtree;
+- zero interactive sources below the 44 px minimum target;
+- zero gradient fills and 104 variable-bound text nodes;
+- a private collection with 33 variables, hidden from publishing with no exposed variable;
+- only Fraunces SemiBold and Source Sans 3 Regular, SemiBold and Bold;
+- a successful Maze path from Lighter, 15 min and Mushrooms through `Mushroom fried rice`, its
+  adapted recipe and a three-step cooking plan;
+- correct visual alignment of all direct actions at 20 px mobile side margins;
+- English participant copy and layer naming throughout the adaptive artifact.
+
+The adaptive v4 creation review verified:
+
+- eight root-level 390 by 844 frames and one named `Flow 9 · Adaptive v4` entry;
+- 270 nodes, 41 interactive reaction sources and 73 top-level prototype actions inside the v4
+  subtree;
+- 24 direct navigation actions, 36 direct variable actions and 13 conditional top-level actions;
+- zero invalid or cross-version destinations and zero interactive sources below the 44 px minimum;
+- 29 variable-bound text nodes after stabilizing the two affected ingredient labels;
+- a private 12-variable collection hidden from publishing;
+- only Fraunces SemiBold and Source Sans 3 Regular, SemiBold and Bold;
+- a successful no-save Maze path using 4 servings, Quick & easy, 25 min, Red lentils, Tomatoes and
+  Spinach through `Tomato lentil pasta`, its recipe and the cooking-plan goal;
+- successful Back navigation from Priority, Time, Ingredients selected, Recommendation and Recipe,
+  including persistence of the four-serving choice;
+- visible simultaneous selection of Red lentils, Tomatoes and Spinach, with the first item retained
+  as the fixture anchor;
+- no overlap between the recommendation's fixed primary and secondary actions;
+- English participant copy and layer naming throughout the active artifact.
+
 ## Remaining research work
 
-The A/B/H Maze study is published and the full no-tracking preview passed on 2026-08-16. Its
+The Maze study was updated to adaptive v4 and its full no-tracking preview passed on 2026-08-21. Its
 configuration, privacy boundary, verified links and operating protocol are recorded in
 `stage-0-maze-study.md`.
 
