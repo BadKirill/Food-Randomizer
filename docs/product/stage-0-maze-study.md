@@ -1,6 +1,6 @@
 # Stage 0 Maze study
 
-Status: live adaptive v4 and full-flow preview verified; participant evidence pending
+Status: full-flow v5 A/B/H study live and end-to-end preview verified; participant evidence pending
 
 Published: 2026-08-16
 
@@ -26,9 +26,9 @@ not connect another Figma file or replace this link without the canonical-file c
 
 ## Research decision
 
-The study first observes an adaptive weeknight decision journey from an unselected product entry
-to a situation-specific cooking plan. It then compares three bounded recommendation presentations
-for the same job:
+The study compares three bounded recommendation presentations through three complete weeknight
+decision journeys. Each journey begins at the same unselected product entry and ends at the same
+observable cooking-start outcome:
 
 - A: one strong recommendation plus a replacement action;
 - B: two or three equally weighted options;
@@ -48,12 +48,11 @@ fourth cardinality variant.
 2. two-question screener;
 3. recent concrete incident question;
 4. recent workaround/tool usage question;
-5. adaptive V4-01–V4-08 product journey from editable limits to a situation-specific cooking plan;
-6. randomized A/B/H variant comparison;
-7. format preference question;
-8. decision-friction tradeoff question;
-9. open trust-requirement question;
-10. default Maze thank-you screen.
+5. randomized A/B/H variant comparison, where every variant runs from Welcome through Cooking;
+6. format preference question;
+7. decision-friction tradeoff question;
+8. open trust-requirement question;
+9. default Maze thank-you screen.
 
 ### Screener
 
@@ -89,27 +88,30 @@ prototype behavior.
 
 ## Full journey contract
 
-The first Prototype Test is the participant's first product exposure.
+The assigned A/B/H Prototype Test is the participant's first product exposure for that variant.
 
 Task: `Decide what to cook tonight and begin cooking.`
 
 Description: `Imagine a typical weekday evening. You want to cook dinner but have no clear idea. Start on the first screen, set tonight’s limits, choose what matters and how much time you have, select one or more ingredients, then continue until you would genuinely start cooking or leave.`
 
-| Maze block | Start screen | Goal screen | Goal rule |
+| Maze variant | Start screen | Goal screen | Goal rule |
 | --- | --- | --- | --- |
-| Adaptive weeknight decision v4 | `Runner V4-01 · Welcome` (`320:1855`) | `Runner V4-08 · Adaptive cooking plan` (`320:1934`) | Reach a specific screen |
+| Single recommendation | `Runner V5-A01 · Welcome` (`347:2021`) | `Runner V5-A08 · Adaptive cooking plan` (`347:2116`) | Reach a specific screen |
+| Equal shortlist | `Runner V5-B01 · Welcome` (`347:3022`) | `Runner V5-B08 · Adaptive cooking plan` (`347:3117`) | Reach a specific screen |
+| Hybrid hierarchy | `Runner V5-H01 · Welcome` (`347:3293`) | `Runner V5-H08 · Adaptive cooking plan` (`347:3388`) | Reach a specific screen |
 
 The path starts with an editable serving limit, then collects one priority, one time bound and one
-or more prototype ingredients before showing the Hybrid recommendation. The no-peanuts hard limit
-stays visible and cannot be relaxed. Priority changes the recommendation framing. Time and the
+or more prototype ingredients before showing the assigned recommendation presentation. The
+no-peanuts hard limit stays visible and cannot be relaxed. Priority changes the recommendation
+framing. Time and the
 first ingredient anchor the bounded fixture; additional ingredients are independently recorded and
 remain visibly selected. Back controls allow participants to revise each preceding decision.
 
 The recipe amounts remain fixed even when the participant changes the 1, 2 or 4 serving limit, and
 additional ingredients do not rewrite the scripted recipe. Both limitations are disclosed in the
 prototype. The private v4 Figma variable collection contains 12 unpublished variables and cannot
-be used as a production analytics store. The preserved v3 fixture still contains the broader
-18 ingredient-and-time plus three skip scenarios, but it is no longer the live Maze entry.
+be used as a production analytics store. The preserved v4, v3 and v2 journeys remain versioned
+evidence and are not v5 participant starts.
 
 Exact-path success and hotspot hints are disabled so legitimate alternatives, adjustment and
 abandonment remain observable. Interactive-component compatibility is enabled because Figma
@@ -121,20 +123,20 @@ analytics contract.
 
 Every variant uses the same task and scenario:
 
-Task: `Choose a meal you would genuinely start cooking.`
+Task: `Decide what to cook tonight and begin cooking.`
 
-Scenario: `Imagine a typical weekday evening. You want to cook dinner, have little time, and have no clear idea. Use the prototype as you would the real app. Stop when you would genuinely begin cooking or decide to leave.`
+Scenario: `Imagine a typical weekday evening. Start from the first screen, choose what matters today, set any time limit, select as many ingredients as you have, and continue until you would genuinely begin cooking or decide to leave.`
 
 | Variant | Maze name | Start screen | Goal screen | Goal rule |
 | --- | --- | --- | --- | --- |
-| A | Single recommendation | `Runner A1 · Single` (`203:823`) | `Runner A7 · Cooking` (`203:878`) | Reach a specific screen |
-| B | Equal shortlist | `Runner B1 · Shortlist` (`203:1788`) | `Runner B6 · Cooking` (`203:1827`) | Reach a specific screen |
-| H | Hybrid hierarchy | `Runner H1 · Hybrid` (`204:1149`) | `Runner H4 · Cooking` (`204:1172`) | Reach a specific screen |
+| A | Single recommendation | `Runner V5-A01 · Welcome` (`347:2021`) | `Runner V5-A08 · Adaptive cooking plan` (`347:2116`) | Reach a specific screen |
+| B | Equal shortlist | `Runner V5-B01 · Welcome` (`347:3022`) | `Runner V5-B08 · Adaptive cooking plan` (`347:3117`) | Reach a specific screen |
+| H | Hybrid hierarchy | `Runner V5-H01 · Welcome` (`347:3293`) | `Runner V5-H08 · Adaptive cooking plan` (`347:3388`) | Reach a specific screen |
 
 Exact-path success is disabled so legitimate alternative and recovery paths remain observable.
-Hotspot hints and interactive-component assistance are disabled. Maze records success, direct or
-indirect paths, time, misclicks and abandonment for each prototype task. The A/B/H tasks are focused
-comparison stimuli after the full journey; they are not the first exposure to the product.
+Hotspot hints are disabled and interactive-component compatibility is enabled. Maze records
+success, direct or indirect paths, time, misclicks and abandonment for each complete prototype
+journey.
 
 Each variant ends with the same required questions:
 
@@ -181,7 +183,7 @@ source attribution, use a bounded non-personal tag such as `source=friend`, `sou
 1. recruit 12 completed participants in batches of three;
 2. include two contrast users and at least six participants who recently used a recipe or AI
    alternative;
-3. keep the published adaptive v4 study structure and locked thresholds unchanged after the first live
+3. keep the published full-flow v5 study structure and locked thresholds unchanged after the first live
    response;
 4. use one participant link for all A/B/H participants so Maze preserves randomized order;
 5. inspect the first three completions for technical failure, unclear wording and segment mismatch;
@@ -206,6 +208,33 @@ fail, otherwise `PIVOT`. Qualitative contradictions, safety failures or evidence
 wrong segment can override the arithmetic and must be recorded.
 
 ## Verification record
+
+The 2026-08-21 full-flow v5 publication and end-to-end preview saved no participant response. It
+verified:
+
+- Maze refreshed the canonical Figma source and discovered Flows 10–12 plus all 24 V5 root frames;
+- the active editable comparison assigns A to V5-A01→V5-A08, B to V5-B01→V5-B08 and H to
+  V5-H01→V5-H08;
+- every task uses the same full-journey wording and has interactive-component compatibility enabled;
+- the preserved comparison block was hidden and copied before editing, retaining the prior study
+  version for auditability;
+- the canonical V5 subtrees contain no cross-version navigation, target below 44 px, unsupported
+  visible font or visible node outside its mobile root frame;
+- the redundant published v4 task was hidden, leaving exactly three participant-visible prototype
+  tests inside the alternating A/B/H comparison;
+- Maze published the corrected study successfully and retained participant link
+  `https://t.maze.co/574247931`;
+- the no-save authenticated preview completed all three journeys from the servings limit through
+  priority, time, first ingredient, additional ingredient selections, recommendation, recipe and
+  `Start cooking` to the Maze `Task complete` state;
+- Back returned to the previous screen, servings accepted 1, 2 and 4 across the three runs, and
+  multiple ingredients remained independently selected before matching;
+- Single changed its recommendation in place through `Show another`, while a quieter Hybrid
+  alternative and an equal Shortlist option each opened the corresponding recipe;
+- all post-task confidence and cooking-intent questions, the final comparison questions and the
+  thank-you screen completed successfully;
+- Recruit reported the study as Live for all devices with zero started and zero completed real
+  responses immediately after verification.
 
 The 2026-08-16 dry run used Maze preview mode, which does not save responses. It verified:
 
@@ -291,8 +320,8 @@ verified:
 ## Change and stop rules
 
 Figma changes after publication can alter participant experience and invalidate comparisons. Freeze
-the V4-01–V4-08 and editable A/B/H runner frames while collection is active. Keep V3-01–V3-08 and
-E1–E8 as preserved evidence only. If a critical prototype defect is found, stop the study,
+the V5-A01–V5-A08, V5-B01–V5-B08 and V5-H01–V5-H08 runner frames while collection is active. Keep
+V4-01–V4-08, V3-01–V3-08 and E1–E8 as preserved evidence only. If a critical prototype defect is found, stop the study,
 duplicate or version the affected Maze block, re-run preview verification and document which
 responses belong to each version. Never silently refresh the prototype during a live batch.
 

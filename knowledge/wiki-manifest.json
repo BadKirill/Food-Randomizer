@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "owner": "randomeal-knowledge",
   "repository": "BadKirill/Food-Randomizer",
-  "contentFingerprint": "311392978b776da8e553f4061109161a428390d52ccf5ae2273afa559e1437a3",
+  "contentFingerprint": "7045b2db462963a03f9b3a670c2e9376dc9a399a94b354c2022a8d246f9763d8",
   "externalSync": {
     "provider": "notion",
     "mode": "explicit-only-with-read-back",
@@ -35,7 +35,7 @@
       "slug": "Home",
       "title": "RandoMeal Knowledge Graph",
       "group": "System",
-      "sha256": "a93e2fd40ef366f40ca8b39dee3808d40e5b49c5967f668ba54fa9a8f6924334",
+      "sha256": "8b86cc1634a66f99e51c38145879d01cff396c2f16e17dbb19539496faa3f479",
       "nodeId": null
     },
     {
@@ -59,7 +59,7 @@
       "slug": "File-Index",
       "title": "Complete File Index",
       "group": "System",
-      "sha256": "572243c390138dc413637a85ee0f5556c6e18fe9102677043620dfda4fb73faf",
+      "sha256": "073745bfd57cc598b64703b30ad003359c360069eb3aeaf801738902deca35e1",
       "nodeId": null
     },
     {
@@ -67,7 +67,7 @@
       "slug": "RandoMeal--Governance--Knowledge-System",
       "title": "Knowledge system",
       "group": "Governance",
-      "sha256": "5d0f3ec6c23e9e820505986d18369c71a47350f0d95f9f49eb91f0596ea434d2",
+      "sha256": "3cdfa4bbbc61a6377de0e06b9515737919be02e1eec3c0bf74509beb8391444d",
       "nodeId": "knowledge-system"
     },
     {
@@ -91,7 +91,7 @@
       "slug": "RandoMeal--Governance--Repository-Inventory",
       "title": "Complete repository inventory",
       "group": "Governance",
-      "sha256": "4a133cb8a6442d2e4d440aa11459b1771365f6d33ff88db3b7ef7a051f3a7a0f",
+      "sha256": "2ce90701f4e4a904bbb020d9b79deaa5c3765fb2afd9c3015751905abb09c176",
       "nodeId": "repository-inventory"
     },
     {
@@ -107,7 +107,7 @@
       "slug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "title": "Hybrid choice-cardinality evidence gate",
       "group": "Product",
-      "sha256": "079abeafd9a6cc5270309755ff59e77966bd69370c9c26c5cf87fa08c8b06885",
+      "sha256": "9df135a349896891f59d5527e6a4da325da052ca90cedd9cde366ee5793ff670",
       "nodeId": "choice-cardinality-gate"
     },
     {
@@ -115,7 +115,7 @@
       "slug": "RandoMeal--Product--Delivery-Roadmap",
       "title": "Product delivery roadmap",
       "group": "Product",
-      "sha256": "40d2acfa2a8f04be36e3026a02e51bcbeb687cdb486afb88cbfd9889433db240",
+      "sha256": "0af85710dd0bac7a274e18b055de17182e4d221049330b93c14e34e8fac59115",
       "nodeId": "delivery-roadmap"
     },
     {
@@ -283,7 +283,7 @@
       "slug": "RandoMeal--Analytics--Measurement",
       "title": "Analytics and measurement plan",
       "group": "Analytics and Quality",
-      "sha256": "7aebc03bae73fac8072ad741b34bd262e43b54994d5dd894eade5de2c5ec7091",
+      "sha256": "0e1ec6019e21ee78288003d733f81fd80ae77ac024fb36ceb6c84448e58f380a",
       "nodeId": "analytics-measurement"
     },
     {
@@ -291,7 +291,7 @@
       "slug": "RandoMeal--Design--System-and-Quality",
       "title": "Design system and product quality",
       "group": "Analytics and Quality",
-      "sha256": "275aedff5e9b78fafdfd841b319e178c43f61d1e33510f1d462da8548b6f441b",
+      "sha256": "c2af5516996d8276813e396850bc3c15d1f96001c8db35f64855f1e50052e8bc",
       "nodeId": "design-system-quality"
     },
     {

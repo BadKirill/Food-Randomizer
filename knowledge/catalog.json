@@ -194,7 +194,7 @@
       "wikiSlug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "status": "target",
       "authority": "discovery-gate",
-      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live adaptive v4 Maze study now starts with editable serving limits, revision through Back and multi-select ingredients across V4-01–V4-08 before the focused A/B/H comparison; the canonical prototype preserves v3, v2 and separate C and D controls.",
+      "summary": "The founder-selected launch candidate is Hybrid: one dominant answer plus two quieter tradeoff-labelled alternatives. The live full-flow v5 Maze study compares Single, Shortlist and Hybrid through separate Welcome-to-Cooking journeys with identical intake, working Back and multi-select ingredients; v4, v3, v2 and separate C/D controls remain preserved evidence.",
       "tags": ["single", "shortlist", "hybrid", "experiment", "H3", "одно блюдо", "2-3 варианта", "гипотеза"],
       "sources": ["docs/product/discovery-decisions.md", "docs/product/quality-and-design.md", "docs/product/decision-flow-concept-01.md", "docs/product/stage-0-research-prototype.md", "docs/product/stage-0-maze-study.md", "docs/product/delivery-plan.md"],
       "rules": [
@@ -205,11 +205,11 @@
         "Measure time to decision, acceptance, replacement, abandonment, trust, and safety separately by policy.",
         "Do not irreversibly activate final launch navigation or rollout before the Stage 0 gate is signed.",
         "Use A and B as equal-fidelity cardinality bounds and H as the intentionally hierarchical founder-selected candidate; the Figma screens do not replace participant evidence.",
-        "Use the adaptive participant journey from Welcome node 320:1855 through Adaptive cooking plan node 320:1934 as the first product exposure; editable serving limits, priority, time, first ingredient anchor and additional ingredient selections precede the meal recommendation, recipe and step map.",
+        "Use the three full-flow v5 participant journeys as the H3 comparison: A runs 347:2021 to 347:2116, B runs 347:3022 to 347:3117 and H runs 347:3293 to 347:3388; each starts before a meal is shown and includes servings, priority, time, first ingredient anchor, additional ingredient selections, recipe and cooking plan.",
         "Treat the V4 Figma state as a bounded deterministic simulation with 12 unpublished variables, not as the production recommender, scaled-serving engine, recipe truth source or analytics store; serving changes and extra ingredient selections are explicitly recorded fixtures rather than claims of recipe adaptation.",
-        "The runnable research prototype starts A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319.",
-        "Live Maze study 574247931 first runs the adaptive V4-01-to-V4-08 journey with interactive-component compatibility enabled and hotspot hints disabled, then uses alternating randomized A/B/H order, specific-screen goals A7/B6/H4, identical five-point confidence and cooking-intent questions, no Clips or participant PII, and a verified participant link at https://t.maze.co/574247931.",
-        "Freeze the published V4-01-V4-08 and editable A/B/H Figma runner frames during collection; keep V3-01-V3-08 and E1-E8 as preserved evidence and require a stopped, versioned study for any material prototype fix."
+        "Legacy focused follow-up runners start A at node 203:823, B at 203:1788, H at 204:1149, bounded C at 204:2035, separate D at 204:2161 and recovery at 204:2319; they are not v5 participant starts.",
+        "Maze study 574247931 is live with exactly three participant-visible full-flow v5 tests in Alternating randomized A/B/H order, Welcome-to-Cooking goals, identical task wording, interactive-component compatibility enabled, hotspot hints disabled, no Clips or participant PII, and participant link https://t.maze.co/574247931; a no-save end-to-end preview completed all three branches through Task complete and the final thank-you screen before real collection began.",
+        "Freeze V5-A01-to-V5-A08, V5-B01-to-V5-B08 and V5-H01-to-V5-H08 after publication; keep v4, v3, v2 and legacy focused A/B/H frames as preserved evidence and require a stopped, versioned study for any material prototype fix."
       ],
       "dependsOn": ["product-strategy"],
       "related": ["recommendation-engine-target", "analytics-measurement", "design-system-quality"],
@@ -233,7 +233,7 @@
         "Release claims must be backed by current tests rather than historical test-count snapshots.",
         "Execution Stage 0 branch baseline and Stage 1 research prototype are complete; the founder-selected Hybrid direction is documented, while product discovery Stage 0 remains open until participant evidence signs D0.",
         "Use the executable Stage 0-19 plan for operational status, dependency order, handoff, exit criteria and rollback.",
-        "Stage 2 participant collection uses the live adaptive Maze v4 study with the V4-01-V4-08 journey followed by A/B/H comparison in batches of three; publication and a successful preview do not complete D0."
+        "Stage 2 participant collection uses the versioned Maze v5 study with alternating full-flow A/B/H Welcome-to-Cooking journeys in batches of three; publication and a successful preview do not complete D0."
       ],
       "dependsOn": ["product-strategy", "current-vs-target"],
       "related": ["qa-strategy", "production-infrastructure"],
@@ -723,9 +723,10 @@
         "D0/H3 cardinality, H7 Pantry value and H10 payment remain explicit branches or gates throughout the flow skeleton.",
         "P0 mobile wireframes pass 01 at node 75:3 contains 16 creation-reviewed 393 by 852 screens for F01-F04 and keeps D0-A single, D0-B shortlist and D0-C hybrid reversible.",
         "All current visible copy, layer names, reusable component defaults and instance overrides in the canonical Figma file are English; other languages belong only in explicit localization-expansion test artifacts.",
-        "The Stage 0 research prototype page 187:2 contains 51 top-level runner frames, including preserved v2 and adaptive v3 journeys plus active adaptive v4; Flow 9 starts at node 320:1855 and reaches the adaptive cooking plan at node 320:1934.",
+        "The Stage 0 research prototype page 187:2 contains 75 top-level runner frames: 27 legacy focused runners, preserved v2, v3 and v4 journeys, plus 24 active full-flow v5 A/B/H frames; Flows 10-12 start at nodes 347:2021, 347:3022 and 347:3293.",
         "The adaptive v4 subtree has 270 nodes, 41 interactive sources, 73 top-level actions and 29 variable-bound texts, with no invalid or cross-version destination and no target below 44 px; its private 12-variable collection is hidden from publishing.",
-        "The live v4 path exposes a non-relaxable no-peanuts limit, editable 1, 2 or 4 servings, working Back navigation and six independent multi-select ingredient chips; the first ingredient anchors the deterministic fixture while extra selections and fixed recipe amounts are disclosed as research limitations.",
+        "Every v5 comparison path exposes a non-relaxable no-peanuts limit, editable 1, 2 or 4 servings, working Back navigation and six independent multi-select ingredient chips; the first ingredient anchors the deterministic fixture while extra selections and fixed recipe amounts are disclosed as research limitations.",
+        "The 24 v5 root frames contain no cross-version navigation, interaction target below 44 px, unsupported visible font or visible node outside its mobile root; all three Maze drafts use matching Welcome and Cooking start/goal nodes with interactive components enabled.",
         "The shared Hybrid component at node 157:54 and reference screens 168:145, 176:138, 192:1167 and 204:1149 show one dominant primary plus two quieter factual tradeoffs.",
         "Focused small-iPhone node 198:744, Android node 198:748 and 125 percent large-text node 198:752 are creation-reviewed evidence, not complete launch-platform coverage.",
         "P0 design still requires broader platform, localization, keyboard, safe-area, reduced-motion, imagery and production analytics implementation after D0."
