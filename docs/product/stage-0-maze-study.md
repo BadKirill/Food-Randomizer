@@ -1,9 +1,9 @@
 # Stage 0 Maze study
 
-Status: full-flow v5 A/B/H study remains live and frozen with five participant results; the separate
-V6 three-round draft is creation-reviewed and no-save preview verified but not published
+Status: full-flow V6 A/B/H study is live for new participant collection; V5 remains frozen with
+five historical participant results and must not receive new recruits
 
-Published: 2026-08-16
+Published: V5 on 2026-08-16; V6 on 2026-08-26
 
 Updated: 2026-08-26
 
@@ -11,22 +11,24 @@ Updated: 2026-08-26
 
 | Resource | URL | Purpose |
 | --- | --- | --- |
-| Participant study | [t.maze.co/574247931](https://t.maze.co/574247931) | Send this link to qualified participants |
+| Current V6 participant study | [t.maze.co/577725277](https://t.maze.co/577725277) | Send this link to new qualified participants |
+| Frozen V5 participant study | [t.maze.co/574247931](https://t.maze.co/574247931) | Historical five-response evidence; do not send to new participants |
 | Frozen V5 authenticated preview | [Maze preview](https://app.maze.co/maze-preview/mazes/574247931) | Test the published V5 study without saving responses |
 | Frozen V5 builder and recruitment | [Maze study 574247931](https://app.maze.co/projects/574247910/mazes/574247931) | Review, pause and distribute the published study without changing its collected contract |
 | Results dashboard | [Maze results](https://app.maze.co/projects/574247910/mazes/574247931/results?tab=results) | Review participants and block-level evidence |
-| V6 authenticated preview | [Maze V6 preview](https://app.maze.co/maze-preview/mazes/577725277) | Test the corrected three-round draft without saving responses |
-| V6 draft builder | [Maze study 577725277](https://app.maze.co/projects/574247910/mazes/577725277) | Review the duplicate draft before any publication decision |
+| V6 authenticated preview | [Maze V6 preview](https://app.maze.co/maze-preview/mazes/577725277) | Test the live three-round study without saving responses |
+| V6 builder and recruitment | [Maze study 577725277](https://app.maze.co/projects/574247910/mazes/577725277) | Review, pause and distribute the live V6 study without changing its collected contract |
 | Maze project | [RandoMeal project](https://app.maze.co/projects/574247910) | Parent project |
 | Canonical Figma source | [RandoMeal canonical product design](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2) | Sole design source allowed by repository policy |
 
-The Maze project ID is `574247910` and the live study ID is `574247931`. The study is titled
+The Maze project ID is `574247910`. Frozen V5 study `574247931` is titled
 `Stage 0 · Weeknight Meal Decision · A/B/H`.
 
-The corrected draft study ID is `577725277`. It is titled
-`Stage 0 · Meal Decision V6 · 3 Rounds`. It was duplicated from V5 so the five existing V5
-participant results remain comparable and untouched. V6 has no participant link until an explicit
-publication decision is made.
+The current collection study ID is `577725277`. It is titled
+`Stage 0 · Meal Decision V6 · 3 Rounds` and uses participant link
+`https://t.maze.co/577725277`. It was duplicated from V5 so the five existing V5 participant
+results remain comparable and untouched. Study `574247931` remains a frozen historical boundary;
+new recruitment uses V6 only.
 
 Figma file `DP7ujNqthXzWwwu1mnFhfj` is connected through the Maze Figma integration. Link access is
 `Anyone can view`; public editing, password access, and viewer copy/save/export are disabled. Do
@@ -50,7 +52,7 @@ Feed/search control C and Pantry-first exercise D are intentionally outside this
 a separate H3 control and D is a separate H7 value/input test; neither may be interpreted as a
 fourth cardinality variant.
 
-## V6 draft contract
+## V6 live contract
 
 V6 keeps the signed A/B/H comparison and `Alternating` randomized order but replaces each variant's
 prototype task with a complete 11-screen journey. Every participant is explicitly told that they
@@ -89,8 +91,7 @@ completes three interactive cooking-preview steps before Maze detects the goal.
 
 V6 retains the same verified and license-safe Source Sans 3 and Fraunces families. All applicable
 headers support Back, every interactive target is at least 44 px, and no V6 reaction leaves its own
-versioned subtree. The published V5 study remains the only collection link until V6 is explicitly
-approved for publication.
+versioned subtree. V6 is the active collection link; V5 is preserved as historical evidence only.
 
 ## Participant flow
 
@@ -259,9 +260,9 @@ wrong segment can override the arithmetic and must be recorded.
 
 ## Verification record
 
-The 2026-08-26 V6 correction and draft preview saved no participant response. It verified:
+The 2026-08-26 V6 correction, no-save preview and publication verified:
 
-- the duplicate study `577725277` contains one participant-visible `Alternating` comparison with
+- versioned study `577725277` contains one participant-visible `Alternating` comparison with
   exactly three V6 prototype tasks and zero participant-visible tasks using the old V5 wording;
 - A starts at `382:2505` and ends at `393:2988`, B starts at `382:3493` and ends at `393:3018`, and
   H starts at `382:3763` and ends at `393:3048`;
@@ -277,8 +278,15 @@ The 2026-08-26 V6 correction and draft preview saved no participant response. It
   an explicit main-ingredient step and a separate multi-select extras step;
 - recipe and cooking views include a meal image placeholder, expanded ingredient list, three live
   `Done, next step` states and a dedicated `Task completed` goal;
-- published study `574247931` and its five collected participant results were not edited, and the
-  V6 duplicate remains private and unpublished.
+- published study `574247931` and its five collected participant results were not edited;
+- the `More than 40 min` chip on A03 (`382:2534`), B03 (`382:3522`) and H03 (`382:3792`) now hugs
+  its content at 138 px instead of sharing an equal fill width, preserving the component's 16 px
+  horizontal padding and 44 px touch height without clipping either shorter choice;
+- a no-save Maze run advanced from Welcome through Priority to Time and rendered the corrected
+  three-range row without the long label touching its boundary;
+- study `577725277` was published for all devices with Clips disabled, response tracking enabled
+  and one response per device; `https://t.maze.co/577725277` loaded the public Welcome screen
+  without authentication.
 
 The 2026-08-21 full-flow v5 publication and end-to-end preview saved no participant response. It
 verified:
@@ -396,9 +404,10 @@ V4-01–V4-08, V3-01–V3-08 and E1–E8 as preserved evidence only. If a critic
 duplicate or version the affected Maze block, re-run preview verification and document which
 responses belong to each version. Never silently refresh the prototype during a live batch.
 
-Treat V6-A01–V6-A11, V6-B01–V6-B11 and V6-H01–V6-H11 as the candidate replacement contract. Do not
-publish draft study `577725277`, replace the V5 participant link or mix V5 and V6 results without an
-explicit study-version decision and a documented analysis boundary.
+Freeze V6-A01–V6-A11, V6-B01–V6-B11 and V6-H01–V6-H11 while collection is active. Send new
+participants only to study `577725277` and analyze its results as a separate version from the five
+historical V5 responses. Do not mix V5 and V6 results into one unlabelled sample or refresh the live
+V6 Figma source during a collection batch.
 
 Stop the study immediately for a hard dietary-safety contradiction, a broken goal path, accidental
 sensitive-data collection, or a material mismatch between Maze and the canonical Figma file.
