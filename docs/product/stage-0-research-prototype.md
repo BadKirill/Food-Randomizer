@@ -1,8 +1,8 @@
 # Stage 0 research prototype handoff
 
 Status: creation-reviewed full-flow V6 A/B/H candidate with three live cooking-preview steps;
-published V5 remains frozen with five participant results; V6 Maze draft and no-save preview are
-verified but not published; product discovery evidence remains pending
+V6 Maze study is published for new collection; V5 remains frozen with five historical participant
+results; product discovery evidence remains pending
 
 Canonical artifact:
 [Stage 0 Research Prototype](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
@@ -14,7 +14,10 @@ Revised: 2026-08-26
 Frozen V5 live study:
 [Stage 0 · Weeknight Meal Decision · A/B/H](https://t.maze.co/574247931)
 
-V6 draft preview:
+Current V6 participant study:
+[Stage 0 · Meal Decision V6 · 3 Rounds](https://t.maze.co/577725277)
+
+V6 no-save preview:
 [Stage 0 · Meal Decision V6 · 3 Rounds](https://app.maze.co/maze-preview/mazes/577725277)
 
 Operational contract:
@@ -218,9 +221,9 @@ decision. Select a start frame and press Present:
 
 The page now contains 108 top-level runner frames: the original 27 focused frames, eight preserved
 v2 frames, eight preserved v3 frames, eight preserved v4 frames, 24 frozen V5 comparison frames and
-33 V6 candidate frames. Figma exposes the preserved 12 named flow start points; the V6 Maze draft
-uses the exact A01, B01 and H01 nodes as its starts and the corresponding A11, B11 and H11 nodes as
-its goals.
+33 V6 candidate frames. Figma exposes the preserved 12 named flow start points; the versioned V6
+Maze study was published without changing those node contracts and uses the exact A01, B01 and H01
+nodes as its starts and the corresponding A11, B11 and H11 nodes as its goals.
 
 Its transitions cover context selection, optional ingredient selection and skip, deterministic
 adaptation, acceptance, alternative selection, adjustment, replacement, recipe open, cooking start,
@@ -300,8 +303,13 @@ The V6 pass then addressed the designer review without mutating the published V5
 - recipe pages include a clear image placeholder and expanded ingredient list;
 - cooking continues through three participant-driven steps and ends on a dedicated Maze goal;
 - all 33 V6 frames passed containment, font, touch-target, copy and version-local navigation review;
-- Maze study `577725277` is a private duplicate draft, while the published V5 study and its five
-  participant results remain frozen.
+- the long `More than 40 min` choice on all three V6 time screens hugs its content at 138 px,
+  retaining 16 px horizontal padding and the 44 px target while the shorter choices fill the
+  remaining row;
+- a no-save Maze run rendered the corrected time row, and Maze study `577725277` was then published
+  at `https://t.maze.co/577725277` for new collection;
+- the V5 study and its five participant results remain a frozen, separately analyzed historical
+  version.
 
 ## Moderator protocol
 
