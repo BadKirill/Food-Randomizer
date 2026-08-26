@@ -1,32 +1,36 @@
 # Stage 0 research prototype handoff
 
-Status: creation-reviewed full-flow v5 A/B/H research artifact; Maze publication and no-save
-end-to-end preview are verified; v4, v3 and v2 remain preserved evidence; product discovery
-evidence remains pending
+Status: creation-reviewed full-flow V6 A/B/H candidate with three live cooking-preview steps;
+published V5 remains frozen with five participant results; V6 Maze draft and no-save preview are
+verified but not published; product discovery evidence remains pending
 
 Canonical artifact:
 [Stage 0 Research Prototype](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2)
 
 Created: 2026-08-11
 
-Revised: 2026-08-21
+Revised: 2026-08-26
 
-Live study:
+Frozen V5 live study:
 [Stage 0 · Weeknight Meal Decision · A/B/H](https://t.maze.co/574247931)
+
+V6 draft preview:
+[Stage 0 · Meal Decision V6 · 3 Rounds](https://app.maze.co/maze-preview/mazes/577725277)
 
 Operational contract:
 [`stage-0-maze-study.md`](stage-0-maze-study.md)
 
 ## Purpose
 
-The prototype now contains five deliberately separate layers:
+The prototype now contains six deliberately separate layers:
 
-1. three active full-flow v5 A/B/H journeys that each begin before any meal is chosen and differ
-   only at recommendation cardinality;
-2. the preserved V4-01–V4-08 adaptive hybrid journey as versioned research evidence;
-3. the preserved V3-01–V3-08 adaptive journey as earlier versioned evidence;
-4. the preserved E1–E8 v2 journey as earlier versioned evidence;
-5. focused legacy A/B/H stimuli and C/D controls for bounded follow-up work.
+1. three creation-reviewed V6 A/B/H candidate journeys that run from needs through a three-step
+   cooking preview and differ only at recommendation cardinality;
+2. three frozen full-flow V5 A/B/H journeys used by the published study with five collected results;
+3. the preserved V4-01–V4-08 adaptive hybrid journey as versioned research evidence;
+4. the preserved V3-01–V3-08 adaptive journey as earlier versioned evidence;
+5. the preserved E1–E8 v2 journey as earlier versioned evidence;
+6. focused legacy A/B/H stimuli and C/D controls for bounded follow-up work.
 
 Each active journey starts with the same unselected product entry, serving limit, priority, time and
 multi-select ingredient flow. Only the recommendation presentation changes: Single shows one
@@ -134,6 +138,41 @@ The three v5 subtrees contain 24 root frames. Automated creation review found no
 navigation, no unsupported visible font, no interaction target below 44 px and no visible node
 outside its root frame.
 
+## Full-flow V6 comparison journeys
+
+V6 incorporates the moderated-preview feedback without changing the signed A/B/H research
+question. Each branch has the same 11-screen path, and only screen 06 changes recommendation
+cardinality and hierarchy.
+
+| Variant | Start | Recommendation | Recipe | Cooking steps | Goal |
+| --- | --- | --- | --- | --- | --- |
+| A · Single | `Runner V6-A01 · Welcome` (`382:2505`) | `Runner V6-A06 · Single recommendation` (`382:2584`) | `Runner V6-A07 · Adaptive recipe` (`382:2590`) | `382:2600`, `393:2968`, `393:2978` | `Runner V6-A11 · Task completed` (`393:2988`) |
+| B · Shortlist | `Runner V6-B01 · Welcome` (`382:3493`) | `Runner V6-B06 · Shortlist recommendation` (`382:3572`) | `Runner V6-B07 · Adaptive recipe` (`382:3578`) | `382:3588`, `393:2998`, `393:3008` | `Runner V6-B11 · Task completed` (`393:3018`) |
+| H · Hybrid | `Runner V6-H01 · Welcome` (`382:3763`) | `Runner V6-H06 · Hybrid recommendation` (`382:3842`) | `Runner V6-H07 · Adaptive recipe` (`382:3848`) | `382:3858`, `393:3028`, `393:3038` | `Runner V6-H11 · Task completed` (`393:3048`) |
+
+The first screen uses neutral `today` language and exposes required and optional needs with dynamic
+1, 2 and 4 serving choices. Priority and total-time selection use direct, gated choices. Time is
+expressed as `Up to 20 min`, `20–40 min` and `More than 40 min`, with a short explanation that three
+ranges keep the study fast while covering common meal windows.
+
+Ingredient collection is split into two explicit states. Screen 04 says that the participant is
+choosing one main ingredient. Screen 05 pins that main ingredient beside the serving context,
+removes it from the selectable list, and offers six independently toggleable extras. The scripted
+fixture may still anchor on the main ingredient, but the interface does not pretend that extra
+selections rewrite the recipe.
+
+The recommendation screen identifies the branch without internal research language. The recipe
+adds a bounded meal-image placeholder and a visible five-item ingredient list. `Start cooking`
+opens three separate interactive states—prepare, cook and finish—before the dedicated completion
+screen. Every applicable header has a 44 by 44 Back target and every branch can return to the
+preceding state without crossing versions.
+
+The private collection `__Prototype · Stage 0 v6` stores only bounded research state. The 33 V6
+frames are 390 by 844 and use Core Design System v1 components, Ivory/Graphite/Paprika semantic
+tokens, Source Sans 3 and Fraunces under SIL Open Font License 1.1. Creation review found no missing
+Back or forward path, cross-version destination, interaction below 44 px, visible `tonight` copy or
+frame-size mismatch.
+
 ## Preserved adaptive v3 participant journey
 
 The former live entry is `Runner V3-01 · Welcome` (`293:1692`). It ends at
@@ -177,10 +216,11 @@ decision. Select a start frame and press Present:
 | D | `204:2161` | Separate Pantry-first H7 exercise |
 | Recovery | `204:2319` | No-safe-match and offline recovery |
 
-The page now contains 75 top-level runner frames: the original 27 focused frames, eight preserved v2
-frames, eight preserved v3 frames, eight preserved v4 frames and 24 active v5 comparison frames.
-Figma exposes 12 flow start points. Flows 10–12 are the active full-flow comparison entries; Flow 9
-preserves v4, Flow 8 preserves v3 and Flow 7 preserves v2.
+The page now contains 108 top-level runner frames: the original 27 focused frames, eight preserved
+v2 frames, eight preserved v3 frames, eight preserved v4 frames, 24 frozen V5 comparison frames and
+33 V6 candidate frames. Figma exposes the preserved 12 named flow start points; the V6 Maze draft
+uses the exact A01, B01 and H01 nodes as its starts and the corresponding A11, B11 and H11 nodes as
+its goals.
 
 Its transitions cover context selection, optional ingredient selection and skip, deterministic
 adaptation, acceptance, alternative selection, adjustment, replacement, recipe open, cooking start,
@@ -245,6 +285,23 @@ the first servings-limit screen to `Start cooking`, including working Back navig
 serving and time choices, multiple simultaneous ingredient selections, Single replacement, and
 alternative selection in Hybrid and Shortlist. Maze reached `Task complete` for every branch and
 continued through all post-task and final study questions to the thank-you screen.
+
+The V6 pass then addressed the designer review without mutating the published V5 evidence:
+
+- the participant task is a concise Situation and What to do list and explicitly explains three
+  randomized rounds;
+- needs and servings remain participant-controlled through bounded predefined choices;
+- priority and total time use neutral `now` and `today` language instead of repeating `tonight`;
+- total time uses three explained ranges rather than three unexplained point estimates;
+- main and extra ingredient selection are separate states with the main ingredient pinned outside
+  the multi-select extras list;
+- Single, Shortlist and Hybrid use one shared intake and cooking path while preserving distinct
+  recommendation hierarchies;
+- recipe pages include a clear image placeholder and expanded ingredient list;
+- cooking continues through three participant-driven steps and ends on a dedicated Maze goal;
+- all 33 V6 frames passed containment, font, touch-target, copy and version-local navigation review;
+- Maze study `577725277` is a private duplicate draft, while the published V5 study and its five
+  participant results remain frozen.
 
 ## Moderator protocol
 
