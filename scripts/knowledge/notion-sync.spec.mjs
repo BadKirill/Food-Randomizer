@@ -30,6 +30,12 @@ test('rewrites managed links and preserves external links', () => {
   assert.equal(result, 'See <mention-page url="https://app.notion.com/p/target">Target</mention-page> and [Docs](https://example.com).');
 });
 
+test('normalizes identical URL links without changing labelled links', () => {
+  const url = 'https://t.maze.co/574247931';
+  assert.equal(canonicalNotionBody(url), canonicalNotionBody(`[${url}](${url})`));
+  assert.equal(canonicalNotionBody(`[Maze study](${url})`), `[Maze study](${url})`);
+});
+
 test('converts markdown tables to Notion table blocks', () => {
   const result = convertMarkdownTables('| Name | Value |\n| --- | --- |\n| One | Two |');
   assert.match(result, /<table fit-page-width="true" header-row="true">/);

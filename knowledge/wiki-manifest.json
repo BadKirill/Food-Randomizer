@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "owner": "randomeal-knowledge",
   "repository": "BadKirill/Food-Randomizer",
-  "contentFingerprint": "5913a39fcfcac582be215c72ada73c12b7ff4f1077748da9b83f8f07efe8dda9",
+  "contentFingerprint": "47e29ed719f6a4851544a9e3f78d9706be3a320c672cc1e1d975621b74d492db",
   "externalSync": {
     "provider": "notion",
     "mode": "explicit-only-with-read-back",
@@ -35,7 +35,7 @@
       "slug": "Home",
       "title": "RandoMeal Knowledge Graph",
       "group": "System",
-      "sha256": "297e4258d38c3410f2c2b2ccec047d674c1c5e427677aceace5ab35e40188a90",
+      "sha256": "9b49c13d9a24ead1591067211928ab4f6e70048dc2d563939c5a492b826737b4",
       "nodeId": null
     },
     {
@@ -59,7 +59,7 @@
       "slug": "File-Index",
       "title": "Complete File Index",
       "group": "System",
-      "sha256": "a7148adcf2744845aaab7af437dc711e87c23bef595cb0fabdaf5c75d0d9e441",
+      "sha256": "b4440b29864baebf99573bf83f8d47bbefba24b29940161515cfd40477c30c12",
       "nodeId": null
     },
     {
@@ -67,7 +67,7 @@
       "slug": "RandoMeal--Governance--Knowledge-System",
       "title": "Knowledge system",
       "group": "Governance",
-      "sha256": "a498a838089997bef1570f199d71df6bb94d510f1fdfe9567404b00bfbb6b6a6",
+      "sha256": "8f6eb7c5b2bb780145b26a1c864784095f3d9bca8cc569dc138ac27f4fa60234",
       "nodeId": "knowledge-system"
     },
     {
@@ -91,7 +91,7 @@
       "slug": "RandoMeal--Governance--Repository-Inventory",
       "title": "Complete repository inventory",
       "group": "Governance",
-      "sha256": "6352293918ab9f39ac4d400dc2c06cf3dff39ca431d9fffdca3efe6add93ab39",
+      "sha256": "d4056d36237a3a9ac7dc17a579ac23bab08cfc916f41a02145fe0b5ae177803e",
       "nodeId": "repository-inventory"
     },
     {

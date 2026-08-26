@@ -1,6 +1,6 @@
 # Complete File Index
 
-Fingerprint: `5913a39fcfcac582be215c72ada73c12b7ff4f1077748da9b83f8f07efe8dda9`
+Fingerprint: `47e29ed719f6a4851544a9e3f78d9706be3a320c672cc1e1d975621b74d492db`
 
 | File | Language | Knowledge nodes | Summary |
 | --- | --- | --- | --- |
@@ -190,7 +190,7 @@ Fingerprint: `5913a39fcfcac582be215c72ada73c12b7ff4f1077748da9b83f8f07efe8dda9`
 | `scripts/knowledge/index-repository.mjs` | javascript | knowledge-system, repository-inventory | javascript file index-repository.mjs |
 | `scripts/knowledge/lib.mjs` | javascript | knowledge-system, repository-inventory | 35 indexed sections: rootDir, catalogPath, indexPath, wikiDir, wikiManifestPath, … |
 | `scripts/knowledge/notion-sync.mjs` | javascript | knowledge-system, repository-inventory | 17 indexed sections: managedOwner, normalizeLineEndings, canonicalNotionBody, stripPageTitle, tableCells, … |
-| `scripts/knowledge/notion-sync.spec.mjs` | javascript | knowledge-system, repository-inventory | 9 indexed sections: rewrites managed links and preserves external links, converts markdown tables to Notion table blocks, builds and verifies a managed Notion payload, rejects a body that changed while keeping the declared hash, verifies a bounded shared baseline without owning child Wikis, … |
+| `scripts/knowledge/notion-sync.spec.mjs` | javascript | knowledge-system, repository-inventory | 10 indexed sections: rewrites managed links and preserves external links, normalizes identical URL links without changing labelled links, converts markdown tables to Notion table blocks, builds and verifies a managed Notion payload, rejects a body that changed while keeping the declared hash, … |
 | `scripts/knowledge/plan-notion-sync.mjs` | javascript | knowledge-system, repository-inventory | javascript file plan-notion-sync.mjs |
 | `scripts/knowledge/query-knowledge.mjs` | javascript | knowledge-system, repository-inventory | 7 indexed sections: argument, tokens, includesToken, scoreNode, matchedRouteIds, … |
 | `scripts/knowledge/render-wiki.mjs` | javascript | knowledge-system, repository-inventory | 11 indexed sections: pageLink, wikiPageTitle, sourceList, renderHome, renderSidebar, … |
