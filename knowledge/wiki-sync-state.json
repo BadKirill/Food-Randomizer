@@ -3,8 +3,8 @@
   "provider": "notion",
   "owner": "randomeal-knowledge",
   "repository": "BadKirill/Food-Randomizer",
-  "contentFingerprint": "f2db21adde6ec7a4fd93659796f0812ff7db83fd5af0d772078bda6de6bccbe2",
-  "verifiedAt": "2026-08-01T20:22:56.000Z",
+  "contentFingerprint": "47e29ed719f6a4851544a9e3f78d9706be3a320c672cc1e1d975621b74d492db",
+  "verifiedAt": "2026-08-26T10:33:15.132Z",
   "workspace": {
     "id": "0e583eb3-1385-4f9f-b553-1405b74be641",
     "name": "Кирилл Плохой's Notion"
@@ -15,40 +15,40 @@
     "url": "https://app.notion.com/p/3a57e1830c32803ea86cef426f85f9f1",
     "snapshotSha256": "686d268be0a86b867f2cda5030fd959f595cc5f149a5529fac4c728283b7d34f",
     "bodySha256": "08a594142b5bab27b17f9f4c1918f30187943990cea383b23374642f3a95da70",
-    "fetchSha256": "2f2ee5b2bcbf1bd33dea174d582a3bf668d7e7610f37628c5822c6654858f1a4",
+    "fetchSha256": "894d35c7e8e768a592ae086113fb0439bba2d1496f086b2c5d14354653342e36",
     "verified": true,
-    "verifiedAt": "2026-08-03T23:32:17.740Z"
+    "verifiedAt": "2026-08-26T10:32:33.639Z"
   },
   "rootPage": {
     "id": "3a57e183-0c32-80cc-8237-deed329685d5",
     "title": "Food-Randomizer Wiki",
     "url": "https://app.notion.com/p/3a57e1830c3280cc8237deed329685d5",
-    "fetchSha256": "d7afcf51e2db47b63a630331ef0ebc5f0e749c215a83d3a3cfb4ffaf3a3fc241"
+    "fetchSha256": "637417483d7f623b74ba08372d9580ed42e427ed48248439d9a59dd0e203fead"
   },
   "pages": [
     {
       "slug": "Home",
       "nodeId": null,
+      "title": "RandoMeal Knowledge Graph",
       "pageId": "3a57e1830c32813e919cdfd947b99f42",
       "url": "https://app.notion.com/p/3a57e1830c32813e919cdfd947b99f42",
-      "title": "RandoMeal Knowledge Graph",
-      "sourceSha256": "6e549da781996f992dce5b87f2c09b9eee8f4a98d5e43fae714db07cf0ae526f",
-      "bodySha256": "2163481d7cc71f5927e62c85ff4bc99ccfd804bbb286054d53267d9fa31ad08d",
-      "fetchSha256": "5d48416f60baedad7215d70e7e3718c3a8bab8e77ea2a4d4431ba832b86cfb46",
+      "sourceSha256": "9b49c13d9a24ead1591067211928ab4f6e70048dc2d563939c5a492b826737b4",
+      "bodySha256": "03513b8713a49c2ef232468afce830b738063463d221ab4d151ecc4984366ddf",
+      "fetchSha256": "857ff3740f3dbd986f7511a53d0921dd1a42db35332d2248655162221be79570",
       "verified": true,
-      "verifiedAt": "2026-08-01T20:22:56.000Z"
+      "verifiedAt": "2026-08-26T10:29:10.609Z"
     },
     {
       "slug": "_Sidebar",
       "nodeId": null,
+      "title": "Knowledge Navigation",
       "pageId": "3a57e1830c3281c386e3ce659f273789",
       "url": "https://app.notion.com/p/3a57e1830c3281c386e3ce659f273789",
-      "title": "Knowledge Navigation",
-      "sourceSha256": "d280b0485a65ae21319b3facee2ab1ac7c607ea4cf0c8d897e53fb3de201d306",
+      "sourceSha256": "00ad8596a1df0849bb7710fda71a9fd865d36a0d7338474423ce96b2cb75515c",
       "bodySha256": "855643dd2c3f4ed11ad119220bd69657b81e909763edbf8ccb9e4ab14e047b44",
-      "fetchSha256": "8c2cd63f7914e68301741ba410eb3b2101816439307f51abf55186b659993519",
+      "fetchSha256": "434ea87bacf9412c83392c4fac2e913b7d26c1bf684c0cd4fd6a835c4f7f60c9",
       "verified": true,
-      "verifiedAt": "2026-07-28T12:22:00.195Z"
+      "verifiedAt": "2026-08-26T10:29:11.472Z"
     },
     {
       "slug": "Knowledge-Protocol",
@@ -65,38 +65,38 @@
     {
       "slug": "File-Index",
       "nodeId": null,
+      "title": "Complete File Index",
       "pageId": "3a57e1830c3281f9a385f7134f74a454",
       "url": "https://app.notion.com/p/3a57e1830c3281f9a385f7134f74a454",
-      "title": "Complete File Index",
-      "sourceSha256": "6ee4c745ef72357e2115954cff65dcddd78f75caec7fbad3d97a0fad834d52ae",
-      "bodySha256": "b71bd18573ac3175991c9e5953272c6dee6be50b0ff198e868699c27c780a75a",
-      "fetchSha256": "f746c622061e7dfdb37a3d4b5fde2a4d2fc76869216061e43aa147ef3da0f418",
+      "sourceSha256": "b4440b29864baebf99573bf83f8d47bbefba24b29940161515cfd40477c30c12",
+      "bodySha256": "a905ebbf48abc14cf19ee5cbbee0d72a1d5015d37e8a4e1d846d0957b8915419",
+      "fetchSha256": "3451586e9530a18a68f6fa2b82cada03e908003b0d27e8e932ad4bc3392dd61c",
       "verified": true,
-      "verifiedAt": "2026-08-01T20:22:56.000Z"
+      "verifiedAt": "2026-08-26T10:29:18.977Z"
     },
     {
       "slug": "RandoMeal--Governance--Knowledge-System",
       "nodeId": "knowledge-system",
+      "title": "Knowledge system",
       "pageId": "3a57e1830c32817cab34c62d2a265cfc",
       "url": "https://app.notion.com/p/3a57e1830c32817cab34c62d2a265cfc",
-      "title": "Knowledge system",
-      "sourceSha256": "e3fd7ce995de110046e57fb2bc29b0fb3d59f6c85cb6f3821d3266766fb921a3",
-      "bodySha256": "cd0966533590eda4bbbd0b18055ceaf3666d0809815a5e233e8988db4bb5f05a",
-      "fetchSha256": "a474402080bedf026b67c4bfadb162099d0901cc522ed271a8777ed71adaa5cc",
+      "sourceSha256": "8f6eb7c5b2bb780145b26a1c864784095f3d9bca8cc569dc138ac27f4fa60234",
+      "bodySha256": "0fc4e492286afec2508999e9d18fb045b273363ccbe491db15724973f92195b1",
+      "fetchSha256": "0a320d9d71b94dcc2083790ad2a50e9084f5086389eb3d011c03cba35ee586c8",
       "verified": true,
-      "verifiedAt": "2026-08-01T20:08:03.695Z"
+      "verifiedAt": "2026-08-26T10:29:53.062Z"
     },
     {
       "slug": "RandoMeal--Governance--Agents",
       "nodeId": "agent-governance",
+      "title": "Agent governance",
       "pageId": "3a57e1830c3281518061e754eb31e5e4",
       "url": "https://app.notion.com/p/3a57e1830c3281518061e754eb31e5e4",
-      "title": "Agent governance",
-      "sourceSha256": "b5822baf67f56ec0239f7574021949655fb4f6122ac6aa97dce6643a7e83afa1",
-      "bodySha256": "09f968b4f0e2ca7c106637d229c80b42e2910b3363beb43af142c9fa62872f33",
-      "fetchSha256": "374725b12c02586876419eac685cc645f8a14667bf80f414323140ab7e63d941",
+      "sourceSha256": "07651bede1c0eeb6cb16352f11623b780333dd55a30c67c2a7e7dec0e1d76590",
+      "bodySha256": "1ea7ab4fdc21df743c5e8303f629fb2cca958e3135d30d49fe94663fa0121051",
+      "fetchSha256": "fddbda2d55a1c6c365970cce6480d7383cfb9338e243959e3220afb7a22f157b",
       "verified": true,
-      "verifiedAt": "2026-08-01T20:22:56.000Z"
+      "verifiedAt": "2026-08-26T10:29:54.618Z"
     },
     {
       "slug": "RandoMeal--Governance--Canonical-Figma",
@@ -113,62 +113,62 @@
     {
       "slug": "RandoMeal--Governance--Repository-Inventory",
       "nodeId": "repository-inventory",
+      "title": "Complete repository inventory",
       "pageId": "3a57e1830c3281b8a0b4d6898b7d1f4b",
       "url": "https://app.notion.com/p/3a57e1830c3281b8a0b4d6898b7d1f4b",
-      "title": "Complete repository inventory",
-      "sourceSha256": "bacb26d544406fc047841427653843e8247f82fb8ae17d41b925fd252d10c1da",
-      "bodySha256": "d8e29a730a7fac539806e26efcb3d7d319067518ba5d0bff9be31e81f1fa2af7",
-      "fetchSha256": "09ded0d2d2617d35b005b5cf934b40c1f68ab9fba0ecf448fb4a773ec2a2f183",
+      "sourceSha256": "d4056d36237a3a9ac7dc17a579ac23bab08cfc916f41a02145fe0b5ae177803e",
+      "bodySha256": "f5e27cceeaeb932089c50ed424c5c7601442ee008a0684661c0d77252fc68197",
+      "fetchSha256": "d24dfe0658aa85aa104cbff09ecfebd24a6ed5e959b97ca6d1619b676b725794",
       "verified": true,
-      "verifiedAt": "2026-08-01T20:22:56.000Z"
+      "verifiedAt": "2026-08-26T10:30:03.073Z"
     },
     {
       "slug": "RandoMeal--Product--Strategy",
       "nodeId": "product-strategy",
+      "title": "Product strategy and discovery gates",
       "pageId": "3a57e1830c3281eba717ee5a84eb4bfa",
       "url": "https://app.notion.com/p/3a57e1830c3281eba717ee5a84eb4bfa",
-      "title": "Product strategy and discovery gates",
-      "sourceSha256": "c9a7bdbae7a35deb1edc1bb47486a3bc58e351b7cef631bc1cd9c39282fd12af",
-      "bodySha256": "f5567dfb3230a984425e6e56561934b756bf4dfc654e61d238f90acf92003796",
-      "fetchSha256": "be80be56111659aa1af159438545d338976391dca70860e40144ab427fd62017",
+      "sourceSha256": "a546b26cdd12611f9de619dc77df37f4d95e1c7a5009009b26c2b813cf325e8f",
+      "bodySha256": "098d688dae1e5bf7923660a1592bed9069b43205b2f0d5c7f8bf4a4de2268180",
+      "fetchSha256": "b066420496d2f496032aa1be5d69ca48636d8aae6ad626bb24c1f45495628d3c",
       "verified": true,
-      "verifiedAt": "2026-07-29T01:38:00.170Z"
+      "verifiedAt": "2026-08-26T10:30:35.585Z"
     },
     {
       "slug": "RandoMeal--Product--Choice-Cardinality-Gate",
       "nodeId": "choice-cardinality-gate",
+      "title": "Hybrid choice-cardinality evidence gate",
       "pageId": "3a57e1830c3281538e72f47c2b12e535",
       "url": "https://app.notion.com/p/3a57e1830c3281538e72f47c2b12e535",
-      "title": "Single versus shortlist evidence gate",
-      "sourceSha256": "d0cc2767072c8d2d45c5e3fdede84ab15d039fcb31c26b51a8173c4c2fab43ce",
-      "bodySha256": "6cd8c1ccc330617aea9a577c446dbc93ded1c45ae09fa2be7ff3732d1d68e04e",
-      "fetchSha256": "57714f15986667f0cc268f5d2434eb43b96685d5f05f72f4dad799fe0be94f2d",
+      "sourceSha256": "806266ad00d6b3c369b28d2ec126ee09fc0e7689871e1ac1ee5b18400b9631ea",
+      "bodySha256": "01decb498943aa5296ed6779b0ef73773e7cbfb70f2e9f735f9892335eb7d9e7",
+      "fetchSha256": "8145703d3390597129f37162c00666253aaede79c5a5fab42d9bd7f5829a8d9a",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-26T10:30:36.589Z"
     },
     {
       "slug": "RandoMeal--Product--Delivery-Roadmap",
       "nodeId": "delivery-roadmap",
+      "title": "Product delivery roadmap",
       "pageId": "3a57e1830c328186a00be6ddbdfc6cc5",
       "url": "https://app.notion.com/p/3a57e1830c328186a00be6ddbdfc6cc5",
-      "title": "Product delivery roadmap",
-      "sourceSha256": "58d30cf766792bb647983360e25c7eb143f848da3f66c5f31f4c6898b3f3266c",
-      "bodySha256": "de18f5a037de484dcaa0f2b0b9004771e62e6b6b5502eb5f8ecb65c72417be05",
-      "fetchSha256": "fe21a0811120d3fa43a32a0a06f2e1ee353f1fbfc5ec01aefc4e59fd534fff13",
+      "sourceSha256": "aba5e9ed33f5a4241ff5d5a3c1e12ebfeb3fbd1975e6857d06c55479d74dd5c3",
+      "bodySha256": "98d13d9ab4740696ed402cedb32ad31d9c91db7d85d5ceaec85528b6ddc2bca2",
+      "fetchSha256": "f965e055c948943b74a6cf6d87c4b73178673199336dfab6238e6712c68a7f36",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-26T10:30:43.633Z"
     },
     {
       "slug": "RandoMeal--Architecture--Target",
       "nodeId": "target-architecture",
+      "title": "Target product architecture",
       "pageId": "3a57e1830c328191a558d790f770cbc6",
       "url": "https://app.notion.com/p/3a57e1830c328191a558d790f770cbc6",
-      "title": "Target product architecture",
-      "sourceSha256": "683cd64fec2b87e3f16430229d6ac69f9c8353c54c114727841e153b0b0978e0",
-      "bodySha256": "b0b663399a3df2966772f64f137e62824f47b1a526f903dd970ba7c4ff30cb9b",
-      "fetchSha256": "871dcf9af3abb573e98c9b120b309cdbd7469d8e6c37773cb3c990e5d67fd5ad",
+      "sourceSha256": "8edee69b9203bf1b059562fea586a4925c17d66323414122d81cd6fd9fb8520d",
+      "bodySha256": "ef20eb923427c049b1de3cc42f97b4b37ce379357f91b45651a27a4148dba72e",
+      "fetchSha256": "bdc8344ded593f29cf891f715de35a65e091b0dd833960c263af2d535e920d94",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-26T10:30:52.303Z"
     },
     {
       "slug": "RandoMeal--Architecture--Current-vs-Target",
@@ -185,14 +185,14 @@
     {
       "slug": "RandoMeal--Architecture--Recommendation-Engine",
       "nodeId": "recommendation-engine-target",
+      "title": "Target recommendation engine",
       "pageId": "3a57e1830c3281548763d54b78e39567",
       "url": "https://app.notion.com/p/3a57e1830c3281548763d54b78e39567",
-      "title": "Target recommendation engine",
-      "sourceSha256": "292581e3e0f8576b512fc9b1b2576c1ce34dc57de19fffec67d7a277c5282d69",
-      "bodySha256": "4d33d90f6c028835d234bb503dae6a84323baf111eeb06e0885b6c06555659d6",
-      "fetchSha256": "45e3442d0d8f908a0e6a8f16429cc7c97503445f2be18b5b1111b2a2eb7980d6",
+      "sourceSha256": "30aafeb8cefc45bf70c904e4a5311bc69ab5e01a562f1b85f034f358f606f427",
+      "bodySha256": "cb614d371b584eddfb7523cb667a68e4200b4acb0389397e2f971773e24ec0a7",
+      "fetchSha256": "44023bc90533afd832db6b9d6d5ba89c2329d713948a234925d4f445df40b21c",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-26T10:30:58.584Z"
     },
     {
       "slug": "RandoMeal--Data--Current-Prisma",
@@ -209,14 +209,14 @@
     {
       "slug": "RandoMeal--Data--Target-Model",
       "nodeId": "target-data-model",
+      "title": "Target product data model",
       "pageId": "3a57e1830c3281b29203c6972af3350e",
       "url": "https://app.notion.com/p/3a57e1830c3281b29203c6972af3350e",
-      "title": "Target product data model",
-      "sourceSha256": "b2d867314d5ffb17a6b6ee4157d104a4140402f67db4a069f774d63e2e64ee11",
-      "bodySha256": "5d00b1f1e35971c18cb018323ef24ae0e8be92f6da0fa4048fca87cda838e151",
-      "fetchSha256": "721a829761086461e859fe2ee848c5975b7358318d3df6c1064589eb895b2902",
+      "sourceSha256": "9f95b8d31384c2766026bcbec4e7d5b92c593ccd2924a0de23b510eb1004628c",
+      "bodySha256": "7b0ac066326a7ecae3b8e6f03f01bf93a8fdfa2ccdec1d49ae46e42d02b1da6a",
+      "fetchSha256": "ecc2dab8827467afb7d2e82241ed5d54b0b54527f409d0b100783ac0f3c452b9",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-26T10:31:04.245Z"
     },
     {
       "slug": "RandoMeal--Data--Seed-Content",
@@ -245,14 +245,14 @@
     {
       "slug": "RandoMeal--API--Target-v2",
       "nodeId": "api-v2-contract",
+      "title": "Target API v2 contract",
       "pageId": "3a57e1830c3281f2a1c6f9b20d2f01b4",
       "url": "https://app.notion.com/p/3a57e1830c3281f2a1c6f9b20d2f01b4",
-      "title": "Target API v2 contract",
-      "sourceSha256": "b6560ef8e285967de240a31cfabc3be302b0b7853a29eb655ca5706867e82f22",
-      "bodySha256": "c511a519243141ec4b1963d4be2e47956dacac5cd8e893053ceb125da5ff5180",
-      "fetchSha256": "854705ada5755f25734b48d0a9d0f009637761a662f17439135cbb797bbb1ca7",
+      "sourceSha256": "ad39241fd5e9a2cacce5222811d949c560b773d047765c3897b627d41884869f",
+      "bodySha256": "94b27b787ade4c3a2ab7c787baeb0eac63b3ba97a72efbf115ba8a365f753959",
+      "fetchSha256": "40e1e7e2eb87b6503f41338dc45dd474b9b1ace20acb8ee9aa477fb8aded2bda",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-26T10:31:44.338Z"
     },
     {
       "slug": "RandoMeal--Contracts--Legacy",
@@ -365,14 +365,14 @@
     {
       "slug": "RandoMeal--Mobile--Random-Flow",
       "nodeId": "mobile-random-current",
+      "title": "Current mobile random flow",
       "pageId": "3a57e1830c32812aae2cf1d5010c1ad3",
       "url": "https://app.notion.com/p/3a57e1830c32812aae2cf1d5010c1ad3",
-      "title": "Current mobile random flow",
-      "sourceSha256": "d55186c2a269ec077d58ba7b43d7f7f40b39b1e4a6c49d0e00b77428d4020311",
+      "sourceSha256": "2e5a28bec0a05bb65d85b55bc65815d9947881e54a3c857a167854d6265f6fc0",
       "bodySha256": "a7b735f311d0bd1b74b48638150629a6906b58187f1ab55ca78f122d5fbbe84e",
-      "fetchSha256": "9dfca75d26b023e5a99be3362f8d44ca04957d95039c0101acbbe8113a688c6e",
+      "fetchSha256": "fce1cdfc367ec458b15997bd16c488f9852de54e052e2e8d3dc9890ef48ec490",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-26T10:31:49.995Z"
     },
     {
       "slug": "RandoMeal--Mobile--Manage-Flow",
@@ -389,50 +389,50 @@
     {
       "slug": "RandoMeal--Mobile--Theme-Debt",
       "nodeId": "mobile-theme-current",
+      "title": "Current mobile theme and visual debt",
       "pageId": "3a57e1830c3281a48701fb436b087b51",
       "url": "https://app.notion.com/p/3a57e1830c3281a48701fb436b087b51",
-      "title": "Current mobile theme and visual debt",
-      "sourceSha256": "8fafa745a3259da498fdac50f852caed315d3dd4248533280063ed2049adbdf3",
-      "bodySha256": "da910005f58ee5dba8287253b461e252073f44d6c6524596a71a4630d38f5e14",
-      "fetchSha256": "6ed7b51a95096deb3def4874a101a309b96842055dbea32825c4941b40bc78cb",
+      "sourceSha256": "6c1a4a85a7183086bc1e01508b05234b273d0ca0b68fe4e8849a0590c768ad1e",
+      "bodySha256": "9711cdb360716a684f02564bbaf17a356fd43a3178b7110c3d4eea924634c00c",
+      "fetchSha256": "b5aa4b87eff85aaa5876d9824d8336639a2a7d02328dbb897905d77be0915808",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-26T10:31:56.895Z"
     },
     {
       "slug": "RandoMeal--Analytics--Measurement",
       "nodeId": "analytics-measurement",
+      "title": "Analytics and measurement plan",
       "pageId": "3a57e1830c328163a4dfc327580cac18",
       "url": "https://app.notion.com/p/3a57e1830c328163a4dfc327580cac18",
-      "title": "Analytics and measurement plan",
-      "sourceSha256": "9b141bd9102b4e3b69021fe331db1805010cf8870a7943b32098476898b27bf1",
-      "bodySha256": "4ca184bd0fb5f9b0121c715bcb1fa639c99a9b72223934c0994019495f3ac4f5",
-      "fetchSha256": "fb27ef3c2730328bc0bdbe236786c2a04b22a56d7317f3cb91f8d5b927b414a6",
+      "sourceSha256": "dd5cc79357b8a5412fbdf98b5aa862f0d993c5c4bb80a5fa7966d3f2262f2338",
+      "bodySha256": "222623fc200d88ecb066cf2998766e1054b4ed2dc69173ede1f0dd1ccb39795a",
+      "fetchSha256": "ecc979c6cb8014f4f395135596cd651d8195a54f2b29ac8d503ab5de97b6063b",
       "verified": true,
-      "verifiedAt": "2026-07-22T23:51:10.644Z"
+      "verifiedAt": "2026-08-26T10:32:02.763Z"
     },
     {
       "slug": "RandoMeal--Design--System-and-Quality",
       "nodeId": "design-system-quality",
+      "title": "Design system and product quality",
       "pageId": "3a57e1830c3281ac9967e3e12933ca43",
       "url": "https://app.notion.com/p/3a57e1830c3281ac9967e3e12933ca43",
-      "title": "Design system and product quality",
-      "sourceSha256": "520a375f26da38e9566a262bcd5455ad6e6fd111f877abf3aec5f71df07d9aa6",
-      "bodySha256": "80bb65558df23e9eb374f7d3f529e09d29cae45c35d21cc6afd1ff0718161cfb",
-      "fetchSha256": "7d2cfcd5efcbadee2e6ffa956b4ae24181970bce3ce21222dedaf74466fae443",
+      "sourceSha256": "b7db54647f9debe5e769fa234992fee4c96e68b6dc0867aea91ac4f7b6db7a0d",
+      "bodySha256": "9b8f9a143eed4a95855b85c83ada875c057c371ac20e0de73e0c15d96a63e914",
+      "fetchSha256": "d3f26fec75881ea25932afb898f9a506579a2b961dcc7b764a82789b5c7831b4",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-26T10:32:09.139Z"
     },
     {
       "slug": "RandoMeal--Quality--QA-Strategy",
       "nodeId": "qa-strategy",
+      "title": "QA, security, and release gates",
       "pageId": "3a57e1830c3281418b9ed2698b5b0395",
       "url": "https://app.notion.com/p/3a57e1830c3281418b9ed2698b5b0395",
-      "title": "QA, security, and release gates",
-      "sourceSha256": "bfb2e04068d6a334b19ae7df3b810b4c1d4858ed216b06c740e96810b689af73",
-      "bodySha256": "de7137d3270a2012a2ed2b22eebfbc83255efb3a77a0e618c3cc6bfe01281101",
-      "fetchSha256": "b81183b04d7d4aff2dae08d38d9a3e82da99137c08cd7f37b9ccad9f3c212fe5",
+      "sourceSha256": "fa0e790879e43dc2026b6541de1a142f808d4fffd2a2dcfe108dc826efed4453",
+      "bodySha256": "b275780c0399a6af9be23ca8027f240455d8a11750fbd63116e2d8dc3d3de979",
+      "fetchSha256": "e4e7f23479b17ccec9b666dcb63d4150ee37b6b7be168b4be6d9f64c074f890a",
       "verified": true,
-      "verifiedAt": "2026-07-29T20:33:53.000Z"
+      "verifiedAt": "2026-08-26T10:32:15.489Z"
     },
     {
       "slug": "RandoMeal--Tooling--Workspace",

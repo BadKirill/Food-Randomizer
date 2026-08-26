@@ -10,6 +10,7 @@ export function canonicalNotionBody(value) {
   const unescaped = ['\\', '*', '~', '`', '$', '[', ']', '<', '>', '{', '}', '|', '^', ':']
     .reduce((text, character) => text.replaceAll(`\\${character}`, character), normalizeLineEndings(value));
   return unescaped
+    .replace(/\[(https?:\/\/[^\]]+)]\(\1\)/g, '$1')
     .replace(/\[([A-Za-z0-9._-]+)]\(https?:\/\/\1\/?\)/g, '$1')
     .replace(/<mention-page url="([^"]+)">[^<]*<\/mention-page>/g, '<mention-page url="$1"/>')
     .split('\n')

@@ -1,24 +1,32 @@
 # Stage 0 Maze study
 
-Status: full-flow v5 A/B/H study live and end-to-end preview verified; participant evidence pending
+Status: full-flow v5 A/B/H study remains live and frozen with five participant results; the separate
+V6 three-round draft is creation-reviewed and no-save preview verified but not published
 
 Published: 2026-08-16
 
-Updated: 2026-08-21
+Updated: 2026-08-26
 
 ## Links and ownership
 
 | Resource | URL | Purpose |
 | --- | --- | --- |
 | Participant study | [t.maze.co/574247931](https://t.maze.co/574247931) | Send this link to qualified participants |
-| Authenticated preview | [Maze preview](https://app.maze.co/maze-preview/mazes/574247931) | Test the full study without saving responses |
-| Study builder and recruitment | [Maze study 574247931](https://app.maze.co/projects/574247910/mazes/574247931) | Edit, pause and distribute the study |
+| Frozen V5 authenticated preview | [Maze preview](https://app.maze.co/maze-preview/mazes/574247931) | Test the published V5 study without saving responses |
+| Frozen V5 builder and recruitment | [Maze study 574247931](https://app.maze.co/projects/574247910/mazes/574247931) | Review, pause and distribute the published study without changing its collected contract |
 | Results dashboard | [Maze results](https://app.maze.co/projects/574247910/mazes/574247931/results?tab=results) | Review participants and block-level evidence |
+| V6 authenticated preview | [Maze V6 preview](https://app.maze.co/maze-preview/mazes/577725277) | Test the corrected three-round draft without saving responses |
+| V6 draft builder | [Maze study 577725277](https://app.maze.co/projects/574247910/mazes/577725277) | Review the duplicate draft before any publication decision |
 | Maze project | [RandoMeal project](https://app.maze.co/projects/574247910) | Parent project |
 | Canonical Figma source | [RandoMeal canonical product design](https://www.figma.com/design/DP7ujNqthXzWwwu1mnFhfj?node-id=187-2) | Sole design source allowed by repository policy |
 
 The Maze project ID is `574247910` and the live study ID is `574247931`. The study is titled
 `Stage 0 · Weeknight Meal Decision · A/B/H`.
+
+The corrected draft study ID is `577725277`. It is titled
+`Stage 0 · Meal Decision V6 · 3 Rounds`. It was duplicated from V5 so the five existing V5
+participant results remain comparable and untouched. V6 has no participant link until an explicit
+publication decision is made.
 
 Figma file `DP7ujNqthXzWwwu1mnFhfj` is connected through the Maze Figma integration. Link access is
 `Anyone can view`; public editing, password access, and viewer copy/save/export are disabled. Do
@@ -41,6 +49,48 @@ variant distribution so every participant sees all three variants in randomized 
 Feed/search control C and Pantry-first exercise D are intentionally outside this live study. C is
 a separate H3 control and D is a separate H7 value/input test; neither may be interpreted as a
 fourth cardinality variant.
+
+## V6 draft contract
+
+V6 keeps the signed A/B/H comparison and `Alternating` randomized order but replaces each variant's
+prototype task with a complete 11-screen journey. Every participant is explicitly told that they
+will repeat the setup three times and that repetition is intentional because only the meal-choice
+presentation changes.
+
+Task: `One of 3 rounds · Choose a meal and preview cooking`
+
+Description:
+
+> You will complete 3 short rounds in a randomized order. Repeating the setup is intentional: only
+> the meal-choice screen changes.
+>
+> Situation
+> - You want to cook a main meal now.
+> - You do not know what to make.
+>
+> What to do
+> - Set your needs and servings.
+> - Choose one main ingredient, then any extras.
+> - Choose a meal, open the recipe, and complete all 3 cooking-preview steps.
+>
+> Stop if you would leave the app.
+
+| Maze variant | Start screen | Goal screen | Goal rule |
+| --- | --- | --- | --- |
+| Single recommendation | `Runner V6-A01 · Welcome` (`382:2505`) | `Runner V6-A11 · Task completed` (`393:2988`) | Reach a specific screen |
+| Equal shortlist | `Runner V6-B01 · Welcome` (`382:3493`) | `Runner V6-B11 · Task completed` (`393:3018`) | Reach a specific screen |
+| Hybrid hierarchy | `Runner V6-H01 · Welcome` (`382:3763`) | `Runner V6-H11 · Task completed` (`393:3048`) | Reach a specific screen |
+
+Each path starts with required and optional needs plus dynamic 1, 2 or 4 servings. It then collects
+one priority, one total-time range, one main ingredient and zero or more additional ingredients.
+The main ingredient is pinned separately and removed from the extras list. The participant then
+chooses a meal, opens a recipe with a visible image placeholder and five-item ingredient list, and
+completes three interactive cooking-preview steps before Maze detects the goal.
+
+V6 retains the same verified and license-safe Source Sans 3 and Fraunces families. All applicable
+headers support Back, every interactive target is at least 44 px, and no V6 reaction leaves its own
+versioned subtree. The published V5 study remains the only collection link until V6 is explicitly
+approved for publication.
 
 ## Participant flow
 
@@ -209,6 +259,27 @@ wrong segment can override the arithmetic and must be recorded.
 
 ## Verification record
 
+The 2026-08-26 V6 correction and draft preview saved no participant response. It verified:
+
+- the duplicate study `577725277` contains one participant-visible `Alternating` comparison with
+  exactly three V6 prototype tasks and zero participant-visible tasks using the old V5 wording;
+- A starts at `382:2505` and ends at `393:2988`, B starts at `382:3493` and ends at `393:3018`, and
+  H starts at `382:3763` and ends at `393:3048`;
+- all three tasks use the same concise Situation and What to do structure and explicitly explain
+  the three randomized rounds;
+- the authenticated no-save preview passed the screener, context questions and first task handoff,
+  then opened the correct V6 start screen inside Maze;
+- a real participant-style click advanced from the needs screen into the priority flow;
+- the canonical V6 subtree contains 33 mobile frames with no missing Back path, missing forward
+  path, cross-version destination, `tonight` copy, undersized interaction target or frame-size
+  mismatch;
+- the setup supports predetermined optional needs, all serving choices, three total-time ranges,
+  an explicit main-ingredient step and a separate multi-select extras step;
+- recipe and cooking views include a meal image placeholder, expanded ingredient list, three live
+  `Done, next step` states and a dedicated `Task completed` goal;
+- published study `574247931` and its five collected participant results were not edited, and the
+  V6 duplicate remains private and unpublished.
+
 The 2026-08-21 full-flow v5 publication and end-to-end preview saved no participant response. It
 verified:
 
@@ -324,6 +395,10 @@ the V5-A01–V5-A08, V5-B01–V5-B08 and V5-H01–V5-H08 runner frames while col
 V4-01–V4-08, V3-01–V3-08 and E1–E8 as preserved evidence only. If a critical prototype defect is found, stop the study,
 duplicate or version the affected Maze block, re-run preview verification and document which
 responses belong to each version. Never silently refresh the prototype during a live batch.
+
+Treat V6-A01–V6-A11, V6-B01–V6-B11 and V6-H01–V6-H11 as the candidate replacement contract. Do not
+publish draft study `577725277`, replace the V5 participant link or mix V5 and V6 results without an
+explicit study-version decision and a documented analysis boundary.
 
 Stop the study immediately for a hard dietary-safety contradiction, a broken goal path, accidental
 sensitive-data collection, or a material mismatch between Maze and the canonical Figma file.
